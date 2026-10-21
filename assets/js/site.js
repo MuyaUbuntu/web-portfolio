@@ -223,3 +223,9 @@ document.querySelectorAll('[data-lens]').forEach(function(h){
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open)setOpen(false)});
 })();
+
+/* Imágenes: si el archivo local aún no existe, usa la copia publicada en Behance */
+document.querySelectorAll('img[data-fallback]').forEach(function(img){
+  function swap(){if(img.dataset.fallback&&img.src!==img.dataset.fallback){img.src=img.dataset.fallback;img.removeAttribute('data-fallback')}}
+  img.addEventListener('error',swap); if(img.complete&&img.naturalWidth===0) swap();
+});
