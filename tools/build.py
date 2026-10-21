@@ -39,7 +39,7 @@ def nav(pre,home):
     return f'''<nav class="nav" aria-label="Principal">
   <a class="nav-logo" href="{'#inicio' if home else pre}"{go} aria-label="Rodrigo López, inicio">{LOGO}</a>
   <div class="nav-links"><span class="nav-pill" aria-hidden="true"></span>
-    <a href="{h}#trabajo"{go}>Trabajo</a><a href="{h}#servicios"{go}>Servicios</a><a href="{h}#sobre-mi"{go}>Sobre mí</a>
+    <a href="{h}#trabajo"{go}>Trabajo</a><a href="{h}#servicios"{go}>Servicios</a><a href="{h}#dibuja"{go}>Dibuja</a>
   </div>
   <a class="nav-cta" href="{h}#contacto"{go}>Hablemos</a>
 </nav>
@@ -164,21 +164,12 @@ home=head('Rodrigo López · Brand Designer & Brand Manager','Portafolio de Rodr
     </div>
   </section>
 
-  <section class="sec wrap" id="sobre-mi">
-    <div class="about">
-      <div class="polas">
-        <div class="pola a" data-cursor="Arrastra">{fb("")}<small>Retrato · reemplazar</small></div>
-        <div class="pola b" data-cursor="Arrastra">{ph(6,"Happy Speakers, de la landing de Happy Talks",pre,"b")}<small>Happy Talks · 2025</small></div>
-        <span class="bubble">¡Hola! 👋</span>
-      </div>
-      <div>
-        <span class="mono muted">Sobre mí</span>
-        <h2 style="margin-top:1rem"><span class="lm"><span>Del diseño</span></span><span class="lm"><span>a la <em>gestión</em></span></span></h2>
-        <p>Mi base es el diseño. En los últimos años he tomado decisiones de presupuesto, coordinado proveedores y medido resultados.</p>
-        <p>Hoy busco crecer hacia la gestión de marca, sin dejar de hacer lo que mejor sé: que una marca se vea y se sienta distinta.</p>
-        <div class="tags"><span class="tag t">Identidad visual</span><span class="tag p">UX/UI</span><span class="tag b">Brand management</span><span class="tag">Dirección de arte</span><span class="tag">3D</span><span class="tag">Figma</span><span class="tag">Adobe CC</span></div>
-      </div>
-    </div>
+  <section class="play" id="dibuja" aria-label="Zona para dibujar">
+    <canvas class="play-canvas" aria-hidden="true"></canvas>
+    <p class="play-title">Be creative,<br>be you</p>
+    <p class="play-hint mono">Mueve el cursor para dibujar ✳</p>
+    <span class="pen" aria-hidden="true"></span>
+    <button class="reset" type="button" hidden><span class="reset-ic" aria-hidden="true">↺</span><span class="reset-t">Blank page, fresh mind</span></button>
   </section>
 </main>
 '''+contact()+scripts(pre)
