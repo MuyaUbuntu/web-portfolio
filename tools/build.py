@@ -1,4 +1,4 @@
-"""Genera index.html y proyectos/happy-talks.html a partir de bloques compartidos.
+"""Genera index.html y proyectos/happy-talks.html (v3).
 Uso: python3 tools/build.py"""
 import os
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -6,13 +6,9 @@ LOGO=open(os.path.join(R,'tools','logo-inline.svg')).read().strip()
 B='https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/'
 HT=['684229227805201.68479f1136a54','78437e227805201.68479f11380df','1cae49227805201.68479f11379ed','09e022227805201.68479f1135bbd','a986e1227805201.68479f11372d5','c3c662227805201.68479f11361c9','b76ac6227805201.68479f1134c0e','d1dd88227805201.68479f113528b','82f81f227805201.68479f11334d1','bf5c4f227805201.68479f1133d30','66dfe8227805201.68479f11343ac']
 
-def img(n,alt,pre,eager=False,fb='a'):
-    load='eager' if eager else 'lazy'
-    return (f'<span class="fallback {fb}" aria-hidden="true"></span>'
-            f'<img src="{pre}assets/img/happy-talks/{n:02d}.jpg" data-fallback="{B}{HT[n-1]}.jpg" alt="{alt}" loading="{load}" decoding="async">')
-
-def stroke(): return '<svg class="stroke" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1"/></svg>'
-def hl(href,text,icon,extra=''): return f'<a class="hl" href="{href}"{extra}><span class="hl-t">{text}{stroke()}</span><span class="hl-i" aria-hidden="true">{icon}</span></a>'
+def ph(n,alt,pre,fb='',eager=False):
+    return (f'<div class="ph"><span class="fb {fb}" aria-hidden="true"></span>'
+            f'<img src="{pre}assets/img/happy-talks/{n:02d}.jpg" data-fallback="{B}{HT[n-1]}.jpg" alt="{alt}" loading="{"eager" if eager else "lazy"}" decoding="async" draggable="false"></div>')
 
 def head(title,desc,pre):
     return f'''<!doctype html>
@@ -28,39 +24,24 @@ def head(title,desc,pre):
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400..900&family=DM+Sans:opsz,wght@9..40,400..700&family=Martian+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="{pre}assets/css/main.css">
 <style>:root{{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}}[hidden]{{display:none!important}}</style>
 </head>
 <body>
-<div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel">Ver</span></div>
-<div class="curtain" aria-hidden="true">{LOGO.replace('class="logo"','class="logo"')}</div>
+<div class="ctag" id="ctag" aria-hidden="true"></div>
+<div class="blot" aria-hidden="true"></div>
 '''
 
-def chrome(pre,home):
-    brand_href='#inicio' if home else f'{pre}'
-    t='' if home else ' data-transition'
-    return f'''<header class="top">
-  <div class="wrap">
-    <a class="brand" href="{brand_href}"{t} aria-label="Rodrigo López, inicio">{LOGO}</a>
-    <div class="top-r">
-      <a class="top-cta" href="{'' if home else pre}#contacto"{t}><span data-scramble-hover>Hablemos</span></a>
-      <button class="burger" type="button" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
-        <svg viewBox="0 0 28 28" aria-hidden="true"><path/><path/><path/></svg>
-      </button>
-    </div>
+def nav(pre,home):
+    h='' if home else pre
+    go='' if home else ' data-go'
+    return f'''<nav class="nav" aria-label="Principal">
+  <a class="nav-logo" href="{'#inicio' if home else pre}"{go} aria-label="Rodrigo López, inicio">{LOGO}</a>
+  <div class="nav-links"><span class="nav-pill" aria-hidden="true"></span>
+    <a href="{h}#trabajo"{go}>Trabajo</a><a href="{h}#servicios"{go}>Servicios</a><a href="{h}#sobre-mi"{go}>Sobre mí</a>
   </div>
-</header>
-<nav class="menu" id="menu" aria-label="Menú principal" aria-hidden="true">
-  <div class="wrap menu-in">
-    <ul>
-      <li><a href="{'' if home else pre}#proyectos"{t} data-lens aria-label="Proyectos"><span class="lens-txt">Proyectos</span></a></li>
-      <li><a href="{'' if home else pre}#capacidades"{t} data-lens aria-label="Capacidades"><span class="lens-txt">Capacidades</span></a></li>
-      <li><a href="{'' if home else pre}#perfil"{t} data-lens aria-label="Perfil"><span class="lens-txt">Perfil</span></a></li>
-      <li><a href="{'' if home else pre}#contacto"{t} data-lens aria-label="Contacto"><span class="lens-txt">Contacto</span></a></li>
-    </ul>
-    <div class="menu-foot mono"><span>hola@tudominio.com</span><span>CDMX · Remoto o reubicación</span></div>
-  </div>
+  <a class="nav-cta" href="{h}#contacto"{go}>Hablemos</a>
 </nav>
 '''
 
@@ -73,239 +54,232 @@ def scripts(pre):
 </html>
 '''
 
-def contact(pre):
-    return f'''<section class="contact" id="contacto">
+def contact():
+    return '''<section class="contact" id="contacto">
   <div class="wrap">
     <span class="mono">¿Tienes un proyecto o una vacante?</span>
-  </div>
-  <div class="contact-big" aria-hidden="true">Hablemos <span class="o">Hablemos</span> Hablemos</div>
-  <div class="wrap">
-    <h2 class="sr">Hablemos</h2>
-    <div class="contact-row">
-      <span class="mail" id="mail">hola@tudominio.com</span>
-      <button class="btn" type="button" id="copy" data-magnetic>Copiar correo</button>
+    <h2 style="margin-top:1.2rem"><span class="lm"><span>Hagamos</span></span><span class="lm"><span class="o">algo</span> <span>grande</span></span></h2>
+    <div class="contact-grid">
+      <div>
+        <span class="mail" id="mail">hola@tudominio.com</span>
+        <div class="socials">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://www.behance.net/" target="_blank" rel="noopener">Behance ↗</a>
+          <a href="#contacto">CV ↓</a>
+        </div>
+      </div>
+      <button class="blob" type="button" data-cursor="Copiar">Copiar<br>correo</button>
     </div>
-    <div class="contact-row" style="margin-top:2.4rem;justify-content:flex-start;gap:1rem 3rem">
-      {hl("https://www.linkedin.com/","LinkedIn","↗",' target="_blank" rel="noopener"')}
-      {hl("https://www.behance.net/","Behance","↗",' target="_blank" rel="noopener"')}
-      {hl(f"{pre}#contacto","Descargar CV","↓")}
-    </div>
-    <div class="foot mono"><span>© 2026 Rodrigo López</span><span>Hecho con criterio humano y un poco de código</span></div>
+    <div class="foot mono"><span>© 2026 Rodrigo López</span><span>CDMX · Remoto o reubicación</span></div>
   </div>
 </section>
 '''
 
-def proj(href,name,tags,role,kpi,kpis,media,soon=False,pre=''):
-    tag=f'<a class="proj" href="{href}" data-transition data-cursor="Ver caso">' if not soon else '<div class="proj soon" data-cursor="Pronto">'
-    end='</a>' if not soon else '</div>'
-    pills=''.join(f'<span class="pill">{t}</span>' for t in tags)
-    return f'''      {tag}
-        <div class="media">{media}<div class="tags"><span class="pills">{pills}</span>{'<span class="pill">Próximamente</span>' if soon else ''}</div><span class="name"><i class="spark"></i>{name}</span></div>
-        <div class="meta"><p>{role}</p><div class="kpi">{kpi}<small>{kpis}</small></div></div>
-      {end}'''
+def card(i,href,name,role,tags,kpi,kpis,media,soon=False):
+    t=''.join(f'<span class="tag">{x}</span>' for x in tags)
+    o=f'<a class="card" href="{href}" data-go data-cursor="Ver caso">' if not soon else '<div class="card" data-cursor="Próximamente">'
+    c='</a>' if not soon else '</div>'
+    s='<span class="tag b soon">Próximamente</span>' if soon else ''
+    return f'''      {o}
+        <div class="frame">{media}<span class="num">{i:02d}</span>{s}<div class="tags">{t}</div></div>
+        <div class="info"><div><h3>{name}</h3><p>{role}</p></div><div class="kpi"><b>{kpi}</b><small>{kpis}</small></div></div>
+      {c}'''
 
-# ---------------- HOME ----------------
+def fb(cls): return f'<div class="ph"><span class="fb {cls}"></span></div>'
+
+# ================= HOME =================
 pre=''
-home=head('Rodrigo López · Brand Designer & Brand Manager','Portafolio de Rodrigo López: identidades, experiencias digitales y gestión de marca con resultados medibles.',pre)+chrome(pre,True)+f'''<main id="inicio">
+roles='<span>Brand Design</span><span>UX/UI</span><span>Brand Management</span><span>Dirección de arte</span><span>Modelado 3D</span><span>Empaque</span>'
+roles2='<span>Ideas creativas</span><span>Resultados medibles</span><span>Marcas con carácter</span><span>Sistemas que escalan</span>'
+home=head('Rodrigo López · Brand Designer & Brand Manager','Portafolio de Rodrigo López: identidades, experiencias digitales y gestión de marca con resultados medibles.',pre)+nav(pre,True)+f'''<main id="inicio">
   <section class="hero wrap">
-    <div class="hero-kick mono"><span>Brand Designer &amp; Brand Manager</span><span>Ciudad de México · Remoto o reubicación</span></div>
-    <h1 data-lens data-scramble aria-label="Creative ideas, big results"><span class="lens-txt">Creative ideas,<br>big results</span></h1>
-    <a class="hero-card media" href="proyectos/happy-talks.html" data-transition data-cursor="Ver caso" aria-label="Ver caso Happy Talks">{img(1,"Landing de Happy Talks",pre,True)}</a>
-    <div class="hero-foot">
-      <p><span class="badge pill blue"><i class="spark"></i>Portafolio 2026</span>Diseño identidades y experiencias digitales que se ven distintas y se miden en resultados.</p>
-      <div class="hero-links">
-        {hl("#proyectos","Ver proyectos","↓")}
-        {hl("#contacto","Descargar CV","↗")}
+    <canvas class="dots" aria-hidden="true"></canvas>
+    <div class="hero-top">
+      <div class="hello"><span class="av">{LOGO}</span><p>Hola, soy <b>Rodrigo López</b>. Brand Designer y Brand Manager en Ciudad de México.</p></div>
+      <span class="avail mono"><i></i>Disponible para proyectos y vacantes</span>
+    </div>
+    <div>
+      <h1 class="stickers" aria-label="Creative ideas, big results">
+        <span class="stk s1" aria-hidden="true">Creative</span>
+        <span class="stk s2" aria-hidden="true">ideas,</span>
+        <span class="stk s5" aria-hidden="true">✳ desde 2018</span>
+        <span class="stk s3" aria-hidden="true">big</span>
+        <span class="stk s4" aria-hidden="true">results</span>
+      </h1>
+      <p class="drag-hint mono" style="margin-top:1rem">Arrastra las palabras ✋</p>
+    </div>
+    <div class="hero-bottom">
+      <p>Diseño identidades y experiencias digitales que se ven distintas y se miden en resultados.</p>
+      <div class="ctas">
+        <a class="btn t" href="#trabajo">Ver proyectos <span class="ar">↓</span></a>
+        <a class="btn o" href="#contacto">Descargar CV <span class="ar">↗</span></a>
       </div>
-      <div class="scroll-cue mono"><i></i>Scroll</div>
+      <span class="scroll mono">Scroll <b>↓</b></span>
     </div>
   </section>
 
-  <section class="reel-wrap wrap" aria-label="Caso destacado">
-    <a class="reel" href="proyectos/happy-talks.html" data-transition data-cursor="Ver caso">
-      <div class="media">{img(3,"Hero de la landing de Happy Talks",pre)}</div>
-      <div class="reel-label"><div><span class="mono">Caso destacado · HDO · 2025</span><h2>Happy Talks</h2></div><span class="pill" style="color:#fff">Ver caso →</span></div>
-    </a>
-  </section>
+  <div class="ribbon" aria-hidden="true"><div class="rail">{roles*4}</div></div>
+  <div class="ribbon alt" aria-hidden="true"><div class="rail">{roles2*5}</div></div>
 
-  <section class="statement wrap">
-    <span class="mono"><i class="spark" style="color:var(--blue)"></i>Sobre mi trabajo</span>
-    <p data-words>Ocho años diseñando marcas que se reconocen al instante. Hoy sumo <em>estrategia, datos y gestión de equipos</em> para que cada decisión creativa tenga un resultado medible.</p>
-  </section>
-
-  <section class="wrap panels" id="capacidades" aria-label="Capacidades">
-    <article class="panel p1" style="--i:0">
-      <div><span class="mono">01 · Capacidad</span><h2>Branding &amp;<br>identidad</h2></div>
-      <div>
-        <div class="pills"><span class="pill">Estrategia</span><span class="pill">Identidad</span><span class="pill">Empaque</span><span class="pill">Manuales</span></div>
-        <p class="lead">Marcas con carácter, construidas como sistema.</p>
-        <p class="body">De la estrategia al logotipo, la paleta y el manual. Cada identidad se diseña para funcionar en cualquier punto de contacto, no solo en la presentación.</p>
-        <div class="stats"><div><b data-count>30+</b><span>identidades</span></div><div><b data-count>120+</b><span>SKUs de empaque</span></div><div><b data-count>6</b><span>manuales</span></div></div>
-      </div>
-      <i class="steps" aria-hidden="true"></i>
-    </article>
-    <article class="panel p2" style="--i:1">
-      <div><span class="mono">02 · Capacidad</span><h2>UX/UI &amp;<br>experiencias<br>digitales</h2></div>
-      <div>
-        <div class="pills"><span class="pill">UX/UI</span><span class="pill">Landing pages</span><span class="pill">Dirección de arte</span><span class="pill">3D</span></div>
-        <p class="lead">Experiencias que cuentan la historia y convierten.</p>
-        <p class="body">Arquitectura, interfaz y dirección de arte para sitios que se recuerdan. Como Happy Talks, donde una oferta intangible se volvió una experiencia visual que genera solicitudes.</p>
-        <div style="margin-top:2rem">{hl("proyectos/happy-talks.html","Ver Happy Talks","→",' data-transition')}</div>
-      </div>
-      <i class="steps" aria-hidden="true"></i>
-    </article>
-    <article class="panel p3" style="--i:2">
-      <div><span class="mono">03 · Capacidad</span><h2>Brand<br>management</h2></div>
-      <div>
-        <div class="pills"><span class="pill">Presupuesto</span><span class="pill">Proveedores</span><span class="pill">KPIs</span><span class="pill">Lanzamientos</span></div>
-        <p class="lead">La marca, de la idea al mercado.</p>
-        <p class="body">Planeación de lanzamientos, coordinación de equipos y agencias, y KPIs definidos antes de diseñar para medir después.</p>
-        <div class="stats"><div><b data-count>$2.4M</b><span>MXN administrados</span></div><div><b data-count>9</b><span>proveedores coordinados</span></div><div><b data-count>4</b><span>lanzamientos medidos</span></div></div>
-        <p class="mono" style="margin-top:1rem;opacity:.6">Cifras de ejemplo</p>
-      </div>
-      <i class="steps" aria-hidden="true"></i>
-    </article>
-  </section>
-
-  <section class="giant" aria-hidden="true">
-    <div class="giant-row">Trabajo <span class="o">Selecto</span> Trabajo</div>
-    <div class="giant-row"><span class="o">Selecto</span> Trabajo <span class="o">Selecto</span></div>
-    <div class="giant-card media">{img(6,"",pre,fb='b')}</div>
-  </section>
-
-  <section class="work" id="proyectos" aria-label="Proyectos">
-    <div class="wrap work-head">
-      <h2 class="sr">Proyectos</h2>
+  <section class="sec wrap" id="trabajo">
+    <div class="sec-h">
+      <h2><span class="lm"><span>Trabajo</span></span><span class="lm"><span>selecto<i class="n">04</i></span></span></h2>
       <p>Cada caso muestra el reto, el proceso y lo que se logró.</p>
-      <div class="pills"><span class="pill fill">Todos</span><span class="pill">Branding</span><span class="pill">Web</span><span class="pill">Gestión</span></div>
     </div>
-    <div class="work-track">
-{proj("proyectos/happy-talks.html","Happy Talks",["Web","Branding"],"Landing page para la plataforma de conferencias de HDO. UX/UI, branding, dirección de arte y 3D.","HDO","Cliente · 2025",img(1,"Happy Talks",pre))}
-{proj("","Lumen Óptica",["Branding"],"Implementación de marca en 40 sucursales.","40","sucursales","<span class='fallback c'></span>",True)}
-{proj("","Tierra Alta",["Branding","Empaque"],"Identidad y sistema de 8 etiquetas para mezcal artesanal.","8","etiquetas","<span class='fallback b'></span>",True)}
-{proj("","Pulso",["Gestión"],"Guía de marca y producción de contenido para una fintech.","4×","contenido mensual","<span class='fallback d'></span>",True)}
+    <div class="grid">
+{card(1,"proyectos/happy-talks.html","Happy Talks","Landing page para la plataforma de conferencias de HDO.",["Web","UX/UI","Branding"],"HDO","Cliente · 2025",ph(1,"Landing de Happy Talks",pre))}
+{card(2,"","Lumen Óptica","Implementación de marca en 40 sucursales.",["Branding"],"40","sucursales",fb("c"),True)}
+{card(3,"","Tierra Alta","Identidad y 8 etiquetas para mezcal artesanal.",["Branding","Empaque"],"8","etiquetas",fb("b"),True)}
+{card(4,"","Pulso","Guía de marca y contenido para una fintech.",["Gestión"],"4×","contenido",fb("d"),True)}
     </div>
-    <div class="work-progress" aria-hidden="true"><i></i></div>
   </section>
 
-  <section class="about wrap" id="perfil">
-    <div class="about-grid">
-      <div data-rise>
-        <span class="mono muted">Perfil</span>
-        <h2 style="margin-top:1rem">Del diseño <span>a la gestión</span></h2>
+  <section class="sec wrap" id="servicios" style="padding-top:0">
+    <div class="sec-h">
+      <h2><span class="lm"><span>Lo que</span></span><span class="lm"><span>hago</span></span></h2>
+      <p>Del concepto a la implementación, y de la implementación a los resultados.</p>
+    </div>
+    <ul class="svc">
+      <li class="open" style="--c:var(--pink)"><button type="button"><span class="i">01</span><h3>Branding &amp; identidad</h3><span class="pl" aria-hidden="true">+</span></button>
+        <div class="body"><div><div class="inner"><p>Marcas con carácter, construidas como sistema: estrategia, logotipo, paleta, tipografía, empaque y manuales que funcionan en cualquier punto de contacto.</p><div class="tags"><span class="tag">Estrategia</span><span class="tag">Identidad</span><span class="tag">Empaque</span><span class="tag">Manuales</span></div></div></div></div></li>
+      <li style="--c:var(--butter)"><button type="button"><span class="i">02</span><h3>UX/UI &amp; web</h3><span class="pl" aria-hidden="true">+</span></button>
+        <div class="body"><div><div class="inner"><p>Experiencias digitales que cuentan la historia y convierten. Como en <a href="proyectos/happy-talks.html" data-go>Happy Talks</a>, donde una oferta intangible se volvió una landing que genera solicitudes.</p><div class="tags"><span class="tag">UX/UI</span><span class="tag">Landing pages</span><span class="tag">Prototipos</span><span class="tag">Figma</span></div></div></div></div></li>
+      <li style="--c:var(--sky)"><button type="button"><span class="i">03</span><h3>Dirección de arte &amp; 3D</h3><span class="pl" aria-hidden="true">+</span></button>
+        <div class="body"><div><div class="inner"><p>Fotografía, ilustración y modelado 3D para que la marca se vea distinta y se sienta humana.</p><div class="tags"><span class="tag">Dirección de arte</span><span class="tag">Ilustración</span><span class="tag">3D</span></div></div></div></div></li>
+      <li style="--c:var(--tomato)"><button type="button"><span class="i">04</span><h3>Brand management</h3><span class="pl" aria-hidden="true">+</span></button>
+        <div class="body"><div><div class="inner"><p>Lanzamientos planeados, proveedores coordinados y KPIs definidos antes de diseñar para medir después.</p><div class="tags"><span class="tag">Presupuesto</span><span class="tag">Proveedores</span><span class="tag">KPIs</span><span class="tag">Lanzamientos</span></div></div></div></div></li>
+    </ul>
+  </section>
+
+  <section class="wrap" aria-label="Cifras">
+    <div class="numbers" data-pop>
+      <h2>Ocho años convirtiendo <em>ideas creativas</em> en resultados.</h2>
+      <div class="nums">
+        <div><span class="odo" data-v="8"></span><small>años en diseño de marca</small></div>
+        <div><span class="odo" data-v="30+"></span><small>marcas lanzadas o rediseñadas</small></div>
+        <div><span class="odo" data-v="120+"></span><small>SKUs llevados a producción</small></div>
+        <div><span class="odo" data-v="4"></span><small>lanzamientos con KPIs medidos</small></div>
       </div>
-      <div data-rise>
-        <p class="lead">Mi base es el diseño. En los últimos años he tomado decisiones de presupuesto, coordinado proveedores y medido resultados, y busco seguir creciendo hacia la gestión de marca.</p>
-        <div class="metrics">
-          <div><b data-count>8</b><span>años en diseño de marca</span></div>
-          <div><b data-count>30+</b><span>marcas lanzadas o rediseñadas</span></div>
-          <div><b data-count>120+</b><span>SKUs llevados a producción</span></div>
-          <div><b data-count>4</b><span>lanzamientos con KPIs medidos</span></div>
-        </div>
-        <div class="chips"><span class="pill">Identidad visual</span><span class="pill">Estrategia de marca</span><span class="pill">UX/UI</span><span class="pill">Dirección de arte</span><span class="pill">Modelado 3D</span><span class="pill">Brand guidelines</span><span class="pill">Gestión de proveedores</span><span class="pill">Figma</span><span class="pill">Adobe CC</span></div>
+      <span class="nums-ex">Cifras de ejemplo</span>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="sobre-mi">
+    <div class="about">
+      <div class="polas">
+        <div class="pola a" data-cursor="Arrastra">{fb("")}<small>Retrato · reemplazar</small></div>
+        <div class="pola b" data-cursor="Arrastra">{ph(6,"Happy Speakers, de la landing de Happy Talks",pre,"b")}<small>Happy Talks · 2025</small></div>
+        <span class="bubble">¡Hola! 👋</span>
+      </div>
+      <div>
+        <span class="mono muted">Sobre mí</span>
+        <h2 style="margin-top:1rem"><span class="lm"><span>Del diseño</span></span><span class="lm"><span>a la <em>gestión</em></span></span></h2>
+        <p>Mi base es el diseño. En los últimos años he tomado decisiones de presupuesto, coordinado proveedores y medido resultados.</p>
+        <p>Hoy busco crecer hacia la gestión de marca, sin dejar de hacer lo que mejor sé: que una marca se vea y se sienta distinta.</p>
+        <div class="tags"><span class="tag t">Identidad visual</span><span class="tag p">UX/UI</span><span class="tag b">Brand management</span><span class="tag">Dirección de arte</span><span class="tag">3D</span><span class="tag">Figma</span><span class="tag">Adobe CC</span></div>
       </div>
     </div>
   </section>
 </main>
-'''+contact(pre)+scripts(pre)
+'''+contact()+scripts(pre)
 open(os.path.join(R,'index.html'),'w').write(home)
 
-# ---------------- CASO HAPPY TALKS ----------------
+# ================= CASO =================
 pre='../'
-screens=[
- (3,'Hero','Un micrófono modelado en 3D rompe la palabra HAPPY: la conferencia es protagonista desde el primer segundo.','wide dark'),
- (4,'Conferencias','Las tres conferencias como índice tipográfico, fácil de recorrer y comparar.',''),
- (5,'Historia de aprendizaje','Video y storytelling para explicar qué vive una organización en una sesión.','dark'),
- (6,'Happy Speakers','Retratos sobre formas orgánicas y cifras de asistentes.','wide'),
- (7,'Prueba social','Asistentes impactados y marcas que ya confiaron en HDO.',''),
- (8,'Nuestras conferencias','Fotografía real de eventos que hace tangible la oferta.','dark'),
- (10,'Solicitud de conferencia','El cierre convierte: un formulario corto, el objetivo principal de la landing.','wide dark'),
-]
-sc='\n'.join(f'''      <article class="screen {cls}">
-        <div class="cap"><h3>{t}</h3><span class="mono muted">{i+1:02d} / {len(screens):02d}</span></div>
-        <div class="media" data-blur>{img(n,f"Sección {t} de la landing de Happy Talks",pre)}</div>
-        <p>{d}</p>
-      </article>''' for i,(n,t,d,cls) in enumerate(screens))
-case=head('Happy Talks · Rodrigo López','Caso de estudio: landing page de Happy Talks para HDO. UX/UI, branding, dirección de arte y modelado 3D.',pre)+chrome(pre,False)+f'''<main>
+shots=[(3,'Hero','Un micrófono modelado en 3D rompe la palabra HAPPY.'),(4,'Conferencias','Índice tipográfico fácil de recorrer.'),(5,'Historia','Video y storytelling de una sesión.'),(6,'Speakers','Retratos sobre formas orgánicas.'),(7,'Prueba social','Asistentes y marcas que ya confiaron.'),(8,'Eventos','Fotografía real que hace tangible la oferta.'),(9,'Temas','Stickers y tipografía en collage.'),(10,'Solicitud','Un formulario corto, el objetivo de la landing.')]
+gal='\n'.join(f'        <figure class="shot">{ph(n,f"Sección {t} de la landing de Happy Talks",pre)}<figcaption><b>{i+1:02d} · {t}</b><span>{d}</span></figcaption></figure>' for i,(n,t,d) in enumerate(shots))
+def word(w,cls=''):
+    return f'<span class="w {cls}">'+''.join(f'<span class="lt">{c}</span>' for c in w)+'</span>'
+case=head('Happy Talks · Rodrigo López','Caso de estudio: landing page de Happy Talks para HDO. UX/UI, branding, dirección de arte y modelado 3D.',pre)+nav(pre,False)+f'''<main>
   <section class="c-hero wrap">
-    <a class="crumb mono" href="{pre}#proyectos" data-transition>← Todos los proyectos</a>
-    <h1 data-lens data-scramble aria-label="Happy Talks"><span class="lens-txt">Happy<br>Talks</span></h1>
-    <div class="c-intro">
-      <p>Landing page para la plataforma de conferencias de HDO: una oferta intangible convertida en una experiencia visual que presenta a los speakers y genera solicitudes.</p>
-      <div style="display:grid;gap:.8rem;justify-items:start">
-        <div class="pills"><span class="pill blue">UX/UI</span><span class="pill">Branding</span><span class="pill">Dirección de arte</span><span class="pill">Modelado 3D</span></div>
-        <div class="tools"><span class="tool t-ai" title="Illustrator">Ai</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
+    <a class="back" href="{pre}#trabajo" data-go>← Todos los proyectos</a>
+    <h1 class="c-title" aria-label="Happy Talks"><span aria-hidden="true">{word("Happy","hlw")} {word("Talks")}</span></h1>
+    <div class="c-row">
+      <div>
+        <p>Una landing para la plataforma de conferencias de HDO: una oferta intangible convertida en una experiencia visual que presenta a los speakers y genera solicitudes.</p>
+        <div class="tags"><span class="tag t">UX/UI</span><span class="tag p">Branding</span><span class="tag b">Dirección de arte</span><span class="tag">Modelado 3D</span><span class="tool t-ai" title="Illustrator">Ai</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
       </div>
-    </div>
-    <dl class="c-meta">
-      <div><dt class="mono">Mi rol</dt><dd>UX/UI, branding, dirección de arte y 3D</dd></div>
-      <div><dt class="mono">Cliente</dt><dd>HDO · Human Design Doing</dd></div>
-      <div><dt class="mono">Año</dt><dd>2025</dd></div>
-      <div class="todo"><dt class="mono">Resultado</dt><dd>Pendiente de agregar</dd></div>
-    </dl>
-  </section>
-
-  <section class="c-reel" aria-label="Portada">
-    <div class="media">{img(1,"Landing de Happy Talks en una laptop",pre,True)}</div>
-  </section>
-
-  <section class="wrap">
-    <div class="key">
-      <span class="pill"><i class="spark"></i>Punto clave</span>
-      <h2>¿Cuál era<br>el reto?</h2>
-      <div class="key-grid">
-        <div data-rise><b>01</b><p>Comunicar una oferta intangible, las conferencias, de manera tangible y atractiva.</p></div>
-        <div data-rise><b>02</b><p>Diferenciarse en un mercado competido de servicios de desarrollo organizacional.</p></div>
-      </div>
-      <i class="steps" aria-hidden="true"></i>
+      <dl class="facts">
+        <div><dt class="mono">Mi rol</dt><dd>UX/UI, branding, arte y 3D</dd></div>
+        <div><dt class="mono">Cliente</dt><dd>HDO</dd></div>
+        <div><dt class="mono">Año</dt><dd>2025</dd></div>
+        <div class="todo"><dt class="mono">Resultado</dt><dd>Por agregar</dd></div>
+      </dl>
     </div>
   </section>
 
-  <section class="approach wrap">
-    <span class="mono muted">Enfoque</span>
+  <section class="cover" aria-label="Portada">{ph(1,"Landing de Happy Talks en una laptop",pre,"",True)}</section>
+
+  <div class="wrap chapters">
+    <aside class="toc" aria-label="Capítulos">
+      <ol><li><a href="#reto">El reto</a></li><li><a href="#enfoque">Enfoque</a></li><li><a href="#landing">La landing</a></li><li><a href="#concepto">Concepto</a></li><li><a href="#resultados">Resultados</a></li></ol>
+      <div class="bar"><i></i></div>
+    </aside>
     <div>
-      <p class="big" data-words>Happy Talks ofrece conferencias disruptivas que provocan reflexión y detonan el cambio. La landing tenía que sentirse igual: <em style="font-style:normal;color:var(--blue)">auténtica, memorable y lejos de lo corporativo.</em></p>
-      <div class="cols">
-        <div data-rise><h3>Metas</h3><ul><li>Presentar el portafolio de speakers y conferencias.</li><li>Generar leads con una ruta clara hacia la solicitud.</li><li>Contar la historia con una estructura ágil.</li></ul></div>
-        <div data-rise><h3>Alcance</h3><ul><li>UX/UI de la landing, desktop y móvil</li><li>Lenguaje visual: tipografía, color y stickers</li><li>Dirección de arte, fotografía e ilustración</li><li>Modelado 3D de elementos clave</li></ul></div>
-      </div>
+      <section class="chap" id="reto">
+        <span class="mono">01 · El reto</span>
+        <h2><span class="lm"><span>Hacer tangible</span></span><span class="lm"><span>lo intangible</span></span></h2>
+        <div class="quotes">
+          <div class="quote a"><b>01</b><p>Comunicar una oferta intangible, las conferencias, de manera tangible y atractiva.</p></div>
+          <div class="quote b"><b>02</b><p>Diferenciarse en un mercado competido de servicios de desarrollo organizacional.</p></div>
+        </div>
+      </section>
+
+      <section class="chap" id="enfoque">
+        <span class="mono">02 · Enfoque</span>
+        <h2><span class="lm"><span>Una conferencia que</span></span><span class="lm"><span>no parece conferencia</span></span></h2>
+        <p class="lead">Happy Talks ofrece conferencias disruptivas que provocan reflexión y detonan el cambio en las organizaciones. La landing tenía que sentirse igual: auténtica, memorable y lejos de lo corporativo.</p>
+        <div class="lists">
+          <div><h3>Metas</h3><ul><li>Presentar el portafolio de speakers y conferencias.</li><li>Generar leads con una ruta clara hacia la solicitud.</li><li>Contar la historia con una estructura ágil.</li></ul></div>
+          <div><h3>Alcance</h3><ul><li>UX/UI de la landing, desktop y móvil</li><li>Lenguaje visual: tipografía, color y stickers</li><li>Dirección de arte, fotografía e ilustración</li><li>Modelado 3D de elementos clave</li></ul></div>
+        </div>
+      </section>
+
+      <section class="chap" id="landing">
+        <span class="mono">03 · La landing</span>
+        <h2><span class="lm"><span>Sección por sección</span></span></h2>
+        <p class="lead">Del primer impacto a la solicitud de conferencia. Arrastra para recorrerla.</p>
+        <div class="drag">
+          <div class="drag-track" tabindex="0" aria-label="Pantallas de la landing" data-cursor="Arrastra">
+{gal}
+          </div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Anterior">←</button><button type="button" data-next aria-label="Siguiente">→</button></div></div>
+        </div>
+        <div class="wipe">{ph(2,"Introducción de Happy Talks con stickers de temas",pre)}</div>
+      </section>
+
+      <section class="chap" id="concepto">
+        <span class="mono">04 · Concepto</span>
+        <h2><span class="lm"><span>Energía con</span></span><span class="lm"><span>rostro humano</span></span></h2>
+        <div class="swatches" aria-label="Paleta de Happy Talks">
+          <div class="sw" style="background:#141218;color:#fff">Negro escenario</div>
+          <div class="sw" style="background:#B45CF2;color:#141218">Morado</div>
+          <div class="sw" style="background:#FFE14D;color:#141218">Amarillo</div>
+          <div class="sw" style="background:#3DDC97;color:#141218">Menta</div>
+          <div class="sw" style="background:#FF4FD8;color:#141218">Magenta</div>
+        </div>
+        <div class="concept">
+          <div><h3>Tonos vibrantes que transmiten energía y positividad</h3><p>Para que la marca se sienta como un evento y no como un servicio corporativo.</p></div>
+          <div><h3>Ilustración y fotografía que humanizan la marca</h3><p>Retratos reales de speakers con trazos y stickers dibujados a mano.</p></div>
+        </div>
+        <div class="wipe tall">{ph(11,"La landing de Happy Talks en móvil",pre)}</div>
+      </section>
+
+      <section class="chap" id="resultados">
+        <span class="mono">05 · Resultados</span>
+        <div class="todo-box">
+          <h3>Métricas por agregar</h3>
+          <p>Aquí irán los resultados del proyecto: solicitudes de conferencia, conversión o tiempo en página.</p>
+          <a class="btn o" href="https://www.behance.net/gallery/227805201/Landing-Happy-Talks" target="_blank" rel="noopener">Ver en Behance <span class="ar">↗</span></a>
+        </div>
+      </section>
     </div>
-  </section>
+  </div>
 
-  <section class="wrap" aria-label="La landing sección por sección">
-    <div class="screens">
-{sc}
-    </div>
-  </section>
-
-  <section class="c-giant" aria-hidden="true">
-    <div class="giant-row">Energía <span class="o">Color</span> Energía</div>
-    <div class="giant-row"><span class="o">Humano</span> Visual <span class="o">Humano</span></div>
-    <div class="giant-card media">{img(9,"",pre,fb='b')}</div>
-  </section>
-
-  <section class="wrap" aria-label="Concepto visual">
-    <div class="concept">
-      <div class="cc a" data-rise><span class="mono">Decisión 01</span><h3>Tonos vibrantes que transmiten energía y positividad</h3><p>Morado, amarillo y verde menta sobre negro, para que la marca se sienta como un evento y no como un servicio corporativo.</p></div>
-      <div class="cc b" data-rise><span class="mono">Decisión 02</span><h3>Ilustración y fotografía que humanizan la marca</h3><p>Retratos reales de speakers y eventos, con trazos y stickers dibujados a mano, para conectar con el público.</p></div>
-    </div>
-    <div class="mobile"><div class="media" data-blur>{img(11,"La landing de Happy Talks en móvil",pre)}</div></div>
-  </section>
-
-  <section class="results wrap">
-    <div class="results-box">
-      <span class="mono muted">Resultados</span>
-      <h2>Próximamente</h2>
-      <p class="muted">Aquí irán las métricas del proyecto: solicitudes de conferencia, conversión o tiempo en página.</p>
-      <div>{hl("https://www.behance.net/gallery/227805201/Landing-Happy-Talks","Ver en Behance","↗",' target="_blank" rel="noopener"')}</div>
-    </div>
-  </section>
-
-  <a class="next" href="{pre}#proyectos" data-transition data-cursor="Ver todo">
-    <div class="wrap"><span class="mono">Siguiente proyecto</span></div>
-    <h2 class="wrap" style="white-space:nowrap">Lumen Óptica · Lumen Óptica</h2>
-    <div class="peek media"><span class="fallback c"></span></div>
-    <div class="wrap"><div class="foot mono" style="margin-top:3rem"><span>© 2026 Rodrigo López</span><span>Caso 01 / 04</span></div></div>
+  <a class="next" href="{pre}#trabajo" data-go data-cursor="Ver todo">
+    <div class="wrap"><span class="mono">Siguiente</span><h2>Lumen Óptica →</h2></div>
+    <div class="peek ph"><span class="fb c"></span></div>
+    <div class="wrap"><div class="foot mono"><span>© 2026 Rodrigo López</span><span>Caso 01 / 04</span></div></div>
   </a>
 </main>
 '''+scripts(pre)
