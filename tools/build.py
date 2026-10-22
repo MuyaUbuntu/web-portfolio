@@ -146,16 +146,17 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
   <section class="stage" id="work">
     <div class="sec wrap">
       <div class="sec-h">
-        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">06</i></span></span></h2>
+        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">07</i></span></span></h2>
         <div><p>Campaigns and digital work for global brands. On AI projects, hover to see the sketch they started from.</p></div>
       </div>
       <div class="grid">
 {card(1,"proyectos/happy-talks.html","HDO · 2025","Happy Talks","Landing page for a disruptive conference platform. UX/UI, art direction and 3D.",["Web","UX/UI","3D"],ht(1,"Happy Talks landing page",pre))}
 {card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
-{card(3,"","Coca-Cola","Conexiones Mágicas","Team experience for a 75-person concentrate plant.",["Key visual","Firefly"],ai("coca-final","A hand catching a bottle cap in red light",pre),"coca-ref",True,True)}
-{card(4,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
-{card(5,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
-{card(6,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
+{card(3,"proyectos/arboterra.html","ArboTerra · Africam Safari","ArboTerra es…","Campaign system approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(4,"","Coca-Cola","Conexiones Mágicas","Team experience for a 75-person concentrate plant.",["Key visual","Firefly"],ai("coca-final","A hand catching a bottle cap in red light",pre),"coca-ref",True,True)}
+{card(5,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
+{card(6,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
+{card(7,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
       </div>
     </div>
   </section>
@@ -407,7 +408,132 @@ case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key vis
       </section>
     </div>
   </div>
-'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+next_block(pre,'ArboTerra es…','arboterra.html','<img src="../assets/img/arboterra/kv-aventura.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','no-vendas-humo.html'),'w').write(case2)
+
+# ================= CASE: ARBOTERRA (campaign system) =================
+def at(name,alt='',cls='',lazy=True):
+    ext='webp' if name.startswith(('tree','flamingo')) else 'jpg'
+    from PIL import Image as _I
+    w,h=_I.open(os.path.join(R,'assets/img/arboterra',f'{name}.{ext}')).size
+    return f'<img src="{pre}assets/img/arboterra/{name}.{ext}" alt="{alt}" class="{cls}" width="{w}" height="{h}" draggable="false"{" loading=\"lazy\"" if lazy else ""}>'
+LOCK={'aventura':(1404,133),'magia':(1236,131),'diversion':(1426,171)}
+moods=[('aventura','Aventura','aventura','#195554'),('noche','Magia · night','magia','#FFFFFF'),('dia','Magia · day','magia','#195554'),('diversion','Diversión','diversion','#195554')]
+layers=''.join(f'<div class="m-layer{" on" if i==0 else ""}" data-m="{m}">{at("bg-"+m,"","bg",i>0)}{at("tree-"+m,"","tree",i>0)}</div>' for i,(m,l,w,c) in enumerate(moods))
+locks=''.join(f'<img class="lock{" on" if i==0 else ""}" data-m="{m}" src="{pre}assets/img/arboterra/lock-{w}{"" if c=="#FFFFFF" else "-teal"}.png" alt="ArboTerra es {w}" style="--h:{LOCK[w][1]/133:.3f}" draggable="false">' for i,(m,l,w,c) in enumerate(moods))
+tabs=''.join(f'<button type="button" data-m="{m}" aria-pressed="{"true" if i==0 else "false"}">{l}</button>' for i,(m,l,w,c) in enumerate(moods))
+promos=[('promo-1','Alegría','Photo promos put real kids at the center.'),('promo-2','Celebración','Birthday packages, same type system.'),('promo-3','Celebración','A second take for the same offer.'),('promo-4','Aventura','Park photography with the brand lockup.'),('promo-5','Aventura','Greens and depth, no tree needed.'),('promo-6','Aventura','The path into the park.'),('app-story','Story','The tree adapted to a vertical story.'),('app-vertical','Vertical','A narrow format for print and screens.')]
+pgal='\n'.join(f'        <figure class="shot pt">{at(n,f"ArboTerra {t} piece")}<figcaption><b>{i+1:02d} · {t}</b><span>{d}</span></figcaption></figure>' for i,(n,t,d) in enumerate(promos))
+ig=[('ig-1','Oct 21, 2026','The Árbol Arcano, now under a glass dome for World Energy Saving Day.'),('ig-2','Sep 28, 2026','The block-cut lettering, reused for the park’s kids podcast.'),('ig-3','Sep 3, 2026','Same podcast, same type system, new scene.')]
+igal='\n'.join(f'        <figure class="shot ig">{at(n,f"ArboTerra Instagram post from {d}")}<figcaption><b>@arboterra · {d}</b><span>{t}</span></figcaption></figure>' for n,d,t in ig)
+steps=[('Background','Photo, blurred and color-graded to match the word.'),('Árbol Arcano','The 3D tree: a floating island with a waterfall and a balloon.'),('Supporting elements','Birds from the park, bubbles and light.'),('Final','Lockup and call to action: ¡Ven y explora!')]
+bsteps=''.join(f'<button type="button" data-i="{i}" aria-pressed="{"true" if i==0 else "false"}"><b>{i+1:02d}</b>{t}</button>' for i,(t,d) in enumerate(steps))
+bimgs=''.join(f'<figure class="b-img{" on" if i==0 else ""}">{at(f"build-{i+1}",f"Construction step {i+1}: {t}")}</figure>' for i,(t,d) in enumerate(steps))
+bnotes=''.join(f'<p class="b-note{" on" if i==0 else ""}">{d}</p>' for i,(t,d) in enumerate(steps))
+
+case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campaign system for ArboTerra, Africam Safari’s secret world. Concept, art direction and 3D.',pre)+nav(pre,False)+f'''<main>
+  <section class="wrap c-hero arbt">
+    <div>
+      <a class="back" href="{pre}#work" data-go>← All work</a>
+      <div class="c-client"><span class="tag k">ArboTerra · Africam Safari</span><span class="tag">Campaign · 2023</span></div>
+      <h1 class="c-title" aria-label="ArboTerra es…"><span aria-hidden="true">{word("ArboTerra")} {word("es…","hlw")}</span></h1>
+      <p class="c-lead">A park nobody could define got a campaign that never finishes the sentence. One floating tree, four moods and a type system the client still uses three years later.</p>
+      <div class="tags c-tags"><span class="tag t">Concept</span><span class="tag p">Art direction</span><span class="tag b">3D</span><span class="tool t-bl" title="Blender">Bl</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, 3D</dd></div><div><dt class="mono">Agency</dt><dd>Happy Studio</dd></div><div><dt class="mono">Timeline</dt><dd>2–3 months</dd></div><div class="win"><dt class="mono">Result</dt><dd>Still in use, 3 years on</dd></div></dl>
+    </div>
+    <div class="moods" data-cursor="Change mood">
+      <div class="m-stage">{layers}<div class="m-locks">{locks}</div></div>
+      <div class="m-tabs" role="group" aria-label="Choose a mood">{tabs}</div>
+    </div>
+  </section>
+
+  <div class="wrap chapters">
+    <aside class="toc" aria-label="Chapters">
+      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#world">The world</a></li><li><a href="#system">The system</a></li><li><a href="#results">Results</a></li></ol>
+      <div class="bar"><i></i></div>
+    </aside>
+    <div>
+      <section class="chap" id="challenge">
+        <span class="mono">01 · Challenge</span>
+        <h2><span class="lm"><span>A park nobody</span></span><span class="lm"><span>could define</span></span></h2>
+        <p class="lead">ArboTerra is the secret world inside Africam Safari, in Puebla. Before it had a campaign, it had a problem: many families didn’t know what it was. The client wanted one concept that would sum it up.</p>
+        <div class="quotes" style="margin-top:2rem">
+          <div class="quote a"><b>Families</b><p>Parents and kids, with very different reasons to visit.</p></div>
+          <div class="quote c"><b>Print + digital</b><p>Billboards and a steady stream of social content.</p></div>
+        </div>
+      </section>
+
+      <section class="chap" id="idea">
+        <span class="mono">02 · Idea</span>
+        <h2><span class="lm"><span>Don’t define it.</span></span><span class="lm"><span>Let it be everything.</span></span></h2>
+        <p class="lead">Instead of boxing ArboTerra into one word, the campaign leaves the sentence open: <b>ArboTerra es…</b> For a kid it’s adventure or magic. For parents, it’s learning. The park can be all of it, depending on who’s looking.</p>
+        <p class="pull">One sentence, <em>endless endings</em>.</p>
+        <h3 class="sub">The road not taken</h3>
+        <p class="lead">The first route explained the park with mascots on a clean white stage. Clear, but it looked like any park. The floating tree became a world of its own: one image that could hold every ending. Drag to compare.</p>
+        <div class="compare" data-cursor="Drag">
+          <div class="before">{at('route-white','Discarded route: mascots and 3D letters reading Arboterra es Aventura on white')}</div>
+          <div class="after" style="position:absolute;inset:0">{at('kv-aventura','Chosen route: the Árbol Arcano floating over teal clouds')}</div>
+          <span class="l a tag k">Discarded route</span><span class="l b tag b">Chosen route</span>
+          <span class="handle" aria-hidden="true"></span>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare the discarded route and the chosen one">
+        </div>
+      </section>
+
+      <section class="chap" id="world">
+        <span class="mono">03 · The world</span>
+        <h2><span class="lm"><span>Building the</span></span><span class="lm"><span>Árbol Arcano</span></span></h2>
+        <p class="lead">One hero element, modeled in Blender and composed in Photoshop: a floating island with a waterfall, a balloon and the park’s own birds. Modeling the tree was the hardest part of the project. Every scene is built in four layers.</p>
+        <div class="build">
+          <div class="b-stage">{bimgs}</div>
+          <div class="b-side"><div class="b-steps" role="group" aria-label="Construction layers">{bsteps}</div><div class="b-notes">{bnotes}</div><p class="mono muted b-cap">From the AdBook: the layer in color is the one being added.</p></div>
+        </div>
+        <h3 class="sub">Same tree, four moods</h3>
+        <p class="lead">Each word gets its own background, built from a photo: blurred, then color-graded to match the feeling. Hover to open each one.</p>
+        <div class="swatches moods-sw" aria-label="The four backgrounds">
+          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-aventura.jpg)"><span>Aventura</span></div>
+          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-noche.jpg)"><span>Magia · night</span></div>
+          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-dia.jpg)"><span>Magia · day</span></div>
+          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-diversion.jpg)"><span>Diversión</span></div>
+        </div>
+      </section>
+
+      <section class="chap" id="system">
+        <span class="mono">04 · The system</span>
+        <h2><span class="lm"><span>A toolkit,</span></span><span class="lm"><span>not a poster</span></span></h2>
+        <p class="lead">I sold the concept; the client’s in-house team ran the execution. So the delivery was a 35-page AdBook: backgrounds, extras, photo promos, layouts and a type system built to be reused.</p>
+        <div class="concept">
+          <div><h3>Sorvette for the big words</h3><p>Rounded block letters with small cut-in details, so every word feels hand-built.</p></div>
+          <div><h3>Knewave for the call to action</h3><p>A loose brush script that shouts ¡Ven y explora! without competing with the title.</p></div>
+        </div>
+        <div class="drag" style="margin-top:2.4rem">
+          <div class="drag-track" tabindex="0" aria-label="Campaign pieces" data-cursor="Drag">
+{pgal}
+          </div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+        </div>
+      </section>
+
+      <section class="chap" id="results">
+        <span class="mono">05 · Results</span>
+        <h2><span class="lm"><span>Three years later,</span></span><span class="lm"><span>still ArboTerra es…</span></span></h2>
+        <div class="quotes three">
+          <div class="quote b"><b>1st round</b><p>Concept approved at the first presentation.</p></div>
+          <div class="quote c"><b>In-house</b><p>The AdBook let the client’s team produce billboards and social on their own.</p></div>
+          <div class="quote a"><b>2023 → 2026</b><p>The tree, the lettering and #ArboTerraesMagia are still on the park’s Instagram.</p></div>
+        </div>
+        <p class="lead" style="margin-top:2.4rem">The client loved that it felt timeless: an open sentence gave them room to keep talking. Here’s how it looks today.</p>
+        <div class="drag" style="margin-top:1.6rem">
+          <div class="drag-track" tabindex="0" aria-label="Recent ArboTerra Instagram posts" data-cursor="Drag">
+{igal}
+          </div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+        </div>
+        <div class="learn"><span class="mono">What I’d do differently</span><p>Give 3D the time it needs. A tree this complex in a few weeks was a stretch; today I’d prototype the scenes with AI before committing to the full model.</p></div>
+      </section>
+    </div>
+  </div>
+'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+scripts(pre)
+open(os.path.join(R,'proyectos','arboterra.html'),'w').write(case3)
 print('ok')

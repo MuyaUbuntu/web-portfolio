@@ -30,7 +30,7 @@ Fuente: respuestas de Rodrigo (2026-10-22) + ARBT_AdBook.pdf (Drive: Web Portfol
 ## Alcance y señales
 - Piezas: varios espectaculares y mucho contenido digital; cantidad desconocida (ejecución del cliente).
 - Aprobado a la primera: sí.
-- Continuidad: publicación en Instagram de ArboTerra del 2026-10-21 (https://www.instagram.com/arboterra/p/DextTHeDV8l/) sugiere que el sistema sigue en uso (por verificar con captura).
+- Continuidad: verificado el 2026-10-22 en instagram.com/arboterra (20.1K seguidores). Post del 21-oct-2026 usa el Árbol Arcano (bajo una cúpula); posts de sep-2026 (podcast Encuéntame) reutilizan el lettering por bloques; hashtag #ArboTerraesMagia vigente. Capturas en el chat.
 - Comentario del cliente: les encantó cómo se resolvió; buscaban algo atemporal, y un concepto que no encapsula el proyecto les da libertad para comunicar.
 - Aprendizaje: ajustaría tiempos; no haría un modelado tan complejo en tan poco tiempo; hoy usaría IA para agilizar.
 
@@ -44,3 +44,8 @@ Fuente: respuestas de Rodrigo (2026-10-22) + ARBT_AdBook.pdf (Drive: Web Portfol
 - Promociones vivenciales: fotografía protagonista (Alegría, Celebración, Aventura).
 - Tipografía: Sorvette (títulos, bordes redondeados, intervención por bloques) + Knewave (CTA).
 - Construcción por capas: fondo → árbol → elementos de apoyo → final. Aplicaciones: feed, story, vertical.
+
+## Actualización (2026-10-22)
+- Proceso del árbol en Blender: no hay; el archivo .blend se perdió.
+- Fotos de scouting: no hay (cámara de la empresa).
+- Drive: elementos-sueltos (árboles, fondos, aves, burbujas, nubes), arreglos-tipograficos (SVG) y artes-finales. Archivos muy pesados para el conector; el caso usa las capas embebidas en el AdBook.

@@ -457,3 +457,53 @@ html.arrived .blot canvas{opacity:0;transition:opacity .3s .2s}
   .shot{flex-basis:84vw}
   .prompt .typed{word-break:break-word}
 }
+
+/* ---------- Case: ArboTerra ---------- */
+.t-bl{background:#1F2A36;color:#F5792A}
+.facts .win{background:var(--mint)}
+.moods{display:grid;gap:.9rem;min-width:0}
+.m-stage{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;background:#0f3d3d;box-shadow:0 30px 60px -30px rgba(0,0,0,.55);isolation:isolate}
+.m-layer{position:absolute;inset:0;opacity:0;transition:opacity 1s var(--out)}
+.m-layer.on{opacity:1}
+.m-layer .bg{position:absolute;inset:-4%;width:108%;height:108%;max-width:none;object-fit:cover;scale:1.08;transition:scale 6s linear;translate:var(--bx,0) var(--by,0)}
+.m-layer.on .bg{scale:1}
+.m-layer .tree{position:absolute;left:50%;bottom:-6%;height:92%;width:auto;max-width:none;translate:calc(-50% + var(--tx,0px)) calc(var(--ty,0px) + 14%);transition:translate 1.1s var(--bounce)}
+.m-layer.on .tree{translate:calc(-50% + var(--tx,0px)) var(--ty,0px);animation:float 6s ease-in-out infinite}
+@keyframes float{50%{margin-bottom:-1.4%}}
+.m-locks{position:absolute;left:0;right:0;top:6%;height:13%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:3}
+.lock{position:absolute;bottom:0;height:calc(100% * var(--h,1));width:auto;max-width:none;opacity:0;translate:0 30%;transition:opacity .45s,translate .6s var(--bounce)}
+.lock.on{opacity:1;translate:0 0;transition-delay:.15s}
+.m-tabs{display:flex;flex-wrap:wrap;gap:.45rem}
+.m-tabs button{font:600 .82rem/1 var(--f-body);padding:.6rem .9rem;border-radius:99px;border:0;background:var(--chip);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);cursor:pointer;transition:background .3s,color .3s}
+.m-tabs button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.chap h3.sub{font-size:clamp(1.3rem,2.4vw,1.8rem);margin:clamp(2.6rem,6vw,4rem) 0 .8rem}
+.build{display:grid;gap:1.4rem;margin-top:2rem;align-items:center}
+@media(min-width:900px){.build{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2.4rem}}
+.b-stage{position:relative;aspect-ratio:1;border-radius:var(--r);overflow:hidden;background:#e9ecea;box-shadow:0 26px 50px -30px rgba(0,0,0,.5)}
+.b-img{position:absolute;inset:0;margin:0;opacity:0;scale:1.04;transition:opacity .7s var(--out),scale .9s var(--out)}
+.b-img.on{opacity:1;scale:1}
+.b-img img{width:100%;height:100%;object-fit:cover}
+.b-steps{display:grid;gap:.5rem}
+.b-steps button{display:flex;align-items:center;gap:.9rem;text-align:left;font:700 clamp(1rem,1.6vw,1.2rem)/1.2 var(--f-display);padding:.9rem 1rem;border-radius:var(--r-sm);border:0;background:transparent;box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);cursor:pointer;position:relative;overflow:hidden}
+.b-steps button b{font-family:var(--f-mono);font-size:.7rem;color:var(--tomato)}
+.b-steps button::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--tomato);transform:scaleX(0);transform-origin:left}
+.b-steps button[aria-pressed="true"]{background:var(--butter);box-shadow:none}
+.b-steps button[aria-pressed="true"]::after{animation:bfill var(--bt,2.6s) linear forwards}
+.build.paused .b-steps button::after{animation:none}
+@keyframes bfill{to{transform:scaleX(1)}}
+.b-notes{position:relative;margin-top:1rem;min-height:3.2em}
+.b-note{position:absolute;inset:0;opacity:0;transition:opacity .4s;color:var(--ink-2);margin:0}
+.b-note.on{opacity:1;position:relative}
+.moods-sw .sw{background-size:cover;background-position:center;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.shot.pt{flex:0 0 min(62vw,300px)}
+.shot.ig{flex:0 0 min(72vw,380px)}
+.shot.pt img,.shot.ig img{width:100%;height:auto;border-radius:var(--r-sm);box-shadow:0 22px 44px -26px rgba(0,0,0,.5);display:block}
+.shot figcaption{display:grid;gap:.15rem;margin-top:.7rem;font-size:.9rem}
+.quotes.three{grid-template-columns:minmax(0,1fr)}
+@media(min-width:760px){.quotes.three{grid-template-columns:repeat(3,minmax(0,1fr))}.quotes.three .quote{min-height:200px}}
+.learn{margin-top:clamp(2.4rem,6vw,3.4rem);border-radius:var(--r);padding:clamp(1.4rem,3vw,2rem);background:var(--chip);box-shadow:inset 0 0 0 1px var(--line);max-width:60ch}
+.learn .mono{color:var(--tomato)}
+.learn p{margin:.6rem 0 0;font-size:1.1rem;line-height:1.45}
+@media(max-width:700px){.m-tabs button{font-size:.74rem;padding:.55rem .75rem}}
+@media(prefers-reduced-motion:reduce){.m-layer.on .tree{animation:none}.m-layer .bg{transition:none}}
+.b-cap{margin-top:1.2rem;font-size:.62rem}

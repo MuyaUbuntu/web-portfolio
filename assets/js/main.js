@@ -235,6 +235,24 @@
     if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
       (function a(now){var k=Math.min(1,(now-t0)/1600),v=50+Math.sin(k*Math.PI*2)*22*(1-k);r.value=v;set();if(k<1)requestAnimationFrame(a);else{r.value=50;set()}})(t0)},{threshold:.6});io.observe(c)}});
 
+  /* ---------- ArboTerra: same tree, four moods ---------- */
+  (function(){var box=$('.moods');if(!box)return;var stage=$('.m-stage',box),tabs=$$('.m-tabs button',box),ls=$$('.m-layer',box),lk=$$('.lock',box),ids=tabs.map(function(b){return b.getAttribute('data-m')}),cur=0,t=null,user=false;
+    function show(i){cur=i;var m=ids[i];ls.forEach(function(l){l.classList.toggle('on',l.getAttribute('data-m')===m)});lk.forEach(function(l){l.classList.toggle('on',l.getAttribute('data-m')===m)});tabs.forEach(function(b,k){b.setAttribute('aria-pressed',k===i?'true':'false')});
+      ls.forEach(function(l){$$('img',l).forEach(function(im){im.loading='eager'})})}
+    function auto(){if(reduce||user)return;clearInterval(t);t=setInterval(function(){show((cur+1)%ids.length)},3200)}
+    tabs.forEach(function(b,i){b.addEventListener('click',function(){user=true;clearInterval(t);show(i)})});
+    stage.addEventListener('click',function(){user=true;clearInterval(t);show((cur+1)%ids.length)});
+    if(fine&&!reduce){var tx=0,ty=0,ax=0,ay=0;stage.addEventListener('pointermove',function(e){var r=stage.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5});stage.addEventListener('pointerleave',function(){tx=ty=0});
+      (function loop(){ax+=(tx-ax)*.06;ay+=(ty-ay)*.06;stage.style.setProperty('--tx',(ax*22)+'px');stage.style.setProperty('--ty',(ay*14)+'px');stage.style.setProperty('--bx',(-ax*14)+'px');stage.style.setProperty('--by',(-ay*10)+'px');requestAnimationFrame(loop)})()}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting)auto();else clearInterval(t)}).observe(stage);else auto()})();
+
+  /* ---------- ArboTerra: scene built layer by layer ---------- */
+  $$('.build').forEach(function(b){var btn=$$('.b-steps button',b),im=$$('.b-img',b),nt=$$('.b-note',b),cur=0,t=null,D=2600;
+    function show(i){cur=i;btn.forEach(function(x,k){x.setAttribute('aria-pressed',k===i?'true':'false')});im.forEach(function(x,k){x.classList.toggle('on',k===i)});nt.forEach(function(x,k){x.classList.toggle('on',k===i)})}
+    function run(){if(reduce){b.classList.add('paused');return}clearInterval(t);t=setInterval(function(){show((cur+1)%btn.length)},D)}
+    btn.forEach(function(x,i){x.addEventListener('click',function(){clearInterval(t);b.classList.add('paused');show(i)})});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting){if(!b.classList.contains('paused'))run()}else clearInterval(t)},{threshold:.4}).observe(b)});
+
   if(!hasG)return;
   /* ===================== GSAP ===================== */
   var stks=$$('.stk');
