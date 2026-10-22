@@ -10,18 +10,37 @@
 
   /* ---------- Transition: circle from the click + chaotic white scribbles ---------- */
   var blot=$('.blot'), scrib=blot&&$('canvas',blot), scribRun=false;
+  /* Hand-drawn scribbles: six kinds, a random one on every load (never the same twice in a row) */
+  var W=260,H=180,CX=W/2,CY=H/2,R=Math.random;
+  function rnd(a,b){return a+R()*(b-a)}
+  function smooth(pts,steps){/* Catmull-Rom through control points → dense polyline */
+    var out=[];for(var i=0;i<pts.length-1;i++){var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+      for(var t=0;t<1;t+=1/steps){var t2=t*t,t3=t2*t;out.push([.5*((2*p1[0])+(-p0[0]+p2[0])*t+(2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*t2+(-p0[0]+3*p1[0]-3*p2[0]+p3[0])*t3),
+        .5*((2*p1[1])+(-p0[1]+p2[1])*t+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3)])}}
+    return out}
+  var KINDS={
+    tangle:function(){var c=[],a=rnd(0,6.283),n=42;for(var i=0;i<n;i++){a+=rnd(.9,1.9);var r=rnd(26,64),ox=rnd(-10,10),oy=rnd(-8,8);c.push([CX+ox+Math.cos(a)*r*1.3,CY+oy+Math.sin(a)*r])}return smooth(c,12)},
+    spiral:function(){var c=[],a=rnd(0,6.283),turns=rnd(5,7);for(var i=0;i<turns*14;i++){a+=6.283/14;var r=8+i*.62+rnd(-4,4);c.push([CX+Math.cos(a)*r*1.4,CY+Math.sin(a)*r])}return smooth(c,6)},
+    zigzag:function(){var c=[],rows=rnd(9,13)|0,x0=CX-80,x1=CX+80,y=CY-52,dy=104/rows;for(var i=0;i<=rows;i++){c.push([i%2?x1+rnd(-8,8):x0+rnd(-8,8),y+i*dy+rnd(-4,4)+(i%2?8:-8)])}
+      for(var j=rows;j>=0;j-=2)c.push([CX+rnd(-70,70),CY+rnd(-45,45)]);return smooth(c,10)},
+    coil:function(){var c=[],x=CX-95,loops=rnd(6,8)|0,step=190/loops;for(var i=0;i<loops*8;i++){var a=i/8*6.283,r=rnd(20,30);c.push([x+i/8*step+Math.cos(a)*r*.75,CY+Math.sin(a)*r+rnd(-3,3)])}return smooth(c,5)},
+    clouds:function(){var c=[],k=rnd(5,7)|0;for(var j=0;j<k;j++){var cx=CX+rnd(-70,70),cy=CY+rnd(-35,35),r=rnd(14,30),a0=rnd(0,6.283);for(var i=0;i<=16;i++){var a=a0+i/14*6.283;c.push([cx+Math.cos(a)*r*rnd(.85,1.15),cy+Math.sin(a)*r*rnd(.85,1.15)])}}return smooth(c,5)},
+    burst:function(){var c=[[CX,CY]],n=rnd(14,20)|0;for(var i=0;i<n;i++){var a=rnd(0,6.283),r=rnd(40,80);c.push([CX+Math.cos(a)*r*1.3,CY+Math.sin(a)*r]);c.push([CX+rnd(-14,14),CY+rnd(-12,12)])}return smooth(c,8)}
+  };
+  function pickKind(){var keys=Object.keys(KINDS),last=null;try{last=sessionStorage.getItem('rl-scrib')}catch(e){}
+    var pool=keys.filter(function(k){return k!==last}),k=pool[(R()*pool.length)|0];try{sessionStorage.setItem('rl-scrib',k)}catch(e){}return k}
   function scribble(){
     if(!scrib||scribRun)return; scribRun=true;
-    var ctx=scrib.getContext('2d'),dpr=Math.min(2,devicePixelRatio||1),W=220,H=150;scrib.width=W*dpr;scrib.height=H*dpr;ctx.scale(dpr,dpr);
+    var ctx=scrib.getContext('2d'),dpr=Math.min(2,devicePixelRatio||1);scrib.width=W*dpr;scrib.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#fff';
-    var pts=[],x=W/2,y=H/2,a=Math.random()*6.28,t=0;
-    (function tick(){if(!scribRun)return;t++;
-      a+=(Math.random()-.5)*1.4; x+=Math.cos(a)*7; y+=Math.sin(a)*7;
-      if(x<20||x>W-20)a=Math.PI-a; if(y<20||y>H-20)a=-a; x=Math.max(16,Math.min(W-16,x)); y=Math.max(16,Math.min(H-16,y));
-      pts.push([x,y]); if(pts.length>34)pts.shift();
-      ctx.clearRect(0,0,W,H);
-      for(var i=1;i<pts.length;i++){ctx.globalAlpha=i/pts.length;ctx.lineWidth=1+4*(i/pts.length);ctx.beginPath();ctx.moveTo(pts[i-1][0],pts[i-1][1]);ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke()}
-      requestAnimationFrame(tick)})();
+    var pts=KINDS[pickKind()](),total=pts.length,t0=performance.now(),DUR=1100,drawn=1;
+    /* a little hand tremor */
+    pts=pts.map(function(p){return [p[0]+rnd(-.6,.6),p[1]+rnd(-.6,.6)]});
+    ctx.clearRect(0,0,W,H);
+    (function tick(now){if(!scribRun)return;
+      var k=Math.min(1,(now-t0)/DUR),e=1-Math.pow(1-k,2),upto=Math.max(2,Math.floor(e*total));
+      for(var i=drawn;i<upto;i++){ctx.lineWidth=1.6+Math.sin(i*.05)*.5;ctx.beginPath();ctx.moveTo(pts[i-1][0],pts[i-1][1]);ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke()}
+      drawn=upto; if(k<1)requestAnimationFrame(tick)})(t0);
   }
   var arrived=false;
   try{arrived=sessionStorage.getItem('rl-go')==='1';sessionStorage.removeItem('rl-go')}catch(e){}
