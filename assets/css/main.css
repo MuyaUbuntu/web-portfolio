@@ -434,3 +434,26 @@ html.arrived .blot canvas{opacity:0;transition:opacity .3s .2s}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .ctag,.peekimg,.tools-pop{display:none}
 }
+
+/* ---------- Mobile containment fixes ---------- */
+.chapters{grid-template-columns:minmax(0,1fr)}
+@media(min-width:960px){.chapters{grid-template-columns:220px minmax(0,1fr)}}
+.chapters > *,.c-hero > *,.svc-wrap > *,.two-col > *,.flow > *,.quotes > *,.concept > *{min-width:0}
+.c-hero{grid-template-columns:minmax(0,1fr)}
+@media(min-width:960px){.c-hero{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+@media(max-width:700px){
+  .quote{rotate:0deg}
+  .facts div:nth-child(odd),.facts div:nth-child(even){rotate:0deg}
+  .fan{overflow:hidden;border-radius:var(--r);margin-inline:calc(var(--g)*-1);padding-inline:var(--g)}
+  .fan .card-img{width:66%}
+  .fan .card-img:nth-child(1){transform:translate(-14%,-16%)}
+  .fan .card-img:nth-child(2){transform:translate(14%,-6%)}
+  .fan .card-img:nth-child(3){transform:translate(0,12%)}
+  .c-title{font-size:clamp(2.3rem,11vw,3.6rem)}
+  .pull{max-width:none}
+  .swatches{height:120px;gap:6px}
+  .sw{padding:.6rem;font-size:.5rem}
+  .sw:hover{flex:1.6}
+  .shot{flex-basis:84vw}
+  .prompt .typed{word-break:break-word}
+}
