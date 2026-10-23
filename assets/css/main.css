@@ -800,3 +800,5 @@ body *:not(.keep-case){text-transform:none!important}
 @keyframes wave{0%{transform:scale(.3);opacity:.9}100%{transform:scale(3.2);opacity:0}}
 
 @media (pointer:coarse){.br-view{overflow:hidden;touch-action:pan-y;height:clamp(360px,62vh,560px)}.br-live{display:none}}
+
+@media (pointer:coarse){.micdrop{touch-action:pan-y;cursor:auto}.micdrop::after{content:"← Drag the mic →";position:absolute;left:50%;bottom:.8rem;translate:-50% 0;z-index:3;color:#9a96a6;font-size:.8rem;white-space:nowrap}}

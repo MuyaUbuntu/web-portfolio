@@ -295,12 +295,16 @@
   /* ---------- Happy Talks: the mic amplifies the words ---------- */
   $$('.micdrop').forEach(function(m){var wrap=$('.md-mic-wrap',m),ls=$$('.ml',m),x=0,tx=0,y=0,W=0,H=0,vis=false,first=true;
     function size(){W=m.clientWidth;H=m.clientHeight;if(first){x=tx=W*.72;y=H+40;first=false}}
-    m.addEventListener('pointermove',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-wrap.offsetWidth,e.clientX-b.left-wrap.offsetWidth/2));m.classList.add('on')});
-    m.addEventListener('pointerleave',function(){m.classList.remove('on')});
-    function loop(t){if(!vis)return;size();x+=(tx-x)*.12;var rest=H-wrap.offsetHeight*.62;y+=(rest-y)*.08;
+    var coarse=matchMedia('(pointer:coarse)').matches,lastTouch=0;
+    if(coarse)m.classList.add('on');
+    m.addEventListener('pointermove',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-wrap.offsetWidth,e.clientX-b.left-wrap.offsetWidth/2));m.classList.add('on');lastTouch=performance.now()});
+    m.addEventListener('pointerdown',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-wrap.offsetWidth,e.clientX-b.left-wrap.offsetWidth/2));lastTouch=performance.now();try{m.setPointerCapture(e.pointerId)}catch(err){}});
+    m.addEventListener('pointerup',function(e){lastTouch=performance.now();try{m.releasePointerCapture(e.pointerId)}catch(err){}});
+    m.addEventListener('pointerleave',function(){if(!coarse)m.classList.remove('on')});
+    function loop(t){if(!vis)return;size();if(coarse&&t-lastTouch>1800){tx=(W-wrap.offsetWidth)*(.5+.5*Math.sin(t/1400))}x+=(tx-x)*.12;var rest=H-wrap.offsetHeight*.62;y+=(rest-y)*.08;
       wrap.style.transform='translate('+x.toFixed(1)+'px,'+(y+Math.sin(t/700)*4).toFixed(1)+'px) rotate('+((tx-x)*.04).toFixed(2)+'deg)';
       var mb=m.getBoundingClientRect(),mx=mb.left+x+wrap.offsetWidth*.62,on=m.classList.contains('on');
-      ls.forEach(function(l,i){var r=l.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mx),a=on?Math.max(0,1-d/220):0,v=a*(.55+.45*Math.sin(t/85+i*1.7));
+      ls.forEach(function(l,i){var r=l.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mx),a=on?Math.max(0,1-d/Math.min(220,W*.22)):0,v=a*(.55+.45*Math.sin(t/85+i*1.7));
         l.style.transform='translateY('+(-v*14).toFixed(1)+'px) scaleY('+(1+v*.45).toFixed(3)+')';l.style.color=a>.25?'#57E3C3':''});
       requestAnimationFrame(loop)}
     if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)requestAnimationFrame(loop)}).observe(m)});
