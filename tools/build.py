@@ -87,7 +87,7 @@ def contact():
 
 def card(i,href,client,name,role,tags,media,ref=None,aiflag=False,soon=False):
     t=''.join(f'<span class="tag">{x}</span>' for x in tags)
-    o=f'<a class="card" href="{href}" data-go data-cursor="{"See process" if aiflag else "See case"}">' if not soon else f'<div class="card soon" data-cursor="Coming soon">'
+    o=f'<a class="card" href="{href}" data-go data-zoom data-cursor="{"See process" if aiflag else "See case"}">' if not soon else f'<div class="card soon" data-cursor="Coming soon">'
     c='</a>' if not soon else '</div>'
     refh=f'<div class="ref" aria-hidden="true"><img src="assets/img/ai/{ref}.jpg" alt="" loading="lazy" draggable="false"><span class="lbl tag k">Before AI · sketch</span></div>' if ref else ''
     badges=('<span class="ai">AI process</span>' if aiflag else '')
@@ -115,13 +115,13 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
     </div>
     <div>
       <h1 class="stickers" aria-label="Creative ideas, big results">
-        <span class="stk s1" aria-hidden="true">Creative</span>
+        <span class="stk s1 keep-case" aria-hidden="true">Creative</span>
         <span class="stk s2" aria-hidden="true">ideas,</span>
         <span class="stk s5" aria-hidden="true">✳ since 2016</span>
-        <span class="stk s3" aria-hidden="true">big</span>
+        <span class="stk s3 keep-case" aria-hidden="true">big</span>
         <span class="stk s4" aria-hidden="true">results</span>
       </h1>
-      <p class="drag-hint mono">Drag the words around ✋</p>
+      <p class="drag-hint"><span class="dh-ic" aria-hidden="true"><svg viewBox="0 0 64 44" width="64" height="44"><g class="dh-move"><rect x="8" y="8" width="26" height="18" rx="4" fill="#FF4417"/><path d="M27 20 L27 40 L32 35 L35.5 42.5 L39 41 L35.6 33.6 L42.5 33.6 Z" fill="#0B0B0A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></g><rect class="dh-ghost" x="8" y="8" width="26" height="18" rx="4" fill="none" stroke="#0B0B0A" stroke-width="1.4" stroke-dasharray="3 3"/></svg></span><span>Drag the words around</span></p>
     </div>
     <div class="hero-bottom">
       <div class="ctas">
@@ -158,7 +158,23 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(6,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
 {card(7,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
       </div>
+      <div class="ix" aria-label="Project index">
+        <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
+          <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">01</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HDO</span><span class="ix-tg">Web · UX/UI · 3D</span><span class="ix-yr">2025</span></a>
+          <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">02</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
+          <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">Africam Safari</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
+          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/coca-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">Soon</span></div>
+          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">05</span><span class="ix-name">Fuerza DiDi</span><span class="ix-cl">DiDi Food</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
+          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/megagas-final.jpg"><span class="ix-n">06</span><span class="ix-name">Amo Aquí</span><span class="ix-cl">Megagas</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
+          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/mars-final.jpg"><span class="ix-n">07</span><span class="ix-name">Snackable</span><span class="ix-cl">Mars Wrigley</span><span class="ix-tg">Event · AI</span><span class="ix-yr">Soon</span></div>
+      </div>
     </div>
+    <div class="lamp" aria-label="Lights off: move the cursor to discover final artworks">
+      <div class="lamp-grid base" aria-hidden="true"><img src="assets/img/arboterra/kv-magia-noche.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/pmi-humo-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/coca-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/arboterra/kv-diversion.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/didi-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/megagas-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/sephora-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/arboterra/kv-aventura.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/mars-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/arcelor-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/cinepolis-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/pmi-copilot-final.jpg" alt="" loading="lazy" draggable="false"></div>
+      <div class="lamp-grid lit" aria-hidden="true"><img src="assets/img/arboterra/kv-magia-noche.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/pmi-humo-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/coca-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/arboterra/kv-diversion.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/didi-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/megagas-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/sephora-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/arboterra/kv-aventura.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/mars-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/arcelor-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/cinepolis-final.jpg" alt="" loading="lazy" draggable="false"><img src="assets/img/ai/pmi-copilot-final.jpg" alt="" loading="lazy" draggable="false"></div>
+      <p class="lamp-t"><b>Lights off.</b><span>Move around to find the finals.</span></p>
+    </div>
+    <div class="ix-float" aria-hidden="true"><img alt=""></div>
   </section>
 
   <section class="sec wrap" id="services">
@@ -246,7 +262,7 @@ def htimg(n,pre): return f'<img src="{pre}assets/img/happy-talks/{n:02d}.jpg" da
 def aiimg(n,pre): return f'<img src="{pre}assets/img/ai/{n}.jpg" alt="" draggable="false">'
 
 def next_block(pre,title,href,img):
-    return f'''  <a class="next" href="{href}" data-go data-cursor="Next">
+    return f'''  <a class="next" href="{href}" data-go data-zoom data-cursor="Next">
     <div class="wrap"><span class="mono">Next project</span><h2>{title} →</h2></div>
     <div class="peek">{img}</div>
     <div class="wrap"><div class="foot mono"><span>© 2026 Rodrigo López</span><span>{EMAIL}</span></div></div>

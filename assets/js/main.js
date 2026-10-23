@@ -46,8 +46,25 @@
   try{arrived=sessionStorage.getItem('rl-go')==='1';sessionStorage.removeItem('rl-go')}catch(e){}
   if(arrived&&!reduce){root.classList.add('arriving');scribble();
     setTimeout(function(){root.classList.add('arrived');setTimeout(function(){root.classList.remove('arriving','arrived');scribRun=false},1600)},550)}
+  /* ---------- Zoom transition: the image grows into the next page ---------- */
+  function zoomFrom(a,e){var im=a.querySelector('.frame img,.peek img,.ph img')||null,src=a.getAttribute('data-img')||(im&&(im.currentSrc||im.src));if(!src)return false;
+    var r=im&&im.getBoundingClientRect();if(!r||r.width<20||r.height<20){r={left:e.clientX-80,top:e.clientY-50,width:160,height:100}}
+    var L=document.createElement('div');L.className='zoom-layer';L.innerHTML='<img alt="">';L.firstChild.src=src;
+    var st=L.style;st.left=r.left+'px';st.top=r.top+'px';st.width=r.width+'px';st.height=r.height+'px';st.borderRadius='14px';document.body.appendChild(L);
+    var t0=performance.now(),D=900,x0=r.left,y0=r.top,w0=r.width,h0=r.height,W=innerWidth,H=innerHeight;
+    (function a2(now){var k=Math.min(1,(now-t0)/D),q=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;st.left=x0*(1-q)+'px';st.top=y0*(1-q)+'px';st.width=(w0+(W-w0)*q)+'px';st.height=(h0+(H-h0)*q)+'px';st.borderRadius=(14*(1-q))+'px';if(k<1)requestAnimationFrame(a2)})(t0);
+    try{sessionStorage.setItem('rl-zoom',src)}catch(err){}
+    setTimeout(function(){location.href=a.getAttribute('href')},D+80);return true}
+  (function(){var src=null;try{src=sessionStorage.getItem('rl-zoom');sessionStorage.removeItem('rl-zoom')}catch(e){}
+    if(!src||reduce)return;var target=$('.c-cover,.m-stage');var L=document.createElement('div');L.className='zoom-layer';L.innerHTML='<img alt="">';L.firstChild.src=src;
+    var st=L.style;st.left='0px';st.top='0px';st.width=innerWidth+'px';st.height=innerHeight+'px';document.body.appendChild(L);root.classList.add('zoomed');
+    setTimeout(function(){var r=target?target.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+      var t0=performance.now(),D=850,W=innerWidth,H=innerHeight;
+      (function a3(now){var k=Math.min(1,(now-t0)/D),q=1-Math.pow(1-k,3);st.left=(r.left*q)+'px';st.top=(r.top*q)+'px';st.width=(W+(r.width-W)*q)+'px';st.height=(H+(r.height-H)*q)+'px';st.borderRadius=(14*q)+'px';
+        if(k<1)requestAnimationFrame(a3);else{L.style.transition='opacity .5s';L.style.opacity='0';setTimeout(function(){L.remove()},520)}})(t0)},250)})();
   $$('a[data-go]').forEach(function(a){a.addEventListener('click',function(e){
-    if(reduce||e.metaKey||e.ctrlKey||e.shiftKey)return; var href=a.getAttribute('href'); if(!href||href.charAt(0)==='#')return;
+    if(reduce||e.metaKey||e.ctrlKey||e.shiftKey)return;
+    if(a.hasAttribute('data-zoom')){var hz=a.getAttribute('href');if(hz&&hz.charAt(0)!=='#'){e.preventDefault();if(zoomFrom(a,e))return;location.href=hz;return}} var href=a.getAttribute('href'); if(!href||href.charAt(0)==='#')return;
     e.preventDefault(); if(blot){blot.style.setProperty('--bx',e.clientX+'px');blot.style.setProperty('--by',e.clientY+'px')}
     try{sessionStorage.setItem('rl-go','1')}catch(err){} root.classList.add('leaving'); scribble(); setTimeout(function(){location.href=href},1250);
   })});
@@ -240,6 +257,23 @@
   $$('.compare').forEach(function(c){var r=$('input',c);function set(){c.style.setProperty('--pos',r.value+'%')}r.addEventListener('input',set);set();
     if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
       (function a(now){var k=Math.min(1,(now-t0)/1600),v=50+Math.sin(k*Math.PI*2)*22*(1-k);r.value=v;set();if(k<1)requestAnimationFrame(a);else{r.value=50;set()}})(t0)},{threshold:.6});io.observe(c)}});
+
+  /* ---------- Index: the final art follows the cursor and bends with speed ---------- */
+  (function(){var fl=$('.ix-float');if(!fl||!fine)return;var im=$('img',fl),x=0,y=0,cx=0,cy=0,on=false,raf=0;
+    function loop(){var vx=x-cx;cx+=(x-cx)*.14;cy+=(y-cy)*.14;var sk=Math.max(-18,Math.min(18,vx*.25));
+      fl.style.transform='translate3d('+(cx-fl.offsetWidth/2)+'px,'+(cy-fl.offsetHeight/2)+'px,0) skewX('+(-sk)+'deg) rotate('+(sk*.4)+'deg)';raf=on||Math.abs(vx)>.3?requestAnimationFrame(loop):0}
+    $$('.ix-row').forEach(function(r){r.addEventListener('pointerenter',function(e){var u=r.getAttribute('data-img');if(u&&im.getAttribute('src')!==u)im.src=u;if(!on){cx=x=e.clientX;cy=y=e.clientY}on=true;fl.classList.add('on');if(!raf)raf=requestAnimationFrame(loop)});
+      r.addEventListener('pointerleave',function(){on=false;fl.classList.remove('on')})});
+    addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY},{passive:true})})();
+
+  /* ---------- Flashlight: the finals appear only where you point ---------- */
+  (function(){var lp=$('.lamp');if(!lp)return;var x=.5,y=.5,tx=.5,ty=.5,rad=190,trad=190,user=false,last=0,vis=false;
+    function set(e){var r=lp.getBoundingClientRect();tx=(e.clientX-r.left)/r.width;ty=(e.clientY-r.top)/r.height;user=true;last=performance.now()}
+    lp.addEventListener('pointermove',set);lp.addEventListener('pointerdown',function(e){set(e);trad=320});addEventListener('pointerup',function(){trad=190});
+    lp.addEventListener('pointerleave',function(){user=false});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)requestAnimationFrame(loop)}).observe(lp);
+    function loop(now){if(!vis)return;if(!user||now-last>2500){var t=now/1000;tx=.5+Math.sin(t*.7)*.32;ty=.5+Math.sin(t*1.1+1)*.28}
+      x+=(tx-x)*.09;y+=(ty-y)*.09;rad+=(trad-rad)*.1;lp.style.setProperty('--x',(x*100)+'%');lp.style.setProperty('--y',(y*100)+'%');lp.style.setProperty('--rad',(reduce?260:rad)+'px');requestAnimationFrame(loop)}})();
 
   /* ---------- ArboTerra: same tree, four moods ---------- */
   (function(){var box=$('.moods');if(!box)return;var stage=$('.m-stage',box),tabs=$$('.m-tabs button',box),ls=$$('.m-layer',box),lk=$$('.lock',box),ids=tabs.map(function(b){return b.getAttribute('data-m')}),cur=0,t=null,user=false;
