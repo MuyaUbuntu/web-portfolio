@@ -153,7 +153,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(1,"proyectos/happy-talks.html","HDO · 2025","Happy Talks","Landing page for a disruptive conference platform. UX/UI, art direction and 3D.",["Web","UX/UI","3D"],ht(1,"Happy Talks landing page",pre))}
 {card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
-{card(4,"","Coca-Cola","Conexiones Mágicas","Team experience for a 75-person concentrate plant.",["Key visual","Firefly"],ai("coca-final","A hand catching a bottle cap in red light",pre),"coca-ref",True,True)}
+{card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
 {card(5,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
 {card(6,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
 {card(7,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
@@ -163,7 +163,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
           <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">01</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HDO</span><span class="ix-tg">Web · UX/UI · 3D</span><span class="ix-yr">2025</span></a>
           <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">02</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
           <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
-          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/coca-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">Soon</span></div>
+          <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">05</span><span class="ix-name">Fuerza DiDi</span><span class="ix-cl">DiDi Food</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/megagas-final.jpg"><span class="ix-n">06</span><span class="ix-name">Amo Aquí</span><span class="ix-cl">Megagas</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/mars-final.jpg"><span class="ix-n">07</span><span class="ix-name">Snackable</span><span class="ix-cl">Mars Wrigley</span><span class="ix-tg">Event · AI</span><span class="ix-yr">Soon</span></div>
@@ -557,9 +557,104 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       </section>
     </div>
   </div>
-'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+next_block(pre,'Conexiones Mágicas','conexiones-magicas.html','<img src="../assets/img/coca/s7-final.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','arboterra.html'),'w').write(case3)
+# ================= CASE: CONEXIONES MÁGICAS (short AI case) =================
+def cc(n,alt='',cls=''):
+    return f'<img src="{pre}assets/img/coca/{n}" alt="{alt}" class="{cls}" draggable="false" loading="lazy">'
+steps=[('s1-reference.jpg','Photo reference','Hand','A reference photo of a hand, cut out and placed on red to lock the gesture.'),
+ ('s2-structure.jpg','Structure reference','Hand','The gesture flattened into a silhouette, so Firefly keeps the pose and invents the light.'),
+ ('s3-firefly.jpg','Firefly result','AI','Godrays, dust and backlight. The output didn’t fill the canvas: see the red band on top.'),
+ ('s4-extend.jpg','Generative Fill','AI','The missing sky is extended and the fingers are cleaned up.'),
+ ('s5-grade.jpg','Color grade','Hand','Warm light pushed into Coca-Cola red with hue and curve adjustments.'),
+ ('s6-cap.jpg','The cap','Hand','A real bottle-cap photo, rebuilt in 12 layers to sit in the light.'),
+ ('s7-final.jpg','Final key visual','Hand','Title in linear burn, tagline and logo.')]
+timgs=''.join(f'<figure class="t-img{" on" if i==0 else ""}">{cc(f,f"Step {i+1}: {t}")}</figure>' for i,(f,t,w,d) in enumerate(steps))
+tlist=''.join(f'<li data-i="{i}"{" class=on" if i==0 else ""}><b>{i+1:02d}</b><span>{t}</span><em class="{"ai-b" if w=="AI" else "hand-b"}">{w}</em></li>' for i,(f,t,w,d) in enumerate(steps))
+tnotes=''.join(f'<p class="t-note{" on" if i==0 else ""}">{d}</p>' for i,(f,t,w,d) in enumerate(steps))
+case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted key visual for a Coca-Cola México team experience, built in layers from a hand silhouette.',pre)+nav(pre,False)+f'''<main>
+  <section class="wrap c-hero">
+    <div class="c-head"><div class="c-l">
+      <a class="back" href="{pre}#work" data-go>← All work</a>
+      <div class="c-client"><span class="tag k">Coca-Cola México</span><span class="ai">AI process</span></div>
+      <h1 class="c-title" aria-label="Conexiones mágicas"><span aria-hidden="true">{word("Conexiones")} {word("mágicas","hlw")}</span></h1>
+      </div><div class="c-r">
+      <p class="c-lead">A team-building proposal for a Coca-Cola concentrate plant, built on one idea: the magic isn’t only in the secret formula, it’s in the people. My part was the visual concept.</p>
+      <div class="tags c-tags"><span class="tag t">Key visual</span><span class="tag p">Internal culture</span><span class="tool t-ff" title="Adobe Firefly">Ff</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Visual concept, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Designed for</dt><dd>75-person warehouse team</dd></div><div><dt class="mono">Format</dt><dd>8-hour on-site experience (proposal)</dd></div></dl>
+    </div></div>
+    <div class="c-cover pop-cover">{cc('s7-final.jpg','Final key visual: a hand about to catch a Coca-Cola bottle cap in red light, with the title Conexiones mágicas')}
+      <button class="pop" type="button" aria-label="Pop the cap to reveal the key visual" data-cursor="Pop it">
+        <img class="pop-cap" src="{pre}assets/img/coca/cap.png" alt="" draggable="false">
+        <span class="pop-t">Pop the cap</span><span class="pop-h">Click or flick it away</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="wrap chapters">
+    <aside class="toc" aria-label="Chapters">
+      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#trick">Behind the trick</a></li><li><a href="#cap">The cap</a></li></ol>
+      <div class="bar"><i></i></div>
+    </aside>
+    <div>
+      <section class="chap" id="challenge">
+        <span class="mono">01 · Challenge</span>
+        <h2><span class="lm"><span>“We’ve lost the feeling</span></span><span class="lm"><span>of being a winning team”</span></span></h2>
+        <p class="lead">A warehouse team at Coca-Cola’s concentrate plant needed to break silos, recover its champion spirit and open up to different ways of working.</p>
+        <div class="quotes" style="margin-top:.5rem">
+          <div class="quote a"><b>75</b><p>people in the warehouse team the experience was designed for.</p></div>
+          <div class="quote c"><b>8 h</b><p>of on-site, playful workshops proposed by HD*.</p></div>
+        </div>
+      </section>
+
+      <section class="chap" id="idea">
+        <span class="mono">02 · Idea</span>
+        <h2><span class="lm"><span>The magic is</span></span><span class="lm"><span>in the people</span></span></h2>
+        <p class="lead">The pitch opens like a magic trick. The reveal: what makes Coca-Cola special isn’t only the formula, it’s the team. One gesture sums it up: a hand about to catch a popped cap.</p>
+        <h3 class="sub">Where it started</h3>
+        <div class="refs">
+          <figure>{cc('../ai/coca-photo1.jpg','Reference photo: hands in backlight')}</figure>
+          <figure>{cc('../ai/coca-photo2.jpg','Reference photo: a hand reaching into light')}</figure>
+          <figure>{cc('../ai/coca-photo3.jpg','Reference photo: the hand pose that was chosen')}<figcaption class="tag">The pose I kept</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="chap" id="trick">
+        <span class="mono">03 · Behind the trick</span>
+        <h2><span class="lm"><span>Seven steps,</span></span><span class="lm"><span>straight from the PSD</span></span></h2>
+        <p class="lead">Drag through the actual layers of the file. Labels show what the AI did and what I did by hand.</p>
+        <div class="trick" data-n="{len(steps)}">
+          <div class="t-stage">{timgs}</div>
+          <div class="t-side">
+            <ol class="t-list">{tlist}</ol>
+            <div class="t-notes">{tnotes}</div>
+            <input class="t-range" type="range" min="0" max="{len(steps)-1}" value="0" step="1" aria-label="Scrub through the layers">
+          </div>
+        </div>
+        <div class="prompt" aria-label="Prompt">
+          <div class="bar"><i></i><i></i><i></i><span>Firefly · prompt</span></div>
+          <div class="typed">hand lighted by godrays red dark background</div>
+          <div class="meta"><span>structure ref: silhouette</span><span>16:9</span><span>real prompt, kept in the PSD layer name</span></div>
+        </div>
+      </section>
+
+      <section class="chap" id="cap">
+        <span class="mono">04 · The cap</span>
+        <h2><span class="lm"><span>The magic</span></span><span class="lm"><span>is handmade</span></span></h2>
+        <p class="lead">The bottle cap isn’t AI. It’s a real photo, cut out and rebuilt in 12 layers of curves, highlights and shadows so it belongs in the scene.</p>
+        <div class="cap-two">
+          <figure>{cc('cap-photo.jpg','The original bottle cap photo')}<figcaption><b>Before</b><span>Studio photo, flat light</span></figcaption></figure>
+          <figure>{cc('cap-scene.jpg','The cap inside the key visual')}<figcaption><b>After</b><span>12 layers to match the backlight</span></figcaption></figure>
+        </div>
+        <div class="learn"><span class="mono">Honest note</span><p>I delivered the visual concept for HD*’s proposal; the design team didn’t see what happened after. What this case shows is the method: lock the gesture by hand, let AI do the light, then finish the details that make it believable.</p></div>
+      </section>
+    </div>
+  </div>
+'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+scripts(pre)
+open(os.path.join(R,'proyectos','conexiones-magicas.html'),'w').write(case4)
+
 
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
 import json as _j
@@ -576,7 +671,8 @@ EXPERIENCE=[("2025–present","Design Team Lead","Brainrocket","Leads the design
  ("2016–2018","Designer","In Movisión","Print and digital design, architectural photography and web layouts.")]
 WORKS=[("Happy Talks","HDO","2025","Landing page for a conference platform. UX/UI, art direction and 3D.","proyectos/happy-talks.html"),
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
- ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html")]
+ ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
+ ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},
@@ -591,7 +687,7 @@ def inject(path,tag):
     if 'application/ld+json' not in t: t=t.replace('</head>',tag+'</head>',1)
     open(path,'w').write(t)
 inject(os.path.join(R,'index.html'),ld_home())
-for i,f in enumerate(['happy-talks','no-vendas-humo','arboterra']): inject(os.path.join(R,'proyectos',f+'.html'),ld_case(i))
+for i,f in enumerate(['happy-talks','no-vendas-humo','arboterra','conexiones-magicas']): inject(os.path.join(R,'proyectos',f+'.html'),ld_case(i))
 md=["# Rodrigo López — Designer & Art Director","",PERSON["description"],"",f"- Email: {EMAIL}",f"- LinkedIn: {LI}",f"- Instagram: {IG}",f"- WhatsApp: {WA}","- Location: Mexico · open to remote","","## Experience"]
 md+= [f"- {yr} · {r}, {o}. {ds}" for yr,r,o,ds in EXPERIENCE]
 md+=["","## Selected work"]+[f"- [{n}]({u}) — {c}{' · '+y if y else ''}. {ds}" for n,c,y,ds,u in WORKS]

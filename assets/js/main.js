@@ -260,8 +260,25 @@
     if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
       (function a(now){var k=Math.min(1,(now-t0)/1600),v=50+Math.sin(k*Math.PI*2)*22*(1-k);r.value=v;set();if(k<1)requestAnimationFrame(a);else{r.value=50;set()}})(t0)},{threshold:.6});io.observe(c)}});
 
+  /* ---------- Conexiones Mágicas: pop the cap ---------- */
+  $$('.pop').forEach(function(b){var cap=$('.pop-cap',b),done=false,sx=0,sy=0,dragging=false,lx=0,ly=0,vx=0,vy=0;
+    function fly(dx,dy){if(done)return;done=true;cap.style.animation='none';var x=0,y=0,r=0,ux=dx||(Math.random()<.5?-1:1)*14,uy=dy||-26,vr=ux*1.6;
+      (function f(){x+=ux;y+=uy;uy+=1.3;r+=vr;cap.style.transform='translate('+x+'px,'+y+'px) rotate('+r+'deg)';if(y<innerHeight)requestAnimationFrame(f)})();b.classList.add('gone')}
+    b.addEventListener('pointerdown',function(e){dragging=true;sx=lx=e.clientX;sy=ly=e.clientY;try{b.setPointerCapture(e.pointerId)}catch(err){}});
+    b.addEventListener('pointermove',function(e){if(!dragging||done)return;vx=e.clientX-lx;vy=e.clientY-ly;lx=e.clientX;ly=e.clientY;cap.style.animation='none';cap.style.transform='translate('+(e.clientX-sx)+'px,'+(e.clientY-sy)+'px) rotate('+((e.clientX-sx)*.4)+'deg)'});
+    b.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false;var moved=Math.hypot(e.clientX-sx,e.clientY-sy);
+      if(moved>8){var k=Math.max(1,Math.hypot(vx,vy));fly(vx/k*22,Math.min(-12,vy/k*22))}else fly()});
+    b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fly()}})});
+
+  /* ---------- Conexiones Mágicas: scrub the PSD layers ---------- */
+  $$('.trick').forEach(function(t){var im=$$('.t-img',t),li=$$('.t-list li',t),nt=$$('.t-note',t),rg=$('.t-range',t),cur=0,timer=null,user=false;
+    function show(i){cur=i;im.forEach(function(x,k){x.classList.toggle('on',k===i)});li.forEach(function(x,k){x.classList.toggle('on',k===i)});nt.forEach(function(x,k){x.classList.toggle('on',k===i)});rg.value=i}
+    function stop(){user=true;clearInterval(timer)}
+    rg.addEventListener('input',function(){stop();show(+rg.value)});li.forEach(function(x,k){x.addEventListener('click',function(){stop();show(k)})});
+    if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting&&!user){clearInterval(timer);timer=setInterval(function(){show((cur+1)%im.length)},2200)}else clearInterval(timer)},{threshold:.4}).observe(t)});
+
   /* ---------- Lightbox: click a gallery image to see it whole ---------- */
-  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img',GROUP='.kv-grid,.drag-track,.flow,.b-stage';
+  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two';
     var lb=null,list=[],idx=0,dx=0,dy=0;
     addEventListener('pointerdown',function(e){dx=e.clientX;dy=e.clientY},true);
     function cap(im){var f=im.closest('figure');var c=f&&f.querySelector('figcaption');var t=c?c.textContent.replace(/\s+/g,' ').trim():'';return t||im.alt||''}
