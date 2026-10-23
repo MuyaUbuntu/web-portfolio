@@ -540,46 +540,75 @@
         if(k<1)requestAnimationFrame(f);else hh.classList.add('in')})(performance.now()+250)}
   }
 
-  /* ---------- Rebrand: lenticular before and after ---------- */
+  /* ---------- Rebrand: lenticular, driven by one slider ---------- */
   var lt=$('.lenti');
   if(lt){
-    var ltp=$$('.lt-p',lt),touched=false,cur2=0,tg=0;
-    function setP(p){lt.style.setProperty('--p',p);ltp.forEach(function(c){c.style.setProperty('--p',p)})}
-    function anim(){cur2+=(tg-cur2)*.12;setP(cur2.toFixed(3));if(Math.abs(tg-cur2)>.002)requestAnimationFrame(anim)}
-    function go(v){var s=Math.abs(tg-cur2)<.002;tg=cl(v,0,1);if(s)requestAnimationFrame(anim)}
-    lt.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;touched=true;var r=lt.getBoundingClientRect();go(cl((e.clientX-r.left-r.width*.15)/(r.width*.7),0,1))});
-    lt.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')touched=false;onS()});
-    function onS(){if(touched)return;var r=lt.getBoundingClientRect();go(cl((innerHeight*.85-r.top)/(innerHeight*.6),0,1))}
-    addEventListener('scroll',onS,{passive:true});setP(0);onS();
+    var lr=$('.lt-r',lt),ltp=$$('.lt-p',lt),lv=0,lg=0,lraf=0,ltouch=false;
+    function lset(v){lt.style.setProperty('--p',v);ltp.forEach(function(c){c.style.setProperty('--p',v)})}
+    function ltick(){lv+=(lg-lv)*.14;lset(lv.toFixed(3));if(Math.abs(lg-lv)>.002)lraf=requestAnimationFrame(ltick);else{lv=lg;lset(lv);lraf=0}}
+    function lgo(v){lg=cl(v,0,1);if(!lraf)lraf=requestAnimationFrame(ltick)}
+    lr.addEventListener('input',function(){ltouch=true;lv=lg=lr.value/100;lset(lv)});
+    $$('.lt-go',lt).forEach(function(b){b.addEventListener('click',function(){ltouch=true;lr.value=b.dataset.v;lgo(b.dataset.v/100)})});
+    lset(0);
+    if(!reduce)inView(lt,function(){var t0=performance.now();(function f(n){if(ltouch)return;var k=Math.min(1,(n-t0)/2600),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;lr.value=Math.round(e*100);lv=lg=e;lset(e);if(k<1)requestAnimationFrame(f)})(t0)},.5);
   }
 
-  /* ---------- App store: two sets, the phone slides over them ---------- */
-  var pn=$('.pano');
-  if(pn){
-    var all=$$('.aso-s',pn),ss=all,ph=$('.pano-ph',pn),pi=0,pov=false;
-    function pshow(k){pi=(k+ss.length)%ss.length;var s=ss[pi];all.forEach(function(x){x.classList.toggle('on',x===s)});
-      ph.style.left=s.offsetLeft+'px';ph.style.width=s.offsetWidth+'px';
-      if(pn.scrollWidth>pn.clientWidth)pn.scrollTo({left:s.offsetLeft-pn.clientWidth/2+s.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
-    all.forEach(function(s){s.addEventListener('click',function(){if(ss.indexOf(s)>-1)pshow(ss.indexOf(s))})});
-    $$('.aso-ui button').forEach(function(b){b.addEventListener('click',function(){$$('.aso-ui button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
-      all.forEach(function(s){s.hidden=s.dataset.set!==b.dataset.set});ss=all.filter(function(s){return !s.hidden});pshow(0)})});
-    ss=all.filter(function(s){return !s.hidden});
-    pn.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')pov=true});pn.addEventListener('pointerleave',function(){pov=false});
-    addEventListener('load',function(){pshow(pi)});pshow(0);addEventListener('resize',function(){pshow(pi)});
-    if(!reduce)inView(pn,function(){setInterval(function(){if(!pov)pshow(pi+1)},2200)});
+  /* ---------- App store: the phone stays, the set slides through it ---------- */
+  var as=$('.as');
+  if(as){
+    var ar=$('.as-r'),tracks=$$('.as-track',as),tr=tracks[0],apos=0,atm=null,auser=0;
+    function aplace(v){apos=v;var it=$$('.as-s',tr),w=it[0].offsetWidth,g=parseFloat(getComputedStyle(tr).columnGap)||40;
+      tr.style.transform='translateX('+(as.clientWidth/2-w/2-v*(w+g))+'px)';it.forEach(function(s,i){var d=Math.abs(i-v);s.style.opacity=Math.max(.28,1-d*.75)});ar.value=Math.round(v*100)}
+    function anim(to){var from=apos,t0=performance.now();(function f(n){var k=Math.min(1,(n-t0)/700),e=1-Math.pow(1-k,3);aplace(from+(to-from)*e);if(k<1)requestAnimationFrame(f)})(t0)}
+    ar.addEventListener('input',function(){auser=Date.now();aplace(ar.value/100)});
+    ar.addEventListener('change',function(){anim(Math.round(ar.value/100))});
+    $$('.aso-ui button').forEach(function(b){b.addEventListener('click',function(){$$('.aso-ui button').forEach(function(x){x.setAttribute('aria-selected',x===b)});tracks.forEach(function(x){x.hidden=x.dataset.set!==b.dataset.set});tr=tracks.filter(function(x){return !x.hidden})[0];aplace(0)})});
+    addEventListener('resize',function(){aplace(apos)});addEventListener('load',function(){aplace(apos)});aplace(0);
+    if(!reduce)inView(as,function(){setInterval(function(){if(Date.now()-auser<5000)return;anim((Math.round(apos)+1)%6)},2600)});
   }
 
-  /* ---------- Carousels: dots follow the swipe, drag with the mouse ---------- */
-  $$('.car').forEach(function(c){var v=$('.car-v',c),dots=$$('.car-dots i',c);
-    function upd(){var k=Math.round(v.scrollLeft/v.clientWidth);dots.forEach(function(d,j){d.classList.toggle('on',j===k)})}
-    v.addEventListener('scroll',upd,{passive:true});upd();
-    var dn=null;v.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;dn={x:e.clientX,s:v.scrollLeft};v.classList.add('grab')});
-    addEventListener('pointermove',function(e){if(dn)v.scrollLeft=dn.s-(e.clientX-dn.x)});
-    addEventListener('pointerup',function(){if(!dn)return;var k=Math.round(v.scrollLeft/v.clientWidth);dn=null;v.classList.remove('grab');v.scrollTo({left:k*v.clientWidth,behavior:'smooth'})});
+  /* ---------- Carousels: arrows, dots, and they move on their own ---------- */
+  $$('.car').forEach(function(c){
+    var t=$('.car-t',c),n=+c.dataset.n,dots=$$('.car-dots button',c),k=0,hold=0;
+    function go(i){k=(i+n)%n;t.style.transform='translateX('+(-k*100)+'%)';dots.forEach(function(d,j){d.classList.toggle('on',j===k)})}
+    $('.car-p',c).addEventListener('click',function(){hold=Date.now();go(k-1)});$('.car-n',c).addEventListener('click',function(){hold=Date.now();go(k+1)});
+    dots.forEach(function(d,j){d.addEventListener('click',function(){hold=Date.now();go(j)})});
+    c.addEventListener('pointerenter',function(){hold=Date.now()+1e9});c.addEventListener('pointerleave',function(){hold=Date.now()});
+    go(0);if(!reduce)inView(c,function(){setInterval(function(){if(Date.now()-hold>3500)go(k+1)},3000)});
   });
 
-  /* ---------- Badges: tap to stamp ---------- */
-  $$('.bdg').forEach(function(b){b.addEventListener('click',function(){b.classList.remove('stamp');void b.offsetWidth;b.classList.add('stamp');b.style.setProperty('--r',(Math.random()*16-8).toFixed(1)+'deg')})});
+  /* ---------- Badges: pick one, it lands on the piece ---------- */
+  var bd=$('.bd');
+  if(bd){var on=$('.bd-on',bd),nm=$('.bd-name',bd);
+    $$('.bdg',bd).forEach(function(b){b.addEventListener('click',function(){$$('.bdg',bd).forEach(function(x){x.classList.toggle('on',x===b)});
+      on.src=b.querySelector('img').src;nm.textContent=b.dataset.n;on.classList.remove('land');void on.offsetWidth;on.classList.add('land')})});
+  }
+
+  /* ---------- Logos: a slot machine lines the reels up into the logo ---------- */
+  var sx=$('.slotx');
+  if(sx){
+    var cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),angs=[0,0,0],curL=0,busy2=false,N8=8;
+    function spin(k){if(busy2)return;busy2=true;curL=k;ths.forEach(function(x,i){x.classList.toggle('on',i===k)});nmx.textContent=ths[k].getAttribute('aria-label');
+      lev.classList.add('pull');setTimeout(function(){lev.classList.remove('pull')},500);
+      cyls.forEach(function(c,j){var base=Math.ceil(angs[j]/360)*360+360*(2+j),a=base+k*45;angs[j]=a;
+        c.style.transition=reduce?'none':'transform '+(1.3+j*.4)+'s cubic-bezier(.15,.75,.2,1.02)';c.style.transform='rotateX('+(-a)+'deg)'});
+      setTimeout(function(){busy2=false},reduce?50:2300)}
+    ths.forEach(function(x,i){x.addEventListener('click',function(){spin(i)})});
+    lev.addEventListener('click',function(){var k;do{k=Math.floor(Math.random()*N8)}while(k===curL);spin(k)});
+    cyls.forEach(function(c){c.style.transform='rotateX(0deg)'});
+  }
+
+  /* ---------- Storyboards: a reel that rolls with the scroll ---------- */
+  var sr=$('.sreel');
+  if(sr){
+    var pin=$('.sr-pin',sr),trk=$('.sr-track',sr),fr=$$('.sr-f',sr),srn=$('.sr-n',sr),bar=$('.sr-bar i',sr),dist=0,tk2=false;
+    function size(){dist=Math.max(0,trk.scrollWidth-pin.clientWidth);sr.style.height=(dist+innerHeight)+'px';upd()}
+    function upd(){tk2=false;var r=sr.getBoundingClientRect(),p=cl(-r.top/Math.max(1,r.height-innerHeight),0,1);trk.style.transform='translate3d('+(-p*dist)+'px,0,0)';bar.style.transform='scaleX('+p+')';
+      var mid=innerWidth/2,best=0,bd2=1e9;fr.forEach(function(f,i){var b=f.getBoundingClientRect(),d=Math.abs(b.left+b.width/2-mid);if(d<bd2){bd2=d;best=i}});
+      fr.forEach(function(f,i){f.classList.toggle('on',i===best)});srn.textContent=(best<9?'0':'')+(best+1)+' / '+fr.length}
+    addEventListener('scroll',function(){if(!tk2){tk2=true;requestAnimationFrame(upd)}},{passive:true});
+    addEventListener('resize',size);addEventListener('load',size);size();
+  }
 
   /* ---------- World Cup: pieces in formation ---------- */
   var wcs=$('.wc');
@@ -619,23 +648,6 @@
     var sx=null;cfw.addEventListener('pointerdown',function(e){sx=e.clientX});
     cfw.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;if(Math.abs(dx)>40)cfs(ci+(dx<0?1:-1));sx=null});
     cfs(2);
-  }
-
-  /* ---------- Motion: storyboards play on their own ---------- */
-  var films=$$('.film'),act=null;
-  films.forEach(function(fm){
-    var big2=$$('.fm-f',fm),th=$$('.fm-t',fm),cp=$$('.fm-c',fm),strip=$('.fm-strip',fm),tc=$('.fm-tc',fm),fi=0,ft=null,over=false,N=big2.length;
-    function fshow(k){fi=(k+N)%N;[big2,th,cp].forEach(function(g){g.forEach(function(e,j){e.classList.toggle('on',j===fi)})});
-      tc.textContent=(fi<9?'0':'')+(fi+1)+' / '+(N<10?'0':'')+N;var t=th[fi];if(!fm.hidden)strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
-    function loop(){clearTimeout(ft);if(fm.hidden)return;ft=setTimeout(function(){if(!over)fshow(fi+1);loop()},2600)}
-    th.forEach(function(t,j){t.addEventListener('click',function(){fshow(j);loop()})});
-    fm.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')over=true});fm.addEventListener('pointerleave',function(){over=false});
-    fm._start=function(){fshow(fi);if(!reduce)loop()};fm._stop=function(){clearTimeout(ft)};
-  });
-  if(films.length){
-    var cur3=films[0];if(!reduce)inView(cur3,function(){cur3._start()});
-    $$('.sb-ui button').forEach(function(b){b.addEventListener('click',function(){$$('.sb-ui button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
-      films.forEach(function(f){var on=f.dataset.b===b.dataset.b;f.hidden=!on;if(on){cur3=f;f._start()}else f._stop()})})});
   }
 
   /* ---------- Icons: one grid, every size ---------- */
