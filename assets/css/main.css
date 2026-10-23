@@ -1406,4 +1406,3 @@ body *:not(.keep-case){text-transform:none!important}
 .car-t::-webkit-scrollbar{display:none}
 .car-t img{scroll-snap-align:start}
 .car-p.off,.car-n.off{opacity:0;pointer-events:none}
-.hf{transition:translate .6s var(--bounce),opacity .35s;transition-delay:calc(var(--i) * 45ms)}

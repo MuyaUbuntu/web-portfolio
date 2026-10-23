@@ -922,6 +922,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
   </div>
 '''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
 '''+scripts(pre)
+case5=case5.replace('</head>','<link rel="preload" as="image" href="../assets/img/campobet/mosaic-d.jpg" media="(min-width:641px)"><link rel="preload" as="image" href="../assets/img/campobet/mosaic-m.jpg" media="(max-width:640px)">\n</head>',1)
 open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
 
 
