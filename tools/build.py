@@ -359,14 +359,14 @@ case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key vis
       </div><div class="c-r">
       <p class="c-lead">A key visual for a sales-culture program during PMI’s shift to a smoke-free company. The idea, “don’t sell smoke”, was drawn by hand first and finished with AI.</p>
       <div class="tags c-tags"><span class="tag t">Key visual</span><span class="tag p">Internal campaign</span><span class="tool t-ff" title="Adobe Firefly">Ff</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Program</dt><dd>2.5-day training</dd></div><div class="todo"><dt class="mono">Result</dt><dd>To be added</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Program</dt><dd>2.5-day training</dd></div></dl>
     </div></div>
     <div class="c-cover">{aiimg('pmi-humo-final',pre).replace('alt=""','alt="Final key visual: letters made of smoke reading No vendas humo"')}<figure class="c-sticker">{aiimg('pmi-humo-ref',pre)}<figcaption class="mono">It started as this sketch</figcaption></figure></div>
   </section>
 
   <div class="wrap chapters">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#process">AI process</a></li><li><a href="#compare">Before / after</a></li><li><a href="#results">Results</a></li></ol>
+      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#process">AI process</a></li><li><a href="#compare">Before / after</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
     <div>
@@ -420,10 +420,6 @@ case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key vis
         </div>
       </section>
 
-      <section class="chap" id="results">
-        <span class="mono">05 · Results</span>
-        <div class="todo-box"><h3>Metrics coming soon</h3><p>Participation, adoption of the “Perfect PMI Store” routines or feedback from the sales team will live here.</p></div>
-      </section>
     </div>
   </div>
 '''+next_block(pre,'ArboTerra es…','arboterra.html','<img src="../assets/img/arboterra/kv-aventura.jpg" alt="" draggable="false">')+'''</main>
