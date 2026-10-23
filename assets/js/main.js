@@ -501,9 +501,9 @@
     function show(k){curF=k;var d=D[k],W=d[0],H=d[1],aw=stg.clientWidth-40,ah=stg.clientHeight-40,sc=Math.min(aw/W,ah/H);
       fr.style.width=(W*sc)+'px';fr.style.height=(H*sc)+'px';
       d[2].forEach(function(b,i){var e=els[i];e.style.left=(b[0]/W*100)+'%';e.style.top=(b[1]/H*100)+'%';e.style.width=(b[2]/W*100)+'%';e.style.height=(b[3]/H*100)+'%'});
-      tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.f===k)});cap.textContent=k.charAt(0).toUpperCase()+k.slice(1)+' · '+W+' × '+H}
+      tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.f===k)});$$('.rf-img',rf).forEach(function(im){im.classList.toggle('on',im.dataset.f===k)});cap.textContent=k.charAt(0).toUpperCase()+k.slice(1)+' · '+W+' × '+H}
     tabs.forEach(function(t){t.addEventListener('click',function(){clearInterval(auto);show(t.dataset.f)})});
-    show('story');addEventListener('resize',function(){show(curF)});
+    show('story');addEventListener('resize',function(){show(curF)});var zc=$('.rf-z input',rf);if(zc)zc.addEventListener('change',function(){fr.classList.toggle('nz',!zc.checked)});
     if(!reduce)inView(rf,function(){auto=setInterval(function(){show(keys[(keys.indexOf(curF)+1)%keys.length])},2600)});
   }
 
@@ -553,18 +553,33 @@
     addEventListener('scroll',onS,{passive:true});setP(0);onS();
   }
 
-  /* ---------- App store: the phone slides over one continuous story ---------- */
+  /* ---------- App store: two sets, the phone slides over them ---------- */
   var pn=$('.pano');
   if(pn){
-    var ss=$$('.aso-s',pn),ph=$('.pano-ph',pn),pi=0,ptm=null,pov=false;
-    function pshow(k){pi=(k+ss.length)%ss.length;var s=ss[pi];ss.forEach(function(x,j){x.classList.toggle('on',j===pi)});
+    var all=$$('.aso-s',pn),ss=all,ph=$('.pano-ph',pn),pi=0,pov=false;
+    function pshow(k){pi=(k+ss.length)%ss.length;var s=ss[pi];all.forEach(function(x){x.classList.toggle('on',x===s)});
       ph.style.left=s.offsetLeft+'px';ph.style.width=s.offsetWidth+'px';
       if(pn.scrollWidth>pn.clientWidth)pn.scrollTo({left:s.offsetLeft-pn.clientWidth/2+s.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
-    ss.forEach(function(s,j){s.addEventListener('click',function(){pshow(j)})});
+    all.forEach(function(s){s.addEventListener('click',function(){if(ss.indexOf(s)>-1)pshow(ss.indexOf(s))})});
+    $$('.aso-ui button').forEach(function(b){b.addEventListener('click',function(){$$('.aso-ui button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      all.forEach(function(s){s.hidden=s.dataset.set!==b.dataset.set});ss=all.filter(function(s){return !s.hidden});pshow(0)})});
+    ss=all.filter(function(s){return !s.hidden});
     pn.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')pov=true});pn.addEventListener('pointerleave',function(){pov=false});
-    pshow(0);addEventListener('resize',function(){pshow(pi)});
-    if(!reduce)inView(pn,function(){ptm=setInterval(function(){if(!pov)pshow(pi+1)},2200)});
+    addEventListener('load',function(){pshow(pi)});pshow(0);addEventListener('resize',function(){pshow(pi)});
+    if(!reduce)inView(pn,function(){setInterval(function(){if(!pov)pshow(pi+1)},2200)});
   }
+
+  /* ---------- Carousels: dots follow the swipe, drag with the mouse ---------- */
+  $$('.car').forEach(function(c){var v=$('.car-v',c),dots=$$('.car-dots i',c);
+    function upd(){var k=Math.round(v.scrollLeft/v.clientWidth);dots.forEach(function(d,j){d.classList.toggle('on',j===k)})}
+    v.addEventListener('scroll',upd,{passive:true});upd();
+    var dn=null;v.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;dn={x:e.clientX,s:v.scrollLeft};v.classList.add('grab')});
+    addEventListener('pointermove',function(e){if(dn)v.scrollLeft=dn.s-(e.clientX-dn.x)});
+    addEventListener('pointerup',function(){if(!dn)return;var k=Math.round(v.scrollLeft/v.clientWidth);dn=null;v.classList.remove('grab');v.scrollTo({left:k*v.clientWidth,behavior:'smooth'})});
+  });
+
+  /* ---------- Badges: tap to stamp ---------- */
+  $$('.bdg').forEach(function(b){b.addEventListener('click',function(){b.classList.remove('stamp');void b.offsetWidth;b.classList.add('stamp');b.style.setProperty('--r',(Math.random()*16-8).toFixed(1)+'deg')})});
 
   /* ---------- World Cup: pieces in formation ---------- */
   var wcs=$('.wc');
@@ -576,7 +591,7 @@
     function form(k){cf=k;var v=pitch.clientHeight>pitch.clientWidth;F[k].forEach(function(p,i){var x=v?p[1]:p[0],y=v?100-p[0]:p[1];pls[i].style.left=x+'%';pls[i].style.top=y+'%'});
       $$('.wc-ui button',wcs).forEach(function(b){b.classList.toggle('on',b.dataset.f===k)})}
     $$('.wc-ui button',wcs).forEach(function(b){b.addEventListener('click',function(){form(b.dataset.f)})});
-    pls.forEach(function(p){p.addEventListener('click',function(){big.innerHTML=p.querySelector('.phb').outerHTML;focus.hidden=false})});
+    pls.forEach(function(p){p.addEventListener('click',function(){var im=p.querySelector('img').cloneNode();im.removeAttribute('loading');big.innerHTML='';big.appendChild(im);focus.hidden=false})});
     $('.wc-x',wcs).addEventListener('click',function(){focus.hidden=true});
     focus.addEventListener('click',function(e){if(e.target===focus)focus.hidden=true});
     form('433');addEventListener('resize',function(){form(cf)});
@@ -606,16 +621,21 @@
     cfs(2);
   }
 
-  /* ---------- Motion: the storyboard plays on its own ---------- */
-  var fm=$('.film');
-  if(fm){
-    var big2=$$('.fm-f',fm),th=$$('.fm-t',fm),strip=$('.fm-strip',fm),tc=$('.fm-tc',fm),fi=0,ft=null,over=false;
-    function fshow(k){fi=(k+big2.length)%big2.length;big2.forEach(function(f,j){f.classList.toggle('on',j===fi)});th.forEach(function(t,j){t.classList.toggle('on',j===fi)});
-      tc.textContent=(fi<9?'0':'')+(fi+1)+' / '+(big2.length<10?'0':'')+big2.length;var t=th[fi];strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
-    function loop(){clearTimeout(ft);ft=setTimeout(function(){if(!over)fshow(fi+1);loop()},1800)}
+  /* ---------- Motion: storyboards play on their own ---------- */
+  var films=$$('.film'),act=null;
+  films.forEach(function(fm){
+    var big2=$$('.fm-f',fm),th=$$('.fm-t',fm),cp=$$('.fm-c',fm),strip=$('.fm-strip',fm),tc=$('.fm-tc',fm),fi=0,ft=null,over=false,N=big2.length;
+    function fshow(k){fi=(k+N)%N;[big2,th,cp].forEach(function(g){g.forEach(function(e,j){e.classList.toggle('on',j===fi)})});
+      tc.textContent=(fi<9?'0':'')+(fi+1)+' / '+(N<10?'0':'')+N;var t=th[fi];if(!fm.hidden)strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
+    function loop(){clearTimeout(ft);if(fm.hidden)return;ft=setTimeout(function(){if(!over)fshow(fi+1);loop()},2600)}
     th.forEach(function(t,j){t.addEventListener('click',function(){fshow(j);loop()})});
     fm.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')over=true});fm.addEventListener('pointerleave',function(){over=false});
-    if(!reduce)inView(fm,loop);
+    fm._start=function(){fshow(fi);if(!reduce)loop()};fm._stop=function(){clearTimeout(ft)};
+  });
+  if(films.length){
+    var cur3=films[0];if(!reduce)inView(cur3,function(){cur3._start()});
+    $$('.sb-ui button').forEach(function(b){b.addEventListener('click',function(){$$('.sb-ui button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      films.forEach(function(f){var on=f.dataset.b===b.dataset.b;f.hidden=!on;if(on){cur3=f;f._start()}else f._stop()})})});
   }
 
   /* ---------- Icons: one grid, every size ---------- */
