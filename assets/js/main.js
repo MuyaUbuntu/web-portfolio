@@ -529,32 +529,42 @@
     render('vm');inView(sw,play,.5);
   }
 
-  /* ---------- Hero: shuffle and deal the pieces ---------- */
-  var dl=$('.deal');
-  if(dl){
-    var cards=$$('.dl-c',dl),tb=$('.dl-table',dl);
-    function lay(anim){
-      var W=tb.clientWidth,H=tb.clientHeight,n=cards.length,mob=W<640,cols=mob?4:7,rows=Math.ceil(n/cols),ch=H/rows*(mob?.62:.66);
-      var order=cards.map(function(c,i){return i}).sort(function(){return Math.random()-.5});
-      order.forEach(function(ci,k){var c=cards[ci],ar=c.style.getPropertyValue('--ar').split('/'),r=ar[0]/ar[1],h=ch*(r>1.2?.62:1),w=h*r;
-        var col=k%cols,row=Math.floor(k/cols),cx=(col+.5)/cols*W+(Math.random()-.5)*W/cols*.35,cy=(row+.5)/rows*H+(Math.random()-.5)*H/rows*.3;
-        c.style.width=w+'px';c.style.height=h+'px';
-        var tf='translate('+(cx-w/2)+'px,'+(cy-h/2)+'px) rotate('+((Math.random()-.5)*16)+'deg)';
-        if(!anim||reduce){c.style.transition='none';c.style.transform=tf;return}
-        c.style.transition='none';c.style.transform='translate('+(W/2-w/2)+'px,'+(H+40)+'px) rotate(0deg)';c.style.zIndex=k;
-        void c.offsetWidth;c.style.transition='transform .9s cubic-bezier(.2,.9,.25,1.05) '+(k*.07)+'s';c.style.transform=tf});
-    }
-    lay(false);inView(dl,function(){lay(true)},.2);
-    $('.dl-again',dl).addEventListener('click',function(){lay(true)});
-    var rq;addEventListener('resize',function(){clearTimeout(rq);rq=setTimeout(function(){lay(false)},200)});
-    cards.forEach(function(c){c.addEventListener('pointerenter',function(){c.style.zIndex=99});c.addEventListener('pointerleave',function(){c.style.zIndex=''})});
+  /* ---------- Hero: the month fills up, then the highlights rise ---------- */
+  var hh=$('.h184');
+  if(hh){
+    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length;
+    if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
+    else{hn.textContent='0';var t0=null;
+      (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/1700),e=1-Math.pow(1-k,2),m=Math.round(N*e);
+        for(var q=0;q<m;q++)cells[q].classList.add('on');hn.textContent=m;
+        if(k<1)requestAnimationFrame(f);else hh.classList.add('in')})(performance.now()+250)}
   }
 
-  /* ---------- Rebrand: flip cards ---------- */
-  var fls=$$('.flp');
-  fls.forEach(function(f){f.addEventListener('click',function(){var o=f.getAttribute('aria-pressed')!=='true';f.setAttribute('aria-pressed',o)})});
-  var fa=$('.flip-all');
-  if(fa)fa.addEventListener('click',function(){var any=fls.some(function(f){return f.getAttribute('aria-pressed')!=='true'});fls.forEach(function(f,i){setTimeout(function(){f.setAttribute('aria-pressed',any)},reduce?0:i*90)})});
+  /* ---------- Rebrand: lenticular before and after ---------- */
+  var lt=$('.lenti');
+  if(lt){
+    var ltp=$$('.lt-p',lt),touched=false,cur2=0,tg=0;
+    function setP(p){lt.style.setProperty('--p',p);ltp.forEach(function(c){c.style.setProperty('--p',p)})}
+    function anim(){cur2+=(tg-cur2)*.12;setP(cur2.toFixed(3));if(Math.abs(tg-cur2)>.002)requestAnimationFrame(anim)}
+    function go(v){var s=Math.abs(tg-cur2)<.002;tg=cl(v,0,1);if(s)requestAnimationFrame(anim)}
+    lt.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;touched=true;var r=lt.getBoundingClientRect();go(cl((e.clientX-r.left-r.width*.15)/(r.width*.7),0,1))});
+    lt.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')touched=false;onS()});
+    function onS(){if(touched)return;var r=lt.getBoundingClientRect();go(cl((innerHeight*.85-r.top)/(innerHeight*.6),0,1))}
+    addEventListener('scroll',onS,{passive:true});setP(0);onS();
+  }
+
+  /* ---------- App store: the phone slides over one continuous story ---------- */
+  var pn=$('.pano');
+  if(pn){
+    var ss=$$('.aso-s',pn),ph=$('.pano-ph',pn),pi=0,ptm=null,pov=false;
+    function pshow(k){pi=(k+ss.length)%ss.length;var s=ss[pi];ss.forEach(function(x,j){x.classList.toggle('on',j===pi)});
+      ph.style.left=s.offsetLeft+'px';ph.style.width=s.offsetWidth+'px';
+      if(pn.scrollWidth>pn.clientWidth)pn.scrollTo({left:s.offsetLeft-pn.clientWidth/2+s.offsetWidth/2,behavior:reduce?'auto':'smooth'})}
+    ss.forEach(function(s,j){s.addEventListener('click',function(){pshow(j)})});
+    pn.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')pov=true});pn.addEventListener('pointerleave',function(){pov=false});
+    pshow(0);addEventListener('resize',function(){pshow(pi)});
+    if(!reduce)inView(pn,function(){ptm=setInterval(function(){if(!pov)pshow(pi+1)},2200)});
+  }
 
   /* ---------- World Cup: pieces in formation ---------- */
   var wcs=$('.wc');
@@ -595,11 +605,6 @@
     cfw.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;if(Math.abs(dx)>40)cfs(ci+(dx<0?1:-1));sx=null});
     cfs(2);
   }
-
-  /* ---------- App store: screenshots slide on their own ---------- */
-  var row=$('.ph-row');
-  if(row&&!reduce){var hold=0;row.addEventListener('pointerdown',function(){hold=Date.now()});row.addEventListener('scroll',function(){},{passive:true});
-    inView(row,function(){setInterval(function(){if(Date.now()-hold<4000)return;var s=row.querySelector('.aso-s'),w=s.offsetWidth+8;row.scrollTo({left:(row.scrollLeft+w>=row.scrollWidth-row.clientWidth+2)?0:row.scrollLeft+w,behavior:'smooth'})},2200)})}
 
   /* ---------- Motion: the storyboard plays on its own ---------- */
   var fm=$('.film');

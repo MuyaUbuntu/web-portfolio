@@ -668,11 +668,13 @@ pre='../'
 def phb(label,ratio='4/5',c='a',extra=''):
     return f'<div class="phb {c}" style="aspect-ratio:{ratio}"{extra}><span>{label}</span></div>'
 CC=['a','b','c','d','e']
-# hero: a deck that deals the pieces
-DEAL=[('Feed post','4/5'),('Story','9/16'),('World Cup','4/5'),('CRM banner','600/520'),('Slot master','9/16'),('Blog header','16/9'),('Paid','1/1'),('Feed post','4/5'),('Promo logo','1/1'),('App store','9/16'),('Feed post','4/5'),('CRM banner','600/520'),('Story','9/16'),('World Cup','1/1')]
-deal=''.join(f'<div class="dl-c" style="--ar:{r}">{phb(l,r,CC[i%5])}</div>' for i,(l,r) in enumerate(DEAL))
-# rebrand: flip cards
-flips=''.join(f'<button type="button" class="flp" aria-pressed="false" aria-label="Flip pair {i+1}"><span class="flp-in"><span class="flp-f">{phb(f"Before · {i+1:02d}",r,"era-old")}<em>Before</em></span><span class="flp-b">{phb(f"After · {i+1:02d}",r,"b")}<em>After</em></span></span></button>' for i,r in enumerate(['4/5','4/5','9/16','4/5','1/1','4/5']))
+# hero: 184 cells (one month of pieces) behind a tidy row of featured pieces
+FEAT=[('Feed post','4/5'),('Story','9/16'),('World Cup','4/5'),('CRM banner','600/520'),('Slot master','9/16'),('Paid','1/1'),('Feed post','4/5')]
+h184=''.join('<i></i>' for _ in range(184))
+hfeat=''.join(f'<div class="hf" style="--i:{i}">{phb(l,r,CC[i%5])}</div>' for i,(l,r) in enumerate(FEAT))
+# rebrand: lenticular pairs (before/after change with the viewing position)
+LT=[('Feed post','4/5'),('Story','9/16'),('Promo','1/1'),('Feed post','4/5')]
+lenti=''.join(f'<div class="lt-p" style="aspect-ratio:{r}"><div class="lt-a">{phb(f"Before · {n}",r,"era-old")}</div><div class="lt-b">{phb(f"After · {n}",r,"b")}</div><i class="lt-sheen"></i></div>' for n,r in LT)
 # social: endless columns
 def col(k):
     rs=[('4/5','Feed'),('9/16','Story'),('4/5','Feed'),('1/1','Paid'),('4/5','Feed'),('9/16','Story')]
@@ -738,12 +740,12 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       </div><div class="c-r">
       <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~130 pieces a month (approx.)</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Peak month</dt><dd>184 pieces, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
-    <div class="c-cover deal" aria-label="A deck of CampoBet pieces dealt across the table">
-      <div class="dl-table">{deal}</div>
-      <button type="button" class="dl-again">Shuffle &amp; deal ↻</button>
-      <span class="dl-count mono">~130 pieces a month · here are 14</span>
+    <div class="c-cover h184" aria-label="184 pieces designed in one month, with a few highlights">
+      <div class="h-grid" aria-hidden="true">{h184}</div>
+      <div class="h-count"><b class="h-n">184</b><span>pieces designed<br>in a single month</span></div>
+      <div class="h-feat">{hfeat}</div>
     </div>
   </section>
 
@@ -755,10 +757,12 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
     <div>
       <section class="chap" id="rebrand">
         <span class="mono">01 · Rebrand</span>
-        <h2><span class="lm"><span>Same piece,</span></span><span class="lm"><span>new face</span></span></h2>
-        <p class="lead">I proposed a new visual language for the organic content and it was approved. Each card is the same piece before and after: tap one to flip it, or flip them all.</p>
-        <div class="flips-ui"><button type="button" class="flip-all">Flip all ↺</button></div>
-        <div class="flips">{flips}</div>
+        <h2><span class="lm"><span>A lenticular</span></span><span class="lm"><span>before and after</span></span></h2>
+        <p class="lead">I proposed a new visual language for the organic content and it was approved. Like a lenticular print, each piece changes with where you look from: move across the cards, or just scroll, and the old look turns into the new one.</p>
+        <div class="lenti">
+          <div class="lt-row">{lenti}</div>
+          <div class="lt-ax mono" aria-hidden="true"><span>Before</span><span class="lt-tr"><i></i></span><span>After</span></div>
+        </div>
       </section>
 
       <section class="chap" id="social">
@@ -793,10 +797,8 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <p class="lead">Blog headers for guides, previews and promos. Drag, swipe or use the arrows to move through them.</p>
         <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous">←</button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next">→</button></div></div>
         <h3 class="sub">The app store page</h3>
-        <div class="aso">
-          <div class="phone"><div class="ph-scr"><div class="ph-head"><i class="ph-ic"></i><div><b>CampoBet</b><span>Sports &amp; casino</span></div><i class="ph-get">Get</i></div><div class="ph-row" data-lenis-prevent>{aso}</div><div class="ph-lines"><i></i><i></i><i class="s"></i></div></div></div>
-          <p>Store screenshots are the first thing a new player sees. I designed them as one continuous story that reads in a single swipe.</p>
-        </div>
+        <p>Store screenshots are the first thing a new player sees. I designed them as one continuous story; the phone shows what fits on screen at a time.</p>
+        <div class="pano" data-lenis-prevent><div class="pano-in">{aso}<span class="pano-ph" aria-hidden="true"></span></div></div>
       </section>
 
       <section class="chap" id="system">
@@ -877,7 +879,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">Automation · 04 · Impact</span>
         <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
         <div class="cb-nums">
-          <div><b>~130</b><p>pieces a month I made by hand before the pipelines.</p><small class="mono">Approximate · my own count</small></div>
+          <div><b>184</b><p>pieces designed by hand in my busiest month, before the pipelines. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the month’s content board</small></div>
           <div><b class="pending">[N]</b><p>slot banners delivered in 2–3 days with the pipeline.</p><small class="mono">Pending · number to confirm</small></div>
           <div><b>2</b><p>moments where I step in per master: choosing the scene and approving the image.</p><small class="mono">From the pipeline design</small></div>
         </div>
@@ -906,7 +908,7 @@ WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for 
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
  ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
  ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html"),
- ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 130 a month at the peak, approximate), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
+ ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (184 pieces designed in the busiest month; copy by the content manager), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},
