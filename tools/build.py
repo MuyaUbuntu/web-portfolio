@@ -154,7 +154,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
-{card(5,"proyectos/campobet.html","CampoBet","CampoBet","184 pieces in one month, a rebrand and three AI pipelines I designed.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/hero-3.jpg" alt="CampoBet World Cup key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(5,"proyectos/campobet.html","CampoBet","CampoBet","+150 pieces a month, a rebrand and three AI pipelines I designed.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(6,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
 {card(7,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
 {card(8,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
@@ -165,7 +165,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
           <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">02</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
           <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
           <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
-          <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/hero-3.jpg"><span class="ix-n">05</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/cover.jpg"><span class="ix-n">05</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">Fuerza DiDi</span><span class="ix-cl">DiDi Food</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/megagas-final.jpg"><span class="ix-n">07</span><span class="ix-name">Amo Aquí</span><span class="ix-cl">Megagas</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/mars-final.jpg"><span class="ix-n">08</span><span class="ix-name">Snackable</span><span class="ix-cl">Mars Wrigley</span><span class="ix-tg">Event · AI</span><span class="ix-yr">Soon</span></div>
@@ -657,7 +657,7 @@ case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted k
 
     </div>
   </div>
-'''+next_block(pre,'CampoBet','campobet.html','<img src="../assets/img/campobet/hero-3.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'CampoBet','campobet.html','<img src="../assets/img/campobet/cover.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','conexiones-magicas.html'),'w').write(case4)
 
@@ -678,15 +678,15 @@ FEAT=['hero-1.jpg','hero-4.jpg','hero-3.jpg','hero-5.jpg','hero-6.jpg','hero-2.j
 h184=''.join('<i></i>' for _ in range(184))
 hfeat=''.join(f'<div class="hf" style="--i:{i}">{cbi(f,"CampoBet piece",lazy=False)}</div>' for i,f in enumerate(FEAT))
 LT=[('Slots',1),('Football',2),('Basketball',3),('American football',4)]
-lenti=''.join(f'<div class="lt-p" style="aspect-ratio:{ar(f"rb-new-{k}.jpg")}"><div class="lt-a">{cbi(f"rb-old-{k}.jpg",f"{n} piece before the rebrand")}</div><div class="lt-b">{cbi(f"rb-new-{k}.jpg",f"{n} piece after the rebrand")}</div><i class="lt-sheen"></i><span class="lt-tag mono">{n}</span></div>' for n,k in LT)
+lenti=''.join(f'<div class="lt-p" style="aspect-ratio:{ar(f"rb-new-{k}.jpg")}"><div class="lt-a">{cbi(f"rb-old-{k}.jpg",f"{n} piece before the rebrand")}</div><div class="lt-b">{cbi(f"rb-new-{k}.jpg",f"{n} piece after the rebrand")}</div><i class="lt-sheen"></i></div>' for n,k in LT)
 def col(k):
     t=''.join(cbi(f'soc-{k*6+j+1:02d}.jpg','CampoBet social post') for j in range(6))
     return f'<div class="col{" up" if k%2 else ""}"><div class="col-rail">{t}{t}</div></div>'
 cols=''.join(col(k) for k in range(4))
 CARS=[('Weekly fixtures',6),('Big leagues',5),('Match of the day',6)]
 cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t">'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}') for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
-wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece")}<span class="pl-n">{i+1}</span></button>' for i in range(11))
-wcb=''.join(cbi(f'wcb-{i+1}.jpg','Megashoot CRM promo block') for i in range(3))
+wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="pl-n">{i+1}</span></button>' for i in range(11))
+wcb=''.join(f'<figure>{cbi(f"wcb-{i+1}.webp","Megashoot promo block")}</figure>' for i in range(3))
 keys=''.join(f'<figure class="key">{cbi(f"key-{i+1}.jpg","Key art reused across several pieces")}</figure>' for i in [2,4,3,0,5,1])
 crm=''.join(f"""<figure class="crm-c" tabindex="0" aria-label="CRM banner {i+1}: tap to see the photo behind it">
   <div class="crm-photo">{cbi(f"crm-photo-{i+1}.jpg","Generated photo behind the banner")}</div>
@@ -700,7 +700,8 @@ BN=['Welcome bonus · sports','Welcome bonus · casino','Boost accumulator','Los
 badges=''.join(f'<button type="button" class="bdg{" on" if i==10 else ""}" data-b="{i+1:02d}" data-n="{BN[i]}" style="--r:{[-6,4,-3,7,-5,3,-8,5,-2,6,-4][i]}deg" aria-label="{BN[i]}"><img src="{pre}assets/img/campobet/badges/badge-{i+1:02d}.svg" alt="" draggable="false"></button>' for i in range(11))
 LG=['Road to the big game','The big championship','Summer football trivia','CampoBet trivia','Winter Race','Basketball nights','Touchdown nights','Slots of the week']
 slot_faces=''.join(f'<span class="sf" style="--f:{i}"><i style="background-image:url({pre}assets/img/campobet/logo-{i+1}.webp)"></i></span>' for i in range(8))
-slot_reels=''.join(f'<div class="reel" style="--j:{j}"><div class="cyl">{slot_faces}</div></div>' for j in range(3))
+SW3=[(11.8,18.7),(36.1,19.9),(61.5,19.1)]
+slot_reels=''.join(f'<div class="sx-win" style="left:{l}%;width:{w}%"><div class="cyl">{slot_faces}</div></div>' for l,w in SW3)
 slot_thumbs=''.join(f'<button type="button" class="sx-t{" on" if i==0 else ""}" data-i="{i}" aria-label="{n}"><img src="{pre}assets/img/campobet/logo-{i+1}.webp" alt="" draggable="false"></button>' for i,n in enumerate(LG))
 SB1=['A man runs through a park, with a lake behind him.','Front shot: something catches his attention.','He sees a man trying to catch a fish (Big Bass slot).','The fisherman waves at him.','The runner looks bewildered.','Distracted, he bumps into the back of a tall, muscular man.','He falls back and looks up.','It’s Zeus (Gates of Olympus): “Sorry, I gotta run.”','A lightning bolt strikes and Zeus disappears.','He gets up and hears a loud noise.','A buffalo charges at him (Buffalo Blitz).','Rear shot: he runs, looking back.','A sharp turn up the steps of a kiosk.','The camera whips to a live dealer in the kiosk.','He shows his phone; everyone sits around him.','A lightning bolt strikes behind them.','Zeus joins the scene.']
 SB2=['Top view of a stadium. “Welcome to CampoBet.”','Zoom transition.','A fan celebrates in the stands. “The sports passion…”','A 360° orbit with heavy motion blur.','Mid-spin, the scene becomes a casino.','She celebrates and looks at her phone.','Over-the-shoulder orbit to her screen.','A super zoom into the phone.','The brand ambassador smiles at his phone.','Final key visual with the welcome offer.']
@@ -748,25 +749,33 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       </div><div class="c-r">
       <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Peak month</dt><dd>184 pieces, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>+150 pieces a month, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
-    <div class="c-cover h184" aria-label="184 pieces designed in one month, with a few highlights">
+    <div class="c-cover h184" aria-label="More than 150 pieces designed every month, with a few highlights">
       <div class="h-grid" aria-hidden="true">{h184}</div>
-      <div class="h-count"><b class="h-n">184</b><span>pieces designed<br>in a single month</span></div>
+      <div class="h-count"><b class="h-n" data-n="150">+150</b><span>pieces designed<br>per month</span></div>
       <div class="h-feat">{hfeat}</div>
     </div>
   </section>
 
   <div class="wrap chapters">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#rebrand">Rebrand</a></li><li><a href="#social">Social</a></li><li><a href="#worldcup">World Cup</a></li><li><a href="#crm">CRM</a></li><li><a href="#blog">Blog &amp; ASO</a></li><li><a href="#system">Badges</a></li><li><a href="#motion">Motion</a></li><li><a href="#automation">Automation</a></li></ol>
+      <ol><li><a href="#rebrand">The look</a></li><li><a href="#social">Social</a></li><li><a href="#worldcup">World Cup</a></li><li><a href="#channels">Channels</a></li><li><a href="#kit">Brand kit</a></li><li><a href="#motion">Motion</a></li><li><a href="#automation">Automation</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
     <div>
+      <section class="part p1" id="work">
+        <div class="part-in">
+          <span class="mono">Part one · The work</span>
+          <h2><span class="lm"><span>One brand,</span></span><span class="lm"><span>every day</span></span></h2>
+          <p>CampoBet publishes every day: slots, sports, seasons and offers, on social, paid, email, the blog and the app stores. My job was to make all of it look like one brand, and keep it coming. This part follows that path, from the new look to the pieces that carry it.</p>
+        </div>
+      </section>
+
       <section class="chap" id="rebrand">
-        <span class="mono">01 · Rebrand</span>
-        <h2><span class="lm"><span>A lenticular</span></span><span class="lm"><span>before and after</span></span></h2>
-        <p class="lead">I proposed a new visual language for the organic content and it was approved. Like a lenticular print, the old look turns into the new one stripe by stripe. Drag the slider, or tap Before and After.</p>
+        <span class="mono">01 · The look</span>
+        <h2><span class="lm"><span>First, a look</span></span><span class="lm"><span>of its own</span></span></h2>
+        <p class="lead">The organic content needed an identity of its own. I proposed a new visual language and it was approved: from dark gradients and centred layouts to big editorial type, open white space and cut-out athletes. Drag the slider to see it change, stripe by stripe, like a lenticular print.</p>
         <div class="lenti">
           <div class="lt-row">{lenti}</div>
           <div class="lt-ax mono"><button type="button" class="lt-go" data-v="0">Before</button><input class="lt-r" type="range" min="0" max="100" value="0" aria-label="From before to after"><button type="button" class="lt-go" data-v="100">After</button></div>
@@ -775,44 +784,40 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
 
       <section class="chap" id="social">
         <span class="mono">02 · Social</span>
-        <h2><span class="lm"><span>The feed</span></span><span class="lm"><span>never stops</span></span></h2>
-        <p class="lead">Organic and paid pieces for every day of the month. Hover to pause and look closer.</p>
+        <h2><span class="lm"><span>Then, the look</span></span><span class="lm"><span>every day</span></span></h2>
+        <p class="lead">With the new look in place came the daily feed: match days, fights, slots and promos, organic and paid.</p>
+        <div class="subhd"><span class="mono">02.1</span><h3>The feed</h3><p>A sample of the month. Hover to pause.</p></div>
         <div class="cols">{cols}</div>
-        <h3 class="sub">Carousels</h3>
-        <p>Multi-slide posts for fixtures and weekly roundups. They advance on their own; use the arrows or dots to move.</p>
+        <div class="subhd"><span class="mono">02.2</span><h3>Carousels</h3><p>Multi-slide posts for fixtures and weekly roundups. Use the arrows or the dots.</p></div>
         <div class="cars">{cars}</div>
       </section>
 
       <section class="chap" id="worldcup">
         <span class="mono">03 · World Cup</span>
-        <h2><span class="lm"><span>Eleven pieces,</span></span><span class="lm"><span>one line-up</span></span></h2>
-        <p class="lead">A special set for the World Cup, laid out as a team. Change the formation to reshuffle the line-up, and pick a player to see the piece up close.</p>
+        <h2><span class="lm"><span>The biggest</span></span><span class="lm"><span>moment of the year</span></span></h2>
+        <p class="lead">For the World Cup the brand dressed up for the tournament across every channel: feed, paid, app store and CRM.</p>
+        <div class="subhd"><span class="mono">03.1</span><h3>The line-up</h3><p>Eleven pieces laid out as a team. Change the formation, and pick a player to see the piece up close.</p></div>
         <div class="wc">
-          <div class="wc-ui" role="group" aria-label="Formation"><button type="button" class="on" data-f="433">4-3-3</button><button type="button" data-f="442">4-4-2</button><button type="button" data-f="352">3-5-2</button></div>
-          <div class="pitch"><svg class="pitch-l" viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="156" height="96"/><path d="M80 2V98"/><circle cx="80" cy="50" r="12"/><rect x="2" y="28" width="18" height="44"/><rect x="140" y="28" width="18" height="44"/><rect x="2" y="40" width="6" height="20"/><rect x="152" y="40" width="6" height="20"/></svg>{wc}</div>
+          <div class="wc-ui" role="group" aria-label="Formation"><span class="mono">Formation</span><button type="button" class="on" data-f="433">4-3-3</button><button type="button" data-f="442">4-4-2</button><button type="button" data-f="352">3-5-2</button></div>
+          <div class="pitch"><svg class="pitch-l h" viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="156" height="96"/><path d="M80 2V98"/><circle cx="80" cy="50" r="12"/><rect x="2" y="28" width="18" height="44"/><rect x="140" y="28" width="18" height="44"/><rect x="2" y="40" width="6" height="20"/><rect x="152" y="40" width="6" height="20"/></svg><svg class="pitch-l v" viewBox="0 0 100 147" preserveAspectRatio="none" aria-hidden="true"><rect x="3" y="3" width="94" height="141"/><path d="M3 73.5H97"/><circle cx="50" cy="73.5" r="13"/><rect x="25" y="3" width="50" height="22"/><rect x="25" y="122" width="50" height="22"/><rect x="38" y="3" width="24" height="8"/><rect x="38" y="136" width="24" height="8"/></svg><span class="pitch-f mono">4-3-3</span>{wc}</div>
           <div class="wc-focus" hidden><button type="button" class="wc-x" aria-label="Back to the pitch">×</button><div class="wc-big"></div></div>
         </div>
-        <h3 class="sub">Images that kept coming back</h3>
-        <p>Some key art worked so well that it was adapted again and again: social, paid, app store and CRM all reused it. Hover to bring one forward.</p>
-        <div class="keys">{keys}</div>
+        <div class="subhd"><span class="mono">03.2</span><h3>Promo blocks</h3><p>The Megashoot game, announced in email and in the app. Click to see them full size.</p></div>
         <div class="wcb">{wcb}</div>
+        <div class="subhd"><span class="mono">03.3</span><h3>Images that kept coming back</h3><p>Some key art worked so well that it was adapted again and again across social, paid, app store and CRM. Click one to see it whole.</p></div>
+        <div class="keys">{keys}</div>
       </section>
 
-      <section class="chap" id="crm">
-        <span class="mono">04 · CRM</span>
-        <h2><span class="lm"><span>The photo</span></span><span class="lm"><span>behind the banner</span></span></h2>
-        <p class="lead">Email banners at 600 × 520 hide most of the image they are built on. Hover or tap a banner and the layout steps aside to show the full generated photo.</p>
+      <section class="chap" id="channels">
+        <span class="mono">04 · Channels</span>
+        <h2><span class="lm"><span>The same brand,</span></span><span class="lm"><span>beyond social</span></span></h2>
+        <p class="lead">Email, the blog and the app stores each have their own format and their own rules. The look had to hold in all of them.</p>
+        <div class="subhd" id="crm"><span class="mono">04.1</span><h3>CRM email</h3><p>Banners at 600 × 520 hide most of the photo they are built on. Hover or tap one and the layout steps aside.</p></div>
         <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show all photos</button></div>
         <div class="crm-grid">{crm}</div>
-      </section>
-
-      <section class="chap" id="blog">
-        <span class="mono">05 · Blog &amp; ASO</span>
-        <h2><span class="lm"><span>Headers worth</span></span><span class="lm"><span>the click</span></span></h2>
-        <p class="lead">Blog headers for guides, previews and promos. Drag, swipe or use the arrows to move through them.</p>
+        <div class="subhd" id="blog"><span class="mono">04.2</span><h3>Blog</h3><p>Headers for guides, previews and promos. Drag, swipe or use the arrows.</p></div>
         <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous">←</button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next">→</button></div></div>
-        <h3 class="sub">The app store page</h3>
-        <p>Two sets of store screenshots. The phone stays put and the set slides through it, the way a player swipes in the store. Use the slider to move it yourself.</p>
+        <div class="subhd" id="aso"><span class="mono">04.3</span><h3>App store</h3><p>Two sets of store screenshots. The phone stays put and the set slides through it, the way a player swipes in the store. Use the slider to move it yourself.</p></div>
         <div class="aso-ui cbp-tabs" role="tablist" aria-label="Screenshot sets"><button role="tab" aria-selected="true" data-set="a">Casino</button><button role="tab" aria-selected="false" data-set="b">Welcome offer</button></div>
         <div class="as">
           <div class="as-track" data-set="a">{aso_a}</div><div class="as-track" data-set="b" hidden>{aso_b}</div>
@@ -821,29 +826,29 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <input class="as-r" type="range" min="0" max="500" value="0" aria-label="Move through the screenshots">
       </section>
 
-      <section class="chap" id="system">
-        <span class="mono">06 · Badges &amp; logos</span>
-        <h2><span class="lm"><span>A stamp for</span></span><span class="lm"><span>every promo</span></span></h2>
-        <p class="lead">Promotions repeat every week, so each one got its own badge: one family of seals that reads at a glance. Pick a badge and it lands on a real piece, where it would live.</p>
+      <section class="chap" id="kit">
+        <span class="mono">05 · Brand kit</span>
+        <h2><span class="lm"><span>Parts that</span></span><span class="lm"><span>come back</span></span></h2>
+        <p class="lead">Promos and campaigns return every week, so they got reusable parts: a family of badges and a set of campaign logos, built from the same brand pieces.</p>
+        <div class="subhd" id="system"><span class="mono">05.1</span><h3>Badges</h3><p>One seal per promotion, readable at a glance. Pick one and it lands on a real piece, where it would live.</p></div>
         <div class="bd">
           <div class="bdgs">{badges}</div>
           <div class="bd-prev"><div class="bd-piece">{cbi("hero-1.jpg","Piece where the badge is applied")}<img class="bd-on" src="{pre}assets/img/campobet/badges/badge-11.svg" alt="" draggable="false"></div><p class="bd-name mono">Boosted odds</p></div>
         </div>
-        <h3 class="sub">Seasons and special events</h3>
-        <p>Campaign logos for seasons, trivia nights and tournaments. Pick one, or pull the lever, and the reels line up to form it.</p>
+        <div class="subhd"><span class="mono">05.2</span><h3>Campaign logos</h3><p>Seasons, trivia nights and tournaments. Pick a logo, or pull the lever, and the reels land on it.</p></div>
         <div class="slotx">
           <div class="sx-thumbs">{slot_thumbs}</div>
           <div class="sx-stage">
-            <div class="sx-mach"><div class="sx-cap l"></div><div class="sx-reels">{slot_reels}<i class="sx-shade"></i></div><div class="sx-cap r"></div><button type="button" class="sx-lever" aria-label="Pull the lever"><span class="sx-rod"></span><span class="sx-ball"></span></button></div>
+            <div class="sx-m"><img class="sx-img" src="{pre}assets/img/campobet/slot-machine.webp" alt="Green metallic slot machine" draggable="false">{slot_reels}<button type="button" class="sx-lever" aria-label="Pull the lever"></button></div>
             <p class="sx-name mono">{LG[0]}</p>
           </div>
         </div>
       </section>
 
       <section class="chap" id="motion">
-        <span class="mono">07 · Motion</span>
-        <h2><span class="lm"><span>Frame</span></span><span class="lm"><span>by frame</span></span></h2>
-        <p class="lead">Storyboards for two videos. Keep scrolling and they roll past like a reel.</p>
+        <span class="mono">06 · Motion</span>
+        <h2><span class="lm"><span>When the brand</span></span><span class="lm"><span>moves</span></span></h2>
+        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Keep scrolling and they roll past like a reel.</p>
       </section>
       <section class="sreel" aria-label="Storyboards">
         <div class="sr-pin"><div class="sr-track">{sreel}</div><div class="sr-ui mono"><span class="sr-n">01 / {NSB}</span><span class="sr-bar"><i></i></span></div></div>
@@ -851,7 +856,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
 
       <section class="part" id="automation">
         <div class="part-in">
-          <span class="mono">Part two</span>
+          <span class="mono">Part two · The system</span>
           <h2><span class="lm"><span>The system</span></span><span class="lm"><span>behind the volume</span></span></h2>
           <p>Everything above was made by hand. To keep that pace without losing quality, I turned the brand rules into three AI production pipelines. I designed the zones, the art direction, the quality checks and the moments where a person decides. The AI renders inside those rules.</p>
           <div class="part-f"><div><b>3</b><span>pipelines</span></div><div><b>9</b><span>layers per master</span></div><div><b>5</b><span>formats from one image</span></div></div>
@@ -911,7 +916,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">Automation · 05 · Impact</span>
         <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
         <div class="cb-nums">
-          <div><b>184</b><p>pieces designed by hand in my busiest month, before the pipelines. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the month’s content board</small></div>
+          <div><b>+150</b><p>pieces a month designed by hand before the pipelines, with 184 in the busiest one. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the content boards</small></div>
           <div><b class="pending">[N]</b><p>slot banners delivered in 2–3 days with the pipeline.</p><small class="mono">Pending · number to confirm</small></div>
           <div><b>2</b><p>moments where I step in per master: choosing the scene and approving the image.</p><small class="mono">From the pipeline design</small></div>
         </div>
@@ -940,7 +945,7 @@ WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for 
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
  ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
  ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html"),
- ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (184 pieces designed in the busiest month; copy by the content manager), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
+ ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (more than 150 pieces a month, 184 in the busiest; copy by the content manager), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},

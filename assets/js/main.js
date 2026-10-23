@@ -327,7 +327,7 @@
     if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting&&!user){clearInterval(timer);timer=setInterval(function(){show((cur+1)%im.length)},2200)}else clearInterval(timer)},{threshold:.4}).observe(t)});
 
   /* ---------- Lightbox: click a gallery image to see it whole ---------- */
-  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two';
+  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img,.keys img,.wcb img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two,.keys,.wcb';
     var lb=null,list=[],idx=0,dx=0,dy=0;
     addEventListener('pointerdown',function(e){dx=e.clientX;dy=e.clientY},true);
     function cap(im){var f=im.closest('figure');var c=f&&f.querySelector('figcaption');var t=c?c.textContent.replace(/\s+/g,' ').trim():'';return t||im.alt||''}
@@ -532,11 +532,11 @@
   /* ---------- Hero: the month fills up, then the highlights rise ---------- */
   var hh=$('.h184');
   if(hh){
-    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length;
+    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;
     if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
     else{hn.textContent='0';var t0=null;
       (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/1700),e=1-Math.pow(1-k,2),m=Math.round(N*e);
-        for(var q=0;q<m;q++)cells[q].classList.add('on');hn.textContent=m;
+        for(var q=0;q<m;q++)cells[q].classList.add('on');hn.textContent='+'+Math.round(NN*e);
         if(k<1)requestAnimationFrame(f);else hh.classList.add('in')})(performance.now()+250)}
   }
 
@@ -573,8 +573,8 @@
     function go(i){k=(i+n)%n;t.style.transform='translateX('+(-k*100)+'%)';dots.forEach(function(d,j){d.classList.toggle('on',j===k)})}
     $('.car-p',c).addEventListener('click',function(){hold=Date.now();go(k-1)});$('.car-n',c).addEventListener('click',function(){hold=Date.now();go(k+1)});
     dots.forEach(function(d,j){d.addEventListener('click',function(){hold=Date.now();go(j)})});
-    c.addEventListener('pointerenter',function(){hold=Date.now()+1e9});c.addEventListener('pointerleave',function(){hold=Date.now()});
-    go(0);if(!reduce)inView(c,function(){setInterval(function(){if(Date.now()-hold>3500)go(k+1)},3000)});
+    var hov=false;c.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hov=true});c.addEventListener('pointerleave',function(){hov=false});
+    go(0);if(!reduce)inView(c,function(){setInterval(function(){if(!hov&&Date.now()-hold>7000)go(k+1)},3200)});
   });
 
   /* ---------- Badges: pick one, it lands on the piece ---------- */
@@ -584,18 +584,19 @@
       on.src=b.querySelector('img').src;nm.textContent=b.dataset.n;on.classList.remove('land');void on.offsetWidth;on.classList.add('land')})});
   }
 
-  /* ---------- Logos: a slot machine lines the reels up into the logo ---------- */
+  /* ---------- Logos: the reels of a real slot render land on the logo ---------- */
   var sx=$('.slotx');
   if(sx){
-    var cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),angs=[0,0,0],curL=0,busy2=false,N8=8;
+    var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),mach=$('.sx-m',sx),angs=[0,0,0],curL=0,busy2=false,N8=8;
+    function rsz(){wins.forEach(function(w){w.style.setProperty('--r',(w.clientHeight/2)+'px')})}
+    addEventListener('resize',rsz);addEventListener('load',rsz);rsz();
     function spin(k){if(busy2)return;busy2=true;curL=k;ths.forEach(function(x,i){x.classList.toggle('on',i===k)});nmx.textContent=ths[k].getAttribute('aria-label');
-      lev.classList.add('pull');setTimeout(function(){lev.classList.remove('pull')},500);
+      mach.classList.remove('pull');void mach.offsetWidth;mach.classList.add('pull');
       cyls.forEach(function(c,j){var base=Math.ceil(angs[j]/360)*360+360*(2+j),a=base+k*45;angs[j]=a;
         c.style.transition=reduce?'none':'transform '+(1.3+j*.4)+'s cubic-bezier(.15,.75,.2,1.02)';c.style.transform='rotateX('+(-a)+'deg)'});
       setTimeout(function(){busy2=false},reduce?50:2300)}
     ths.forEach(function(x,i){x.addEventListener('click',function(){spin(i)})});
     lev.addEventListener('click',function(){var k;do{k=Math.floor(Math.random()*N8)}while(k===curL);spin(k)});
-    cyls.forEach(function(c){c.style.transform='rotateX(0deg)'});
   }
 
   /* ---------- Storyboards: a reel that rolls with the scroll ---------- */
@@ -617,7 +618,7 @@
       '433':[[6,50],[24,14],[22,38],[22,62],[24,86],[46,24],[44,50],[46,76],[72,18],[76,50],[72,82]],
       '442':[[6,50],[24,14],[22,38],[22,62],[24,86],[50,12],[47,38],[47,62],[50,88],[76,36],[76,64]],
       '352':[[6,50],[22,26],[20,50],[22,74],[46,8],[44,30],[42,50],[44,70],[46,92],[76,36],[76,64]]},cf='433';
-    function form(k){cf=k;var v=pitch.clientHeight>pitch.clientWidth;F[k].forEach(function(p,i){var x=v?p[1]:p[0],y=v?100-p[0]:p[1];pls[i].style.left=x+'%';pls[i].style.top=y+'%'});
+    function form(k){cf=k;var v=pitch.clientHeight>pitch.clientWidth;F[k].forEach(function(p,i){var x=v?p[1]:p[0],y=v?97-p[0]*.92:p[1];if(v)x=8+x*.84;pls[i].style.left=x+'%';pls[i].style.top=y+'%'});var lb=$('.pitch-f',wcs);if(lb)lb.textContent=k.split('').join('-');
       $$('.wc-ui button',wcs).forEach(function(b){b.classList.toggle('on',b.dataset.f===k)})}
     $$('.wc-ui button',wcs).forEach(function(b){b.addEventListener('click',function(){form(b.dataset.f)})});
     pls.forEach(function(p){p.addEventListener('click',function(){var im=p.querySelector('img').cloneNode();im.removeAttribute('loading');big.innerHTML='';big.appendChild(im);focus.hidden=false})});

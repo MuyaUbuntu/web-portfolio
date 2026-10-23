@@ -1286,3 +1286,36 @@ body *:not(.keep-case){text-transform:none!important}
 
 @media(max-width:640px){.bd-on{right:2%;top:-4%;width:32%}}
 .sx-lever{right:calc(var(--rw) * .06)}
+
+/* ---- CampoBet · round 4 ---- */
+.subhd{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:1rem;row-gap:.3rem;align-items:baseline;border-top:1.5px solid var(--ink);padding-top:1rem;margin:clamp(2.6rem,6vw,4rem) 0 1rem;scroll-margin-top:6rem}
+.subhd .mono{font-size:.8rem;color:var(--tomato);font-weight:700}
+.subhd h3{margin:0;font-size:clamp(1.3rem,2.4vw,1.8rem)}
+.subhd p{grid-column:2;margin:0;color:var(--ink-2);max-width:60ch}
+.chap > .lead + .subhd{margin-top:2rem}
+.part.p1{margin-top:0;background:#E3EFE7;color:var(--ink)}
+.part.p1 .mono{color:#0E9F5E}
+.part.p1 p{color:#3b3b38}
+.part.p1 h2{color:var(--ink)}
+.wc-ui{align-items:center}
+.wc-ui .mono{font-size:.75rem;color:var(--ink-2);margin-right:.3rem}
+.wc-ui button{color:var(--ink);font-size:.95rem}
+.wc-ui button.on{color:#fff}
+.pitch-l.v{display:none}
+.pitch-f{position:absolute;right:14px;top:12px;z-index:2;color:#fff;font-size:clamp(1.1rem,3vw,2.2rem);font-weight:900;letter-spacing:.02em;opacity:.85}
+@media(max-width:640px){.pitch-l.h{display:none}.pitch-l.v{display:block;transform:none}.pitch{aspect-ratio:100/147;background:repeating-linear-gradient(180deg,#14924F 0 10%,#118446 10% 20%)}.pitch-f{top:auto;bottom:12px;left:14px;right:auto;font-size:1rem}}
+.wcb{gap:14px}
+.wcb figure{margin:0;cursor:zoom-in}
+.wcb img{width:100%;height:auto;border-radius:0;filter:drop-shadow(0 14px 18px rgba(0,0,0,.25))}
+.key{cursor:zoom-in}
+/* slot machine on the render */
+.sx-m{position:relative;width:min(100%,900px);transform-origin:50% 100%}
+.sx-m.pull{animation:sxshake .5s ease}
+@keyframes sxshake{25%{transform:translateY(4px) rotate(-.4deg)}60%{transform:translateY(-2px) rotate(.3deg)}}
+.sx-img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 30px rgba(0,0,0,.45))}
+.sx-win{position:absolute;top:22%;height:74.7%;overflow:hidden;perspective:900px;border-radius:6px;--r:100px}
+.sx-win::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,60,24,.55),rgba(4,60,24,0) 26%,rgba(255,255,255,.18) 44%,rgba(255,255,255,0) 54%,rgba(4,60,24,0) 74%,rgba(4,60,24,.6))}
+.sx-win .cyl{position:absolute;inset:0;transform-style:preserve-3d}
+.sx-win .sf{position:absolute;left:0;right:0;top:50%;height:calc(var(--r) * .828);margin-top:calc(var(--r) * -.414);transform:rotateX(calc(var(--f) * 45deg)) translateZ(var(--r));backface-visibility:hidden;-webkit-backface-visibility:hidden;background:none;box-shadow:none}
+.sx-win .sf i{position:absolute;inset:6% 6%;background-size:contain;background-repeat:no-repeat;background-position:center;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.sx-m .sx-lever{position:absolute;left:86%;top:0;width:13%;height:48%;right:auto;translate:none;border:0;background:none;cursor:pointer}
