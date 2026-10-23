@@ -7,14 +7,14 @@
    same on every device.
    ========================================================= */
 :root{
-  --bg:#FFFFFF; --bg-2:#F4F1EC; --ink:#141110; --ink-2:#6B625B; --line:#E7E1DA;
-  --night:#141110; --on-night:#FFFFFF; --night-2:#A39A92;
-  --tomato:#FF4B2B; --on-tomato:#FFFFFF; --pink:#FFB3D1; --butter:#FFD84D; --sky:#9FD3FF; --mint:#3DDC97;
+  --bg:#F1F1EF; --bg-2:#E8E8E5; --ink:#0B0B0A; --ink-2:#7A7A76; --line:rgba(11,11,10,.11);
+  --night:#0B0B0A; --on-night:#FFFFFF; --night-2:#9A9A95;
+  --tomato:#FF4417; --on-tomato:#FFFFFF; --pink:#F4D3DD; --butter:#F2E3A2; --sky:#CFE1EE; --mint:#C3E6D3;
   --chip:#FFFFFF;
-  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
-  --f-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"Martian Mono",ui-monospace,Menlo,monospace;
-  --r:22px; --r-sm:12px; --max:1400px;
+  --f-display:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:14px; --r-sm:10px; --max:1440px;
   --g:max(16px,env(safe-area-inset-left,0px)); --gr:max(16px,env(safe-area-inset-right,0px));
   --bounce:cubic-bezier(.34,1.56,.64,1); --out:cubic-bezier(.16,1,.3,1);
   color-scheme:light;
@@ -553,3 +553,80 @@ html.arrived .blot canvas{opacity:0;transition:opacity .3s .2s}
 .kv-grid img{width:100%;height:100%;object-fit:cover;transition:scale 1s var(--out)}
 .kv-grid figure:hover img{scale:1.05}
 .kv-grid figcaption{position:absolute;left:.9rem;top:.9rem}
+
+
+/* ============ v5 · Refined cut (Inter, neutral palette, calmer angles) ============ */
+body{font-feature-settings:"cv11","ss01","ss03";letter-spacing:-.011em}
+h1,h2,h3{font-weight:600;letter-spacing:-.045em;line-height:.94}
+h3{letter-spacing:-.03em;line-height:1.1}
+.mono{font-family:var(--f-body);font-weight:500;font-size:.78rem;letter-spacing:-.005em;text-transform:none}
+.tag{font-family:var(--f-body);font-weight:500;font-size:.74rem;letter-spacing:-.005em;text-transform:none;height:1.9rem;padding:0 .8rem;box-shadow:none;background:rgba(11,11,10,.06)}
+.tag.k{background:var(--ink);color:#fff}
+.stage .tag,.card .tag{background:rgba(255,255,255,.14);color:#fff}
+.back{font-family:var(--f-body);font-weight:500;font-size:.8rem;text-transform:none;box-shadow:none;background:rgba(11,11,10,.06)}
+.muted{color:var(--ink-2)}
+/* stickers: keep the toy, calmer type and angles */
+.stk{font-family:var(--f-display);font-weight:650;text-transform:none;letter-spacing:-.055em;border-radius:.18em}
+.stk.s1{--r:-2deg}.stk.s2{--r:1.5deg;box-shadow:inset 0 0 0 .035em var(--ink)}.stk.s3{--r:2.5deg}.stk.s4{--r:-1.5deg}.stk.s5{--r:-6deg;font-weight:600;letter-spacing:-.02em}
+.ribbon{rotate:-1deg}.ribbon.alt{rotate:.8deg}
+.ribbon .rail span,.rail span{font-weight:600;letter-spacing:-.03em}
+.btn:hover{transform:translateY(-2px)}
+.hello .av{transform:none}
+.hw.on{rotate:0deg}
+.peekimg.on{rotate:2deg}
+.sec-h h2 .n{rotate:0deg!important}
+/* case: meta list instead of tilted chips */
+.facts{display:grid;gap:0;margin-top:1.6rem;border-top:1px solid var(--line)}
+.facts div,.facts div:nth-child(odd),.facts div:nth-child(even){display:flex;justify-content:space-between;align-items:baseline;gap:1rem;rotate:0deg;background:none;box-shadow:none;border-radius:0;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.facts dt{margin:0;color:var(--ink-2);font-size:.85rem}
+.facts dd{font-weight:500;text-align:right}
+.facts .win dd,.facts .todo dd{color:var(--tomato)}
+.facts .win dd::before{content:"";display:inline-block;width:.5em;height:.5em;border-radius:99px;background:var(--tomato);margin-right:.5em;vertical-align:.08em;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.facts .win,.facts .todo{background:none}
+.c-title{text-transform:none;font-weight:600;letter-spacing:-.055em;line-height:.9}
+.c-title .hlw{color:var(--ink-2)}
+.c-lead{color:var(--ink);font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.35;letter-spacing:-.02em}
+.c-cover,.m-stage,.kv-grid figure,.b-stage,.compare{border-radius:var(--r);box-shadow:none}
+.c-sticker{rotate:-3deg;border-radius:10px}
+/* chapters: hairlines and numbers */
+.chap{border-top:1px solid var(--line);padding-top:clamp(1.6rem,3vw,2.4rem)}
+.chap > .mono{color:var(--ink-2)}
+.chap h2{font-size:clamp(2rem,4.6vw,4.2rem)}
+.chap p.lead{color:var(--ink-2);letter-spacing:-.02em;line-height:1.35}
+.chap p.lead b{color:var(--ink);font-weight:600}
+.pull{border-left:0;padding-left:0;font-weight:600;letter-spacing:-.045em;max-width:18ch}
+.pull em{color:var(--ink-2)}
+.quote,.quote.a,.quote.b,.quote.c{rotate:0deg;border-radius:var(--r);min-height:200px}
+.quote.a{background:var(--ink);color:#fff}
+.quote b{font-family:var(--f-display);font-weight:600;letter-spacing:-.05em;font-size:clamp(2rem,3.4vw,3rem)}
+.quote p{font-family:var(--f-body);font-weight:500;letter-spacing:-.02em}
+.concept > div,.learn{border-radius:var(--r)}
+.toc a{font-family:var(--f-body);font-weight:500;font-size:.78rem;text-transform:none}
+.m-tabs button,.b-steps button{font-family:var(--f-body);letter-spacing:-.01em}
+.b-steps button{font-weight:600;background:#fff;box-shadow:none}
+.b-steps button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.b-steps button b{color:var(--ink-2)}
+.b-steps button[aria-pressed="true"] b{color:var(--tomato)}
+.m-tabs button{background:#fff;box-shadow:none}
+.kv-grid figcaption.tag{background:rgba(255,255,255,.85);color:var(--ink)}
+.next .peek{rotate:3deg}.next:hover .peek{rotate:0deg}
+/* sentence case everywhere, readable label sizes */
+body *:not(.keep-case){text-transform:none!important}
+.nav-links a,.nav-cta{font-family:var(--f-body);font-size:.86rem;font-weight:500;letter-spacing:-.01em}
+.btn{font-family:var(--f-body);font-size:.95rem;font-weight:500;letter-spacing:-.01em}
+.ai{font-family:var(--f-body);font-size:.74rem;font-weight:500;height:1.9rem}
+.ctag,.peekimg span,.card .client,.xp .yr,.svc-card .now,.reset,.socials a,.lists h3,.prompt .bar,.sw,.b-cap,.c-sticker figcaption,.card.soon .go{font-family:var(--f-body);letter-spacing:-.005em;font-weight:500}
+.card .client,.xp .yr,.lists h3,.sw{font-size:.8rem}
+.peekimg span,.prompt .bar,.prompt .meta span,.b-cap,.c-sticker figcaption{font-size:.74rem}
+.card.soon .go{font-size:.72rem}
+.card .num{font-family:var(--f-body);font-weight:600;letter-spacing:-.02em}
+.sec-h h2 .n{font-style:normal;font-weight:500;background:rgba(255,255,255,.12);color:#fff}
+.card .client{color:var(--night-2)}
+.card h3{font-weight:600;letter-spacing:-.04em}
+.svc h3{font-weight:600;letter-spacing:-.04em}
+.svc-big{font-weight:600;letter-spacing:-.06em}
+.odo{font-weight:600;letter-spacing:-.06em}
+.numbers h2 em{font-style:normal;color:var(--ink-2)}
+.play-title{font-weight:600;letter-spacing:-.05em}
+.contact h2{font-weight:600;letter-spacing:-.06em}
