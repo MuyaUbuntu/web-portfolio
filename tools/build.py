@@ -343,7 +343,7 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
         <figure class="shot sec"><img src="{pre}assets/img/happy-talks/sec-conversations.jpg" alt="Topics section of the Happy Talks landing page" loading="lazy" draggable="false"><figcaption><b>08 · Topics</b></figcaption></figure>
         <figure class="shot sec"><img src="{pre}assets/img/happy-talks/sec-cta.jpg" alt="Request section of the Happy Talks landing page" loading="lazy" draggable="false"><figcaption><b>09 · Request</b></figcaption></figure>
           </div>
-          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" data-next aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
         </div>
       </section>
 
@@ -552,7 +552,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
           <div class="drag-track" tabindex="0" aria-label="Campaign pieces" data-cursor="Drag">
 {pgal}
           </div>
-          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" data-next aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
         </div>
       </section>
 
@@ -569,7 +569,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
           <div class="drag-track" tabindex="0" aria-label="Recent ArboTerra Instagram posts" data-cursor="Drag">
 {igal}
           </div>
-          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" data-next aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
         </div>
         <div class="learn"><span class="mono">What I’d do differently</span><p>Give 3D the time it needs. A tree this complex in a few weeks was a stretch; today I’d prototype the scenes with AI before committing to the full model.</p></div>
       </section>
@@ -818,7 +818,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show only the photos</button></div>
         <div class="crm-grid">{crm}</div>
         <div class="subhd" id="blog"><span class="mono">04.2</span><h3>Blog</h3><p>Headers for guides, previews and promos. Drag, swipe or use the arrows.</p></div>
-        <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous">←</button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next">→</button></div></div>
+        <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
         <div class="subhd" id="aso"><span class="mono">04.3</span><h3>App store</h3><p>Two sets of store screenshots. The phone stays put and the set slides through it, the way a player swipes in the store. Use the slider to move it yourself.</p></div>
         <div class="aso-ui cbp-tabs" role="tablist" aria-label="Screenshot sets"><button role="tab" aria-selected="true" data-set="a">Casino</button><button role="tab" aria-selected="false" data-set="b">Welcome offer</button></div>
         <div class="as">
@@ -905,7 +905,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <p class="lead">Slot visual masters made with the pipeline, each one approved by me and then resized to every format.</p>
         <div class="drag">
           <div class="drag-track" tabindex="0" aria-label="Pipeline outputs" data-cursor="Drag">{outs}</div>
-          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" data-next aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
         </div>
       </section>
 
