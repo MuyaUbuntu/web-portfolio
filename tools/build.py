@@ -686,7 +686,7 @@ def col(k):
     return f'<div class="col{" up" if k%2 else ""}"><div class="col-rail">{t}{t}</div></div>'
 cols=''.join(col(k) for k in range(4))
 CARS=[('Weekly fixtures',6),('Big leagues',5),('Match of the day',6)]
-cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t">'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}',lazy=False) for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
+cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t" data-lenis-prevent>'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}',lazy=False) for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
 wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="pl-n">{i+1}</span></button>' for i in range(11))
 wcb=''.join(f'<figure>{cbi(f"wcb-{i+1}.webp","Megashoot promo block")}</figure>' for i in range(3))
 keys=''.join(f'<figure class="key">{cbi(f"key-{i+1}.jpg","Key art reused across several pieces")}</figure>' for i in [2,4,3,0,5,1])
@@ -710,7 +710,7 @@ SB1=['A man runs through a park, with a lake behind him.','Front shot: something
 SB2=['Top view of a stadium. “Welcome to CampoBet.”','Zoom transition.','A fan celebrates in the stands. “The sports passion…”','A 360° orbit with heavy motion blur.','Mid-spin, the scene becomes a casino.','She celebrates and looks at her phone.','Over-the-shoulder orbit to her screen.','A super zoom into the phone.','The brand ambassador smiles at his phone.','Final key visual with the welcome offer.']
 def sb_row(k,caps,title):
     fr=''.join(f'<figure class="sb-f">{cbi(f"sb{k}-{i+1:02d}.jpg",c)}<figcaption><b>{i+1:02d}</b> {c}</figcaption></figure>' for i,c in enumerate(caps))
-    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}{fr}</div></div><div class="sb-ctl"><input type="range" class="sb-r" min="0" max="1000" value="0" aria-label="Scrub through {title}"><span class="sb-n mono">01 / {len(caps):02d}</span></div></div>'
+    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}</div></div><div class="sb-ctl"><input type="range" class="sb-r" min="0" max="1000" value="0" aria-label="Scrub through {title}"><span class="sb-n mono">01 / {len(caps):02d}</span></div></div>'
 sbrows=sb_row(1,SB1,'The chase')+sb_row(2,SB2,'Brand awareness')
 outs=''.join(f'<figure class="shot out">{cbi(f"out-{i+1}.jpg","Slot visual master made with the pipeline")}</figure>' for i in range(8))
 # automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)

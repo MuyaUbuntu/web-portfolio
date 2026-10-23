@@ -1401,3 +1401,9 @@ body *:not(.keep-case){text-transform:none!important}
 @keyframes hglint{0%,92%,100%{background:rgba(11,11,10,.18)}96%{background:rgba(255,255,255,.08)}}
 .hf img{cursor:zoom-in}
 @media (prefers-reduced-motion:reduce){.h-grid,.h-grid i.on{animation:none}}
+/* round 7 */
+.car-t{transform:none!important;transition:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
+.car-t::-webkit-scrollbar{display:none}
+.car-t img{scroll-snap-align:start}
+.car-p.off,.car-n.off{opacity:0;pointer-events:none}
+.hf{transition:translate .6s var(--bounce),opacity .35s;transition-delay:calc(var(--i) * 45ms)}

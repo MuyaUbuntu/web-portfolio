@@ -533,7 +533,7 @@
   var hh=$('.h184');
   if(hh){
     var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;cells.forEach(function(c){c.style.setProperty('--d',(Math.random()*9).toFixed(2))});
-    if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
+    setTimeout(function(){hh.classList.add('in')},reduce?0:120);if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
     else{hn.textContent='0';var t0=null;
       (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/1700),e=1-Math.pow(1-k,2),m=Math.round(N*e);
         for(var q=0;q<m;q++)cells[q].classList.add('on');hn.textContent='+'+Math.round(NN*e);
@@ -566,6 +566,19 @@
     addEventListener('resize',function(){aplace(apos)});addEventListener('load',function(){aplace(apos)});aplace(0);
     if(!reduce)inView(as,function(){setInterval(function(){if(Date.now()-auser<5000)return;anim((Math.round(apos)+1)%6)},2600)});
   }
+
+  /* ---------- Carousels: a native scroller driven by arrows and dots ---------- */
+  $$('.car').forEach(function(c){
+    var sc=$('.car-t',c),n=+c.dataset.n,dots=$$('.car-dots button',c),pv=$('.car-p',c),nx=$('.car-n',c);
+    function cur(){return Math.round(sc.scrollLeft/Math.max(1,sc.clientWidth))}
+    function to(i){i=cl(i,0,n-1);sc.scrollTo({left:i*sc.clientWidth,behavior:reduce?'auto':'smooth'});mark(i)}
+    function mark(k){dots.forEach(function(d,j){d.classList.toggle('on',j===k)});pv.classList.toggle('off',k===0);nx.classList.toggle('off',k===n-1)}
+    pv.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();to(cur()-1)});
+    nx.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();to(cur()+1)});
+    dots.forEach(function(d,j){d.addEventListener('click',function(e){e.preventDefault();to(j)})});
+    var st;sc.addEventListener('scroll',function(){clearTimeout(st);st=setTimeout(function(){mark(cur())},80)},{passive:true});
+    mark(0);
+  });
 
   /* ---------- Carousels: arrows, dots and swipe ---------- */
   $$('.car').forEach(function(c){
@@ -645,19 +658,22 @@
     cfs(2);
   }
 
-  /* ---------- Storyboards: rows roll on their own; a slider jumps ahead ---------- */
+  /* ---------- Storyboards: rows roll start to end and back; a slider jumps anywhere ---------- */
   $$('.sb-row').forEach(function(row){
-    var tr=$('.sb-track',row),view=$('.sb-view',row),r=$('.sb-r',row),num=$('.sb-n',row),fr=$$('.sb-f',row),N=fr.length/2,rev=row.classList.contains('rev'),
-        pos=0,speed=rev?-.035:.03,hover=false,drag=false,last=0,half=0,seen=false;
-    function measure(){half=tr.scrollWidth/2}
-    function draw(){if(!half)measure();pos=((pos%1)+1)%1;tr.style.transform='translate3d('+(-pos*half)+'px,0,0)';if(!drag)r.value=Math.round(pos*1000);
-      var step=half/N,cx=pos*half+view.clientWidth/2,k=Math.floor(cx/step)%N;num.textContent=(k<9?'0':'')+(k+1)+' / '+(N<10?'0':'')+N}
-    function loop(ts){if(last&&seen&&!hover&&!drag&&!reduce)pos+=speed*(ts-last)/1000/ (half/1000||1);last=ts;draw();requestAnimationFrame(loop)}
+    var tr=$('.sb-track',row),view=$('.sb-view',row),r=$('.sb-r',row),num=$('.sb-n',row),fr=$$('.sb-f',row),N=fr.length,
+        pos=0,dir=row.classList.contains('rev')?-1:1,hover=false,drag=false,last=0,max=0,seen=false,hold=0;
+    if(dir<0)pos=1;
+    function measure(){max=Math.max(0,tr.scrollWidth-view.clientWidth)}
+    function draw(){pos=cl(pos,0,1);tr.style.transform='translate3d('+(-pos*max)+'px,0,0)';if(!drag)r.value=Math.round(pos*1000);
+      var k=pos>=.999?N-1:pos<=.001?0:Math.min(N-1,Math.floor((pos*max+view.clientWidth/2)/(tr.scrollWidth/N)));num.textContent=(k<9?'0':'')+(k+1)+' / '+(N<10?'0':'')+N}
+    function loop(ts){var dt=last?ts-last:0;last=ts;
+      if(seen&&!hover&&!drag&&!reduce&&max&&ts>hold){pos+=dir*30*dt/1000/max;if(pos>=1){pos=1;dir=-1;hold=ts+1500}else if(pos<=0){pos=0;dir=1;hold=ts+1500}}
+      draw();requestAnimationFrame(loop)}
     view.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hover=true});view.addEventListener('pointerleave',function(){hover=false});
     r.addEventListener('input',function(){drag=true;pos=r.value/1000;draw()});
-    r.addEventListener('change',function(){drag=false});r.addEventListener('pointerup',function(){drag=false});
+    ['change','pointerup','touchend'].forEach(function(ev){r.addEventListener(ev,function(){drag=false;hold=performance.now()+2500})});
     new IntersectionObserver(function(es){es.forEach(function(e){seen=e.isIntersecting})}).observe(row);
-    addEventListener('resize',function(){measure();draw()});addEventListener('load',function(){measure();draw()});
+    addEventListener('resize',function(){measure();draw()});addEventListener('load',function(){measure();draw()});measure();
     requestAnimationFrame(loop);
   });
 
