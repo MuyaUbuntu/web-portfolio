@@ -2,6 +2,8 @@
 Usage: python3 tools/build.py"""
 import os, json
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import hashlib as _h
+VER=_h.md5(open(os.path.join(R,'assets','css','main.css'),'rb').read()+open(os.path.join(R,'assets','js','main.js'),'rb').read()).hexdigest()[:8]
 LOGO=open(os.path.join(R,'tools','logo-inline.svg')).read().strip()
 B='https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/'
 HT=['684229227805201.68479f1136a54','78437e227805201.68479f11380df','1cae49227805201.68479f11379ed','09e022227805201.68479f1135bbd','a986e1227805201.68479f11372d5','c3c662227805201.68479f11361c9','b76ac6227805201.68479f1134c0e','d1dd88227805201.68479f113528b','82f81f227805201.68479f11334d1','bf5c4f227805201.68479f1133d30','66dfe8227805201.68479f11343ac']
@@ -32,7 +34,7 @@ def head(title,desc,pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&display=swap">
-<link rel="stylesheet" href="{pre}assets/css/main.css">
+<link rel="stylesheet" href="{pre}assets/css/main.css?v={VER}">
 <style>:root{{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}}[hidden]{{display:none!important}}</style>
 </head>
 <body>
@@ -55,7 +57,7 @@ def scripts(pre):
     return f'''<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="{pre}assets/js/main.js"></script>
+<script src="{pre}assets/js/main.js?v={VER}"></script>
 </body>
 </html>
 '''
@@ -697,8 +699,8 @@ crm=''.join(f'''<figure class="cr" tabindex="0" aria-label="CRM banner {i+1}, bu
 cf=''.join(f'<div class="cf-it" data-i="{i}">{cbi(f"blog-{i+1}.jpg","Blog header")}</div>' for i in range(8))
 aso_a=''.join(f'<div class="as-s">{cbi(f"aso-a-{i+1}.jpg","App store screenshot, casino set")}</div>' for i in range(6))
 aso_b=''.join(f'<div class="as-s">{cbi(f"aso-b-{i+1}.jpg","App store screenshot, welcome offer set")}</div>' for i in range(6))
-BN=['Welcome bonus · sports','Welcome bonus · casino','Boost accumulator','Lose & win','Lose & win','Cashback','Turbo top-up','Early payout','Free bet','Bet & win','Boosted odds']
-badges=''.join(f'<button type="button" class="bdg{" on" if i==10 else ""}" data-b="{i+1:02d}" data-n="{BN[i]}" style="--r:{[-6,4,-3,7,-5,3,-8,5,-2,6,-4][i]}deg" aria-label="{BN[i]}"><img src="{pre}assets/img/campobet/badges/badge-{i+1:02d}.svg" alt="" draggable="false"></button>' for i in range(11))
+BN=['Welcome bonus · sports','Welcome bonus · casino','Boost accumulator','Lose & win',None,'Cashback','Turbo top-up','Early payout','Free bet','Bet & win','Boosted odds']
+badges=''.join(f'<button type="button" class="bdg" data-b="{i+1:02d}" data-n="{BN[i]}" style="--r:{[-6,4,-3,7,-5,3,-8,5,-2,6,-4][i]}deg" aria-label="{BN[i]}"><img src="{pre}assets/img/campobet/badges/badge-{i+1:02d}.svg" alt="" draggable="false"></button>' for i in range(11) if BN[i])
 LG=['Road to the big game','The big championship','Summer football trivia','CampoBet trivia','Winter Race','Basketball nights','Touchdown nights','Slots of the week']
 slot_faces=''.join(f'<span class="sf" style="--f:{i}"><i style="background-image:url({pre}assets/img/campobet/logo-{i+1}.webp)"></i></span>' for i in range(8))
 SW3=[(11.1,19.6),(35.8,20.4),(61.3,20.7)]
@@ -708,7 +710,7 @@ SB1=['A man runs through a park, with a lake behind him.','Front shot: something
 SB2=['Top view of a stadium. “Welcome to CampoBet.”','Zoom transition.','A fan celebrates in the stands. “The sports passion…”','A 360° orbit with heavy motion blur.','Mid-spin, the scene becomes a casino.','She celebrates and looks at her phone.','Over-the-shoulder orbit to her screen.','A super zoom into the phone.','The brand ambassador smiles at his phone.','Final key visual with the welcome offer.']
 def sb_row(k,caps,title):
     fr=''.join(f'<figure class="sb-f">{cbi(f"sb{k}-{i+1:02d}.jpg",c)}<figcaption><b>{i+1:02d}</b> {c}</figcaption></figure>' for i,c in enumerate(caps))
-    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}{fr}</div></div></div>'
+    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}{fr}</div></div><div class="sb-ctl"><input type="range" class="sb-r" min="0" max="1000" value="0" aria-label="Scrub through {title}"><span class="sb-n mono">01 / {len(caps):02d}</span></div></div>'
 sbrows=sb_row(1,SB1,'The chase')+sb_row(2,SB2,'Brand awareness')
 outs=''.join(f'<figure class="shot out">{cbi(f"out-{i+1}.jpg","Slot visual master made with the pipeline")}</figure>' for i in range(8))
 # automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)
@@ -845,7 +847,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <section class="chap" id="motion">
         <span class="mono">06 · Motion</span>
         <h2><span class="lm"><span>When the brand</span></span><span class="lm"><span>moves</span></span></h2>
-        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Both roll on their own; hover a row to pause it and click a frame to see it bigger.</p>
+        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Both roll on their own; drag the slider under each one to jump ahead, and click a frame to see it bigger.</p>
         <div class="sbs">{sbrows}</div>
       </section>
 

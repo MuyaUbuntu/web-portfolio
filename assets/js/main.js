@@ -327,7 +327,7 @@
     if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting&&!user){clearInterval(timer);timer=setInterval(function(){show((cur+1)%im.length)},2200)}else clearInterval(timer)},{threshold:.4}).observe(t)});
 
   /* ---------- Lightbox: click a gallery image to see it whole ---------- */
-  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img,.keys img,.wcb img,.sb-f img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two,.keys,.wcb,.sb-track';
+  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img,.keys img,.wcb img,.sb-f img,.hf img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two,.keys,.wcb,.sb-track,.h-feat';
     var lb=null,list=[],idx=0,dx=0,dy=0;
     addEventListener('pointerdown',function(e){dx=e.clientX;dy=e.clientY},true);
     function cap(im){var f=im.closest('figure');var c=f&&f.querySelector('figcaption');var t=c?c.textContent.replace(/\s+/g,' ').trim():'';return t||im.alt||''}
@@ -532,7 +532,7 @@
   /* ---------- Hero: the month fills up, then the highlights rise ---------- */
   var hh=$('.h184');
   if(hh){
-    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;
+    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;cells.forEach(function(c){c.style.setProperty('--d',(Math.random()*9).toFixed(2))});
     if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
     else{hn.textContent='0';var t0=null;
       (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/1700),e=1-Math.pow(1-k,2),m=Math.round(N*e);
@@ -581,7 +581,7 @@
   });
 
   /* ---------- Badges: tap to stamp ---------- */
-  $$('.bdg').forEach(function(b){b.addEventListener('click',function(){b.classList.remove('stamp');void b.offsetWidth;b.classList.add('stamp')})});
+  $$('.bdg').forEach(function(b,i,all){b.addEventListener('click',function(){all.forEach(function(x){x.classList.toggle('on',x===b)});b.classList.remove('stamp');void b.offsetWidth;b.classList.add('stamp')})});
 
   /* ---------- Logos: the lever plays the real animation, the reels land on the logo ---------- */
   var sx=$('.slotx');
@@ -644,6 +644,22 @@
     cfw.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;if(Math.abs(dx)>40)cfs(ci+(dx<0?1:-1));sx=null});
     cfs(2);
   }
+
+  /* ---------- Storyboards: rows roll on their own; a slider jumps ahead ---------- */
+  $$('.sb-row').forEach(function(row){
+    var tr=$('.sb-track',row),view=$('.sb-view',row),r=$('.sb-r',row),num=$('.sb-n',row),fr=$$('.sb-f',row),N=fr.length/2,rev=row.classList.contains('rev'),
+        pos=0,speed=rev?-.035:.03,hover=false,drag=false,last=0,half=0,seen=false;
+    function measure(){half=tr.scrollWidth/2}
+    function draw(){if(!half)measure();pos=((pos%1)+1)%1;tr.style.transform='translate3d('+(-pos*half)+'px,0,0)';if(!drag)r.value=Math.round(pos*1000);
+      var step=half/N,cx=pos*half+view.clientWidth/2,k=Math.floor(cx/step)%N;num.textContent=(k<9?'0':'')+(k+1)+' / '+(N<10?'0':'')+N}
+    function loop(ts){if(last&&seen&&!hover&&!drag&&!reduce)pos+=speed*(ts-last)/1000/ (half/1000||1);last=ts;draw();requestAnimationFrame(loop)}
+    view.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hover=true});view.addEventListener('pointerleave',function(){hover=false});
+    r.addEventListener('input',function(){drag=true;pos=r.value/1000;draw()});
+    r.addEventListener('change',function(){drag=false});r.addEventListener('pointerup',function(){drag=false});
+    new IntersectionObserver(function(es){es.forEach(function(e){seen=e.isIntersecting})}).observe(row);
+    addEventListener('resize',function(){measure();draw()});addEventListener('load',function(){measure();draw()});
+    requestAnimationFrame(loop);
+  });
 
   /* ---------- Icons: one grid, every size ---------- */
   var iz=$('.isz');

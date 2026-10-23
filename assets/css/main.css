@@ -1384,3 +1384,20 @@ body *:not(.keep-case){text-transform:none!important}
 .car-dots{padding:4px 0}
 .car-dots button{position:relative}
 .car-dots button::before{content:"";position:absolute;inset:-10px -5px}
+/* round 6 */
+.car-p,.car-n{z-index:3}
+.car-dots{position:relative;z-index:2}
+.car-dots button::before{inset:-8px -2px}
+.bd .bdg{flex:0 0 20%;max-width:20%}
+@media(max-width:640px){.bd .bdg{flex-basis:calc(100% / 3);max-width:calc(100% / 3)}}
+.bd .bdg.on{rotate:0deg;background:#fff;border-radius:14px;box-shadow:0 12px 22px -14px rgba(0,0,0,.45)}
+.sb-track{animation:none!important;will-change:transform}
+.sb-ctl{display:flex;align-items:center;gap:1rem;padding:0 max(16px,6vw)}
+.sb-r{flex:1;max-width:520px;accent-color:var(--tomato)}
+.sb-n{color:#9a9a95;font-size:.72rem;min-width:4.5rem}
+.h-grid{animation:hdrift 38s ease-in-out infinite alternate;transform-origin:50% 50%}
+@keyframes hdrift{0%{transform:scale(1.02) translate(0,0)}50%{transform:scale(1.06) translate(-1.2%,.8%)}100%{transform:scale(1.04) translate(1%,-.6%)}}
+.h-grid i.on{animation:hglint 9s ease-in-out infinite;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes hglint{0%,92%,100%{background:rgba(11,11,10,.18)}96%{background:rgba(255,255,255,.08)}}
+.hf img{cursor:zoom-in}
+@media (prefers-reduced-motion:reduce){.h-grid,.h-grid i.on{animation:none}}
