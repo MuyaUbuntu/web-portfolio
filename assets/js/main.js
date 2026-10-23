@@ -532,11 +532,11 @@
   /* ---------- Hero: the month fills up, then the highlights rise ---------- */
   var hh=$('.h184');
   if(hh){
-    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;cells.forEach(function(c){c.style.setProperty('--d',(Math.random()*9).toFixed(2))});
+    var cells=$$('.h-grid i',hh),hn=$('.h-n',hh),N=cells.length,NN=+hn.dataset.n||N;cells.forEach(function(c){c.classList.add('on')});cells.forEach(function(c){c.style.setProperty('--d',(Math.random()*9).toFixed(2))});
     if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
     else{hn.textContent='0';var t0=null;
       (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/550),e=1-Math.pow(1-k,2),m=Math.round(N*e);
-        for(var q=0;q<m;q++)cells[q].classList.add('on');hn.textContent='+'+Math.round(NN*e);
+        hn.textContent='+'+Math.round(NN*e);
         if(k<1)requestAnimationFrame(f);else hh.classList.add('in')})(performance.now())}
   }
 
