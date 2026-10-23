@@ -1422,3 +1422,7 @@ body *:not(.keep-case){text-transform:none!important}
 @media(max-width:640px){.h-feat{height:30%;gap:8px}.hf{max-width:none}.hf img{height:100%;width:auto}}
 .arw{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;margin:auto;pointer-events:none}
 .drag-ui button:hover .arw,.cf-ui button:hover .arw{stroke:currentColor}
+.h184 .h-grid{background-size:cover;background-position:center}
+@media(min-width:641px){.h184{aspect-ratio:16/9}}
+@media(max-width:640px){.h184 .h-grid{grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr)}.h184 .h-grid i:nth-child(n+65){display:none}}
+@media(min-width:641px){.h184 .h-feat{height:31%}}
