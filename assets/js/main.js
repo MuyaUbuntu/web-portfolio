@@ -264,7 +264,7 @@
   $$('.browser').forEach(function(b){var v=$('.br-view',b),notes=$$('.br-notes li',b),ys=notes.map(function(n){return +n.getAttribute('data-y')}),user=false,vis=false,pos=0,last=0;
     function mark(){var f=(v.scrollTop+v.clientHeight*.35)/v.scrollHeight,on=0;ys.forEach(function(y,i){if(f>=y)on=i});notes.forEach(function(n,i){n.classList.toggle('on',i===on)})}
     function take(){if(!user){user=true;b.classList.add('user')}}
-    v.addEventListener('scroll',mark,{passive:true});['wheel','touchstart','pointerdown','keydown'].forEach(function(ev){v.addEventListener(ev,take,{passive:true})});
+    v.addEventListener('scroll',mark,{passive:true});var coarse=matchMedia('(pointer:coarse)').matches;if(!coarse)['wheel','pointerdown','keydown'].forEach(function(ev){v.addEventListener(ev,take,{passive:true})});
     v.addEventListener('wheel',function(e){e.stopPropagation()},{passive:true});
     notes.forEach(function(n,i){n.addEventListener('click',function(){take();v.scrollTo({top:ys[i]*v.scrollHeight,behavior:'smooth'})})});
     if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)requestAnimationFrame(loop)}).observe(b);

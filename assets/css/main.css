@@ -762,7 +762,7 @@ body *:not(.keep-case){text-transform:none!important}
 .browser.user .br-live{color:#9a96a6}.browser.user .br-live::before{animation:none;background:#9a96a6}
 .br-body{display:grid;grid-template-columns:minmax(0,1fr)}
 @media(min-width:960px){.br-body{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}
-.br-view{height:clamp(420px,72vh,760px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#57E3C3 #141218}
+.br-view{height:clamp(420px,72vh,760px);overflow-y:auto;overscroll-behavior:auto;scrollbar-width:thin;scrollbar-color:#57E3C3 #141218}
 .br-view img{display:block;width:100%;height:auto}
 .br-notes{list-style:none;margin:0;padding:1rem;display:none;gap:.2rem;align-content:start;background:#141218;color:#9a96a6;overflow:auto;max-height:clamp(420px,72vh,760px)}
 @media(min-width:960px){.br-notes{display:grid}}
@@ -798,3 +798,5 @@ body *:not(.keep-case){text-transform:none!important}
 .micdrop.on .md-wave i{animation:wave 1.6s ease-out infinite}
 .micdrop.on .md-wave i:nth-child(2){animation-delay:.5s}.micdrop.on .md-wave i:nth-child(3){animation-delay:1s}
 @keyframes wave{0%{transform:scale(.3);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+
+@media (pointer:coarse){.br-view{overflow:hidden;touch-action:pan-y;height:clamp(360px,62vh,560px)}.br-live{display:none}}
