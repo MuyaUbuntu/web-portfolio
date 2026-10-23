@@ -704,3 +704,4 @@ body *:not(.keep-case){text-transform:none!important}
 .lb .lb-p{left:1rem;top:50%;translate:0 -50%}.lb .lb-n{right:1rem;top:50%;translate:0 -50%}
 .lb.single .lb-p,.lb.single .lb-n{display:none}
 @media(max-width:700px){.lb .lb-p,.lb .lb-n{top:auto;bottom:1rem;translate:none}}
+.hw.sk{color:#0E9F5E}.hw.sk.on{background:#0E9F5E;color:#fff}
