@@ -68,7 +68,7 @@ def contact():
     return f'''<section class="contact" id="contact">
   <div class="wrap">
     <span class="mono">Got a project or an open role?</span>
-    <h2 style="margin-top:1.2rem"><span class="lm"><span>Let’s make</span></span><span class="lm"><span class="o">something</span> <span>big</span></span></h2>
+    <h2 style="margin-top:1.2rem"><span class="lm"><span>Let’s make</span></span><span class="lm lm-last"><span class="o">something</span> <span>big</span></span></h2>
     <div class="contact-grid">
       <div>
         <span class="mail" id="mail">{EMAIL}</span>
@@ -100,7 +100,7 @@ def card(i,href,client,name,role,tags,media,ref=None,aiflag=False,soon=False):
 # ================= HOME =================
 pre=''
 roles='<span>Art direction</span><span>AI imagery</span><span>UX/UI</span><span>3D</span><span>Internal campaigns</span><span>Brand management</span>'
-roles2='<span>Creative ideas</span><span>Big results</span><span>Human craft</span><span>AI as copilot</span>'
+roles2='<span>Creative ideas</span><span>Big results</span><span>Human craft</span><span>Strategy first</span>'
 pairs=[{'name':'Philip Morris','ref':'assets/img/ai/pmi-humo-ref.jpg','fin':'assets/img/ai/pmi-humo-final.jpg'},
        {'name':'Coca-Cola','ref':'assets/img/ai/coca-ref.jpg','fin':'assets/img/ai/coca-final.jpg'},
        {'name':'DiDi Food','ref':'assets/img/ai/didi-ref.jpg','fin':'assets/img/ai/didi-final.jpg'},
@@ -137,10 +137,10 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 
   <section class="say wrap" data-pairs='{json.dumps(pairs)}' aria-label="How I work">
     <span class="mono">✳ How I work</span>
-    <p class="big">I turn <span class="hw sk" data-k="sk" tabindex="0">a rough sketch</span> into <span class="hw cp" data-k="cp" tabindex="0">a finished campaign</span>, with AI as my <span class="hw co" data-k="co" tabindex="0">copilot</span> and design as the final word.</p>
+    <p class="big">I turn <span class="hw sk" data-k="sk" tabindex="0">a rough sketch</span> into <span class="hw cp" data-k="cp" tabindex="0">a finished campaign</span>, with <span class="hw co" data-k="co" tabindex="0">creativity</span> as my copilot and strategy as the final word.</p>
     <p class="say-hint mono muted">Hover the highlighted words. Each time, a different real project.</p>
     <div class="peekimg" aria-hidden="true"><img alt=""><span></span></div>
-    <div class="tools-pop" aria-hidden="true"><span class="tool t-ff">Ff</span><span class="tool t-mj">Mj</span><span class="tool t-sd">Sd</span><span class="tool t-ps">Ps</span></div>
+    <div class="tools-pop" aria-hidden="true"><span class="tool ic" style="background:#F2E3A2;color:#0B0B0A" title="Ideas"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V17h5.2v-1.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span class="tool ic" style="background:#F4D3DD;color:#0B0B0A" title="Sketching"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/></svg></span><span class="tool ic" style="background:#CFE1EE;color:#0B0B0A" title="Craft"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><span class="tool ic" style="background:#0B0B0A;color:#FFFFFF" title="Strategy"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg></span></div>
   </section>
 
   <section class="stage" id="work">

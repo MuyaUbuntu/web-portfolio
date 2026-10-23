@@ -705,3 +705,7 @@ body *:not(.keep-case){text-transform:none!important}
 .lb.single .lb-p,.lb.single .lb-n{display:none}
 @media(max-width:700px){.lb .lb-p,.lb .lb-n{top:auto;bottom:1rem;translate:none}}
 .hw.sk{color:#0E9F5E}.hw.sk.on{background:#0E9F5E;color:#fff}
+/* copilot icons + footer heading */
+.tools-pop .tool.ic{width:2.1rem;height:2.1rem;border-radius:10px;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.contact h2 .o{color:var(--ink);-webkit-text-stroke:0}
+.contact h2 .lm-last{padding-bottom:.2em;margin-bottom:-.2em}
