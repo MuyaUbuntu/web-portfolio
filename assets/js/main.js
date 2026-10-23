@@ -160,7 +160,7 @@
   /* ---------- Interactive statement: sketch → campaign ---------- */
   (function(){
     var say=$('.say'); if(!say)return;
-    var peek=$('.peekimg'), pimg=$('img',peek), plab=$('span',peek), pop=$('.tools-pop'), pairs=JSON.parse(say.getAttribute('data-pairs')||'[]'), i=0, mode=null;
+    var peek=$('.peekimg'), pimg=$('img',peek), plab=$('span',peek), pop=$('.tools-pop'), pairs=JSON.parse(say.getAttribute('data-pairs')||'[]'), i=0, mode=null, tapped=false;
     pairs.forEach(function(p){[p.ref,p.fin].forEach(function(u){var im=new Image();im.src=u})});
     function place(x,y){var w=peek.offsetWidth,h=peek.offsetHeight,X=Math.min(innerWidth-w-12,Math.max(12,x+24)),Y=Math.min(innerHeight-h-12,Math.max(12,y-h-16));peek.style.transform='translate('+X+'px,'+Y+'px)';if(pop)pop.style.transform='translate('+Math.min(innerWidth-180,x+18)+'px,'+(y-58)+'px)'}
     function show(w,x,y){var k=w.getAttribute('data-k');$$('.hw',say).forEach(function(o){o.classList.toggle('on',o===w)});
@@ -172,7 +172,7 @@
       w.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')show(w,e.clientX,e.clientY)});
       w.addEventListener('pointermove',function(e){if(mode)place(e.clientX,e.clientY)});
       w.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')hide()});
-      w.addEventListener('click',function(e){var r=w.getBoundingClientRect();if(mode===w.getAttribute('data-k')){hide()}else show(w,r.left+r.width/2,r.top)});
+      w.addEventListener('click',function(e){var r=w.getBoundingClientRect(),k=w.getAttribute('data-k');if(e.pointerType==='mouse'&&mode===k){hide();return}if(e.pointerType!=='mouse'){if(tapped)i++;tapped=true}show(w,r.left+r.width/2,r.top)});
     });
     addEventListener('scroll',function(){if(mode&&!fine)hide()},{passive:true});
   })();
