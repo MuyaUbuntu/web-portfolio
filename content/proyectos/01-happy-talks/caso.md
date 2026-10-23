@@ -35,3 +35,10 @@ _pendiente_
 
 ## Imágenes (orden de Behance → archivo esperado en assets/img/happy-talks/)
 01 portada laptop · 02 intro + stickers · 03 reto + hero · 04 conferencias · 05 historia de aprendizaje · 06 happy speakers · 07 asistentes + marcas · 08 nuestras conferencias · 09 encendamos las conversaciones · 10 solicitud de conferencia · 11 mockups móvil
+
+## Actualización (2026-10-22)
+- Año: 2024 (portada de Behance: "Fecha de ejecución 2024"). Duración: 2 semanas.
+- Rol: exclusivamente UI. Sin IA. El micrófono es foto de stock; el resto en Illustrator (no hubo modelado 3D).
+- Publicado y sigue en línea: https://happy-talks.com/ (verificado 2026-10-22).
+- Aprobado a la primera. No haría nada distinto.
+- Material: Landing_02.pdf (lámina completa de Behance 1920×12947) y 2 mockups móviles.

@@ -260,6 +260,38 @@
     if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();var t0=performance.now();
       (function a(now){var k=Math.min(1,(now-t0)/1600),v=50+Math.sin(k*Math.PI*2)*22*(1-k);r.value=v;set();if(k<1)requestAnimationFrame(a);else{r.value=50;set()}})(t0)},{threshold:.6});io.observe(c)}});
 
+  /* ---------- Happy Talks: the real landing scrolls inside a browser ---------- */
+  $$('.browser').forEach(function(b){var v=$('.br-view',b),notes=$$('.br-notes li',b),ys=notes.map(function(n){return +n.getAttribute('data-y')}),user=false,vis=false,pos=0,last=0;
+    function mark(){var f=(v.scrollTop+v.clientHeight*.35)/v.scrollHeight,on=0;ys.forEach(function(y,i){if(f>=y)on=i});notes.forEach(function(n,i){n.classList.toggle('on',i===on)})}
+    function take(){if(!user){user=true;b.classList.add('user')}}
+    v.addEventListener('scroll',mark,{passive:true});['wheel','touchstart','pointerdown','keydown'].forEach(function(ev){v.addEventListener(ev,take,{passive:true})});
+    v.addEventListener('wheel',function(e){e.stopPropagation()},{passive:true});
+    notes.forEach(function(n,i){n.addEventListener('click',function(){take();v.scrollTo({top:ys[i]*v.scrollHeight,behavior:'smooth'})})});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)requestAnimationFrame(loop)}).observe(b);
+    function loop(t){if(!vis||user||reduce)return;var dt=last?Math.min(50,t-last):16;last=t;pos+=dt*.06;if(pos>=v.scrollHeight-v.clientHeight){pos=0}v.scrollTop=pos;requestAnimationFrame(loop)}
+    mark()});
+
+  /* ---------- Happy Talks: sticker storm with simple physics ---------- */
+  $$('.storm').forEach(function(box){var els=$$('.stk-p',box),W=0,H=0,bodies=[],running=false,vis=false;
+    function size(){W=box.clientWidth;H=box.clientHeight}
+    function drop(){size();bodies=els.map(function(el,i){return {el:el,w:el.offsetWidth,h:el.offsetHeight,x:Math.random()*(W-el.offsetWidth),y:-80-i*70-Math.random()*60,vx:(Math.random()-.5)*3,vy:0,r:(Math.random()-.5)*24,vr:(Math.random()-.5)*2.5,drag:false}});start()}
+    function start(){if(!running){running=true;requestAnimationFrame(step)}}
+    function step(){var moving=false;bodies.forEach(function(b){if(!b.drag){b.vy+=.6;b.x+=b.vx;b.y+=b.vy;b.r+=b.vr;
+        if(b.y+b.h>H){b.y=H-b.h;b.vy*=-.38;b.vx*=.86;b.vr*=.5;if(Math.abs(b.vy)<1)b.vy=0}var onF=b.y+b.h>=H-1||Math.abs(b.vy)<.4;b.r=((b.r+180)%360+360)%360-180;if(onF){b.r+=(0-b.r)*.18;b.vr*=.6}else{b.vr*=.985}if(Math.abs(b.r)>.3)moving=true;
+        if(b.x<0){b.x=0;b.vx*=-.6}if(b.x+b.w>W){b.x=W-b.w;b.vx*=-.6}
+        if(Math.abs(b.vx)>.05||Math.abs(b.vy)>.05||b.y+b.h<H-1)moving=true;else{b.vx=0;b.vr=0}}else moving=true;
+      });
+      for(var it=0;it<3;it++)bodies.forEach(function(b){if(b.drag)return;bodies.forEach(function(o){if(o===b)return;var ox=Math.min(b.x+b.w,o.x+o.w)-Math.max(b.x,o.x),oy=Math.min(b.y+b.h,o.y+o.h)-Math.max(b.y,o.y);if(ox<=0||oy<=0)return;
+        if(oy<ox){if(b.y<o.y){b.y-=oy;if(b.vy>0)b.vy*=-.15}}else{var d=(b.x+b.w/2<o.x+o.w/2)?-ox:ox;b.x+=d*.5;b.vx*=.5;if(b.x<0)b.x=0;if(b.x+b.w>W)b.x=W-b.w}})});
+      bodies.forEach(function(b){b.el.style.transform='translate('+b.x.toFixed(1)+'px,'+b.y.toFixed(1)+'px) rotate('+b.r.toFixed(1)+'deg)'});
+      if(moving&&vis)requestAnimationFrame(step);else running=false}
+    bodies=[];els.forEach(function(el,i){el.addEventListener('pointerdown',function(e){var b=bodies[i];if(!b)return;b.drag=true;el.classList.add('drag');el.setPointerCapture(e.pointerId);var r=box.getBoundingClientRect(),ox=e.clientX-r.left-b.x,oy=e.clientY-r.top-b.y,lx=e.clientX,ly=e.clientY;
+      function mv(ev){b.vx=ev.clientX-lx;b.vy=ev.clientY-ly;lx=ev.clientX;ly=ev.clientY;b.x=ev.clientX-r.left-ox;b.y=ev.clientY-r.top-oy;b.vr=Math.max(-6,Math.min(6,b.vx*.25));start()}
+      function up(){b.drag=false;el.classList.remove('drag');el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);b.vx=Math.max(-40,Math.min(40,b.vx));b.vy=Math.max(-40,Math.min(40,b.vy));start()}
+      el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up)})});
+    $('.storm-reset',box).addEventListener('click',drop);addEventListener('resize',size);
+    var first=true;if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){if(first){first=false;drop()}else start()}},{threshold:.3}).observe(box);else{vis=true;drop()}});
+
   /* ---------- Conexiones Mágicas: pop the cap ---------- */
   $$('.pop').forEach(function(b){var cap=$('.pop-cap',b),done=false,sx=0,sy=0,dragging=false,lx=0,ly=0,vx=0,vy=0;
     function fly(dx,dy){if(done)return;done=true;cap.style.animation='none';var x=0,y=0,r=0,ux=dx||(Math.random()<.5?-1:1)*14,uy=dy||-26,vr=ux*1.6;
