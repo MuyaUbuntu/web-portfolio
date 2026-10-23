@@ -1376,3 +1376,11 @@ body *:not(.keep-case){text-transform:none!important}
 .sb-f figcaption{color:#cfcfca;font-size:.8rem;line-height:1.35}
 .sb-f figcaption b{color:var(--tomato);margin-right:.3rem}
 @media (prefers-reduced-motion:reduce){.sb-track{animation:none}.sb-view{overflow-x:auto}}
+/* lever-only animation + carousel controls */
+.sx-lev{position:absolute;left:84.44%;top:0;width:19.11%;height:auto;max-width:none;pointer-events:none;filter:drop-shadow(0 30px 24px rgba(0,0,0,.22))}
+.sx-m .sx-lever{left:84%;width:19%;height:60%}
+.car-v{touch-action:pan-y}
+.car-p:disabled,.car-n:disabled{opacity:0;pointer-events:none}
+.car-dots{padding:4px 0}
+.car-dots button{position:relative}
+.car-dots button::before{content:"";position:absolute;inset:-10px -5px}

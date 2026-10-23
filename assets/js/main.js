@@ -567,14 +567,17 @@
     if(!reduce)inView(as,function(){setInterval(function(){if(Date.now()-auser<5000)return;anim((Math.round(apos)+1)%6)},2600)});
   }
 
-  /* ---------- Carousels: arrows, dots, and they move on their own ---------- */
+  /* ---------- Carousels: arrows, dots and swipe ---------- */
   $$('.car').forEach(function(c){
-    var t=$('.car-t',c),n=+c.dataset.n,dots=$$('.car-dots button',c),k=0,hold=0;
-    function go(i){k=(i+n)%n;t.style.transform='translateX('+(-k*100)+'%)';dots.forEach(function(d,j){d.classList.toggle('on',j===k)})}
-    $('.car-p',c).addEventListener('click',function(){hold=Date.now();go(k-1)});$('.car-n',c).addEventListener('click',function(){hold=Date.now();go(k+1)});
-    dots.forEach(function(d,j){d.addEventListener('click',function(){hold=Date.now();go(j)})});
-    var hov=false;c.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hov=true});c.addEventListener('pointerleave',function(){hov=false});
-    go(0);if(!reduce)inView(c,function(){setInterval(function(){if(!hov&&Date.now()-hold>7000)go(k+1)},3200)});
+    var t2=$('.car-t',c),n=+c.dataset.n,dots=$$('.car-dots button',c),pv=$('.car-p',c),nx=$('.car-n',c),k=0;
+    function go(i){k=cl(i,0,n-1);t2.style.transform='translateX('+(-k*100)+'%)';dots.forEach(function(d,j){d.classList.toggle('on',j===k);d.setAttribute('aria-current',j===k)});pv.disabled=k===0;nx.disabled=k===n-1}
+    pv.addEventListener('click',function(e){e.stopPropagation();go(k-1)});nx.addEventListener('click',function(e){e.stopPropagation();go(k+1)});
+    dots.forEach(function(d,j){d.addEventListener('click',function(){go(j)})});
+    var v=$('.car-v',c),sx0=null,sy0=0;
+    v.addEventListener('pointerdown',function(e){if(e.target.closest('button'))return;sx0=e.clientX;sy0=e.clientY});
+    v.addEventListener('pointerup',function(e){if(sx0===null)return;var dx=e.clientX-sx0,dy=e.clientY-sy0;sx0=null;if(Math.abs(dx)>36&&Math.abs(dx)>Math.abs(dy))go(k+(dx<0?1:-1))});
+    v.addEventListener('pointercancel',function(){sx0=null});
+    go(0);
   });
 
   /* ---------- Badges: tap to stamp ---------- */
@@ -583,9 +586,9 @@
   /* ---------- Logos: the lever plays the real animation, the reels land on the logo ---------- */
   var sx=$('.slotx');
   if(sx){
-    var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),simg=$('.sx-img',sx),angs=[0,0,0],curL=0,busy2=false,N8=8,NF=61,frames=[],loaded=false;
-    var sbase=simg.getAttribute('src').replace(/f00\.webp.*$/,'');
-    function preload(){if(loaded)return;loaded=true;for(var i=0;i<NF;i++){var im=new Image();im.src=sbase+'f'+(i<10?'0':'')+i+'.webp';frames.push(im)}}
+    var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),simg=$('.sx-lev',sx),angs=[0,0,0],curL=0,busy2=false,N8=8,NF=61,frames=[],loaded=false;
+    var sbase=simg.getAttribute('src').replace(/l00\.webp.*$/,'');
+    function preload(){if(loaded)return;loaded=true;for(var i=0;i<NF;i++){var im=new Image();im.src=sbase+'l'+(i<10?'0':'')+i+'.webp';frames.push(im)}}
     inView(sx,preload,.05);
     function rsz(){wins.forEach(function(w){w.style.setProperty('--r',(w.clientHeight/2)+'px')})}
     addEventListener('resize',rsz);addEventListener('load',rsz);rsz();

@@ -684,7 +684,7 @@ def col(k):
     return f'<div class="col{" up" if k%2 else ""}"><div class="col-rail">{t}{t}</div></div>'
 cols=''.join(col(k) for k in range(4))
 CARS=[('Weekly fixtures',6),('Big leagues',5),('Match of the day',6)]
-cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t">'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}') for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
+cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t">'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}',lazy=False) for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
 wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="pl-n">{i+1}</span></button>' for i in range(11))
 wcb=''.join(f'<figure>{cbi(f"wcb-{i+1}.webp","Megashoot promo block")}</figure>' for i in range(3))
 keys=''.join(f'<figure class="key">{cbi(f"key-{i+1}.jpg","Key art reused across several pieces")}</figure>' for i in [2,4,3,0,5,1])
@@ -836,7 +836,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <div class="slotx">
           <div class="sx-thumbs">{slot_thumbs}</div>
           <div class="sx-stage">
-            <div class="sx-m"><img class="sx-img" src="{pre}assets/img/campobet/lever/f00.webp" width="900" height="483" alt="Green metallic slot machine" draggable="false">{slot_reels}<button type="button" class="sx-lever" aria-label="Pull the lever"></button></div>
+            <div class="sx-m"><img class="sx-img" src="{pre}assets/img/campobet/lever/base.webp" width="900" height="483" alt="Green metallic slot machine" draggable="false"><img class="sx-lev" src="{pre}assets/img/campobet/lever/l00.webp" width="172" height="557" alt="" draggable="false">{slot_reels}<button type="button" class="sx-lever" aria-label="Pull the lever"></button></div>
             <p class="sx-name mono">{LG[0]}</p>
           </div>
         </div>
