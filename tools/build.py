@@ -274,7 +274,7 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">HD* Human Design Doing</span><span class="tag">Web · 2024</span></div>
-      <h1 class="c-title ht-logo"><img src="{pre}assets/img/happy-talks/ht-black.png" alt="Happy Talks" width="1200" height="585" draggable="false"></h1>
+      <h1 class="c-title" aria-label="Happy Talks"><span aria-hidden="true">{word("Happy")} {word("Talks","hlw")}</span></h1>
       </div><div class="c-r">
       <p class="c-lead">A landing page for HD*’s conference platform: an intangible offer, talks that change teams, turned into a page you can scroll, feel and request in one tap. My part was the UI.</p>
       <div class="tags c-tags"><span class="tag t">UI design</span><span class="tag p">Landing page</span><span class="tool t-ai" title="Illustrator">Ai</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
