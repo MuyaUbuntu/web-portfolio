@@ -274,7 +274,7 @@
   /* ---------- Happy Talks: sticker storm with simple physics ---------- */
   $$('.storm').forEach(function(box){var els=$$('.stk-p',box),W=0,H=0,bodies=[],running=false,vis=false;
     function size(){W=box.clientWidth;H=box.clientHeight}
-    function drop(){size();bodies=els.map(function(el,i){return {el:el,w:el.offsetWidth,h:el.offsetHeight,x:Math.random()*(W-el.offsetWidth),y:-80-i*70-Math.random()*60,vx:(Math.random()-.5)*3,vy:0,r:(Math.random()-.5)*24,vr:(Math.random()-.5)*2.5,drag:false}});start()}
+    function drop(){size();bodies=els.map(function(el,i){return {el:el,w:el.offsetWidth||80,h:el.offsetHeight||60,x:Math.random()*(W-el.offsetWidth),y:-80-i*70-Math.random()*60,vx:(Math.random()-.5)*3,vy:0,r:(Math.random()-.5)*24,vr:(Math.random()-.5)*2.5,drag:false}});start()}
     function start(){if(!running){running=true;requestAnimationFrame(step)}}
     function step(){var moving=false;bodies.forEach(function(b){if(!b.drag){b.vy+=.6;b.x+=b.vx;b.y+=b.vy;b.r+=b.vr;
         if(b.y+b.h>H){b.y=H-b.h;b.vy*=-.38;b.vx*=.86;b.vr*=.5;if(Math.abs(b.vy)<1)b.vy=0}var onF=b.y+b.h>=H-1||Math.abs(b.vy)<.4;b.r=((b.r+180)%360+360)%360-180;if(onF){b.r+=(0-b.r)*.18;b.vr*=.6}else{b.vr*=.985}if(Math.abs(b.r)>.3)moving=true;
@@ -291,6 +291,21 @@
       el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up)})});
     $('.storm-reset',box).addEventListener('click',drop);addEventListener('resize',size);
     var first=true;if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){if(first){first=false;drop()}else start()}},{threshold:.3}).observe(box);else{vis=true;drop()}});
+
+  /* ---------- Happy Talks: mic drop ---------- */
+  $$('.micdrop').forEach(function(m){var mic=$('.md-mic',m),x=0,tx=0,y=0,vy=0,r=0,vr=0,state='rise',W=0,H=0,vis=false,t0=0;
+    function size(){W=m.clientWidth;H=m.clientHeight;if(!x)x=tx=W*.72}
+    function rest(){return H-mic.offsetHeight*.92}
+    m.addEventListener('pointermove',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-mic.offsetWidth,e.clientX-b.left-mic.offsetWidth/2))});
+    function drop(){if(state!=='idle')return;state='fall';vy=-9;vr=(Math.random()<.5?-1:1)*7}
+    m.addEventListener('click',drop);m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();drop()}});
+    function loop(t){if(!vis)return;size();x+=(tx-x)*.12;
+      if(state==='rise'){y+=(rest()-y)*.1;r*=.9;if(Math.abs(rest()-y)<1){y=rest();state='idle'}}
+      else if(state==='fall'){vy+=.9;y+=vy;r+=vr;if(y>H+40){state='gone';t0=t}}
+      else if(state==='gone'){if(t-t0>900){y=H+mic.offsetHeight;r=0;state='rise'}}
+      else{y=rest()+Math.sin(t/600)*4}
+      mic.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+r.toFixed(1)+'deg)';requestAnimationFrame(loop)}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){size();if(state==='rise'&&!y)y=H+mic.offsetHeight;requestAnimationFrame(loop)}}).observe(m)});
 
   /* ---------- Conexiones Mágicas: pop the cap ---------- */
   $$('.pop').forEach(function(b){var cap=$('.pop-cap',b),done=false,sx=0,sy=0,dragging=false,lx=0,ly=0,vx=0,vy=0;

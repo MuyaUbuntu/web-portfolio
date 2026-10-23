@@ -779,3 +779,15 @@ body *:not(.keep-case){text-transform:none!important}
 .storm-reset:hover{background:#fff;color:var(--ink)}
 .shot.sec{flex:0 0 min(80vw,620px)}
 .shot.sec img{width:100%;height:clamp(240px,34vw,420px);object-fit:cover;object-position:top;border-radius:var(--r-sm);box-shadow:0 22px 44px -26px rgba(0,0,0,.5)}
+/* Happy Talks: real assets */
+.c-title.ht-logo{line-height:0}
+.c-title.ht-logo img{width:clamp(240px,38vw,600px);height:auto;animation:htfloat 5s ease-in-out infinite}
+@keyframes htfloat{50%{transform:translateY(-6px) rotate(-.6deg)}}
+.stk-p.img{padding:0;border-radius:0;background:none;box-shadow:none;width:calc(var(--w)*1px*var(--k,1));height:auto;filter:drop-shadow(0 12px 14px rgba(0,0,0,.45))}
+@media(max-width:700px){.storm{--k:.62}}
+.storm-mark{position:absolute;left:50%;top:44%;width:min(70%,620px);translate:-50% -50%;opacity:.07;pointer-events:none}
+.storm-line{position:absolute;right:4%;top:6%;width:min(36%,360px);opacity:.75;pointer-events:none}
+.micdrop{position:relative;margin-top:clamp(2.4rem,5vw,3.4rem);height:clamp(320px,46vh,460px);border-radius:var(--r);background:#141218;overflow:hidden;cursor:pointer;display:grid;place-items:center;outline-offset:4px}
+.md-t{position:relative;z-index:1;text-align:center;color:#9a96a6;font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:-.02em;line-height:1.3}
+.md-t b{display:block;color:#fff;font-size:clamp(2.6rem,7vw,5.6rem);font-weight:600;letter-spacing:-.06em;line-height:1}
+.md-mic{position:absolute;left:0;top:0;width:clamp(110px,14vw,190px);height:auto;z-index:2;will-change:transform;pointer-events:none}
