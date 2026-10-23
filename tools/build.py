@@ -594,7 +594,7 @@ case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted k
 
   <div class="wrap chapters">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#trick">Behind the trick</a></li><li><a href="#cap">The cap</a></li></ol>
+      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#idea">Idea</a></li><li><a href="#trick">Behind the trick</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
     <div>
@@ -639,16 +639,6 @@ case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted k
         </div>
       </section>
 
-      <section class="chap" id="cap">
-        <span class="mono">04 · The cap</span>
-        <h2><span class="lm"><span>The magic</span></span><span class="lm"><span>is handmade</span></span></h2>
-        <p class="lead">The bottle cap isn’t AI. It’s a real photo, cut out and rebuilt in 12 layers of curves, highlights and shadows so it belongs in the scene.</p>
-        <div class="cap-two">
-          <figure>{cc('cap-photo.jpg','The original bottle cap photo')}<figcaption><b>Before</b><span>Studio photo, flat light</span></figcaption></figure>
-          <figure>{cc('cap-scene.jpg','The cap inside the key visual')}<figcaption><b>After</b><span>12 layers to match the backlight</span></figcaption></figure>
-        </div>
-        <div class="learn"><span class="mono">Honest note</span><p>I delivered the visual concept for HD*’s proposal; the design team didn’t see what happened after. What this case shows is the method: lock the gesture by hand, let AI do the light, then finish the details that make it believable.</p></div>
-      </section>
     </div>
   </div>
 '''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
