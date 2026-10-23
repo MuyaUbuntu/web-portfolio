@@ -692,6 +692,7 @@ REELS=[('Game',['Slot A','Slot B','Slot C','Slot D','Slot E']),('Scene',['Rocket
 reels=''.join(f'<div class="sm-reel" aria-label="{n}"><span class="sm-lbl mono">{n}</span><div class="sm-win"><div class="sm-strip">'+''.join(f'<span>{x}</span>' for x in xs*3)+'</div></div></div>' for n,xs in REELS)
 
 case5=head('CampoBet · Rodrigo López','Case study: brand and production design for CampoBet, an online betting brand. A rebrand for organic content, an icon and promo-logo system, and three AI production pipelines designed by Rodrigo.',pre)+nav(pre,False)+f'''<main class="cb">
+  <div class="ver-sw mono" aria-label="Review versions"><b>Version A</b><a href="campobet-b.html" data-go>Version B</a></div>
   <section class="wrap c-hero">
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
@@ -813,6 +814,171 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
 '''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
+
+# ================= CASE: CAMPOBET · VERSION B ("Inside the file") =================
+pre='../'
+# Board for the hero canvas: sections of frames laid out like the real Figma file
+BOARD=[('Organic · feed',12,(1080,1350),'a',6),('Stories',8,(1080,1920),'b',8),('Paid',8,(1080,1080),'c',4),('Slot masters',5,(1080,1920),'e',5),('CRM banners',6,(600,520),'d',3),('App store',5,(1080,1920),'c',5),('Blog',4,(1600,900),'a',2),('Promo logos',6,(1000,1000),'l0',3)]
+def board():
+    out=[];x=0;y=0;rowh=0;maxw=3400;S=.12
+    for name,n,(w,h),c,cols in BOARD:
+        fw,fh=w*S,h*S;gap=24;pad=40
+        rows=-(-n//cols);sw=pad*2+cols*fw+(cols-1)*gap;sh=pad*2+30+rows*fh+(rows-1)*(gap+14)
+        if x+sw>maxw: x=0;y+=rowh+80;rowh=0
+        frames=''.join(f'<div class="fb-fr" style="left:{pad+(k%cols)*(fw+gap):.0f}px;top:{pad+30+(k//cols)*(fh+gap+14):.0f}px;width:{fw:.0f}px;height:{fh:.0f}px"><i>{name.split(" ")[0].lower()}_{w}x{h}_{k+1:02d}</i>{phb("",f"{w}/{h}",c)}</div>' for k in range(n))
+        out.append(f'<section class="fb-sec" style="left:{x:.0f}px;top:{y:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px"><b>{name}</b>{frames}</section>')
+        x+=sw+80;rowh=max(rowh,sh)
+    return ''.join(out),maxw,y+rowh
+bhtml,BW,BH=board()
+# Anatomy: real layer stack of the approved visual master (bottom -> top), with real zones of the 1080x1920 frame
+LAY=[('Background','full image, 2k',0,0,1080,1920,'bg'),('Mask group','depth layer under the copy',0,1000,1080,920,'mask'),('glow_line','light ribbon',482,-53,762,1015,'glow'),('Subject','duplicate for my cutout',160,330,760,800,'subj'),('Slot logo','official file, never redrawn',270,985,540,202,'slot'),('Logo shadow','tinted from the image',234,129,613,166,'shadow'),('Logo','brand component',314,161,451,95,'logo'),('Copy','copy component',88,1239,905,190,'copy'),('Disclaimer','auto-fit, min 14 px',62,1484,955,80,'disc')]
+anat=''.join(f'<div class="an-l {k}" style="--z:{i}" data-i="{i}"><i style="left:{x/10.8:.2f}%;top:{y/19.2:.2f}%;width:{w/10.8:.2f}%;height:{h/19.2:.2f}%"></i></div>' for i,(n,d,x,y,w,h,k) in enumerate(LAY))
+anlist=''.join(f'<li data-i="{i}"><span class="ly-ic {k}"></span><b>{n}</b><small>{d}</small></li>' for i,(n,d,x,y,w,h,k) in reversed(list(enumerate(LAY))))
+# Reflow: real layout per format (frame coordinates from the resize skill)
+RF={'story':(1080,1920,[(314,145,451,127),(62,295,955,852),(270,985,540,202),(88,1239,905,190),(62,1484,955,80)]),
+    'reel':(1080,1920,[(314,145,451,127),(60,298,960,720),(217,918,646,179),(195,1156,690,145),(170,1337,740,85)]),
+    'post':(1080,1350,[(368,83,343,97),(22,188,1036,685),(245,749,590,164),(89,955,902,189),(106,1209,868,56)]),
+    'square':(1080,1080,[(368,47,343,97),(22,154,1036,513),(245,543,590,164),(98,735,884,186),(65,967,950,60)]),
+    'horizontal':(1200,628,[(173,49,343,97),(689,0,513,628),(678,435,534,148),(74,267,542,114),(49,464,592,90)])}
+rf_json=json.dumps(RF)
+rf_tabs=''.join(f'<button type="button" role="tab" aria-selected="{"true" if k=="story" else "false"}" data-f="{k}">{k.capitalize()}<small>{w} × {h}</small></button>' for k,(w,h,_) in RF.items())
+rf_els=''.join(f'<i class="rf-e {k}"><span>{n}</span></i>' for k,n in [('logo','Logo'),('char','Character'),('slot','Slot logo'),('copy','Copy'),('disc','Disclaimer')])
+# Swimlanes: who does each step
+SW={'vm':[('Brief','me'),('Read the game','ai'),('Scene concepts','ai'),('Pick the scene','me'),('Two candidates','ai'),('Quality gate','rule'),('Approve','me'),('Assemble in Figma','rule'),('Final cut','me')],
+    'res':[('Master in','me'),('Format plan','rule'),('Adapt the image','ai'),('Build boards','rule'),('Approve all','me')],
+    'crm':[('Brief','me'),('Photo','ai'),('Guardrails','rule'),('Layout','rule'),('Review','me')]}
+sw_json=json.dumps(SW)
+MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+cal=''.join(f'<figure class="shot cal-m"><figcaption class="mono">{m}</figcaption>'+(phb(f"Promo logo · {m}","1/1",["l0","l1","l2"][i%3]) if i%2==0 else '<div class="cal-empty mono">—</div>')+'</figure>' for i,m in enumerate(MONTHS))
+fb=''.join(f'<div class="fl-f" style="--k:{i}">{phb(f"Storyboard frame {i+1:02d}","16/9","s"+str(i%3))}</div>' for i in range(8))
+
+case6=head('CampoBet · Rodrigo López','Case study (version B): brand and production design for CampoBet. A rebrand for organic content, an icon and promo-logo system, and three AI production pipelines designed by Rodrigo.',pre)+nav(pre,False)+f'''<main class="cb cbb">
+  <div class="ver-sw mono" aria-label="Review versions"><a href="campobet.html" data-go>Version A</a><b>Version B</b></div>
+  <section class="wrap c-hero">
+    <div class="c-head"><div class="c-l">
+      <a class="back" href="{pre}#work" data-go>← All work</a>
+      <div class="c-client"><span class="tag k">CampoBet</span><span class="ai">AI system</span></div>
+      <h1 class="c-title" aria-label="CampoBet"><span aria-hidden="true">{word("Campo")}{word("Bet","hlw")}</span></h1>
+      </div><div class="c-r">
+      <p class="c-lead">An online betting brand that needs content every single day. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
+      <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~130 pieces a month (approx.)</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+    </div></div>
+    <div class="c-cover fb" data-lenis-prevent aria-label="The CampoBet working file: drag to move around, use the buttons to zoom">
+      <div class="fb-board" style="width:{BW}px;height:{BH:.0f}px">{bhtml}</div>
+      <div class="fb-ui fb-tl"><span class="fb-tool on" title="Move">↖</span><span class="fb-tool" title="Hand">✋</span><span class="fb-file">CampoBet · working file</span></div>
+      <div class="fb-ui fb-br"><button type="button" class="fb-out" aria-label="Zoom out">−</button><span class="fb-z mono">100%</span><button type="button" class="fb-in" aria-label="Zoom in">+</button><button type="button" class="fb-fit">Fit</button></div>
+      <div class="fb-ui fb-bl mono"><span class="fb-hint">Drag to move around the file</span></div>
+    </div>
+  </section>
+
+  <div class="wrap chapters">
+    <aside class="toc" aria-label="Chapters">
+      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#rebrand">Rebrand</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#reflow">Reflow</a></li><li><a href="#pipelines">Pipelines</a></li><li><a href="#system">System</a></li><li><a href="#motion">Motion</a></li><li><a href="#impact">Impact</a></li></ol>
+      <div class="bar"><i></i></div>
+    </aside>
+    <div>
+      <section class="chap" id="challenge">
+        <span class="mono">01 · Challenge</span>
+        <h2><span class="lm"><span>Every day a new promo,</span></span><span class="lm"><span>and one face for all of it</span></span></h2>
+        <p class="lead">Slots, sports, seasons and offers change daily. The content had to keep that pace on every channel and still look like one brand. The file above is what one stretch of that work looks like.</p>
+        <div class="quotes" style="margin-top:.5rem">
+          <div class="quote a"><b>~130</b><p>pieces a month at the peak, designed by me. Approximate, my own count.</p></div>
+          <div class="quote c"><b>6</b><p>channels to feed: organic, paid, CRM, app stores, blog and motion.</p></div>
+        </div>
+      </section>
+
+      <section class="chap" id="rebrand">
+        <span class="mono">02 · Rebrand</span>
+        <h2><span class="lm"><span>Two eras,</span></span><span class="lm"><span>one scroll</span></span></h2>
+        <p class="lead">I proposed a new visual language for the organic content and it was approved. Keep scrolling: the new version rises over the old one and the changes are marked as they appear.</p>
+        <section class="era" aria-label="Before and after the rebrand">
+    <div class="era-pin">
+      <div class="era-row">
+        <div class="era-p" style="aspect-ratio:4/5">{phb("Before · feed post","4/5","era-old")}<div class="era-new">{phb("After · feed post","4/5","b")}</div></div>
+        <div class="era-p" style="aspect-ratio:9/16">{phb("Before · story","9/16","era-old")}<div class="era-new">{phb("After · story","9/16","b")}</div></div>
+        <div class="era-p" style="aspect-ratio:1/1">{phb("Before · promo","1/1","era-old")}<div class="era-new">{phb("After · promo","1/1","b")}</div></div>
+      </div>
+      <ol class="era-notes"><li><b>Type</b><span>[what changed]</span></li><li><b>Colour</b><span>[what changed]</span></li><li><b>Layout</b><span>[what changed]</span></li><li><b>Imagery</b><span>[what changed]</span></li></ol>
+      <div class="era-lbl mono"><span class="era-a">Before</span><span class="era-bar"><i></i></span><span class="era-b">After</span></div>
+    </div>
+  </section>
+      </section>
+      <section class="chap" id="anatomy">
+        <span class="mono">03 · Anatomy</span>
+        <h2><span class="lm"><span>Take a master</span></span><span class="lm"><span>apart</span></span></h2>
+        <p class="lead">Every slot visual master is the same stack of nine layers, each one with a fixed place and a fixed job. Drag the slider to pull them apart. The names are the real layer names in the file.</p>
+        <div class="anat">
+          <div class="an-stage"><div class="an-stack">{anat}</div></div>
+          <div class="an-side">
+            <div class="an-panel"><div class="an-ph mono">Layers</div><ol class="an-list">{anlist}</ol></div>
+            <label class="an-ctl mono" for="an-r">Explode<input id="an-r" class="an-r" type="range" min="0" max="100" value="70"></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="chap" id="reflow">
+        <span class="mono">04 · Reflow</span>
+        <h2><span class="lm"><span>One image,</span></span><span class="lm"><span>five placements</span></span></h2>
+        <p class="lead">The resize pipeline moves every element to its stored position for each format. These are the real coordinates; the subject is never regenerated, only the image around it is extended.</p>
+        <div class="reflow" data-rf='{rf_json}'>
+          <div class="rf-tabs" role="tablist" aria-label="Formats">{rf_tabs}</div>
+          <div class="rf-stage"><div class="rf-frame">{rf_els}</div></div>
+          <p class="rf-cap mono">Story · 1080 × 1920</p>
+        </div>
+      </section>
+
+      <section class="chap" id="pipelines">
+        <span class="mono">05 · Pipelines</span>
+        <h2><span class="lm"><span>Who does</span></span><span class="lm"><span>what</span></span></h2>
+        <p class="lead">Three pipelines run as Claude skills, with Higgsfield for images and Figma for layout. I designed each one: the zones, the art direction rules, the quality checks and the exact moments where a person decides. Follow a piece through the lanes.</p>
+        <div class="swim" data-sw='{sw_json}'>
+          <div class="sw-top"><div class="cbp-tabs" role="tablist" aria-label="Pipelines"><button role="tab" aria-selected="true" data-p="vm">Slot visual master</button><button role="tab" aria-selected="false" data-p="res">Resizes</button><button role="tab" aria-selected="false" data-p="crm">CRM banners</button></div><button type="button" class="sw-play">Play ►</button></div>
+          <div class="sw-scroll" data-lenis-prevent><div class="sw-grid"><div class="sw-lane l-me"><span>Me</span></div><div class="sw-lane l-rule"><span>Rules I wrote</span></div><div class="sw-lane l-ai"><span>AI</span></div><svg class="sw-line" aria-hidden="true"><polyline/></svg><span class="sw-dot"></span></div></div>
+          <div class="sw-sum mono"></div>
+        </div>
+      </section>
+
+      <section class="chap" id="system">
+        <span class="mono">06 · System</span>
+        <h2><span class="lm"><span>Built to scale,</span></span><span class="lm"><span>built for the calendar</span></span></h2>
+        <p class="lead">An icon set drawn on one grid holds up at every size. Drag the slider from app badge to banner.</p>
+        <div class="isz">
+          <label class="mono" for="isz-r">Size <b class="isz-v">48 px</b><input id="isz-r" type="range" min="16" max="120" value="48"></label>
+          <ul class="isz-grid">{icons}</ul>
+        </div>
+        <h3 class="sub">A logo for every season</h3>
+        <p>Promotions and seasons get their own logo, built from the same brand parts. Drag through the year.</p>
+        <div class="drag cal">
+          <div class="drag-track" tabindex="0" aria-label="Promo logos by month" data-cursor="Drag">{cal}</div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous">←</button><button type="button" data-next aria-label="Next">→</button></div></div>
+        </div>
+      </section>
+
+      <section class="chap" id="motion">
+        <span class="mono">07 · Motion</span>
+        <h2><span class="lm"><span>Hold to</span></span><span class="lm"><span>play the board</span></span></h2>
+        <p class="lead">The storyboards as a flipbook. Press and hold to play it, or drag sideways to move frame by frame.</p>
+        <div class="flip" tabindex="0" aria-label="Storyboard flipbook: press and hold to play">
+          <div class="fl-stack">{fb}</div>
+          <span class="fl-n mono">01 / 08</span><span class="fl-h mono">Hold to play</span>
+        </div>
+      </section>
+
+      <section class="chap" id="impact">
+        <span class="mono">08 · Impact</span>
+        <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
+        <div class="cb-nums">
+          <div><b>~130</b><p>pieces a month I made by hand before the pipelines.</p><small class="mono">Approximate · my own count</small></div>
+          <div><b class="pending">[N]</b><p>slot banners delivered in 2–3 days with the pipeline.</p><small class="mono">Pending · number to confirm</small></div>
+          <div><b>2</b><p>moments where I step in per master: choosing the scene and approving the image.</p><small class="mono">From the pipeline design</small></div>
+        </div>
+      </section>
+    </div>
+  </div>
+'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+scripts(pre)
+open(os.path.join(R,'proyectos','campobet-b.html'),'w').write(case6)
 
 
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
