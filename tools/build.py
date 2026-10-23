@@ -152,7 +152,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
       <div class="grid">
 {card(1,"proyectos/happy-talks.html","HDO · 2025","Happy Talks","Landing page for a disruptive conference platform. UX/UI, art direction and 3D.",["Web","UX/UI","3D"],ht(1,"Happy Talks landing page",pre))}
 {card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
-{card(3,"proyectos/arboterra.html","ArboTerra · Africam Safari","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(4,"","Coca-Cola","Conexiones Mágicas","Team experience for a 75-person concentrate plant.",["Key visual","Firefly"],ai("coca-final","A hand catching a bottle cap in red light",pre),"coca-ref",True,True)}
 {card(5,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
 {card(6,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
@@ -162,7 +162,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
         <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
           <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">01</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HDO</span><span class="ix-tg">Web · UX/UI · 3D</span><span class="ix-yr">2025</span></a>
           <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">02</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
-          <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">Africam Safari</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
+          <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/coca-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">05</span><span class="ix-name">Fuerza DiDi</span><span class="ix-cl">DiDi Food</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
           <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/megagas-final.jpg"><span class="ix-n">06</span><span class="ix-name">Amo Aquí</span><span class="ix-cl">Megagas</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
@@ -449,11 +449,11 @@ bsteps=''.join(f'<button type="button" data-i="{i}" aria-pressed="{"true" if i==
 bimgs=''.join(f'<figure class="b-img{" on" if i==0 else ""}">{at(f"build-{i+1}",f"Construction step {i+1}: {t}")}</figure>' for i,(t,d) in enumerate(steps))
 bnotes=''.join(f'<p class="b-note{" on" if i==0 else ""}">{d}</p>' for i,(t,d) in enumerate(steps))
 
-case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campaign system for ArboTerra, Africam Safari’s secret world. Concept, art direction and 3D.',pre)+nav(pre,False)+f'''<main>
+case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campaign system for ArboTerra, a nature park in Puebla, Mexico. Concept, art direction and 3D.',pre)+nav(pre,False)+f'''<main>
   <section class="wrap c-hero arbt">
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
-      <div class="c-client"><span class="tag k">ArboTerra · Africam Safari</span><span class="tag">Campaign · 2023</span></div>
+      <div class="c-client"><span class="tag k">ArboTerra</span><span class="tag">Campaign · 2023</span></div>
       <h1 class="c-title" aria-label="ArboTerra es…"><span aria-hidden="true">{word("ArboTerra")} {word("es…","hlw")}</span></h1>
       </div><div class="c-r">
       <p class="c-lead">A park nobody could define got a campaign that never finishes the sentence. My part was the concept: the idea, the four key visuals and the AdBook. The client’s in-house team produced everything after, and still uses it three years later.</p>
@@ -475,7 +475,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="challenge">
         <span class="mono">01 · Challenge</span>
         <h2><span class="lm"><span>A park nobody</span></span><span class="lm"><span>could define</span></span></h2>
-        <p class="lead">ArboTerra, the secret world inside Africam Safari, had a problem: many families didn’t know what it was.</p>
+        <p class="lead">ArboTerra, a nature park in Puebla, had a problem: many families didn’t know what it was.</p>
         <div class="quotes" style="margin-top:2rem">
           <div class="quote a"><b>Families</b><p>Parents and kids, with very different reasons to visit.</p></div>
           <div class="quote c"><b>Print + digital</b><p>Billboards and a steady stream of social content.</p></div>
@@ -576,7 +576,7 @@ EXPERIENCE=[("2025–present","Design Team Lead","Brainrocket","Leads the design
  ("2016–2018","Designer","In Movisión","Print and digital design, architectural photography and web layouts.")]
 WORKS=[("Happy Talks","HDO","2025","Landing page for a conference platform. UX/UI, art direction and 3D.","proyectos/happy-talks.html"),
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
- ("ArboTerra es…","ArboTerra · Africam Safari (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html")]
+ ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},

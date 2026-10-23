@@ -18,7 +18,7 @@ Designer and art director from Mexico with 10+ years of experience (since 2016).
 ## Selected work
 - [Happy Talks](proyectos/happy-talks.html) — HDO · 2025. Landing page for a conference platform. UX/UI, art direction and 3D.
 - [No Vendas Humo](proyectos/no-vendas-humo.html) — Philip Morris International. AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.
-- [ArboTerra es…](proyectos/arboterra.html) — ArboTerra · Africam Safari (via Happy Studio) · 2023. Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
+- [ArboTerra es…](proyectos/arboterra.html) — ArboTerra (via Happy Studio) · 2023. Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
 
 ## Highlights (as shown on the site)
 - 13 AI-assisted campaigns for global brands.

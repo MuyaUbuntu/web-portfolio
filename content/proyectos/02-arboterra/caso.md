@@ -7,7 +7,7 @@ Fuente: respuestas de Rodrigo (2026-10-22) + ARBT_AdBook.pdf (Drive: Web Portfol
 - (sin respuesta; se asume que se puede mostrar nombre y logo)
 
 ## Lo básico
-- Cliente: ArboTerra, “El mundo secreto de ArboTerra” por Africam Safari (Puebla).
+- Cliente: ArboTerra (Puebla). Nota: no mencionar a Africam Safari en el sitio; el cliente quiere que ArboTerra no viva a su sombra.
 - Año: 2023 (según el PDF; por confirmar). Desarrollo: ~2 meses (2 o 3 meses en total, por etapas).
 - Público: familias.
 - Problema: mucha gente no sabía qué era ArboTerra; querían una campaña que captara la atención.
