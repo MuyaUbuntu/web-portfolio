@@ -172,7 +172,7 @@
       w.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')show(w,e.clientX,e.clientY)});
       w.addEventListener('pointermove',function(e){if(mode)place(e.clientX,e.clientY)});
       w.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')hide()});
-      w.addEventListener('click',function(e){var r=w.getBoundingClientRect(),k=w.getAttribute('data-k');if(e.pointerType==='mouse'&&mode===k){hide();return}if(e.pointerType!=='mouse'){if(tapped)i++;tapped=true}show(w,r.left+r.width/2,r.top)});
+      w.addEventListener('click',function(e){var r=w.getBoundingClientRect(),k=w.getAttribute('data-k');if(e.pointerType==='mouse'&&mode===k){hide();return}if(e.pointerType!=='mouse'&&k!=='co'){if(tapped&&(k===tapped||(k==='sk'&&tapped==='cp')))i++;tapped=k}show(w,r.left+r.width/2,r.top)});
     });
     addEventListener('scroll',function(){if(mode&&!fine)hide()},{passive:true});
   })();
