@@ -292,20 +292,18 @@
     $('.storm-reset',box).addEventListener('click',drop);addEventListener('resize',size);
     var first=true;if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){if(first){first=false;drop()}else start()}},{threshold:.3}).observe(box);else{vis=true;drop()}});
 
-  /* ---------- Happy Talks: mic drop ---------- */
-  $$('.micdrop').forEach(function(m){var mic=$('.md-mic',m),x=0,tx=0,y=0,vy=0,r=0,vr=0,state='rise',W=0,H=0,vis=false,t0=0;
-    function size(){W=m.clientWidth;H=m.clientHeight;if(!x)x=tx=W*.72}
-    function rest(){return H-mic.offsetHeight*.92}
-    m.addEventListener('pointermove',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-mic.offsetWidth,e.clientX-b.left-mic.offsetWidth/2))});
-    function drop(){if(state!=='idle')return;state='fall';vy=-9;vr=(Math.random()<.5?-1:1)*7}
-    m.addEventListener('click',drop);m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();drop()}});
-    function loop(t){if(!vis)return;size();x+=(tx-x)*.12;
-      if(state==='rise'){y+=(rest()-y)*.1;r*=.9;if(Math.abs(rest()-y)<1){y=rest();state='idle'}}
-      else if(state==='fall'){vy+=.9;y+=vy;r+=vr;if(y>H+40){state='gone';t0=t}}
-      else if(state==='gone'){if(t-t0>900){y=H+mic.offsetHeight;r=0;state='rise'}}
-      else{y=rest()+Math.sin(t/600)*4}
-      mic.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+r.toFixed(1)+'deg)';requestAnimationFrame(loop)}
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){size();if(state==='rise'&&!y)y=H+mic.offsetHeight;requestAnimationFrame(loop)}}).observe(m)});
+  /* ---------- Happy Talks: the mic amplifies the words ---------- */
+  $$('.micdrop').forEach(function(m){var wrap=$('.md-mic-wrap',m),ls=$$('.ml',m),x=0,tx=0,y=0,W=0,H=0,vis=false,first=true;
+    function size(){W=m.clientWidth;H=m.clientHeight;if(first){x=tx=W*.72;y=H+40;first=false}}
+    m.addEventListener('pointermove',function(e){var b=m.getBoundingClientRect();tx=Math.max(0,Math.min(W-wrap.offsetWidth,e.clientX-b.left-wrap.offsetWidth/2));m.classList.add('on')});
+    m.addEventListener('pointerleave',function(){m.classList.remove('on')});
+    function loop(t){if(!vis)return;size();x+=(tx-x)*.12;var rest=H-wrap.offsetHeight*.62;y+=(rest-y)*.08;
+      wrap.style.transform='translate('+x.toFixed(1)+'px,'+(y+Math.sin(t/700)*4).toFixed(1)+'px) rotate('+((tx-x)*.04).toFixed(2)+'deg)';
+      var mb=m.getBoundingClientRect(),mx=mb.left+x+wrap.offsetWidth*.62,on=m.classList.contains('on');
+      ls.forEach(function(l,i){var r=l.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mx),a=on?Math.max(0,1-d/220):0,v=a*(.55+.45*Math.sin(t/85+i*1.7));
+        l.style.transform='translateY('+(-v*14).toFixed(1)+'px) scaleY('+(1+v*.45).toFixed(3)+')';l.style.color=a>.25?'#57E3C3':''});
+      requestAnimationFrame(loop)}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)requestAnimationFrame(loop)}).observe(m)});
 
   /* ---------- Conexiones Mágicas: pop the cap ---------- */
   $$('.pop').forEach(function(b){var cap=$('.pop-cap',b),done=false,sx=0,sy=0,dragging=false,lx=0,ly=0,vx=0,vy=0;

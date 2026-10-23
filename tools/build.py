@@ -355,9 +355,9 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
           <div class="quote c"><b>Live</b><p>Still online at happy-talks.com, two years after launch.</p></div>
           <div class="quote a"><b>2 weeks</b><p>From the brief to the full desktop and mobile UI.</p></div>
         </div>
-        <div class="micdrop" data-cursor="Drop it" role="button" tabindex="0" aria-label="Drop the mic">
-          <p class="md-t">Approved at the first round.<br><b>Mic drop.</b></p>
-          <img class="md-mic" src="{pre}assets/img/happy-talks/mic.webp" alt="" draggable="false">
+        <div class="micdrop" data-cursor="Move the mic" aria-label="Approved at the first round. Mic drop.">
+          <p class="md-t">Approved at the first round.<br><b aria-hidden="true"><span class="ml">M</span><span class="ml">i</span><span class="ml">c</span><span class="ml">&nbsp;</span><span class="ml">d</span><span class="ml">r</span><span class="ml">o</span><span class="ml">p</span><span class="ml">.</span></b></p>
+          <div class="md-mic-wrap"><span class="md-wave" aria-hidden="true"><i></i><i></i><i></i></span><img class="md-mic" src="{pre}assets/img/happy-talks/mic.webp" alt="" draggable="false"></div>
         </div>
       </section>
     </div>
