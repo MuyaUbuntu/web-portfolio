@@ -255,15 +255,16 @@ def next_block(pre,title,href,img):
 
 case=head('Happy Talks · Rodrigo López','Case study: Happy Talks landing page for HDO. UX/UI, art direction and 3D.',pre)+nav(pre,False)+f'''<main>
   <section class="wrap c-hero">
-    <div>
+    <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">HDO</span><span class="tag">Web · 2025</span></div>
       <h1 class="c-title" aria-label="Happy Talks"><span aria-hidden="true">{word("Happy","hlw")} {word("Talks")}</span></h1>
+      </div><div class="c-r">
       <p class="c-lead">A landing page for a disruptive conference platform: an intangible offer turned into a visual experience that presents the speakers and generates requests.</p>
       <div class="tags c-tags"><span class="tag t">UX/UI</span><span class="tag p">Art direction</span><span class="tag b">3D</span><span class="tool t-ai" title="Illustrator">Ai</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>UX/UI, art direction, 3D</dd></div><div><dt class="mono">Client</dt><dd>HDO</dd></div><div><dt class="mono">Year</dt><dd>2025</dd></div><div class="todo"><dt class="mono">Result</dt><dd>To be added</dd></div></dl>
-    </div>
-    {fan([(htimg(6,pre),'Speakers',''),(htimg(9,pre),'Topics',''),(htimg(1,pre),'Landing','')])}
+    </div></div>
+    <div class="c-cover">{htimg(1,pre)}</div>
   </section>
 
   <div class="wrap chapters">
@@ -335,15 +336,16 @@ open(os.path.join(R,'proyectos','happy-talks.html'),'w').write(case)
 # ================= CASE: NO VENDAS HUMO (AI process template) =================
 case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key visual for Philip Morris International, from a hand-painted reference to the final campaign.',pre)+nav(pre,False)+f'''<main>
   <section class="wrap c-hero">
-    <div>
+    <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">Philip Morris International</span><span class="ai">AI process</span></div>
       <h1 class="c-title" aria-label="No vendas humo"><span aria-hidden="true">{word("No")} {word("vendas")} {word("humo","hlw")}</span></h1>
+      </div><div class="c-r">
       <p class="c-lead">A key visual for a sales-culture program during PMI’s shift to a smoke-free company. The idea, “don’t sell smoke”, was drawn by hand first and finished with AI.</p>
       <div class="tags c-tags"><span class="tag t">Key visual</span><span class="tag p">Internal campaign</span><span class="tool t-ff" title="Adobe Firefly">Ff</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Program</dt><dd>2.5-day training</dd></div><div class="todo"><dt class="mono">Result</dt><dd>To be added</dd></div></dl>
-    </div>
-    {fan([(aiimg('pmi-humo-ref',pre),'01 · Sketch','contain'),(aiimg('pmi-humo-iter1',pre),'02 · Iterations','contain'),(aiimg('pmi-humo-final',pre),'03 · Final','')])}
+    </div></div>
+    <div class="c-cover">{aiimg('pmi-humo-final',pre).replace('alt=""','alt="Final key visual: letters made of smoke reading No vendas humo"')}<figure class="c-sticker">{aiimg('pmi-humo-ref',pre)}<figcaption class="mono">It started as this sketch</figcaption></figure></div>
   </section>
 
   <div class="wrap chapters">
@@ -434,14 +436,15 @@ bnotes=''.join(f'<p class="b-note{" on" if i==0 else ""}">{d}</p>' for i,(t,d) i
 
 case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campaign system for ArboTerra, Africam Safari’s secret world. Concept, art direction and 3D.',pre)+nav(pre,False)+f'''<main>
   <section class="wrap c-hero arbt">
-    <div>
+    <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">ArboTerra · Africam Safari</span><span class="tag">Campaign · 2023</span></div>
       <h1 class="c-title" aria-label="ArboTerra es…"><span aria-hidden="true">{word("ArboTerra")} {word("es…","hlw")}</span></h1>
+      </div><div class="c-r">
       <p class="c-lead">A park nobody could define got a campaign that never finishes the sentence. One floating tree, four moods and a type system the client still uses three years later.</p>
       <div class="tags c-tags"><span class="tag t">Concept</span><span class="tag p">Art direction</span><span class="tag b">3D</span><span class="tool t-bl" title="Blender">Bl</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, 3D</dd></div><div><dt class="mono">Agency</dt><dd>Happy Studio</dd></div><div><dt class="mono">Timeline</dt><dd>2–3 months</dd></div><div class="win"><dt class="mono">Result</dt><dd>Still in use, 3 years on</dd></div></dl>
-    </div>
+    </div></div>
     <div class="moods" data-cursor="Change mood">
       <div class="m-stage">{layers}<div class="m-locks">{locks}</div></div>
       <div class="m-tabs" role="group" aria-label="Choose a mood">{tabs}</div>
@@ -457,7 +460,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="challenge">
         <span class="mono">01 · Challenge</span>
         <h2><span class="lm"><span>A park nobody</span></span><span class="lm"><span>could define</span></span></h2>
-        <p class="lead">ArboTerra is the secret world inside Africam Safari, in Puebla. Before it had a campaign, it had a problem: many families didn’t know what it was. The client wanted one concept that would sum it up.</p>
+        <p class="lead">ArboTerra, the secret world inside Africam Safari, had a problem: many families didn’t know what it was.</p>
         <div class="quotes" style="margin-top:2rem">
           <div class="quote a"><b>Families</b><p>Parents and kids, with very different reasons to visit.</p></div>
           <div class="quote c"><b>Print + digital</b><p>Billboards and a steady stream of social content.</p></div>
@@ -467,10 +470,9 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="idea">
         <span class="mono">02 · Idea</span>
         <h2><span class="lm"><span>Don’t define it.</span></span><span class="lm"><span>Let it be everything.</span></span></h2>
-        <p class="lead">Instead of boxing ArboTerra into one word, the campaign leaves the sentence open: <b>ArboTerra es…</b> For a kid it’s adventure or magic. For parents, it’s learning. The park can be all of it, depending on who’s looking.</p>
-        <p class="pull">One sentence, <em>endless endings</em>.</p>
+        <p class="lead">Leave the sentence open: <b>ArboTerra es…</b> adventure or magic for kids, learning for parents.</p>
         <h3 class="sub">The road not taken</h3>
-        <p class="lead">The first route explained the park with mascots on a clean white stage. Clear, but it looked like any park. The floating tree became a world of its own: one image that could hold every ending. Drag to compare.</p>
+        <p class="muted">Mascots on white looked like any park. The floating tree could hold every ending. Drag to compare.</p>
         <div class="compare" data-cursor="Drag">
           <div class="before">{at('route-white','Discarded route: mascots and 3D letters reading Arboterra es Aventura on white')}</div>
           <div class="after" style="position:absolute;inset:0">{at('kv-aventura','Chosen route: the Árbol Arcano floating over teal clouds')}</div>
@@ -483,25 +485,24 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="world">
         <span class="mono">03 · The world</span>
         <h2><span class="lm"><span>Building the</span></span><span class="lm"><span>Árbol Arcano</span></span></h2>
-        <p class="lead">One hero element, modeled in Blender and composed in Photoshop: a floating island with a waterfall, a balloon and the park’s own birds. Modeling the tree was the hardest part of the project. Every scene is built in four layers.</p>
+        <p class="lead">One hero element, modeled in Blender and composed in Photoshop. The hardest part of the project.</p>
         <div class="build">
           <div class="b-stage">{bimgs}</div>
           <div class="b-side"><div class="b-steps" role="group" aria-label="Construction layers">{bsteps}</div><div class="b-notes">{bnotes}</div><p class="mono muted b-cap">From the AdBook: the layer in color is the one being added.</p></div>
         </div>
         <h3 class="sub">Same tree, four moods</h3>
-        <p class="lead">Each word gets its own background, built from a photo: blurred, then color-graded to match the feeling. Hover to open each one.</p>
-        <div class="swatches moods-sw" aria-label="The four backgrounds">
-          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-aventura.jpg)"><span>Aventura</span></div>
-          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-noche.jpg)"><span>Magia · night</span></div>
-          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-dia.jpg)"><span>Magia · day</span></div>
-          <div class="sw" style="background-image:url({pre}assets/img/arboterra/bg-diversion.jpg)"><span>Diversión</span></div>
+        <div class="kv-grid">
+          <figure>{at('kv-aventura','Final key visual: ArboTerra es Aventura')}<figcaption class="tag">Aventura</figcaption></figure>
+          <figure>{at('kv-magia-noche','Final key visual: ArboTerra es Magia, night')}<figcaption class="tag">Magia · night</figcaption></figure>
+          <figure>{at('kv-magia-dia','Final key visual: ArboTerra es Magia, day')}<figcaption class="tag">Magia · day</figcaption></figure>
+          <figure>{at('kv-diversion','Final key visual: ArboTerra es Diversión')}<figcaption class="tag">Diversión</figcaption></figure>
         </div>
       </section>
 
       <section class="chap" id="system">
         <span class="mono">04 · The system</span>
         <h2><span class="lm"><span>A toolkit,</span></span><span class="lm"><span>not a poster</span></span></h2>
-        <p class="lead">I sold the concept; the client’s in-house team ran the execution. So the delivery was a 35-page AdBook: backgrounds, extras, photo promos, layouts and a type system built to be reused.</p>
+        <p class="lead">The client’s team ran the execution, so I delivered a 35-page AdBook built to be reused.</p>
         <div class="concept">
           <div><h3>Sorvette for the big words</h3><p>Rounded block letters with small cut-in details, so every word feels hand-built.</p></div>
           <div><h3>Knewave for the call to action</h3><p>A loose brush script that shouts ¡Ven y explora! without competing with the title.</p></div>
@@ -522,7 +523,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
           <div class="quote c"><b>In-house</b><p>The AdBook let the client’s team produce billboards and social on their own.</p></div>
           <div class="quote a"><b>2023 → 2026</b><p>The tree, the lettering and #ArboTerraesMagia are still on the park’s Instagram.</p></div>
         </div>
-        <p class="lead" style="margin-top:2.4rem">The client loved that it felt timeless: an open sentence gave them room to keep talking. Here’s how it looks today.</p>
+        <p class="muted" style="margin-top:2.4rem">The client wanted something timeless. Here’s the park’s Instagram today:</p>
         <div class="drag" style="margin-top:1.6rem">
           <div class="drag-track" tabindex="0" aria-label="Recent ArboTerra Instagram posts" data-cursor="Drag">
 {igal}

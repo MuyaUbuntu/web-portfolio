@@ -204,7 +204,7 @@
   /* ---------- Chapter index ---------- */
   (function(){var toc=$('.toc');if(!toc)return;var links=$$('a',toc),bar=$('.bar i',toc),chs=links.map(function(a){return $(a.getAttribute('href'))});
     function upd(){var mid=innerHeight*.4,on=0;chs.forEach(function(c,i){if(c&&c.getBoundingClientRect().top<mid)on=i});links.forEach(function(a,i){a.classList.toggle('on',i===on)});
-      var wrap=toc.parentElement.getBoundingClientRect(),p=Math.min(1,Math.max(0,(mid-wrap.top)/wrap.height));if(bar)bar.style.transform='scaleX('+p+')'}
+      var wrap=toc.parentElement.getBoundingClientRect(),p=Math.min(1,Math.max(0,(mid-wrap.top)/wrap.height));if(bar)bar.style.transform='scaleX('+p+')';toc.classList.toggle('show',wrap.top<innerHeight*.75&&wrap.bottom>innerHeight*.6)}
     addEventListener('scroll',upd,{passive:true});upd()})();
 
   /* ---------- Case hero: fanned cards follow the cursor ---------- */
