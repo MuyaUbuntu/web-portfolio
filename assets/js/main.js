@@ -327,7 +327,7 @@
     if(!reduce&&'IntersectionObserver' in window)new IntersectionObserver(function(es){if(es[0].isIntersecting&&!user){clearInterval(timer);timer=setInterval(function(){show((cur+1)%im.length)},2200)}else clearInterval(timer)},{threshold:.4}).observe(t)});
 
   /* ---------- Lightbox: click a gallery image to see it whole ---------- */
-  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img,.keys img,.wcb img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two,.keys,.wcb';
+  (function(){var SEL='.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img,.refs img,.t-img img,.cap-two img,.keys img,.wcb img,.sb-f img',GROUP='.kv-grid,.drag-track,.flow,.b-stage,.refs,.t-stage,.cap-two,.keys,.wcb,.sb-track';
     var lb=null,list=[],idx=0,dx=0,dy=0;
     addEventListener('pointerdown',function(e){dx=e.clientX;dy=e.clientY},true);
     function cap(im){var f=im.closest('figure');var c=f&&f.querySelector('figcaption');var t=c?c.textContent.replace(/\s+/g,' ').trim():'';return t||im.alt||''}
@@ -577,38 +577,26 @@
     go(0);if(!reduce)inView(c,function(){setInterval(function(){if(!hov&&Date.now()-hold>7000)go(k+1)},3200)});
   });
 
-  /* ---------- Badges: pick one, it lands on the piece ---------- */
-  var bd=$('.bd');
-  if(bd){var on=$('.bd-on',bd),nm=$('.bd-name',bd);
-    $$('.bdg',bd).forEach(function(b){b.addEventListener('click',function(){$$('.bdg',bd).forEach(function(x){x.classList.toggle('on',x===b)});
-      on.src=b.querySelector('img').src;nm.textContent=b.dataset.n;on.classList.remove('land');void on.offsetWidth;on.classList.add('land')})});
-  }
+  /* ---------- Badges: tap to stamp ---------- */
+  $$('.bdg').forEach(function(b){b.addEventListener('click',function(){b.classList.remove('stamp');void b.offsetWidth;b.classList.add('stamp')})});
 
-  /* ---------- Logos: the reels of a real slot render land on the logo ---------- */
+  /* ---------- Logos: the lever plays the real animation, the reels land on the logo ---------- */
   var sx=$('.slotx');
   if(sx){
-    var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),mach=$('.sx-m',sx),angs=[0,0,0],curL=0,busy2=false,N8=8;
+    var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),simg=$('.sx-img',sx),angs=[0,0,0],curL=0,busy2=false,N8=8,NF=61,frames=[],loaded=false;
+    var sbase=simg.getAttribute('src').replace(/f00\.webp.*$/,'');
+    function preload(){if(loaded)return;loaded=true;for(var i=0;i<NF;i++){var im=new Image();im.src=sbase+'f'+(i<10?'0':'')+i+'.webp';frames.push(im)}}
+    inView(sx,preload,.05);
     function rsz(){wins.forEach(function(w){w.style.setProperty('--r',(w.clientHeight/2)+'px')})}
     addEventListener('resize',rsz);addEventListener('load',rsz);rsz();
+    function play(){if(reduce||!frames.length)return;var t0=performance.now();(function f(n){var k=Math.min(NF-1,Math.floor((n-t0)/33));var fr=frames[k];if(fr&&fr.complete&&fr.naturalWidth)simg.src=fr.src;if(k<NF-1)requestAnimationFrame(f);else simg.src=frames[0].src})(t0)}
     function spin(k){if(busy2)return;busy2=true;curL=k;ths.forEach(function(x,i){x.classList.toggle('on',i===k)});nmx.textContent=ths[k].getAttribute('aria-label');
-      mach.classList.remove('pull');void mach.offsetWidth;mach.classList.add('pull');
-      cyls.forEach(function(c,j){var base=Math.ceil(angs[j]/360)*360+360*(2+j),a=base+k*45;angs[j]=a;
-        c.style.transition=reduce?'none':'transform '+(1.3+j*.4)+'s cubic-bezier(.15,.75,.2,1.02)';c.style.transform='rotateX('+(-a)+'deg)'});
-      setTimeout(function(){busy2=false},reduce?50:2300)}
+      preload();play();
+      setTimeout(function(){cyls.forEach(function(c,j){var b=Math.ceil(angs[j]/360)*360+360*(2+j),a=b+k*45;angs[j]=a;
+        c.style.transition=reduce?'none':'transform '+(1.2+j*.35)+'s cubic-bezier(.15,.75,.2,1.02)';c.style.transform='rotateX('+(-a)+'deg)'})},reduce?0:420);
+      setTimeout(function(){busy2=false},reduce?50:2400)}
     ths.forEach(function(x,i){x.addEventListener('click',function(){spin(i)})});
     lev.addEventListener('click',function(){var k;do{k=Math.floor(Math.random()*N8)}while(k===curL);spin(k)});
-  }
-
-  /* ---------- Storyboards: a reel that rolls with the scroll ---------- */
-  var sr=$('.sreel');
-  if(sr){
-    var pin=$('.sr-pin',sr),trk=$('.sr-track',sr),fr=$$('.sr-f',sr),srn=$('.sr-n',sr),bar=$('.sr-bar i',sr),dist=0,tk2=false;
-    function size(){dist=Math.max(0,trk.scrollWidth-pin.clientWidth);sr.style.height=(dist+innerHeight)+'px';upd()}
-    function upd(){tk2=false;var r=sr.getBoundingClientRect(),p=cl(-r.top/Math.max(1,r.height-innerHeight),0,1);trk.style.transform='translate3d('+(-p*dist)+'px,0,0)';bar.style.transform='scaleX('+p+')';
-      var mid=innerWidth/2,best=0,bd2=1e9;fr.forEach(function(f,i){var b=f.getBoundingClientRect(),d=Math.abs(b.left+b.width/2-mid);if(d<bd2){bd2=d;best=i}});
-      fr.forEach(function(f,i){f.classList.toggle('on',i===best)});srn.textContent=(best<9?'0':'')+(best+1)+' / '+fr.length}
-    addEventListener('scroll',function(){if(!tk2){tk2=true;requestAnimationFrame(upd)}},{passive:true});
-    addEventListener('resize',size);addEventListener('load',size);size();
   }
 
   /* ---------- World Cup: pieces in formation ---------- */
@@ -627,14 +615,17 @@
     form('433');addEventListener('resize',function(){form(cf)});
   }
 
-  /* ---------- CRM: the layout steps aside to show the photo ---------- */
-  var crs=$$('.crm-c'),ca=$('.crm-all'),fineP=matchMedia('(pointer:fine)').matches;
+  /* ---------- CRM: banners built in layers; hover pulls them apart ---------- */
+  var crs=$$('.cr'),ca=$('.crm-all'),fineP=matchMedia('(pointer:fine)').matches;
   crs.forEach(function(c){
-    if(fineP){c.addEventListener('pointerenter',function(){c.classList.add('ph')});c.addEventListener('pointerleave',function(){if(!ca||ca.getAttribute('aria-pressed')!=='true')c.classList.remove('ph')})}
-    else c.addEventListener('click',function(){c.classList.toggle('ph')});
-    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('ph')}});
+    var inn=$('.cr-in',c);
+    if(fineP){c.addEventListener('pointerenter',function(){c.classList.add('ex')});
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;inn.style.setProperty('--rx',(12-y*10)+'deg');inn.style.setProperty('--ry',(x*16-22)+'deg')});
+      c.addEventListener('pointerleave',function(){c.classList.remove('ex');inn.style.removeProperty('--rx');inn.style.removeProperty('--ry')})}
+    else c.addEventListener('click',function(){c.classList.toggle('ex')});
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('ex')}});
   });
-  if(ca)ca.addEventListener('click',function(){var o=ca.getAttribute('aria-pressed')!=='true';ca.setAttribute('aria-pressed',o);ca.textContent=o?'Show all banners':'Show all photos';crs.forEach(function(c,i){setTimeout(function(){c.classList.toggle('ph',o)},reduce?0:i*80)})});
+  if(ca)ca.addEventListener('click',function(){var o=ca.getAttribute('aria-pressed')!=='true';ca.setAttribute('aria-pressed',o);ca.textContent=o?'Show the banners':'Show only the photos';crs.forEach(function(c,i){setTimeout(function(){c.classList.toggle('ph',o)},reduce?0:i*80)})});
 
   /* ---------- Blog: coverflow ---------- */
   var cfw=$('.cf');

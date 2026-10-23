@@ -688,11 +688,12 @@ cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="c
 wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="pl-n">{i+1}</span></button>' for i in range(11))
 wcb=''.join(f'<figure>{cbi(f"wcb-{i+1}.webp","Megashoot promo block")}</figure>' for i in range(3))
 keys=''.join(f'<figure class="key">{cbi(f"key-{i+1}.jpg","Key art reused across several pieces")}</figure>' for i in [2,4,3,0,5,1])
-crm=''.join(f"""<figure class="crm-c" tabindex="0" aria-label="CRM banner {i+1}: tap to see the photo behind it">
-  <div class="crm-photo">{cbi(f"crm-photo-{i+1}.jpg","Generated photo behind the banner")}</div>
-  <div class="crm-ban">{cbi(f"crm-ban-{i+1}.jpg","Final CRM banner")}</div>
-  <figcaption><span class="crm-s mono">Banner</span><span class="crm-t mono">Photo</span></figcaption>
-</figure>""" for i in range(6))
+CRMH=[503,503,479,500,503,498]
+def crl(n,cls,st,alt=''):
+    return f'<div class="cl {cls}"><img src="{pre}assets/img/campobet/crm/{n}" style="{st}" alt="{alt}" loading="lazy" draggable="false"></div>'
+crm=''.join(f'''<figure class="cr" tabindex="0" aria-label="CRM banner {i+1}, built in layers">
+  <div class="cr-in">{crl(f"c{i+1}-main.jpg","l0 msk",f"left:0;top:0;width:100%;height:{h/5.2:.2f}%","Generated photo")}{crl("glow.webp","l1 msk","left:58.33%;top:0;width:41.67%")}{crl(f"c{i+1}-subject.webp","l2 msk",f"left:0;top:0;width:100%;height:{h/5.2:.2f}%")}{crl("grad.webp","l3 msk","left:0;top:20.67%;width:100%")}{crl(f"c{i+1}-copy.webp","l4","left:0;top:0;width:100%;height:100%","Copy and frame")}{crl("logo.webp","l5","left:36.5%;top:3.85%;width:27%")}{crl(f"c{i+1}-cta.webp","l6","left:26.67%;top:86.54%;width:46.67%","Call to action")}</div>
+</figure>''' for i,h in enumerate(CRMH))
 cf=''.join(f'<div class="cf-it" data-i="{i}">{cbi(f"blog-{i+1}.jpg","Blog header")}</div>' for i in range(8))
 aso_a=''.join(f'<div class="as-s">{cbi(f"aso-a-{i+1}.jpg","App store screenshot, casino set")}</div>' for i in range(6))
 aso_b=''.join(f'<div class="as-s">{cbi(f"aso-b-{i+1}.jpg","App store screenshot, welcome offer set")}</div>' for i in range(6))
@@ -700,16 +701,15 @@ BN=['Welcome bonus · sports','Welcome bonus · casino','Boost accumulator','Los
 badges=''.join(f'<button type="button" class="bdg{" on" if i==10 else ""}" data-b="{i+1:02d}" data-n="{BN[i]}" style="--r:{[-6,4,-3,7,-5,3,-8,5,-2,6,-4][i]}deg" aria-label="{BN[i]}"><img src="{pre}assets/img/campobet/badges/badge-{i+1:02d}.svg" alt="" draggable="false"></button>' for i in range(11))
 LG=['Road to the big game','The big championship','Summer football trivia','CampoBet trivia','Winter Race','Basketball nights','Touchdown nights','Slots of the week']
 slot_faces=''.join(f'<span class="sf" style="--f:{i}"><i style="background-image:url({pre}assets/img/campobet/logo-{i+1}.webp)"></i></span>' for i in range(8))
-SW3=[(11.8,18.7),(36.1,19.9),(61.5,19.1)]
+SW3=[(11.1,19.6),(35.8,20.4),(61.3,20.7)]
 slot_reels=''.join(f'<div class="sx-win" style="left:{l}%;width:{w}%"><div class="cyl">{slot_faces}</div></div>' for l,w in SW3)
 slot_thumbs=''.join(f'<button type="button" class="sx-t{" on" if i==0 else ""}" data-i="{i}" aria-label="{n}"><img src="{pre}assets/img/campobet/logo-{i+1}.webp" alt="" draggable="false"></button>' for i,n in enumerate(LG))
 SB1=['A man runs through a park, with a lake behind him.','Front shot: something catches his attention.','He sees a man trying to catch a fish (Big Bass slot).','The fisherman waves at him.','The runner looks bewildered.','Distracted, he bumps into the back of a tall, muscular man.','He falls back and looks up.','It’s Zeus (Gates of Olympus): “Sorry, I gotta run.”','A lightning bolt strikes and Zeus disappears.','He gets up and hears a loud noise.','A buffalo charges at him (Buffalo Blitz).','Rear shot: he runs, looking back.','A sharp turn up the steps of a kiosk.','The camera whips to a live dealer in the kiosk.','He shows his phone; everyone sits around him.','A lightning bolt strikes behind them.','Zeus joins the scene.']
 SB2=['Top view of a stadium. “Welcome to CampoBet.”','Zoom transition.','A fan celebrates in the stands. “The sports passion…”','A 360° orbit with heavy motion blur.','Mid-spin, the scene becomes a casino.','She celebrates and looks at her phone.','Over-the-shoulder orbit to her screen.','A super zoom into the phone.','The brand ambassador smiles at his phone.','Final key visual with the welcome offer.']
-def reel_frames(k,caps):
-    return ''.join(f'<figure class="sr-f">{cbi(f"sb{k}-{i+1:02d}.jpg",c)}<figcaption><b>{i+1:02d}</b> {c}</figcaption></figure>' for i,c in enumerate(caps))
-sreel=('<div class="sr-card"><span class="mono">Storyboard 01</span><h3>The chase</h3><p>A runner crosses a park full of slot characters: a fisherman, Zeus, a charging buffalo, a live dealer.</p></div>'+reel_frames(1,SB1)
-  +'<div class="sr-card"><span class="mono">Storyboard 02</span><h3>Brand awareness</h3><p>From the roar of a stadium to the glow of a casino, the excitement follows you to your phone.</p></div>'+reel_frames(2,SB2))
-NSB=len(SB1)+len(SB2)
+def sb_row(k,caps,title):
+    fr=''.join(f'<figure class="sb-f">{cbi(f"sb{k}-{i+1:02d}.jpg",c)}<figcaption><b>{i+1:02d}</b> {c}</figcaption></figure>' for i,c in enumerate(caps))
+    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}{fr}</div></div></div>'
+sbrows=sb_row(1,SB1,'The chase')+sb_row(2,SB2,'Brand awareness')
 outs=''.join(f'<figure class="shot out">{cbi(f"out-{i+1}.jpg","Slot visual master made with the pipeline")}</figure>' for i in range(8))
 # automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)
 LAY=[('Background','full image, 2k',0,0,1080,1920,'bg'),('Mask group','depth layer under the copy',0,1000,1080,920,'mask'),('glow_line','light ribbon',482,-53,762,1015,'glow'),('Subject','duplicate for my cutout',160,330,760,800,'subj'),('Slot logo','official file, never redrawn',270,985,540,202,'slot'),('Logo shadow','tinted from the image',234,129,613,166,'shadow'),('Logo','brand component',314,161,451,95,'logo'),('Copy','copy component',88,1239,905,190,'copy'),('Disclaimer','auto-fit, min 14 px',62,1484,955,80,'disc')]
@@ -812,8 +812,8 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">04 · Channels</span>
         <h2><span class="lm"><span>The same brand,</span></span><span class="lm"><span>beyond social</span></span></h2>
         <p class="lead">Email, the blog and the app stores each have their own format and their own rules. The look had to hold in all of them.</p>
-        <div class="subhd" id="crm"><span class="mono">04.1</span><h3>CRM email</h3><p>Banners at 600 × 520 hide most of the photo they are built on. Hover or tap one and the layout steps aside.</p></div>
-        <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show all photos</button></div>
+        <div class="subhd" id="crm"><span class="mono">04.1</span><h3>CRM email</h3><p>Each banner is built in layers: photo, light ribbon, the cut-out subject, a shade, copy and frame, logo and button. Hover or tap one to pull the layers apart, or show only the photos.</p></div>
+        <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show only the photos</button></div>
         <div class="crm-grid">{crm}</div>
         <div class="subhd" id="blog"><span class="mono">04.2</span><h3>Blog</h3><p>Headers for guides, previews and promos. Drag, swipe or use the arrows.</p></div>
         <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous">←</button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next">→</button></div></div>
@@ -830,16 +830,13 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">05 · Brand kit</span>
         <h2><span class="lm"><span>Parts that</span></span><span class="lm"><span>come back</span></span></h2>
         <p class="lead">Promos and campaigns return every week, so they got reusable parts: a family of badges and a set of campaign logos, built from the same brand pieces.</p>
-        <div class="subhd" id="system"><span class="mono">05.1</span><h3>Badges</h3><p>One seal per promotion, readable at a glance. Pick one and it lands on a real piece, where it would live.</p></div>
-        <div class="bd">
-          <div class="bdgs">{badges}</div>
-          <div class="bd-prev"><div class="bd-piece">{cbi("hero-1.jpg","Piece where the badge is applied")}<img class="bd-on" src="{pre}assets/img/campobet/badges/badge-11.svg" alt="" draggable="false"></div><p class="bd-name mono">Boosted odds</p></div>
-        </div>
+        <div class="subhd" id="system"><span class="mono">05.1</span><h3>Badges</h3><p>One seal per promotion, readable at a glance. Tap one to stamp it.</p></div>
+        <div class="bd"><div class="bdgs">{badges}</div></div>
         <div class="subhd"><span class="mono">05.2</span><h3>Campaign logos</h3><p>Seasons, trivia nights and tournaments. Pick a logo, or pull the lever, and the reels land on it.</p></div>
         <div class="slotx">
           <div class="sx-thumbs">{slot_thumbs}</div>
           <div class="sx-stage">
-            <div class="sx-m"><img class="sx-img" src="{pre}assets/img/campobet/slot-machine.webp" alt="Green metallic slot machine" draggable="false">{slot_reels}<button type="button" class="sx-lever" aria-label="Pull the lever"></button></div>
+            <div class="sx-m"><img class="sx-img" src="{pre}assets/img/campobet/lever/f00.webp" width="900" height="483" alt="Green metallic slot machine" draggable="false">{slot_reels}<button type="button" class="sx-lever" aria-label="Pull the lever"></button></div>
             <p class="sx-name mono">{LG[0]}</p>
           </div>
         </div>
@@ -848,10 +845,8 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <section class="chap" id="motion">
         <span class="mono">06 · Motion</span>
         <h2><span class="lm"><span>When the brand</span></span><span class="lm"><span>moves</span></span></h2>
-        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Keep scrolling and they roll past like a reel.</p>
-      </section>
-      <section class="sreel" aria-label="Storyboards">
-        <div class="sr-pin"><div class="sr-track">{sreel}</div><div class="sr-ui mono"><span class="sr-n">01 / {NSB}</span><span class="sr-bar"><i></i></span></div></div>
+        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Both roll on their own; hover a row to pause it and click a frame to see it bigger.</p>
+        <div class="sbs">{sbrows}</div>
       </section>
 
       <section class="part" id="automation">
