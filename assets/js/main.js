@@ -98,6 +98,8 @@
       var px=cx,py=cy;
       if(id!==null){cx+=(tx-cx)*.32;cy+=(ty-cy)*.32}
       else{cx+=vx;cy+=vy;vx*=.9;vy*=.9}
+      if(B){if(cx<B.x0){cx=B.x0;vx=Math.abs(vx)*.5}else if(cx>B.x1){cx=B.x1;vx=-Math.abs(vx)*.5}
+        if(cy<B.y0){cy=B.y0;vy=Math.abs(vy)*.5}else if(cy>B.y1){cy=B.y1;vy=-Math.abs(vy)*.5}}
       var dx=cx-px; if(id!==null){vx=dx;vy=cy-py}
       var targetRot=Math.max(-14,Math.min(14,dx*.9));
       rot+=(targetRot-rot)*.18;
@@ -106,7 +108,11 @@
       else{raf=0;tx=cx;ty=cy;rot=0;el.style.transform='translate3d('+cx.toFixed(2)+'px,'+cy.toFixed(2)+'px,0)'}
     }
     function start(){if(!raf)raf=requestAnimationFrame(frame)}
-    el.addEventListener('pointerdown',function(e){id=e.pointerId;el.setPointerCapture(id);ox=e.clientX-cx;oy=e.clientY-cy;tx=cx;ty=cy;vx=vy=0;el.classList.add('dragging');el.style.transition='none';start()});
+    var B=null,host=el.closest('.hero')||document.body;
+    function bounds(){var h=host.getBoundingClientRect(),r=el.getBoundingClientRect(),bl=r.left-cx,bt=r.top-cy,m=8;
+      B={x0:Math.max(h.left,0)+m-bl,x1:Math.min(h.right,innerWidth)-m-(bl+r.width),y0:h.top+m-bt,y1:h.bottom-m-(bt+r.height)}}
+    addEventListener('resize',function(){B=null;cancelAnimationFrame(raf);raf=0;tx=ty=cx=cy=vx=vy=rot=0;el.style.transform=''});
+    el.addEventListener('pointerdown',function(e){bounds();id=e.pointerId;el.setPointerCapture(id);ox=e.clientX-cx;oy=e.clientY-cy;tx=cx;ty=cy;vx=vy=0;el.classList.add('dragging');el.style.transition='none';start()});
     el.addEventListener('pointermove',function(e){if(e.pointerId!==id)return;tx=e.clientX-ox;ty=e.clientY-oy});
     function up(e){if(e.pointerId!==id)return;id=null;el.classList.remove('dragging');vx=Math.max(-30,Math.min(30,vx));vy=Math.max(-30,Math.min(30,vy));start()}
     el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);

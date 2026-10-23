@@ -630,3 +630,6 @@ body *:not(.keep-case){text-transform:none!important}
 .numbers h2 em{font-style:normal;color:var(--ink-2)}
 .play-title{font-weight:600;letter-spacing:-.05em}
 .contact h2{font-weight:600;letter-spacing:-.06em}
+
+/* hero spans the full viewport so stickers never get cut at the container edge */
+.hero.wrap{max-width:none;padding-left:max(var(--g),calc((100vw - var(--max))/2 + var(--g)));padding-right:max(var(--gr),calc((100vw - var(--max))/2 + var(--gr)))}
