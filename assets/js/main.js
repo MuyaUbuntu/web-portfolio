@@ -474,3 +474,192 @@
       if(k<1)requestAnimationFrame(sweep);else done()})(t0);
   });
 })();
+
+/* ===================== CampoBet ===================== */
+(function(){
+  if(!document.querySelector('.cb'))return;
+  var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Rebrand: scratch the old piece off ---------- */
+  var sc=$('.scratch');
+  if(sc){
+    var stage=$('.sc-stage',sc),pairs=$$('.sc-pair',sc),tabs=$$('.sc-tabs button',sc);
+    function cover(p){
+      var cv=$('.sc-canvas',p),r=p.getBoundingClientRect();if(!r.width)return;
+      var dpr=Math.min(2,devicePixelRatio||1);cv.width=r.width*dpr;cv.height=r.height*dpr;
+      var x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.globalCompositeOperation='source-over';
+      function paint(img){
+        if(img){var s=Math.max(r.width/img.width,r.height/img.height);x.drawImage(img,(r.width-img.width*s)/2,(r.height-img.height*s)/2,img.width*s,img.height*s)}
+        else{x.fillStyle='#7A7A76';x.fillRect(0,0,r.width,r.height);x.fillStyle='rgba(255,255,255,.08)';
+          for(var i=-r.height;i<r.width;i+=20){x.beginPath();x.moveTo(i,0);x.lineTo(i+r.height,r.height);x.lineTo(i+r.height+10,r.height);x.lineTo(i+10,0);x.fill()}
+          x.fillStyle='#fff';x.font='600 12px Inter,system-ui,sans-serif';x.textAlign='center';x.fillText((cv.dataset.label||'Before').toUpperCase(),r.width/2,r.height/2)}
+      }
+      if(cv.dataset.src){var im=new Image();im.onload=function(){paint(im)};im.src=cv.dataset.src}else paint();
+      p.classList.remove('clear');stage.classList.remove('done');p._n=0;
+    }
+    function show(i){pairs.forEach(function(p,j){p.classList.toggle('on',i===j)});tabs.forEach(function(t,j){t.setAttribute('aria-selected',i===j)});requestAnimationFrame(function(){cover(pairs[i])})}
+    pairs.forEach(function(p){
+      var cv=$('.sc-canvas',p),down=false,last=null;
+      function pt(e){var r=cv.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}}
+      function scratch(e){
+        if(p.classList.contains('clear'))return;
+        var q=pt(e),x=cv.getContext('2d'),rad=Math.max(22,cv.getBoundingClientRect().width*.07);
+        x.globalCompositeOperation='destination-out';x.lineCap='round';x.lineWidth=rad*2;
+        x.beginPath();x.moveTo(last?last.x:q.x,last?last.y:q.y);x.lineTo(q.x,q.y);x.stroke();last=q;
+        if(++p._n%12===0){var d=x.getImageData(0,0,cv.width,cv.height).data,t=0,c=0;for(var i=3;i<d.length;i+=64){c++;if(d[i]<20)t++}
+          if(t/c>.5){p.classList.add('clear');stage.classList.add('done')}}
+      }
+      cv.addEventListener('pointerdown',function(e){down=true;last=null;try{cv.setPointerCapture(e.pointerId)}catch(_){};scratch(e)});
+      cv.addEventListener('pointermove',function(e){if(e.pointerType==='mouse'||down)scratch(e)});
+      cv.addEventListener('pointerup',function(){down=false;last=null});
+      cv.addEventListener('pointerleave',function(){last=null});
+    });
+    tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i)})});
+    $('.sc-reset',sc).addEventListener('click',function(){cover($('.sc-pair.on',sc))});
+    var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){cover($('.sc-pair.on',sc))},200)});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){show(0)});else show(0);
+  }
+
+  /* ---------- Calendar wheel: spin through the season logos ---------- */
+  var wh=$('.wheel');
+  if(wh){
+    var dial=$('.wh-dial',wh),rot=$('.wh-rot',wh),logos=$$('.wh-logo',wh),segs=$$('.wh-seg b',wh),N=logos.length,step=360/N,ang=0,cur=0,drag=null;
+    function idx(a){var k=Math.round(((-a-step/2)%360+360)%360/step)%N;return k}
+    function set(a,snap){ang=a;rot.style.transition=snap?'transform .7s cubic-bezier(.34,1.56,.64,1)':'none';rot.style.transform='rotate('+a+'deg)';
+      var k=idx(a);if(k!==cur){cur=k;logos.forEach(function(l,j){l.classList.toggle('on',j===k)});$('.wh-name',wh).textContent=segs[k].textContent;dial.setAttribute('aria-valuenow',k+1)}}
+    function go(k){var target=-(k*step+step/2),d=((target-ang)%360+540)%360-180;set(ang+d,true)}
+    function angle(e){var r=dial.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI}
+    dial.addEventListener('pointerdown',function(e){drag={a:angle(e),s:ang};try{dial.setPointerCapture(e.pointerId)}catch(_){}});
+    dial.addEventListener('pointermove',function(e){if(!drag)return;set(drag.s+angle(e)-drag.a,false)});
+    function up(){if(!drag)return;drag=null;go(idx(ang))}
+    dial.addEventListener('pointerup',up);dial.addEventListener('pointercancel',up);
+    dial.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();go((cur+1)%N)}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go((cur-1+N)%N)}});
+    $('.wh-next',wh).addEventListener('click',function(){go((cur+1)%N)});
+    $('.wh-prev',wh).addEventListener('click',function(){go((cur-1+N)%N)});
+    set(-step/2,false);
+  }
+
+  /* ---------- Bet slip: pick channels, see their pieces ---------- */
+  var bs=$('.betslip');
+  if(bs){
+    var sels=$$('.bs-sel',bs),its=$$('.bs-it',bs),picked=$('.bs-picked',bs);
+    function upd(){
+      var on=sels.filter(function(s){return s.classList.contains('on')}),tot=0;
+      picked.innerHTML=on.length?on.map(function(s){tot+=+$('.bs-o',s).textContent;return '<li><span>'+$('.bs-n',s).textContent+'</span><b>'+$('.bs-o',s).textContent+'</b></li>'}).join(''):'<li class="empty">Add a channel to the slip</li>';
+      $('.bs-c',bs).textContent=on.length+(on.length===1?' selection':' selections');
+      its.forEach(function(it){it.hidden=!on.some(function(s){return s.dataset.k===it.dataset.k})});
+      var t=$('.bs-total',bs),from=+t.textContent||0,t0=performance.now();
+      (function tick(n){var k=Math.min(1,(n-t0)/500);t.textContent=Math.round(from+(tot-from)*k);if(k<1)requestAnimationFrame(tick)})(t0);
+    }
+    sels.forEach(function(s){s.addEventListener('click',function(){var o=!s.classList.contains('on');s.classList.toggle('on',o);s.setAttribute('aria-pressed',o);upd()})});
+    upd();
+  }
+
+  /* ---------- Replay: storyboard frames with telestrator notes ---------- */
+  var rp=$('.replay');
+  if(rp){
+    var fr=$$('.rp-f',rp),ink=$$('.rp-ink',rp),notes=$$('.rp-note',rp),ticks=$$('.rp-tick',rp),btn=$('.rp-play',rp),i=0,D=2600,tm=null,playing=!reduce,seen=false;
+    function show(k){i=k;[fr,ink,notes,ticks].forEach(function(g){g.forEach(function(e,j){e.classList.toggle('on',j===k)})});
+      ticks.forEach(function(t,j){t.classList.toggle('past',j<k);t.style.setProperty('--d',D+'ms')});
+      var s=Math.round(k*D/1000);$('.rp-tc',rp).textContent='00:'+(s<10?'0':'')+s;
+      ink[k].classList.remove('on');void ink[k].getBoundingClientRect();ink[k].classList.add('on');
+      clearTimeout(tm);if(playing&&seen)tm=setTimeout(function(){show((i+1)%fr.length)},D)}
+    function setPlay(p){playing=p;rp.classList.toggle('paused',!p);btn.textContent=p?'❚❚':'►';btn.setAttribute('aria-label',p?'Pause':'Play');show(i)}
+    btn.addEventListener('click',function(){setPlay(!playing)});
+    ticks.forEach(function(t,j){t.addEventListener('click',function(){show(j)})});
+    new IntersectionObserver(function(es){es.forEach(function(e){seen=e.isIntersecting;if(seen)show(i);else clearTimeout(tm)})},{threshold:.4}).observe(rp);
+    setPlay(playing);
+  }
+
+  /* ---------- The machine: reels brief it, the pipeline runs ---------- */
+  var P={
+   vm:{meta:[['Input','game assets + brief'],['Output','1080 × 1920 visual master'],['Checkpoints','2']],st:[
+     ['Brief','me','Slot name, game assets, content type, style, scene idea, copy and disclaimer.'],
+     ['Read the game','ai','Palette, render style, the character’s features, signature objects. Notes the reference poses so the new scene avoids them.'],
+     ['Pick the scene','me','2–3 scene concepts built from the game’s own materials. I choose one.',1],
+     ['Two candidates','ai','Two real options with a different camera or pose. The slot logo and game screenshots are never redrawn by AI.'],
+     ['Quality gate','rule','Automatic checks before I see anything: hands, deformations, on-model, framing inside the zones, contrast under the copy.'],
+     ['Approve','me','I approve, ask for one single-purpose fix, or send my own retouched image.',1],
+     ['Assemble in Figma','rule','Layer stack from the approved reference: light ribbon, depth layer, slot logo, logo shadow, copy, disclaimer fitted to its zone.'],
+     ['Final cut','me','I cut the subject out in Figma. By hand it is faster and cleaner.'],
+     ['Visual master','out','1080 × 1920, ready for review and for the resize pipeline.']]},
+   res:{meta:[['Input','approved visual master'],['Output','Reel, Square, Post, Horizontal'],['Checkpoints','1']],st:[
+     ['Master','me','The approved 1080 × 1920 master is the visual reference for every version.'],
+     ['Format plan','rule','Stored layout per format: logo box, character box, copy, disclaimer and slot logo, taken from a board I approved.'],
+     ['Adapt the image','ai','Extends and recomposes the same image. The subject is never regenerated; sky, light and colours stay identical.'],
+     ['Build the boards','rule','Copy, disclaimer and logo shadows placed per format. Text contrast must match or beat the master.'],
+     ['Approve all','me','One look at every version side by side.',1],
+     ['Content board','out','All formats grouped with their copy fields, ready to hand off.']]},
+   crm:{meta:[['Input','one brief per batch'],['Output','600 × 520 email banners, sent at 2×'],['Checkpoints','1']],st:[
+     ['Brief','me','Per banner: create, adapt or seasonal theme; casino, sports or slot; scene, copy style, copy and CTA.'],
+     ['Photo','ai','Photographic, real light, sharp skin detail. Adults with invented faces, high energy, a shared story.'],
+     ['Brand guardrails','rule','No alcohol, no cash, no skulls, no real people or brands. Perfect cards and chips. Seasons shown through costumes, never repeated in a batch.'],
+     ['Layout','rule','CRM template: copy style, badge and CTA, each banner in its own section.'],
+     ['Review','me','Each banner lands as “For review”. Only an unusable image comes back to me.',1],
+     ['Banner batch','out','The full batch, ready to send.']]}
+  };
+  var LBL={ai:'AI renders',rule:'Rules I wrote',me:'My decision'};
+  var cbp=$('.cbp');
+  if(cbp){
+    var track=$('.cbp-track',cbp),token=$('.cbp-token',cbp),status=$('.cbp-status',cbp),meta=$('.cbp-meta',cbp),pcur='vm',tmr=null,running=false;
+    function render(k){clearTimeout(tmr);running=false;token.style.opacity=0;pcur=k;var p=P[k];
+      meta.innerHTML=p.meta.map(function(m){return '<span>'+m[0]+': <b>'+m[1]+'</b></span>'}).join('');
+      $$('.cbp-st',track).forEach(function(e){e.remove()});
+      p.st.forEach(function(s,i){var el=document.createElement('article');el.className='cbp-st'+(s[3]?' check':'')+(s[1]==='out'?' out':'');
+        el.innerHTML=(s[3]?'<span class="tag2">Checkpoint</span>':'')+'<span class="n">'+(i<9?'0':'')+(i+1)+'</span><h4>'+s[0]+'</h4><p>'+s[2]+'</p><div class="who">'+(s[1]==='out'?'':'<span class="chip '+s[1]+'">'+LBL[s[1]]+'</span>')+'</div>';track.appendChild(el)});
+      status.textContent='Pull the lever to follow one piece from brief to delivery.'}
+    function place(el){if(matchMedia('(max-width:640px)').matches){token.style.top=(el.offsetTop+26)+'px';token.style.left=''}else{token.style.top='';token.style.left=(el.offsetLeft+23)+'px'}}
+    window.__cbRun=function(){
+      var sts=$$('.cbp-st',track),p=P[pcur],i=0;clearTimeout(tmr);running=true;sts.forEach(function(s){s.classList.remove('live','done')});token.style.opacity=1;
+      (function step(){
+        if(i>0)sts[i-1].classList.replace('live','done');
+        if(i>=sts.length){running=false;status.innerHTML='<b>Delivered.</b> Pull again or switch pipeline.';return}
+        var el=sts[i],s=p.st[i];el.classList.add('live');place(el);
+        var scr=el.closest('.cbp-scroll');if(scr.scrollWidth>scr.clientWidth)scr.scrollTo({left:el.offsetLeft-40,behavior:'smooth'});
+        status.innerHTML=s[3]?'<b>Waiting for my eye</b> · '+s[0]:(LBL[s[1]]?LBL[s[1]]+' · ':'')+s[0];
+        i++;tmr=setTimeout(step,reduce?300:(s[3]?1700:950))})();
+    };
+    $$('.cbp-tabs button',cbp).forEach(function(b){b.addEventListener('click',function(){$$('.cbp-tabs button',cbp).forEach(function(x){x.setAttribute('aria-selected',x===b)});render(b.dataset.p)})});
+    render('vm');
+  }
+  var sm=$('.slotm');
+  if(sm){
+    var lever=$('.sm-lever',sm),strips=$$('.sm-strip',sm),out=$('.sm-out',sm),busy=false;
+    lever.addEventListener('click',function(){
+      if(busy)return;busy=true;lever.classList.add('pull');setTimeout(function(){lever.classList.remove('pull')},450);
+      out.textContent='Spinning…';var res=[];
+      strips.forEach(function(st,j){
+        var items=$$('span',st),n=items.length/3,pick=Math.floor(Math.random()*n),h=items[0].offsetHeight,target=(n+pick)*h;
+        st.style.transition='none';st.style.transform='translateY(0)';void st.offsetHeight;
+        st.style.transition='transform '+(reduce?.2:(1.1+j*.45))+'s cubic-bezier(.2,.7,.2,1.05)';st.style.transform='translateY(-'+target+'px)';
+        res.push(items[pick].textContent);
+      });
+      setTimeout(function(){busy=false;out.textContent=res[0]+' · '+res[1]+' · '+res[2];
+        var f=res[2]==='CRM'?'crm':(res[2]==='Story'?'vm':'res');
+        $$('.cbp-tabs button').forEach(function(x){if(x.dataset.p===f&&x.getAttribute('aria-selected')!=='true')x.click()});
+        if(window.__cbRun)window.__cbRun()},reduce?300:2100);
+    });
+  }
+
+  /* ---------- Rulebook: the real zones of the 1080 × 1920 master ---------- */
+  var rb=$('.rulebook');
+  if(rb){
+    var Z=[['logo','CampoBet logo',145,127,'Brand logo, fixed size, with a soft shadow tinted from the image behind it.'],
+      ['char','Main character',295,852,'The subject sits here, centred between logo and copy. Floating game objects never cross into the logo or copy zones.'],
+      ['copy','Copy',1147,314,'A copy component from the brand library, scaled to fit. The image must be deep and calm here so white text reads.'],
+      ['disc','Disclaimer',1461,118,'Exact legal text, auto-sized down until it fits, never below 14 px.'],
+      ['below','Image only',1579,341,'No information below this line. On Reels it belongs to the app’s interface.']];
+    var frm=$('.rb-frame',rb),list=$('.rb-list',rb),ruler=$('.rb-ruler',rb);
+    Z.forEach(function(z){
+      var d=document.createElement('div');d.className='rb-zone '+z[0];d.dataset.k=z[0];d.style.top=(z[2]/19.2)+'%';d.style.height=(z[3]/19.2)+'%';d.textContent=z[1];frm.appendChild(d);
+      var li=document.createElement('li');li.dataset.k=z[0];li.innerHTML='<b>'+z[1]+'<small>y '+z[2]+'–'+(z[2]+z[3])+'</small></b><span>'+z[4]+'</span>';list.appendChild(li);
+      var s=document.createElement('span');s.style.top=(z[2]/19.2)+'%';s.textContent=z[2];ruler.appendChild(s);
+    });
+    function hl(k){$$('[data-k]',rb).forEach(function(e){e.classList.toggle('on',e.dataset.k===k)})}
+    $$('[data-k]',rb).forEach(function(e){e.addEventListener('mouseenter',function(){hl(e.dataset.k)});e.addEventListener('mouseleave',function(){hl(null)});e.addEventListener('click',function(){hl(e.dataset.k)})});
+  }
+  var fm=$('.fmts');
+  if(fm){var F=[['Story','1080 × 1920',1080,1920],['Reel','1080 × 1920',1080,1920],['Post','1080 × 1350',1080,1350],['Square','1080 × 1080',1080,1080],['Horizontal','1200 × 628',1200,628],['CRM banner','600 × 520 · sent at 2×',600,520,1]],S=.1;
+    fm.innerHTML=F.map(function(f){return '<div class="f'+(f[4]?' crm':'')+'"><div class="box" style="width:'+f[2]*S+'px;height:'+f[3]*S+'px"></div><b>'+f[0]+'</b><small>'+f[1]+'</small></div>'}).join('')}
+})();

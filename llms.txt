@@ -20,6 +20,7 @@ Designer and art director from Mexico with 10+ years of experience (since 2016).
 - [No Vendas Humo](proyectos/no-vendas-humo.html) — Philip Morris International. AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.
 - [ArboTerra es…](proyectos/arboterra.html) — ArboTerra (via Happy Studio) · 2023. Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
 - [Conexiones Mágicas](proyectos/conexiones-magicas.html) — Coca-Cola México (via HD* Human Design Doing). Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.
+- [CampoBet](proyectos/campobet.html) — CampoBet. Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, social, paid, CRM, ASO and blog pieces (about 130 a month at the peak, approximate), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.
 
 ## Highlights (as shown on the site)
 - 13 AI-assisted campaigns for global brands.
