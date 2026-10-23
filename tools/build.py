@@ -716,7 +716,7 @@ outs=''.join(f'<figure class="shot out">{cbi(f"out-{i+1}.jpg","Slot visual maste
 # automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)
 LAY=[('Background','full image, 2k',0,0,1080,1920,'bg'),('Mask group','depth layer under the copy',0,1000,1080,920,'mask'),('glow_line','light ribbon',482,-53,762,1015,'glow'),('Subject','duplicate for my cutout',160,330,760,800,'subj'),('Slot logo','official file, never redrawn',270,985,540,202,'slot'),('Logo shadow','tinted from the image',234,129,613,166,'shadow'),('Logo','brand component',314,161,451,95,'logo'),('Copy','copy component',88,1239,905,190,'copy'),('Disclaimer','auto-fit, min 14 px',62,1484,955,80,'disc')]
 anat=''.join(f'<div class="an-l {k}" style="--z:{i}" data-i="{i}"><i style="left:{x/10.8:.2f}%;top:{y/19.2:.2f}%;width:{w/10.8:.2f}%;height:{h/19.2:.2f}%"></i></div>' for i,(n,d,x,y,w,h,k) in enumerate(LAY))
-anlist=''.join(f'<li data-i="{i}"><span class="ly-ic {k}"></span><b>{n}</b><small>{d}</small></li>' for i,(n,d,x,y,w,h,k) in reversed(list(enumerate(LAY))))
+anlist=''.join(f'<li data-i="{i}" aria-pressed="true" role="button" tabindex="0"><span class="ly-eye" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="eo" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle class="eo" cx="12" cy="12" r="3"/><path class="ec" d="M3 3l18 18"/></svg></span><b>{n}</b><small>{d}</small></li>' for i,(n,d,x,y,w,h,k) in reversed(list(enumerate(LAY))))
 RF={'story':(1080,1920,[(314,145,451,127),(62,295,955,852),(270,985,540,202),(88,1239,905,190),(62,1484,955,80)]),
     'reel':(1080,1920,[(314,145,451,127),(60,298,960,720),(217,918,646,179),(195,1156,690,145),(170,1337,740,85)]),
     'post':(1080,1350,[(368,83,343,97),(22,188,1036,685),(245,749,590,164),(89,955,902,189),(106,1209,868,56)]),
@@ -777,7 +777,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <section class="chap" id="rebrand">
         <span class="mono">01 · The look</span>
         <h2><span class="lm"><span>First, a look</span></span><span class="lm"><span>of its own</span></span></h2>
-        <p class="lead">The organic content needed an identity of its own. I proposed a new visual language and it was approved: from dark gradients and centred layouts to big editorial type, open white space and cut-out athletes. Drag the slider to see it change, stripe by stripe, like a lenticular print.</p>
+        <p class="lead">The organic content had become monotonous. I proposed a new visual language and it was approved: more dynamic and sporty, built to break the routine of the feed. White leads, but intense green backgrounds and photographic art keep the rhythm changing, always within the brand colours. Drag the slider to see it change, stripe by stripe, like a lenticular print.</p>
         <div class="lenti">
           <div class="lt-row">{lenti}</div>
           <div class="lt-ax mono"><button type="button" class="lt-go" data-v="0">Before</button><input class="lt-r" type="range" min="0" max="100" value="0" aria-label="From before to after"><button type="button" class="lt-go" data-v="100">After</button></div>
@@ -863,7 +863,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <section class="chap" id="anatomy">
         <span class="mono">Automation · 01 · Anatomy</span>
         <h2><span class="lm"><span>Take a master</span></span><span class="lm"><span>apart</span></span></h2>
-        <p class="lead">Every slot visual master is the same stack of nine layers, each one with a fixed place and a fixed job. Drag the slider to pull them apart. The names are the real layer names in the file.</p>
+        <p class="lead">Every slot visual master is the same stack of nine layers, each one with a fixed place and a fixed job. Drag the slider to pull them apart, and tap a layer to hide or show it. The names are the real layer names in the file.</p>
         <div class="anat">
           <div class="an-stage"><div class="an-stack">{anat}</div></div>
           <div class="an-side">

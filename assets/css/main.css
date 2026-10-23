@@ -1406,3 +1406,17 @@ body *:not(.keep-case){text-transform:none!important}
 .car-t::-webkit-scrollbar{display:none}
 .car-t img{scroll-snap-align:start}
 .car-p.off,.car-n.off{opacity:0;pointer-events:none}
+/* round 8 */
+.ly-eye{width:18px;height:18px;display:grid;place-items:center}
+.ly-eye svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ly-eye .ec{opacity:0}
+.an-list li{grid-template-columns:18px minmax(0,1fr) auto}
+.an-list li.hid{color:#77776f}
+.an-list li.hid .ec{opacity:1}
+.an-list li.hid small{text-decoration:line-through}
+.an-l.hid{opacity:0!important;transform:translateZ(calc(var(--z) * var(--gap))) scale(.96);transition:opacity .3s,transform .3s}
+.lt-go,.cf-ui button,.car-p,.car-n,.wc-ui button,.sx-t,.as-r{color:var(--ink);-webkit-text-fill-color:currentColor}
+.wc-ui button.on{color:#fff}
+.cf-ui button{font-size:1.1rem;line-height:1}
+.hf img{object-fit:contain;max-width:100%}
+@media(max-width:640px){.h-feat{height:30%;gap:8px}.hf{max-width:none}.hf img{height:100%;width:auto}}

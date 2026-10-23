@@ -489,7 +489,10 @@
     function g(v){st.style.setProperty('--gap',(v*.75)+'px')}
     rg.addEventListener('input',function(){g(+rg.value)});
     function hl(i){an.classList.toggle('hl',i!==null);ls.forEach(function(l){l.classList.toggle('on',l.dataset.i===i)});li.forEach(function(l){l.classList.toggle('on',l.dataset.i===i)})}
-    li.forEach(function(l){l.addEventListener('mouseenter',function(){hl(l.dataset.i)});l.addEventListener('mouseleave',function(){hl(null)});l.addEventListener('click',function(){hl(an.classList.contains('hl')&&l.classList.contains('on')?null:l.dataset.i)})});
+    li.forEach(function(l){var lay=ls.filter(function(x){return x.dataset.i===l.dataset.i})[0];
+      if(matchMedia('(pointer:fine)').matches){l.addEventListener('mouseenter',function(){hl(l.dataset.i)});l.addEventListener('mouseleave',function(){hl(null)})}
+      function tog(){var on=l.getAttribute('aria-pressed')!=='true';l.setAttribute('aria-pressed',on);l.classList.toggle('hid',!on);if(lay)lay.classList.toggle('hid',!on)}
+      l.addEventListener('click',tog);l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}})});
     g(0);
     inView(an,function(){if(reduce){rg.value=70;g(70);return}var t0=performance.now();(function f(n){var k=Math.min(1,(n-t0)/1400),e=1-Math.pow(1-k,3);rg.value=Math.round(70*e);g(70*e);if(k<1)requestAnimationFrame(f)})(t0)});
   }
