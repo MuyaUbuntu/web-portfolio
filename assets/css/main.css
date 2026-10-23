@@ -684,3 +684,23 @@ body *:not(.keep-case){text-transform:none!important}
 .lamp-grid{grid-auto-flow:dense;grid-template-rows:repeat(5,1fr)}
 .lamp-grid img:nth-child(4){grid-row:span 2}.lamp-grid img:nth-child(10),.lamp-grid img:nth-child(12){grid-column:span 2}
 @media(max-width:760px){.lamp-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:none}.lamp-grid img:nth-child(n){grid-column:auto;grid-row:auto}.lamp-grid img:nth-child(1){grid-column:span 2}}
+/* lockup sits between background and tree */
+.m-layer .m-locks{position:absolute;left:0;right:0;top:6%;height:13%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:1}
+.m-layer .bg{z-index:0}.m-layer .tree{z-index:2}
+@media(min-width:960px){.c-hero.arbt .m-layer .tree{height:96%}}
+
+/* ---------- Lightbox ---------- */
+.kv-grid img,.drag-track img,.stage-card .im img,.strip img,.b-img img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(12px,4vw,48px);background:rgba(11,11,10,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .35s}
+.lb.on{opacity:1}
+.lb figure{margin:0;display:grid;gap:.8rem;justify-items:center;max-width:100%;max-height:100%}
+.lb img{max-width:min(92vw,1600px);max-height:calc(100svh - 9rem);width:auto;height:auto;border-radius:10px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);scale:.94;transition:scale .5s var(--out),opacity .25s;cursor:zoom-out}
+.lb.on img{scale:1}
+.lb figcaption{color:#fff;font-size:.9rem;text-align:center;max-width:60ch}
+.lb figcaption span{color:rgba(255,255,255,.55);margin-left:.6rem}
+.lb button{position:absolute;display:grid;place-items:center;width:3rem;height:3rem;border-radius:99px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:1.2rem;cursor:pointer;transition:background .25s}
+.lb button:hover{background:#fff;color:var(--ink)}
+.lb .lb-x{top:1rem;right:1rem}
+.lb .lb-p{left:1rem;top:50%;translate:0 -50%}.lb .lb-n{right:1rem;top:50%;translate:0 -50%}
+.lb.single .lb-p,.lb.single .lb-n{display:none}
+@media(max-width:700px){.lb .lb-p,.lb .lb-n{top:auto;bottom:1rem;translate:none}}

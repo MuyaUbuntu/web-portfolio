@@ -1,0 +1,37 @@
+# Rodrigo López — Designer & Art Director
+
+Designer and art director from Mexico with 10+ years of experience (since 2016). Brand design, art direction, AI-assisted key visuals, internal campaigns, UX/UI and 3D for global brands. Looking for Brand Designer or Brand Manager roles; open to remote work.
+
+- Email: rodrigo.lopez.1293@gmail.com
+- LinkedIn: https://www.linkedin.com/in/rodrigo-lp/
+- Instagram: https://www.instagram.com/rodrigo_1293/
+- WhatsApp: https://wa.me/522226858390
+- Location: Mexico · open to remote
+
+## Experience
+- 2025–present · Design Team Lead, Brainrocket. Leads the design team for international iGaming brands in Mexico and Canada, working with Marketing, CRM, ASO and Performance.
+- 2023–2025 · Senior Designer, HD* Human Design Doing. Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more.
+- 2020–2023 · Senior Designer, Happy Studio. Concepts, 3D models and 2D animation for brand campaigns.
+- 2018–2020 · Jr. Art Director, Volátil Agencia Creativa. Creative concepts and art direction.
+- 2016–2018 · Designer, In Movisión. Print and digital design, architectural photography and web layouts.
+
+## Selected work
+- [Happy Talks](proyectos/happy-talks.html) — HDO · 2025. Landing page for a conference platform. UX/UI, art direction and 3D.
+- [No Vendas Humo](proyectos/no-vendas-humo.html) — Philip Morris International. AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.
+- [ArboTerra es…](proyectos/arboterra.html) — ArboTerra · Africam Safari (via Happy Studio) · 2023. Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
+
+## Highlights (as shown on the site)
+- 13 AI-assisted campaigns for global brands.
+- One AI-adoption program reached 1,070 employees.
+- 700+ people at the Mars integration “Day Zero”.
+
+## Skills
+- Brand design
+- Brand management
+- Art direction
+- Key visuals
+- AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)
+- Internal communications and endomarketing
+- UX/UI and landing pages
+- 3D (Blender, Cinema 4D)
+- Design team leadership
