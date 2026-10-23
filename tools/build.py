@@ -662,179 +662,49 @@ case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted k
 open(os.path.join(R,'proyectos','conexiones-magicas.html'),'w').write(case4)
 
 # ================= CASE: CAMPOBET =================
+# Part one: the work, very visual. Part two: the automation (anatomy, reflow, pipelines).
 # Placeholders: colored boxes until the real material arrives (swap phb() for <img> later).
 pre='../'
 def phb(label,ratio='4/5',c='a',extra=''):
     return f'<div class="phb {c}" style="aspect-ratio:{ratio}"{extra}><span>{label}</span></div>'
-WALL=[('Feed post','4/5','a'),('Story','9/16','b'),('Paid · square','1/1','c'),('CRM banner','600/520','d'),('Slot master','9/16','e'),('Blog header','16/9','a'),('ASO screen','9/16','c'),('Promo logo','1/1','b'),('Feed post','4/5','e'),('Horizontal','1200/628','d')]
-def wall_row(off):
-    items=WALL[off:]+WALL[:off]
-    t=''.join(phb(l,r,c) for l,r,c in items)
-    return f'<div class="cbw-row"><div class="cbw-rail">{t}{t}</div></div>'
-PAIRS=[('Feed post','4/5'),('Story','9/16'),('Promo post','1/1')]
-pair_tabs=''.join(f'<button type="button" role="tab" aria-selected="{"true" if i==0 else "false"}" data-i="{i}">{n}</button>' for i,(n,r) in enumerate(PAIRS))
-pair_stage=''.join(f'<div class="sc-pair{" on" if i==0 else ""}" data-ratio="{r}" style="aspect-ratio:{r}">{phb(f"After · {n}",r,"after")}<canvas class="sc-canvas" data-label="Before · {n}" aria-label="Scratch to reveal the rebranded {n.lower()}"></canvas></div>' for i,(n,r) in enumerate(PAIRS))
+CC=['a','b','c','d','e']
+# hero: a deck that deals the pieces
+DEAL=[('Feed post','4/5'),('Story','9/16'),('World Cup','4/5'),('CRM banner','600/520'),('Slot master','9/16'),('Blog header','16/9'),('Paid','1/1'),('Feed post','4/5'),('Promo logo','1/1'),('App store','9/16'),('Feed post','4/5'),('CRM banner','600/520'),('Story','9/16'),('World Cup','1/1')]
+deal=''.join(f'<div class="dl-c" style="--ar:{r}">{phb(l,r,CC[i%5])}</div>' for i,(l,r) in enumerate(DEAL))
+# rebrand: flip cards
+flips=''.join(f'<button type="button" class="flp" aria-pressed="false" aria-label="Flip pair {i+1}"><span class="flp-in"><span class="flp-f">{phb(f"Before · {i+1:02d}",r,"era-old")}<em>Before</em></span><span class="flp-b">{phb(f"After · {i+1:02d}",r,"b")}<em>After</em></span></span></button>' for i,r in enumerate(['4/5','4/5','9/16','4/5','1/1','4/5']))
+# social: endless columns
+def col(k):
+    rs=[('4/5','Feed'),('9/16','Story'),('4/5','Feed'),('1/1','Paid'),('4/5','Feed'),('9/16','Story')]
+    rs=rs[k:]+rs[:k]
+    t=''.join(phb(f"{n} · {k+1}{j+1}",r,CC[(j+k)%5]) for j,(r,n) in enumerate(rs))
+    return f'<div class="col{" up" if k%2 else ""}"><div class="col-rail">{t}{t}</div></div>'
+cols=''.join(col(k) for k in range(4))
+# world cup: pieces on the pitch
+wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{phb(f"World Cup · {i+1:02d}","4/5",["b","a","d"][i%3])}<span class="pl-n">{i+1}</span></button>' for i in range(11))
+# crm: banner vs the photo behind it
+crm=''.join(f'''<figure class="crm-c" tabindex="0" aria-label="CRM banner {i+1}: tap to see the photo behind it">
+  <div class="crm-photo">{phb(f"Generated photo · {i+1:02d}","4/3",CC[(i+2)%5])}</div>
+  <div class="crm-ban">{phb(f"Final banner · {i+1:02d}","600/520","e")}<i class="cb-copy"></i><i class="cb-badge"></i><i class="cb-cta"></i></div>
+  <figcaption><span class="crm-s mono">Banner</span><span class="crm-t mono">Photo</span></figcaption>
+</figure>''' for i in range(6))
+# blog: coverflow
+cf=''.join(f'<div class="cf-it" data-i="{i}">{phb(f"Blog header · {i+1:02d}","16/9",CC[i%5])}</div>' for i in range(8))
+# aso: screenshots inside a store page
+aso=''.join(f'<div class="aso-s">{phb(f"Screenshot {i+1}","9/16",CC[(i+1)%5])}</div>' for i in range(6))
+# icons
 GLYPHS=['<circle cx="24" cy="24" r="14"/>','<rect x="10" y="10" width="28" height="28" rx="6"/>','<path d="M24 8l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z"/>','<path d="M10 34h28M14 34V20M24 34V12M34 34V24"/>','<path d="M24 40s-14-8-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 11-14 19-14 19z"/>','<path d="M12 14h24v14H24l-8 7v-7h-4z"/>','<circle cx="24" cy="24" r="14"/><path d="M24 10v28M10 24h28"/>','<path d="M16 10h16v8a8 8 0 0 1-16 0zM24 26v8M18 38h12"/>','<path d="M14 10h20l-4 28H18z"/>','<path d="M24 8l14 8v16l-14 8-14-8V16z"/>','<path d="M10 30l10-10 6 6 12-12M30 14h8v8"/>','<circle cx="18" cy="18" r="6"/><circle cx="30" cy="30" r="6"/><path d="M14 34L34 14"/>']
 KEY='<g class="key"><rect x="4" y="4" width="40" height="40"/><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="12"/><path d="M4 4l40 40M44 4L4 44M24 4v40M4 24h40"/></g>'
-icons=''.join(f'<li><svg viewBox="0 0 48 48" aria-hidden="true">{KEY}<g class="gl">{g}</g></svg><span class="mono">Icon {i+1:02d}</span></li>' for i,g in enumerate(GLYPHS))
-SEASONS=['Season 01','Season 02','Season 03','Season 04','Season 05','Season 06']
-wheel_segs=''.join(f'<span class="wh-seg" style="--i:{i}"><b>{s}</b></span>' for i,s in enumerate(SEASONS))
-wheel_logos=''.join(f'<div class="wh-logo{" on" if i==0 else ""}" data-i="{i}">{phb(f"Promo logo · {s}","1/1","l"+str(i%3))}</div>' for i,s in enumerate(SEASONS))
-CH=[('feed','Organic feed','Post · Story','a',['4/5','4/5','9/16','4/5']),('paid','Paid social','Square · Story','c',['1/1','9/16','1/1']),('crm','CRM email','600 × 520','d',['600/520','600/520','600/520']),('aso','App store (ASO)','Screenshots','e',['9/16','9/16','9/16','9/16']),('blog','Blog','Header images','b',['16/9','16/9'])]
-sels=''.join(f'<button type="button" class="bs-sel{" on" if k in ("feed","aso") else ""}" data-k="{k}" aria-pressed="{"true" if k in ("feed","aso") else "false"}"><span class="bs-n">{n}</span><span class="bs-f mono">{f}</span><span class="bs-o">{len(rs)}</span></button>' for k,n,f,c,rs in CH)
-bs_gal=''.join(''.join(f'<div class="bs-it" data-k="{k}"{"" if k in ("feed","aso") else " hidden"}>{phb(f"{n} · {j+1}",r,c)}</div>' for j,r in enumerate(rs)) for k,n,f,c,rs in CH)
-FR=[('Frame 01','Open on the hook','M18 70 Q40 30 82 40','circle'),('Frame 02','Push in on the product','M20 20 L60 50','arrow'),('Frame 03','Reveal the offer','M30 30 h40 v30 h-40 z','box'),('Frame 04','Reaction beat','M70 25 Q55 60 25 65','arrow'),('Frame 05','Logo and CTA','M50 50 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0','circle'),('Frame 06','End card','M20 75 L80 75','line')]
-rp_frames=''.join(f'<div class="rp-f{" on" if i==0 else ""}">{phb(f"Storyboard · {t}","16/9","s"+str(i%3))}</div>' for i,(t,n,p,k) in enumerate(FR))
-rp_draw=''.join(f'<path class="rp-ink{" on" if i==0 else ""}" d="{p}" pathLength="1"{" marker-end=\"url(#rp-ah)\"" if k=="arrow" else ""}/>' for i,(t,n,p,k) in enumerate(FR))
-rp_notes=''.join(f'<p class="rp-note{" on" if i==0 else ""}"><b>{t}</b> {n}</p>' for i,(t,n,p,k) in enumerate(FR))
-rp_ticks=''.join(f'<button type="button" class="rp-tick{" on" if i==0 else ""}" data-i="{i}" aria-label="{t}"></button>' for i,(t,n,p,k) in enumerate(FR))
-REELS=[('Game',['Slot A','Slot B','Slot C','Slot D','Slot E']),('Scene',['Rocket ride','Out of the screen','Treasure dive','Candy storm','Jackpot rain']),('Format',['Story','Reel','Post','Square','Horizontal','CRM'])]
-reels=''.join(f'<div class="sm-reel" aria-label="{n}"><span class="sm-lbl mono">{n}</span><div class="sm-win"><div class="sm-strip">'+''.join(f'<span>{x}</span>' for x in xs*3)+'</div></div></div>' for n,xs in REELS)
-
-case5=head('CampoBet · Rodrigo López','Case study: brand and production design for CampoBet, an online betting brand. A rebrand for organic content, an icon and promo-logo system, and three AI production pipelines designed by Rodrigo.',pre)+nav(pre,False)+f'''<main class="cb">
-  <div class="ver-sw mono" aria-label="Review versions"><b>Version A</b><a href="campobet-b.html" data-go>Version B</a></div>
-  <section class="wrap c-hero">
-    <div class="c-head"><div class="c-l">
-      <a class="back" href="{pre}#work" data-go>← All work</a>
-      <div class="c-client"><span class="tag k">CampoBet</span><span class="ai">AI system</span></div>
-      <h1 class="c-title" aria-label="CampoBet"><span aria-hidden="true">{word("Campo")}{word("Bet","hlw")}</span></h1>
-      </div><div class="c-r">
-      <p class="c-lead">An online betting brand that needs content every single day. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
-      <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~130 pieces a month (approx.)</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
-    </div></div>
-    <div class="c-cover cb-wall" aria-label="A wall of CampoBet pieces in every format">
-      {wall_row(0)}{wall_row(3)}{wall_row(6)}
-      <span class="cbw-badge"><b>~130</b><small>pieces a month</small></span>
-    </div>
-  </section>
-
-  <div class="wrap chapters">
-    <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#rebrand">Rebrand</a></li><li><a href="#system">System</a></li><li><a href="#everywhere">Everywhere</a></li><li><a href="#motion">Motion</a></li><li><a href="#machine">The machine</a></li><li><a href="#impact">Impact</a></li></ol>
-      <div class="bar"><i></i></div>
-    </aside>
-    <div>
-      <section class="chap" id="challenge">
-        <span class="mono">01 · Challenge</span>
-        <h2><span class="lm"><span>Every day a new promo,</span></span><span class="lm"><span>and one face for all of it</span></span></h2>
-        <p class="lead">Slots, sports, seasons and offers change daily. The content had to keep that pace on every channel and still look like one brand.</p>
-        <div class="quotes" style="margin-top:.5rem">
-          <div class="quote a"><b>~130</b><p>pieces a month at the peak, designed by me. Approximate, my own count.</p></div>
-          <div class="quote c"><b>6</b><p>channels to feed: organic, paid, CRM, app stores, blog and motion.</p></div>
-        </div>
-      </section>
-
-      <section class="chap" id="rebrand">
-        <span class="mono">02 · Rebrand</span>
-        <h2><span class="lm"><span>Scratch off</span></span><span class="lm"><span>the old look</span></span></h2>
-        <p class="lead">I proposed a new visual language for the organic content and it was approved. Scratch each card to see the same piece before and after.</p>
-        <div class="scratch">
-          <div class="sc-tabs" role="tablist" aria-label="Before and after pairs">{pair_tabs}</div>
-          <div class="sc-stage">{pair_stage}<span class="sc-stamp" aria-hidden="true">Rebrand ✓</span></div>
-          <div class="sc-foot"><span class="mono sc-hint">Scratch with your cursor or finger</span><button type="button" class="sc-reset mono">Cover it again ↺</button></div>
-        </div>
-      </section>
-
-      <section class="chap" id="system">
-        <span class="mono">03 · System</span>
-        <h2><span class="lm"><span>Icons on a grid,</span></span><span class="lm"><span>logos on a calendar</span></span></h2>
-        <p class="lead">An icon set drawn on one construction grid, so any new icon fits the family. Hover an icon to see its keylines.</p>
-        <ul class="icon-grid" aria-label="Icon system">{icons}</ul>
-        <h3 class="sub">The calendar wheel</h3>
-        <p>Promotions and seasons get their own logo, built from the same brand parts. Spin the wheel to move through the year.</p>
-        <div class="wheel">
-          <div class="wh-dial" tabindex="0" role="slider" aria-label="Season" aria-valuemin="1" aria-valuemax="{len(SEASONS)}" aria-valuenow="1"><div class="wh-rot">{wheel_segs}</div><span class="wh-pin" aria-hidden="true"></span></div>
-          <div class="wh-out">{wheel_logos}<div class="wh-ctl"><button type="button" class="wh-prev" aria-label="Previous season">←</button><span class="wh-name mono">{SEASONS[0]}</span><button type="button" class="wh-next" aria-label="Next season">→</button></div></div>
-        </div>
-      </section>
-
-      <section class="chap" id="everywhere">
-        <span class="mono">04 · Everywhere</span>
-        <h2><span class="lm"><span>Build your</span></span><span class="lm"><span>bet slip</span></span></h2>
-        <p class="lead">The same identity runs across every channel. Add channels to the slip and see what each one got.</p>
-        <div class="betslip">
-          <div class="bs-list" role="group" aria-label="Channels">{sels}</div>
-          <div class="bs-slip"><div class="bs-h"><span>Bet slip</span><span class="mono bs-c">2 selections</span></div><ul class="bs-picked"></ul><div class="bs-pay"><span>Payout</span><b class="bs-total">0</b><small>pieces shown</small></div></div>
-          <div class="bs-gal">{bs_gal}</div>
-        </div>
-      </section>
-
-      <section class="chap" id="motion">
-        <span class="mono">05 · Motion</span>
-        <h2><span class="lm"><span>Instant</span></span><span class="lm"><span>replay</span></span></h2>
-        <p class="lead">Storyboards played like a sports replay, with my direction notes drawn on top of each frame.</p>
-        <div class="replay">
-          <div class="rp-stage">{rp_frames}
-            <svg class="rp-tele" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="rp-ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#FFE14D"/></marker></defs>{rp_draw}</svg>
-            <span class="rp-tag">Replay</span><span class="rp-tc mono">00:00</span>
-          </div>
-          <div class="rp-bar"><button type="button" class="rp-play" aria-label="Pause">❚❚</button><div class="rp-ticks">{rp_ticks}</div></div>
-          <div class="rp-notes">{rp_notes}</div>
-        </div>
-      </section>
-
-      <section class="chap" id="machine">
-        <span class="mono">06 · The machine</span>
-        <h2><span class="lm"><span>Pull the lever,</span></span><span class="lm"><span>watch the system work</span></span></h2>
-        <p class="lead">I designed three production pipelines that run as Claude skills, using Higgsfield for images and Figma for layout. I wrote the brand zones, the art direction rules and the quality checks, and I decided where a person has to step in. The AI renders inside those rules.</p>
-        <div class="slotm">
-          <div class="sm-body"><div class="sm-top mono">CampoBet · production machine</div><div class="sm-reels">{reels}</div><div class="sm-out mono" aria-live="polite">Pull the lever to brief the machine</div></div>
-          <button type="button" class="sm-lever" aria-label="Pull the lever"><span class="sm-arm"></span><span class="sm-knob"></span></button>
-        </div>
-        <div class="cbp">
-          <div class="cbp-bar"><div class="cbp-tabs" role="tablist" aria-label="Pipelines"><button role="tab" aria-selected="true" data-p="vm">Slot visual master</button><button role="tab" aria-selected="false" data-p="res">Resizes</button><button role="tab" aria-selected="false" data-p="crm">CRM banners</button></div>
-            <div class="cbp-legend"><span class="chip ai">AI renders</span><span class="chip rule">Rules I wrote</span><span class="chip me">My decision</span></div></div>
-          <div class="cbp-meta"></div>
-          <div class="cbp-scroll" data-lenis-prevent><div class="cbp-track"><span class="cbp-token"></span></div></div>
-          <div class="cbp-status mono" aria-live="polite">Pull the lever to follow one piece from brief to delivery.</div>
-          <div class="cbp-loop"><b>Every approved piece becomes the new standard.</b> When I adjust a master by hand, its positions and values go back into the skill, so the next run starts from my correction.</div>
-        </div>
-        <h3 class="sub">The AI never decides where things go</h3>
-        <div class="rulebook">
-          <div class="rb-frame-box"><div class="rb-ruler" aria-hidden="true"></div><div class="rb-frame" role="img" aria-label="1080 by 1920 story frame with brand zones"><i class="rb-glow"></i></div></div>
-          <div><p>Every master is built on the same zone map, drawn here to scale. The image is generated to fit it: subject high, deep calm areas where white text sits. Hover a zone.</p><ul class="rb-list"></ul>
-            <div class="rb-qa" aria-label="Automatic checks before I see a candidate"><span>Hands and fingers counted</span><span>No deformations</span><span>On-model with the game</span><span>New pose, never copied</span><span>Nothing in brand zones</span><span>Contrast measured under the copy</span><span>Game world still visible</span></div></div>
-        </div>
-        <h3 class="sub">One approved image, every placement</h3>
-        <div class="fmts"></div>
-      </section>
-
-      <section class="chap" id="impact">
-        <span class="mono">07 · Impact</span>
-        <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
-        <div class="cb-nums">
-          <div><b>~130</b><p>pieces a month I made by hand before the pipelines.</p><small class="mono">Approximate · my own count</small></div>
-          <div><b class="pending">[N]</b><p>slot banners delivered in 2–3 days with the pipeline.</p><small class="mono">Pending · number to confirm</small></div>
-          <div><b>2</b><p>moments where I step in per master: choosing the scene and approving the image.</p><small class="mono">From the pipeline design</small></div>
-        </div>
-      </section>
-    </div>
-  </div>
-'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
-'''+scripts(pre)
-open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
-
-# ================= CASE: CAMPOBET · VERSION B ("Inside the file") =================
-pre='../'
-# Board for the hero canvas: sections of frames laid out like the real Figma file
-BOARD=[('Organic · feed',12,(1080,1350),'a',6),('Stories',8,(1080,1920),'b',8),('Paid',8,(1080,1080),'c',4),('Slot masters',5,(1080,1920),'e',5),('CRM banners',6,(600,520),'d',3),('App store',5,(1080,1920),'c',5),('Blog',4,(1600,900),'a',2),('Promo logos',6,(1000,1000),'l0',3)]
-def board():
-    out=[];x=0;y=0;rowh=0;maxw=3400;S=.12
-    for name,n,(w,h),c,cols in BOARD:
-        fw,fh=w*S,h*S;gap=24;pad=40
-        rows=-(-n//cols);sw=pad*2+cols*fw+(cols-1)*gap;sh=pad*2+30+rows*fh+(rows-1)*(gap+14)
-        if x+sw>maxw: x=0;y+=rowh+80;rowh=0
-        frames=''.join(f'<div class="fb-fr" style="left:{pad+(k%cols)*(fw+gap):.0f}px;top:{pad+30+(k//cols)*(fh+gap+14):.0f}px;width:{fw:.0f}px;height:{fh:.0f}px"><i>{name.split(" ")[0].lower()}_{w}x{h}_{k+1:02d}</i>{phb("",f"{w}/{h}",c)}</div>' for k in range(n))
-        out.append(f'<section class="fb-sec" style="left:{x:.0f}px;top:{y:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px"><b>{name}</b>{frames}</section>')
-        x+=sw+80;rowh=max(rowh,sh)
-    return ''.join(out),maxw,y+rowh
-bhtml,BW,BH=board()
-# Anatomy: real layer stack of the approved visual master (bottom -> top), with real zones of the 1080x1920 frame
+icons=''.join(f'<li><svg viewBox="0 0 48 48" aria-hidden="true">{KEY}<g class="gl">{g}</g></svg></li>' for g in GLYPHS)
+MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+cal=''.join(f'<figure class="shot cal-m"><figcaption class="mono">{m}</figcaption>'+(phb(f"Promo logo · {m}","1/1",["l0","l1","l2"][i%3]) if i%2==0 else '<div class="cal-empty mono">—</div>')+'</figure>' for i,m in enumerate(MONTHS))
+# motion: filmstrip
+film_big=''.join(f'<div class="fm-f{" on" if i==0 else ""}">{phb(f"Storyboard frame {i+1:02d}","16/9","s"+str(i%3))}</div>' for i in range(8))
+film_strip=''.join(f'<button type="button" class="fm-t{" on" if i==0 else ""}" data-i="{i}" aria-label="Frame {i+1}">{phb(f"{i+1:02d}","16/9","s"+str(i%3))}</button>' for i in range(8))
+# automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)
 LAY=[('Background','full image, 2k',0,0,1080,1920,'bg'),('Mask group','depth layer under the copy',0,1000,1080,920,'mask'),('glow_line','light ribbon',482,-53,762,1015,'glow'),('Subject','duplicate for my cutout',160,330,760,800,'subj'),('Slot logo','official file, never redrawn',270,985,540,202,'slot'),('Logo shadow','tinted from the image',234,129,613,166,'shadow'),('Logo','brand component',314,161,451,95,'logo'),('Copy','copy component',88,1239,905,190,'copy'),('Disclaimer','auto-fit, min 14 px',62,1484,955,80,'disc')]
 anat=''.join(f'<div class="an-l {k}" style="--z:{i}" data-i="{i}"><i style="left:{x/10.8:.2f}%;top:{y/19.2:.2f}%;width:{w/10.8:.2f}%;height:{h/19.2:.2f}%"></i></div>' for i,(n,d,x,y,w,h,k) in enumerate(LAY))
 anlist=''.join(f'<li data-i="{i}"><span class="ly-ic {k}"></span><b>{n}</b><small>{d}</small></li>' for i,(n,d,x,y,w,h,k) in reversed(list(enumerate(LAY))))
-# Reflow: real layout per format (frame coordinates from the resize skill)
 RF={'story':(1080,1920,[(314,145,451,127),(62,295,955,852),(270,985,540,202),(88,1239,905,190),(62,1484,955,80)]),
     'reel':(1080,1920,[(314,145,451,127),(60,298,960,720),(217,918,646,179),(195,1156,690,145),(170,1337,740,85)]),
     'post':(1080,1350,[(368,83,343,97),(22,188,1036,685),(245,749,590,164),(89,955,902,189),(106,1209,868,56)]),
@@ -843,99 +713,89 @@ RF={'story':(1080,1920,[(314,145,451,127),(62,295,955,852),(270,985,540,202),(88
 rf_json=json.dumps(RF)
 rf_tabs=''.join(f'<button type="button" role="tab" aria-selected="{"true" if k=="story" else "false"}" data-f="{k}">{k.capitalize()}<small>{w} × {h}</small></button>' for k,(w,h,_) in RF.items())
 rf_els=''.join(f'<i class="rf-e {k}"><span>{n}</span></i>' for k,n in [('logo','Logo'),('char','Character'),('slot','Slot logo'),('copy','Copy'),('disc','Disclaimer')])
-# Swimlanes: who does each step
-SW={'vm':[('Brief','me'),('Read the game','ai'),('Scene concepts','ai'),('Pick the scene','me'),('Two candidates','ai'),('Quality gate','rule'),('Approve','me'),('Assemble in Figma','rule'),('Final cut','me')],
-    'res':[('Master in','me'),('Format plan','rule'),('Adapt the image','ai'),('Build boards','rule'),('Approve all','me')],
-    'crm':[('Brief','me'),('Photo','ai'),('Guardrails','rule'),('Layout','rule'),('Review','me')]}
+SW={'vm':[('Brief','me','ticket'),('Read the game','ai','swatch'),('Scene concepts','ai','thumbs'),('Pick the scene','me','pick'),('Two candidates','ai','cands'),('Quality gate','rule','scan'),('Approve','me','approve'),('Assemble in Figma','rule','frame'),('Final cut','me','cut')],
+    'res':[('Master in','me','master'),('Format plan','rule','plan'),('Adapt the image','ai','adapt'),('Build boards','rule','boards'),('Approve all','me','approve2')],
+    'crm':[('Brief','me','ticket'),('Photo','ai','photo'),('Guardrails','rule','guard'),('Layout','rule','layout'),('Review','me','review')]}
 sw_json=json.dumps(SW)
-MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-cal=''.join(f'<figure class="shot cal-m"><figcaption class="mono">{m}</figcaption>'+(phb(f"Promo logo · {m}","1/1",["l0","l1","l2"][i%3]) if i%2==0 else '<div class="cal-empty mono">—</div>')+'</figure>' for i,m in enumerate(MONTHS))
-fb=''.join(f'<div class="fl-f" style="--k:{i}">{phb(f"Storyboard frame {i+1:02d}","16/9","s"+str(i%3))}</div>' for i in range(8))
+mv=('<div class="mv" data-s="" aria-hidden="true">'
+ '<div class="mv-el mv-ticket" data-on="ticket"><b>Brief</b><i></i><i></i><i class="s"></i></div>'
+ '<div class="mv-el mv-sw" data-on="swatch"><i></i><i></i><i></i><i></i><i></i></div>'
+ '<div class="mv-el mv-thumbs" data-on="thumbs pick"><i></i><i class="k"></i><i></i></div>'
+ '<div class="mv-el mv-cands" data-on="cands scan approve"><i></i><i class="k"></i><span class="mv-scan"></span><span class="mv-ok">✓ ✓ ✓</span></div>'
+ '<div class="mv-el mv-frame" data-on="frame cut master"><i class="f-bg"></i><i class="f-subj"></i><i class="f-logo"></i><i class="f-slot"></i><i class="f-copy"></i><i class="f-disc"></i><i class="f-cut"></i></div>'
+ '<div class="mv-el mv-fmts" data-on="plan adapt boards approve2"><i style="--w:28;--h:50"></i><i style="--w:28;--h:35"></i><i style="--w:28;--h:28"></i><i style="--w:60;--h:31"></i></div>'
+ '<div class="mv-el mv-photo" data-on="photo guard layout review"><i class="p-img"></i><i class="p-copy"></i><i class="p-cta"></i><i class="p-badge"></i></div>'
+ '<div class="mv-el mv-guard" data-on="guard"><i>Alcohol</i><i>Cash</i><i>Skulls</i></div>'
+ '<div class="mv-el mv-stamp" data-on="approve approve2 review"></div>'
+ '<span class="mv-cap mono"></span></div>')
 
-case6=head('CampoBet · Rodrigo López','Case study (version B): brand and production design for CampoBet. A rebrand for organic content, an icon and promo-logo system, and three AI production pipelines designed by Rodrigo.',pre)+nav(pre,False)+f'''<main class="cb cbb">
-  <div class="ver-sw mono" aria-label="Review versions"><a href="campobet.html" data-go>Version A</a><b>Version B</b></div>
+case5=head('CampoBet · Rodrigo López','Case study: brand and production design for CampoBet, an online betting brand. Social, paid, CRM, World Cup, blog and app store pieces, a rebrand for organic content, an icon and promo-logo system, and three AI production pipelines designed by Rodrigo.',pre)+nav(pre,False)+f'''<main class="cb">
   <section class="wrap c-hero">
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">CampoBet</span><span class="ai">AI system</span></div>
       <h1 class="c-title" aria-label="CampoBet"><span aria-hidden="true">{word("Campo")}{word("Bet","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">An online betting brand that needs content every single day. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
+      <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~130 pieces a month (approx.)</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
-    <div class="c-cover fb" data-lenis-prevent aria-label="The CampoBet working file: drag to move around, use the buttons to zoom">
-      <div class="fb-board" style="width:{BW}px;height:{BH:.0f}px">{bhtml}</div>
-      <div class="fb-ui fb-tl"><span class="fb-tool on" title="Move">↖</span><span class="fb-tool" title="Hand">✋</span><span class="fb-file">CampoBet · working file</span></div>
-      <div class="fb-ui fb-br"><button type="button" class="fb-out" aria-label="Zoom out">−</button><span class="fb-z mono">100%</span><button type="button" class="fb-in" aria-label="Zoom in">+</button><button type="button" class="fb-fit">Fit</button></div>
-      <div class="fb-ui fb-bl mono"><span class="fb-hint">Drag to move around the file</span></div>
+    <div class="c-cover deal" aria-label="A deck of CampoBet pieces dealt across the table">
+      <div class="dl-table">{deal}</div>
+      <button type="button" class="dl-again">Shuffle &amp; deal ↻</button>
+      <span class="dl-count mono">~130 pieces a month · here are 14</span>
     </div>
   </section>
 
   <div class="wrap chapters">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#challenge">Challenge</a></li><li><a href="#rebrand">Rebrand</a></li><li><a href="#anatomy">Anatomy</a></li><li><a href="#reflow">Reflow</a></li><li><a href="#pipelines">Pipelines</a></li><li><a href="#system">System</a></li><li><a href="#motion">Motion</a></li><li><a href="#impact">Impact</a></li></ol>
+      <ol><li><a href="#rebrand">Rebrand</a></li><li><a href="#social">Social</a></li><li><a href="#worldcup">World Cup</a></li><li><a href="#crm">CRM</a></li><li><a href="#blog">Blog &amp; ASO</a></li><li><a href="#system">System</a></li><li><a href="#motion">Motion</a></li><li><a href="#automation">Automation</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
     <div>
-      <section class="chap" id="challenge">
-        <span class="mono">01 · Challenge</span>
-        <h2><span class="lm"><span>Every day a new promo,</span></span><span class="lm"><span>and one face for all of it</span></span></h2>
-        <p class="lead">Slots, sports, seasons and offers change daily. The content had to keep that pace on every channel and still look like one brand. The file above is what one stretch of that work looks like.</p>
-        <div class="quotes" style="margin-top:.5rem">
-          <div class="quote a"><b>~130</b><p>pieces a month at the peak, designed by me. Approximate, my own count.</p></div>
-          <div class="quote c"><b>6</b><p>channels to feed: organic, paid, CRM, app stores, blog and motion.</p></div>
-        </div>
-      </section>
-
       <section class="chap" id="rebrand">
-        <span class="mono">02 · Rebrand</span>
-        <h2><span class="lm"><span>Two eras,</span></span><span class="lm"><span>one scroll</span></span></h2>
-        <p class="lead">I proposed a new visual language for the organic content and it was approved. Keep scrolling: the new version rises over the old one and the changes are marked as they appear.</p>
-        <section class="era" aria-label="Before and after the rebrand">
-    <div class="era-pin">
-      <div class="era-row">
-        <div class="era-p" style="aspect-ratio:4/5">{phb("Before · feed post","4/5","era-old")}<div class="era-new">{phb("After · feed post","4/5","b")}</div></div>
-        <div class="era-p" style="aspect-ratio:9/16">{phb("Before · story","9/16","era-old")}<div class="era-new">{phb("After · story","9/16","b")}</div></div>
-        <div class="era-p" style="aspect-ratio:1/1">{phb("Before · promo","1/1","era-old")}<div class="era-new">{phb("After · promo","1/1","b")}</div></div>
-      </div>
-      <ol class="era-notes"><li><b>Type</b><span>[what changed]</span></li><li><b>Colour</b><span>[what changed]</span></li><li><b>Layout</b><span>[what changed]</span></li><li><b>Imagery</b><span>[what changed]</span></li></ol>
-      <div class="era-lbl mono"><span class="era-a">Before</span><span class="era-bar"><i></i></span><span class="era-b">After</span></div>
-    </div>
-  </section>
+        <span class="mono">01 · Rebrand</span>
+        <h2><span class="lm"><span>Same piece,</span></span><span class="lm"><span>new face</span></span></h2>
+        <p class="lead">I proposed a new visual language for the organic content and it was approved. Each card is the same piece before and after: tap one to flip it, or flip them all.</p>
+        <div class="flips-ui"><button type="button" class="flip-all">Flip all ↺</button></div>
+        <div class="flips">{flips}</div>
       </section>
-      <section class="chap" id="anatomy">
-        <span class="mono">03 · Anatomy</span>
-        <h2><span class="lm"><span>Take a master</span></span><span class="lm"><span>apart</span></span></h2>
-        <p class="lead">Every slot visual master is the same stack of nine layers, each one with a fixed place and a fixed job. Drag the slider to pull them apart. The names are the real layer names in the file.</p>
-        <div class="anat">
-          <div class="an-stage"><div class="an-stack">{anat}</div></div>
-          <div class="an-side">
-            <div class="an-panel"><div class="an-ph mono">Layers</div><ol class="an-list">{anlist}</ol></div>
-            <label class="an-ctl mono" for="an-r">Explode<input id="an-r" class="an-r" type="range" min="0" max="100" value="70"></label>
-          </div>
+
+      <section class="chap" id="social">
+        <span class="mono">02 · Social</span>
+        <h2><span class="lm"><span>The feed</span></span><span class="lm"><span>never stops</span></span></h2>
+        <p class="lead">Organic and paid pieces for every day of the month. Hover to pause and look closer.</p>
+        <div class="cols">{cols}</div>
+      </section>
+
+      <section class="chap" id="worldcup">
+        <span class="mono">03 · World Cup</span>
+        <h2><span class="lm"><span>Eleven pieces,</span></span><span class="lm"><span>one line-up</span></span></h2>
+        <p class="lead">A special set for the World Cup, laid out as a team. Change the formation to reshuffle the line-up, and pick a player to see the piece up close.</p>
+        <div class="wc">
+          <div class="wc-ui" role="group" aria-label="Formation"><button type="button" class="on" data-f="433">4-3-3</button><button type="button" data-f="442">4-4-2</button><button type="button" data-f="352">3-5-2</button></div>
+          <div class="pitch"><svg class="pitch-l" viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="156" height="96"/><path d="M80 2V98"/><circle cx="80" cy="50" r="12"/><rect x="2" y="28" width="18" height="44"/><rect x="140" y="28" width="18" height="44"/><rect x="2" y="40" width="6" height="20"/><rect x="152" y="40" width="6" height="20"/></svg>{wc}</div>
+          <div class="wc-focus" hidden><button type="button" class="wc-x" aria-label="Back to the pitch">×</button><div class="wc-big"></div></div>
         </div>
       </section>
 
-      <section class="chap" id="reflow">
-        <span class="mono">04 · Reflow</span>
-        <h2><span class="lm"><span>One image,</span></span><span class="lm"><span>five placements</span></span></h2>
-        <p class="lead">The resize pipeline moves every element to its stored position for each format. These are the real coordinates; the subject is never regenerated, only the image around it is extended.</p>
-        <div class="reflow" data-rf='{rf_json}'>
-          <div class="rf-tabs" role="tablist" aria-label="Formats">{rf_tabs}</div>
-          <div class="rf-stage"><div class="rf-frame">{rf_els}</div></div>
-          <p class="rf-cap mono">Story · 1080 × 1920</p>
-        </div>
+      <section class="chap" id="crm">
+        <span class="mono">04 · CRM</span>
+        <h2><span class="lm"><span>The photo</span></span><span class="lm"><span>behind the banner</span></span></h2>
+        <p class="lead">Email banners at 600 × 520 hide most of the image they are built on. Hover or tap a banner and the layout steps aside to show the full generated photo.</p>
+        <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show all photos</button></div>
+        <div class="crm-grid">{crm}</div>
       </section>
 
-      <section class="chap" id="pipelines">
-        <span class="mono">05 · Pipelines</span>
-        <h2><span class="lm"><span>Who does</span></span><span class="lm"><span>what</span></span></h2>
-        <p class="lead">Three pipelines run as Claude skills, with Higgsfield for images and Figma for layout. I designed each one: the zones, the art direction rules, the quality checks and the exact moments where a person decides. Follow a piece through the lanes.</p>
-        <div class="swim" data-sw='{sw_json}'>
-          <div class="sw-top"><div class="cbp-tabs" role="tablist" aria-label="Pipelines"><button role="tab" aria-selected="true" data-p="vm">Slot visual master</button><button role="tab" aria-selected="false" data-p="res">Resizes</button><button role="tab" aria-selected="false" data-p="crm">CRM banners</button></div><button type="button" class="sw-play">Play ►</button></div>
-          <div class="sw-scroll" data-lenis-prevent><div class="sw-grid"><div class="sw-lane l-me"><span>Me</span></div><div class="sw-lane l-rule"><span>Rules I wrote</span></div><div class="sw-lane l-ai"><span>AI</span></div><svg class="sw-line" aria-hidden="true"><polyline/></svg><span class="sw-dot"></span></div></div>
-          <div class="sw-sum mono"></div>
+      <section class="chap" id="blog">
+        <span class="mono">05 · Blog &amp; ASO</span>
+        <h2><span class="lm"><span>Headers worth</span></span><span class="lm"><span>the click</span></span></h2>
+        <p class="lead">Blog headers for guides, previews and promos. Drag, swipe or use the arrows to move through them.</p>
+        <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous">←</button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next">→</button></div></div>
+        <h3 class="sub">The app store page</h3>
+        <div class="aso">
+          <div class="phone"><div class="ph-scr"><div class="ph-head"><i class="ph-ic"></i><div><b>CampoBet</b><span>Sports &amp; casino</span></div><i class="ph-get">Get</i></div><div class="ph-row" data-lenis-prevent>{aso}</div><div class="ph-lines"><i></i><i></i><i class="s"></i></div></div></div>
+          <p>Store screenshots are the first thing a new player sees. I designed them as one continuous story that reads in a single swipe.</p>
         </div>
       </section>
 
@@ -957,16 +817,64 @@ case6=head('CampoBet · Rodrigo López','Case study (version B): brand and produ
 
       <section class="chap" id="motion">
         <span class="mono">07 · Motion</span>
-        <h2><span class="lm"><span>Hold to</span></span><span class="lm"><span>play the board</span></span></h2>
-        <p class="lead">The storyboards as a flipbook. Press and hold to play it, or drag sideways to move frame by frame.</p>
-        <div class="flip" tabindex="0" aria-label="Storyboard flipbook: press and hold to play">
-          <div class="fl-stack">{fb}</div>
-          <span class="fl-n mono">01 / 08</span><span class="fl-h mono">Hold to play</span>
+        <h2><span class="lm"><span>Frame</span></span><span class="lm"><span>by frame</span></span></h2>
+        <p class="lead">Storyboards for animated pieces, playing on their own. Pick any frame on the strip to jump to it.</p>
+        <div class="film">
+          <div class="fm-screen">{film_big}<span class="fm-tc mono">01 / 08</span></div>
+          <div class="fm-strip" data-lenis-prevent><div class="fm-rail">{film_strip}</div></div>
+        </div>
+      </section>
+
+      <section class="part" id="automation">
+        <div class="part-in">
+          <span class="mono">Part two</span>
+          <h2><span class="lm"><span>The system</span></span><span class="lm"><span>behind the volume</span></span></h2>
+          <p>Everything above was made by hand. To keep that pace without losing quality, I turned the brand rules into three AI production pipelines. I designed the zones, the art direction, the quality checks and the moments where a person decides. The AI renders inside those rules.</p>
+          <div class="part-f"><div><b>3</b><span>pipelines</span></div><div><b>9</b><span>layers per master</span></div><div><b>5</b><span>formats from one image</span></div></div>
+        </div>
+      </section>
+
+      <section class="chap" id="anatomy">
+        <span class="mono">Automation · 01 · Anatomy</span>
+        <h2><span class="lm"><span>Take a master</span></span><span class="lm"><span>apart</span></span></h2>
+        <p class="lead">Every slot visual master is the same stack of nine layers, each one with a fixed place and a fixed job. Drag the slider to pull them apart. The names are the real layer names in the file.</p>
+        <div class="anat">
+          <div class="an-stage"><div class="an-stack">{anat}</div></div>
+          <div class="an-side">
+            <div class="an-panel"><div class="an-ph mono">Layers</div><ol class="an-list">{anlist}</ol></div>
+            <label class="an-ctl mono" for="an-r">Explode<input id="an-r" class="an-r" type="range" min="0" max="100" value="70"></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="chap" id="reflow">
+        <span class="mono">Automation · 02 · Reflow</span>
+        <h2><span class="lm"><span>One image,</span></span><span class="lm"><span>five placements</span></span></h2>
+        <p class="lead">The resize pipeline moves every element to its stored position for each format. These are the real coordinates; the subject is never regenerated, only the image around it is extended.</p>
+        <div class="reflow" data-rf='{rf_json}'>
+          <div class="rf-tabs" role="tablist" aria-label="Formats">{rf_tabs}</div>
+          <div class="rf-stage"><div class="rf-frame">{rf_els}</div></div>
+          <p class="rf-cap mono">Story · 1080 × 1920</p>
+        </div>
+      </section>
+
+      <section class="chap" id="pipelines">
+        <span class="mono">Automation · 03 · Pipelines</span>
+        <h2><span class="lm"><span>Who does</span></span><span class="lm"><span>what</span></span></h2>
+        <p class="lead">The three pipelines run as Claude skills, with Higgsfield for images and Figma for layout. Follow a piece through the lanes; the screen on the side shows what happens at each step.</p>
+        <div class="swim" data-sw='{sw_json}'>
+          <div class="sw-top"><div class="cbp-tabs" role="tablist" aria-label="Pipelines"><button role="tab" aria-selected="true" data-p="vm">Slot visual master</button><button role="tab" aria-selected="false" data-p="res">Resizes</button><button role="tab" aria-selected="false" data-p="crm">CRM banners</button></div><button type="button" class="sw-play">Play ►</button></div>
+          <div class="sw-body">
+            <div class="sw-scroll" data-lenis-prevent><div class="sw-grid"><div class="sw-lane l-me"><span>Me</span></div><div class="sw-lane l-rule"><span>Rules I wrote</span></div><div class="sw-lane l-ai"><span>AI</span></div><svg class="sw-line" aria-hidden="true"><polyline/></svg><span class="sw-dot"></span></div></div>
+            {mv}
+          </div>
+          <div class="sw-sum mono"></div>
+          <div class="cbp-loop"><b>Every approved piece becomes the new standard.</b> When I adjust a master by hand, its positions and values go back into the skill, so the next run starts from my correction.</div>
         </div>
       </section>
 
       <section class="chap" id="impact">
-        <span class="mono">08 · Impact</span>
+        <span class="mono">Automation · 04 · Impact</span>
         <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
         <div class="cb-nums">
           <div><b>~130</b><p>pieces a month I made by hand before the pipelines.</p><small class="mono">Approximate · my own count</small></div>
@@ -978,7 +886,7 @@ case6=head('CampoBet · Rodrigo López','Case study (version B): brand and produ
   </div>
 '''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
 '''+scripts(pre)
-open(os.path.join(R,'proyectos','campobet-b.html'),'w').write(case6)
+open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
 
 
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
@@ -998,7 +906,7 @@ WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for 
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
  ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
  ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html"),
- ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, social, paid, CRM, ASO and blog pieces (about 130 a month at the peak, approximate), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
+ ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 130 a month at the peak, approximate), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},
