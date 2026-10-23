@@ -299,17 +299,18 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
       <section class="chap" id="challenge">
         <span class="mono">01 · Challenge</span>
         <h2><span class="lm"><span>Make the intangible</span></span><span class="lm"><span>feel tangible</span></span></h2>
-        <p class="lead">Conferences are hard to sell on a screen, and the market for organizational development is crowded.</p>
+        <p class="lead">Happy Talks offers disruptive conferences that provoke reflection, build emotional connection and catalyze change inside organizations, far from traditional formats.</p>
         <div class="quotes" style="margin-top:.5rem">
-          <div class="quote a"><b>Show</b><p>Present the speakers and their talks so the offer feels real.</p></div>
-          <div class="quote c"><b>Convert</b><p>Lead every scroll to one action: request a conference.</p></div>
+          <div class="quote a"><b>Intangible</b><p>Communicate an intangible offer, conferences, in a tangible and appealing way.</p></div>
+          <div class="quote c"><b>Crowded</b><p>Stand out in a competitive market for organizational development services.</p></div>
         </div>
+        <p class="muted" style="margin-top:1.6rem">The goal: present the speakers and generate leads through an agile structure and storytelling that reflects the brand’s innovative spirit.</p>
       </section>
 
       <section class="chap" id="system">
         <span class="mono">02 · The system</span>
         <h2><span class="lm"><span>Less brochure,</span></span><span class="lm"><span>more backstage pass</span></span></h2>
-        <p class="lead">Vibrant tones for energy, real photography for trust, and stickers that carry the topics. Go ahead, throw them around.</p>
+        <p class="lead">Vibrant tones that carry energy and positivity. Illustration and photography that humanize the brand and connect with people. And stickers that carry the topics.</p>
         <div class="storm" aria-label="The landing’s topic stickers: drag and throw them" data-cursor="Grab one"><img class="storm-mark" src="{pre}assets/img/happy-talks/ht-white.png" alt="" draggable="false"><img class="storm-line" src="{pre}assets/img/happy-talks/squiggle.webp" alt="" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s02.webp" alt="" width="440" height="211" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s03.webp" alt="" width="440" height="195" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s04.webp" alt="" width="440" height="399" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s05.webp" alt="" width="440" height="398" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s06.webp" alt="" width="440" height="440" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s07.webp" alt="" width="250" height="440" style="--w:125" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s08.webp" alt="" width="440" height="440" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s09.webp" alt="" width="440" height="145" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s10.webp" alt="" width="440" height="169" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s11.webp" alt="" width="440" height="145" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s12.webp" alt="" width="440" height="260" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s13.webp" alt="" width="440" height="260" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s14.webp" alt="" width="254" height="440" style="--w:127" draggable="false"><button type="button" class="storm-reset">Drop them again</button></div>
         <p class="muted mono" style="margin-top:.8rem">The landing’s real topic stickers. Go ahead, throw them.</p>
         <div class="swatches" aria-label="Happy Talks palette" style="margin-top:2rem">
