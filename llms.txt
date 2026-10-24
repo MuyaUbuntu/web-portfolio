@@ -9,17 +9,17 @@ Designer and art director from Mexico with 10+ years of experience (since 2016).
 - Location: Mexico · open to remote
 
 ## Experience
-- 2025–present · Design Team Lead, iGaming. Design for an online betting brand: social, paid, CRM, ASO and AI production pipelines.
-- 2023–2025 · Senior Designer, HD* Human Design Doing. Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more.
-- 2020–2023 · Senior Designer, Happy Studio. Concepts, 3D models and 2D animation for brand campaigns.
+- 2025–present · Design Team Lead, iGaming. Sole designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines.
+- 2023–2025 · Senior Designer, HD* Human Design Doing. Concepts and AI key visuals for culture and training programs at Philip Morris, Coca-Cola, Mars, Sephora, Cinépolis and more, plus the Happy Talks landing.
+- 2020–2023 · Senior Designer, Happy Studio. Campaign concepts, 3D and 2D animation, including the ArboTerra concept and AdBook.
 - 2018–2020 · Jr. Art Director, Volátil Agencia Creativa. Creative concepts and art direction.
 - 2016–2018 · Designer, In Movisión. Print and digital design, architectural photography and web layouts.
 
 ## Selected work
 - [Happy Talks](proyectos/happy-talks.html) — HD* Human Design Doing (in-house) · 2024. UI design for the landing page of HD*’s conference platform, desktop and mobile, delivered in two weeks. Approved at the first round and still live at happy-talks.com. Illustrator and Photoshop; no AI.
-- [No Vendas Humo](proyectos/no-vendas-humo.html) — Philip Morris International. AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.
-- [ArboTerra es…](proyectos/arboterra.html) — ArboTerra (via Happy Studio) · 2023. Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
-- [Conexiones Mágicas](proyectos/conexiones-magicas.html) — Coca-Cola México (via HD* Human Design Doing). Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.
+- [No Vendas Humo](proyectos/no-vendas-humo.html) — Philip Morris International. AI-assisted key visual for a 2.5-day training that refocused the sales force on point-of-sale execution. Title plays on the Spanish idiom for empty promises; hand-painted reference finished with Adobe Firefly and Photoshop.
+- [ArboTerra es…](proyectos/arboterra.html) — ArboTerra (via Happy Studio) · 2023. Open-ended campaign concept (the park means something different to each visitor, so the line stays open), four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.
+- [Conexiones Mágicas](proyectos/conexiones-magicas.html) — Coca-Cola México (via HD* Human Design Doing). Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Bottle cap built by hand in about 12 layers.
 - [CampoBet](proyectos/campobet.html) — CampoBet. Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 160 pieces a month on average, 184 in the busiest; copy by the content manager; 50 slot pieces in one working day with the pipeline; 82% of customers contacted for first-deposit follow-up said they found the brand on social media), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.
 
 ## Highlights (as shown on the site)
@@ -29,7 +29,6 @@ Designer and art director from Mexico with 10+ years of experience (since 2016).
 
 ## Skills
 - Brand design
-- Brand management
 - Art direction
 - Key visuals
 - AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)

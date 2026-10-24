@@ -101,7 +101,7 @@ def card(i,href,client,name,role,tags,media,ref=None,aiflag=False,soon=False):
 
 # ================= HOME =================
 pre=''
-roles='<span>Art direction</span><span>AI imagery</span><span>UX/UI</span><span>3D</span><span>Internal campaigns</span><span>Brand management</span>'
+roles='<span>Art direction</span><span>AI imagery</span><span>UX/UI</span><span>3D</span><span>Internal campaigns</span><span>Brand systems</span>'
 roles2='<span>Creative ideas</span><span>Big results</span><span>Human craft</span><span>Strategy first</span>'
 pairs=[{'name':'Philip Morris','ref':'assets/img/ai/pmi-humo-ref.jpg','fin':'assets/img/ai/pmi-humo-final.jpg'},
        {'name':'Coca-Cola','ref':'assets/img/ai/coca-ref.jpg','fin':'assets/img/ai/coca-final.jpg'},
@@ -112,7 +112,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
   <section class="hero wrap">
     <canvas class="dots" aria-hidden="true"></canvas>
     <div class="hero-top">
-      <div class="hello"><span class="av">{LOGO}</span><p>Hi, I’m <b>Rodrigo López</b>. Designer and art director from Mexico, working with global brands.</p></div>
+      <div class="hello"><span class="av">{LOGO}</span><p>Hi, I’m <b>Rodrigo López</b>, a designer and art director from Mexico. Ten years of campaigns and brand work for global brands.</p></div>
       <span class="avail mono"><i></i>Open to projects &amp; roles</span>
     </div>
     <div>
@@ -149,16 +149,16 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
     <div class="sec wrap">
       <div class="sec-h">
         <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">07</i></span></span></h2>
-        <div><p>Campaigns and digital work for global brands. On AI projects, hover to see the sketch they started from.</p></div>
+        <div><p>Campaigns, brand systems and digital work for Philip Morris, Coca-Cola, Mars and more. On AI projects, hover to see the sketch each one started from.</p></div>
       </div>
       <div class="grid">
-{card(1,"proyectos/happy-talks.html","HD* · 2024","Happy Talks","Approved at first round and still live, two years on. UI in two weeks.",["Web","UI","Illustrator"],ht(1,"Happy Talks landing page on a laptop",pre))}
-{card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
-{card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
-{card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
-{card(5,"proyectos/campobet.html","CampoBet","CampoBet","160 pieces a month on average, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(1,"proyectos/happy-talks.html","HD* · 2024","Happy Talks","Landing UI for a conference brand: two weeks, approved in the first round, still live.",["Web","UI","Illustrator"],ht(1,"Happy Talks landing page on a laptop",pre))}
+{card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for PMI’s sales-force program, built on a Spanish double meaning.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
+{card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","A concept that refuses to define the park. Approved at first pitch, still in use three years on.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","Key visual for a 75-person team experience: AI for the light, the details by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
+{card(5,"proyectos/campobet.html","CampoBet","CampoBet","Sole designer of a betting brand: ~160 pieces a month, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(6,"proyectos/ai-showroom.html","Showroom · 10 brands","AI Showroom","11 AI key visuals for culture programs, shown from reference to final.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
-{card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three briefs against the clock: from 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
+{card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three recruitment briefs against the clock. The fastest: 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
       <div class="ix" aria-label="Project index">
         <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
@@ -192,15 +192,13 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
       </div>
       <ul class="svc">
         <li class="open" data-n="01" style="--c:var(--butter)"><button type="button"><span class="i">01</span><h3>AI art direction</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Key visuals that start as a hand-painted reference and end as a polished campaign. Firefly, Midjourney and Stable Diffusion as copilots; Photoshop and judgment for the final word.</p><div class="tags"><span class="tag">Firefly</span><span class="tag">Midjourney</span><span class="tag">Stable Diffusion</span><span class="tag">Photoshop</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>Key visuals that start from a hand-painted reference, so the composition is decided before the AI renders anything. Final art and retouching in Photoshop.</p><div class="tags"><span class="tag">Firefly</span><span class="tag">Midjourney</span><span class="tag">Stable Diffusion</span><span class="tag">Photoshop</span></div></div></div></div></li>
         <li data-n="02" style="--c:var(--pink)"><button type="button"><span class="i">02</span><h3>Internal campaigns</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Concepts and materials for culture, training and change programs at Philip Morris, Coca-Cola, Nestlé, Sephora, Mars and more.</p><div class="tags"><span class="tag">Endomarketing</span><span class="tag">Concepts</span><span class="tag">Events</span><span class="tag">Large-format</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>Concepts and key visuals for culture, training and change programs, from a 75-person plant team to a 1,070-employee rollout. Philip Morris, Coca-Cola, Mars, Sephora and more.</p><div class="tags"><span class="tag">Endomarketing</span><span class="tag">Concepts</span><span class="tag">Events</span><span class="tag">Large-format</span></div></div></div></div></li>
         <li data-n="03" style="--c:var(--sky)"><button type="button"><span class="i">03</span><h3>UX/UI &amp; web</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Landing pages and digital experiences that tell the story and convert, like <a href="proyectos/happy-talks.html" data-go>Happy Talks</a>.</p><div class="tags"><span class="tag">Figma</span><span class="tag">Landing pages</span><span class="tag">HTML &amp; CSS</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>Landing pages built around one action, like <a href="proyectos/happy-talks.html" data-go>Happy Talks</a>: nine sections that lead to a single request.</p><div class="tags"><span class="tag">Figma</span><span class="tag">Landing pages</span><span class="tag">HTML &amp; CSS</span></div></div></div></div></li>
         <li data-n="04" style="--c:var(--mint)"><button type="button"><span class="i">04</span><h3>3D &amp; motion</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>3D models, renders and 2D animation that give campaigns depth and movement.</p><div class="tags"><span class="tag">Blender</span><span class="tag">Cinema 4D</span><span class="tag">Octane</span><span class="tag">After Effects</span></div></div></div></div></li>
-        <li data-n="05" style="--c:var(--tomato)"><button type="button"><span class="i">05</span><h3>Team &amp; brand management</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Leading design for an online betting brand, aligned with Marketing, CRM, ASO and Performance to improve conversion and retention.</p><div class="tags"><span class="tag">Team lead</span><span class="tag">CRM</span><span class="tag">ASO</span><span class="tag">Performance</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>3D models and scenes for campaigns, like ArboTerra’s floating tree, plus 2D animation.</p><div class="tags"><span class="tag">Blender</span><span class="tag">Cinema 4D</span><span class="tag">Octane</span><span class="tag">After Effects</span></div></div></div></div></li>
       </ul>
     </div>
   </section>
@@ -213,9 +211,9 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
       </div>
     </div>
     <ul class="xp" aria-label="Experience">
-      <li><span class="yr"><b>2025 – Now</b></span><h3>Design Team Lead<small>iGaming</small></h3><p>Design for an online betting brand: social, paid, CRM, ASO and AI production pipelines.</p></li>
-      <li><span class="yr"><b>2023 – 2025</b></span><h3>Senior Designer<small>HD* Human Design Doing</small></h3><p>Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more.</p></li>
-      <li><span class="yr"><b>2020 – 2023</b></span><h3>Senior Designer<small>Happy Studio</small></h3><p>Concepts, 3D models and 2D animation for brand campaigns.</p></li>
+      <li><span class="yr"><b>2025 – Now</b></span><h3>Design Team Lead<small>iGaming</small></h3><p>Sole designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines.</p></li>
+      <li><span class="yr"><b>2023 – 2025</b></span><h3>Senior Designer<small>HD* Human Design Doing</small></h3><p>Concepts and AI key visuals for culture and training programs at Philip Morris, Coca-Cola, Mars, Sephora, Cinépolis and more, plus the Happy Talks landing.</p></li>
+      <li><span class="yr"><b>2020 – 2023</b></span><h3>Senior Designer<small>Happy Studio</small></h3><p>Campaign concepts, 3D and 2D animation, including the ArboTerra concept and AdBook.</p></li>
       <li><span class="yr"><b>2018 – 2020</b></span><h3>Jr. Art Director<small>Volátil Agencia Creativa</small></h3><p>Creative concepts and art direction in a fast-paced agency.</p></li>
       <li><span class="yr"><b>2016 – 2018</b></span><h3>Designer<small>In Movisión</small></h3><p>Print and digital design, architectural photography and web layouts.</p></li>
     </ul>
@@ -275,7 +273,7 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
       <div class="c-client"><span class="tag k">HD* Human Design Doing</span><span class="tag">Web · 2024</span></div>
       <h1 class="c-title" aria-label="Happy Talks"><span aria-hidden="true">{word("Happy")} {word("Talks","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">A landing page for HD*’s conference platform: an intangible offer, talks that change teams, turned into a page you can scroll, feel and request in one tap. My part was the UI.</p>
+      <p class="c-lead">UI for the landing of Happy Talks, HD*’s conference brand. The job: sell something intangible, a talk, in a crowded market. The page presents it like a festival lineup, with speakers, proof and one clear request.</p>
       <div class="tags c-tags"><span class="tag t">UI design</span><span class="tag p">Landing page</span><span class="tool t-ai" title="Illustrator">Ai</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>UI design</dd></div><div><dt class="mono">Client</dt><dd>HD* (in-house)</dd></div><div><dt class="mono">Timeline</dt><dd>2 weeks · 2024</dd></div><div class="win"><dt class="mono">Result</dt><dd>Approved first round · still live</dd></div></dl>
       <a class="btn live" href="https://happy-talks.com/" target="_blank" rel="noopener">Visit the live site <span class="ar">↗</span></a>
@@ -298,18 +296,18 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
       <section class="chap" id="challenge">
         <span class="mono">01 · Challenge</span>
         <h2><span class="lm"><span>Make the intangible</span></span><span class="lm"><span>feel tangible</span></span></h2>
-        <p class="lead">Happy Talks offers disruptive conferences that provoke reflection, build emotional connection and catalyze change inside organizations, far from traditional formats.</p>
+        <p class="lead">Happy Talks sells conferences to companies: talks meant to provoke reflection and change inside teams. Hard to show, and easy to confuse with any other speaker agency.</p>
         <div class="quotes" style="margin-top:.5rem">
           <div class="quote a"><b>Intangible</b><p>Communicate an intangible offer, conferences, in a tangible and appealing way.</p></div>
           <div class="quote c"><b>Crowded</b><p>Stand out in a competitive market for organizational development services.</p></div>
         </div>
-        <p class="muted" style="margin-top:1.6rem">The goal: present the speakers and generate leads through an agile structure and storytelling that reflects the brand’s innovative spirit.</p>
+        <p class="muted" style="margin-top:1.6rem">The brief: present the speakers and generate leads, with a structure that is quick to scan and ends in one action.</p>
       </section>
 
       <section class="chap" id="system">
         <span class="mono">02 · The system</span>
         <h2><span class="lm"><span>Less brochure,</span></span><span class="lm"><span>more backstage pass</span></span></h2>
-        <p class="lead">Vibrant tones that carry energy and positivity. Illustration and photography that humanize the brand and connect with people. And stickers that carry the topics.</p>
+        <p class="lead">A dark stage with vibrant color for energy, photography and illustration to keep it human, and stickers that carry the topics, so a new talk fits without redesigning the page.</p>
         <div class="storm" aria-label="The landing’s topic stickers: drag and throw them" data-cursor="Grab one"><img class="storm-mark" src="{pre}assets/img/happy-talks/ht-white.png" alt="" draggable="false"><img class="storm-line" src="{pre}assets/img/happy-talks/squiggle.webp" alt="" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s02.webp" alt="" width="440" height="211" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s03.webp" alt="" width="440" height="195" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s04.webp" alt="" width="440" height="399" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s05.webp" alt="" width="440" height="398" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s06.webp" alt="" width="440" height="440" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s07.webp" alt="" width="250" height="440" style="--w:125" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s08.webp" alt="" width="440" height="440" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s09.webp" alt="" width="440" height="145" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s10.webp" alt="" width="440" height="169" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s11.webp" alt="" width="440" height="145" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s12.webp" alt="" width="440" height="260" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s13.webp" alt="" width="440" height="260" style="--w:220" draggable="false"><img class="stk-p img" src="{pre}assets/img/happy-talks/stickers/s14.webp" alt="" width="254" height="440" style="--w:127" draggable="false"><button type="button" class="storm-reset">Drop them again</button></div>
         <p class="muted mono" style="margin-top:.8rem">The landing’s real topic stickers. Go ahead, throw them.</p>
         <div class="swatches" aria-label="Happy Talks palette" style="margin-top:2rem">
@@ -374,7 +372,7 @@ case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key vis
       <div class="c-client"><span class="tag k">Philip Morris International</span><span class="ai">AI process</span></div>
       <h1 class="c-title" aria-label="No vendas humo"><span aria-hidden="true">{word("No")} {word("vendas")} {word("humo","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">A key visual for a sales-culture program during PMI’s shift to a smoke-free company. The idea, “don’t sell smoke”, was drawn by hand first and finished with AI.</p>
+      <p class="c-lead">Key visual for a 2.5-day training that refocused PMI’s sales force on execution at the point of sale, during the company’s move to a smoke-free business. The title works twice: “no vendas humo” is Spanish for “don’t make empty promises”.</p>
       <div class="tags c-tags"><span class="tag t">Key visual</span><span class="tag p">Internal campaign</span><span class="tool t-ff" title="Adobe Firefly">Ff</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Program</dt><dd>2.5-day training</dd></div></dl>
     </div></div>
@@ -469,7 +467,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <div class="c-client"><span class="tag k">ArboTerra</span><span class="tag">Campaign · 2023</span></div>
       <h1 class="c-title" aria-label="ArboTerra es…"><span aria-hidden="true">{word("ArboTerra")} {word("es…","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">A park nobody could define got a campaign that never finishes the sentence. My part was the concept: the idea, the four key visuals and the AdBook. The client’s in-house team produced everything after, and still uses it three years later.</p>
+      <p class="c-lead">Many families didn’t know what ArboTerra was, and the client wanted one concept to define it. The answer was not to: the park is something different for every visitor, so the sentence stays open. I created the concept, four 3D key visuals and the AdBook the client’s team still produces with.</p>
       <div class="tags c-tags"><span class="tag t">Concept</span><span class="tag p">Art direction</span><span class="tag b">3D</span><span class="tool t-bl" title="Blender">Bl</span><span class="tool t-ps" title="Photoshop">Ps</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>Concept, key visuals, 3D</dd></div><div><dt class="mono">Scope</dt><dd>Concept only · execution in-house</dd></div><div><dt class="mono">Agency</dt><dd>Happy Studio</dd></div><div><dt class="mono">Timeline</dt><dd>2–3 months</dd></div><div class="win"><dt class="mono">Result</dt><dd>Still in use, 3 years on</dd></div></dl>
     </div></div>
@@ -488,7 +486,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="challenge">
         <span class="mono">01 · Challenge</span>
         <h2><span class="lm"><span>A park nobody</span></span><span class="lm"><span>could define</span></span></h2>
-        <p class="lead">ArboTerra, a nature park in Puebla, had a problem: many families didn’t know what it was.</p>
+        <p class="lead">ArboTerra, a nature park in Puebla, needed a campaign to introduce itself: many families didn’t know what it was. The brief asked for a single concept to sum the park up.</p>
         <div class="quotes" style="margin-top:2rem">
           <div class="quote a"><b>Families</b><p>Parents and kids, with very different reasons to visit.</p></div>
           <div class="quote c"><b>Print + digital</b><p>Billboards and a steady stream of social content.</p></div>
@@ -498,9 +496,10 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="idea">
         <span class="mono">02 · Idea</span>
         <h2><span class="lm"><span>Don’t define it.</span></span><span class="lm"><span>Let it be everything.</span></span></h2>
-        <p class="lead">Leave the sentence open: <b>ArboTerra es…</b> adventure or magic for kids, learning for parents.</p>
+        <p class="lead">Any single definition would leave most of the park out. So the line never ends: <b>ArboTerra es…</b> adventure, fun or magic, depending on who visits and what they do there. A kid finds adventure; a parent finds learning.</p>
+        <p class="muted">The client wanted something timeless. An open sentence gives them a campaign that never runs out of endings, and the freedom to say whatever the park needs next.</p>
         <h3 class="sub">The road not taken</h3>
-        <p class="muted">Mascots on white looked like any park. The floating tree could hold every ending. Drag to compare.</p>
+        <p class="muted">The white route, with mascots and 3D letters, looked like any other park. The floating tree belongs only to ArboTerra and works with every ending. Drag to compare.</p>
         <div class="compare" data-cursor="Drag">
           <div class="before">{at('route-white','Discarded route: mascots and 3D letters reading Arboterra es Aventura on white')}</div>
           <div class="after" style="position:absolute;inset:0">{at('kv-aventura','Chosen route: the Árbol Arcano floating over teal clouds')}</div>
@@ -538,7 +537,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       <section class="chap" id="system">
         <span class="mono">04 · The system</span>
         <h2><span class="lm"><span>A toolkit,</span></span><span class="lm"><span>not a poster</span></span></h2>
-        <p class="lead">The client’s team ran the execution, so I delivered a 35-page AdBook built to be reused.</p>
+        <p class="lead">I sold the concept; the client’s in-house team would run production. So the deliverable was a 35-page AdBook: four backgrounds, the tree, supporting elements, type and layer rules, enough to build any new piece without the agency.</p>
         <div class="concept">
           <div><h3>Sorvette for the big words</h3><p>Rounded block letters with small cut-in details, so every word feels hand-built.</p></div>
           <div><h3>Knewave for the call to action</h3><p>A loose brush script that shouts ¡Ven y explora! without competing with the title.</p></div>
@@ -581,7 +580,7 @@ steps=[('s1-reference.jpg','Photo reference','Hand','A reference photo of a hand
  ('s3-firefly.jpg','Firefly result','AI','Godrays, dust and backlight. The output didn’t fill the canvas: see the red band on top.'),
  ('s4-extend.jpg','Generative Fill','AI','The missing sky is extended and the fingers are cleaned up.'),
  ('s5-grade.jpg','Color grade','Hand','Warm light pushed into Coca-Cola red with hue and curve adjustments.'),
- ('s6-cap.jpg','The cap','Hand','A real bottle-cap photo, rebuilt in 12 layers to sit in the light.'),
+ ('s6-cap.jpg','The cap','Hand','The cap, built by hand in about 12 layers of curves, highlights and shadows.'),
  ('s7-final.jpg','Final key visual','Hand','Title in linear burn, tagline and logo.')]
 timgs=''.join(f'<figure class="t-img{" on" if i==0 else ""}">{cc(f,f"Step {i+1}: {t}")}</figure>' for i,(f,t,w,d) in enumerate(steps))
 tlist=''.join(f'<li data-i="{i}"{" class=on" if i==0 else ""}><b>{i+1:02d}</b><span>{t}</span><em class="{"ai-b" if w=="AI" else "hand-b"}">{w}</em></li>' for i,(f,t,w,d) in enumerate(steps))
@@ -738,7 +737,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <div class="c-client"><span class="tag k">CampoBet</span><span class="ai">AI system</span></div>
       <h1 class="c-title" aria-label="CampoBet"><span aria-hidden="true">{word("Campo")}{word("Bet","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
+      <p class="c-lead">An online betting brand that publishes every day. As its only designer, I produce ~160 pieces a month across social, paid, CRM, the blog and the app stores. I proposed the rebrand that gave the organic content its own look, and designed three AI pipelines that put the brand rules into production.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>The brand’s only designer: brand, production, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~160 pieces a month on average</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
@@ -837,7 +836,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <div class="part-in">
           <span class="mono">Part two · The system</span>
           <h2><span class="lm"><span>The system</span></span><span class="lm"><span>behind the volume</span></span></h2>
-          <p>Everything above was made by hand. To keep that pace without losing quality, I turned the brand rules into three AI production pipelines. I designed the zones, the art direction, the quality checks and the moments where a person decides. The AI renders inside those rules.</p>
+          <p>To keep that pace without losing consistency, I turned the brand rules into three AI production pipelines. I designed the zones, the art direction, the quality checks and the moments where a person decides. The AI renders inside those rules.</p>
           <div class="part-f"><div><b>3</b><span>pipelines</span></div><div><b>9</b><span>layers per master</span></div><div><b>5</b><span>formats from one image</span></div></div>
         </div>
       </section>
@@ -895,7 +894,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">Automation · 05 · Impact</span>
         <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
         <div class="cb-nums">
-          <div><b>160</b><p>pieces a month on average, designed by hand before the pipelines, with 184 in the busiest month. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the content boards</small></div>
+          <div><b>160</b><p>pieces a month on average, with 184 in the busiest month. Copy by the content manager; every design is mine.</p><small class="mono">Monthly average</small></div>
           <div><b>50</b><p>slot pieces delivered in one day of work with the pipeline, across all formats.</p><small class="mono">Total working time, my own count</small></div>
           <div><b>82%</b><p>of customers contacted for a first-deposit follow-up said they found CampoBet through social media. Instagram followers and interaction grew after the rebrand.</p><small class="mono">From the follow-up calls</small></div>
         </div>
@@ -1146,16 +1145,16 @@ PERSON={"@type":"Person","name":"Rodrigo López","jobTitle":"Design Team Lead ·
  "description":"Designer and art director from Mexico with 10+ years of experience (since 2016). Brand design, art direction, AI-assisted key visuals, internal campaigns, UX/UI and 3D for global brands. Looking for Brand Designer or Brand Manager roles; open to remote work.",
  "email":"mailto:"+EMAIL,"address":{"@type":"PostalAddress","addressCountry":"MX"},
  "sameAs":[LI,IG],
- "knowsAbout":["Brand design","Brand management","Art direction","Key visuals","AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)","Internal communications and endomarketing","UX/UI and landing pages","3D (Blender, Cinema 4D)","Design team leadership"]}
-EXPERIENCE=[("2025–present","Design Team Lead","iGaming","Design for an online betting brand: social, paid, CRM, ASO and AI production pipelines."),
- ("2023–2025","Senior Designer","HD* Human Design Doing","Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more."),
- ("2020–2023","Senior Designer","Happy Studio","Concepts, 3D models and 2D animation for brand campaigns."),
+ "knowsAbout":["Brand design","Art direction","Key visuals","AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)","Internal communications and endomarketing","UX/UI and landing pages","3D (Blender, Cinema 4D)","Design team leadership"]}
+EXPERIENCE=[("2025–present","Design Team Lead","iGaming","Sole designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines."),
+ ("2023–2025","Senior Designer","HD* Human Design Doing","Concepts and AI key visuals for culture and training programs at Philip Morris, Coca-Cola, Mars, Sephora, Cinépolis and more, plus the Happy Talks landing."),
+ ("2020–2023","Senior Designer","Happy Studio","Campaign concepts, 3D and 2D animation, including the ArboTerra concept and AdBook."),
  ("2018–2020","Jr. Art Director","Volátil Agencia Creativa","Creative concepts and art direction."),
  ("2016–2018","Designer","In Movisión","Print and digital design, architectural photography and web layouts.")]
 WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for the landing page of HD*’s conference platform, desktop and mobile, delivered in two weeks. Approved at the first round and still live at happy-talks.com. Illustrator and Photoshop; no AI.","proyectos/happy-talks.html"),
- ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
- ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
- ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html"),
+ ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a 2.5-day training that refocused the sales force on point-of-sale execution. Title plays on the Spanish idiom for empty promises; hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
+ ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Open-ended campaign concept (the park means something different to each visitor, so the line stays open), four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
+ ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Bottle cap built by hand in about 12 layers.","proyectos/conexiones-magicas.html"),
  ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 160 pieces a month on average, 184 in the busiest; copy by the content manager; 50 slot pieces in one working day with the pipeline; 82% of customers contacted for first-deposit follow-up said they found the brand on social media), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
