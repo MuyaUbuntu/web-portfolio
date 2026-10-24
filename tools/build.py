@@ -152,21 +152,21 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
         <div><p>Campaigns, brand systems and digital work for Philip Morris, Coca-Cola, Mars and more. On AI projects, hover to see the sketch each one started from.</p></div>
       </div>
       <div class="grid">
-{card(1,"proyectos/happy-talks.html","HD* · 2024","Happy Talks","Landing UI for a conference brand: two weeks, approved in the first round, still live.",["Web","UI","Illustrator"],ht(1,"Happy Talks landing page on a laptop",pre))}
-{card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for PMI’s sales-force program, built on a Spanish double meaning.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
-{card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","A concept that refuses to define the park. Approved at first pitch, still in use three years on.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(1,"proyectos/campobet.html","CampoBet","CampoBet","Sole designer of a betting brand: ~160 pieces a month, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(2,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","A concept that refuses to define the park. Approved at first pitch, still in use three years on.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(3,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for PMI’s sales-force program, built on a Spanish double meaning.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","Key visual for a 75-person team experience: AI for the light, the details by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
-{card(5,"proyectos/campobet.html","CampoBet","CampoBet","Sole designer of a betting brand: ~160 pieces a month, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(5,"proyectos/happy-talks.html","HD* · 2024","Happy Talks","Landing UI for a conference brand: two weeks, approved in the first round, still live.",["Web","UI","Illustrator"],ht(1,"Happy Talks landing page on a laptop",pre))}
 {card(6,"proyectos/ai-showroom.html","Showroom · 10 brands","AI Showroom","11 AI key visuals for culture programs, shown from reference to final.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
 {card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three recruitment briefs against the clock. The fastest: 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
       <div class="ix" aria-label="Project index">
         <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
-          <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">01</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HD*</span><span class="ix-tg">Web · UI</span><span class="ix-yr">2024</span></a>
-          <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">02</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
-          <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
+          <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/cover.jpg"><span class="ix-n">01</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">02</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
+          <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">03</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
           <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
-          <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/cover.jpg"><span class="ix-n">05</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">05</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HD*</span><span class="ix-tg">Web · UI</span><span class="ix-yr">2024</span></a>
           <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">AI Showroom</span><span class="ix-cl">10 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
           <a class="ix-row" href="proyectos/ai-lab.html" data-go data-zoom data-cursor="Open" data-img="assets/img/lab/nissan.jpg"><span class="ix-n">07</span><span class="ix-name">AI Lab</span><span class="ix-cl">Recruitment exercises</span><span class="ix-tg">AI process</span><span class="ix-yr">—</span></a>
       </div>
@@ -360,7 +360,7 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
       </section>
     </div>
   </div>
-'''+next_block(pre,'No Vendas Humo','no-vendas-humo.html',aiimg('pmi-humo-final',pre))+'''</main>
+'''+next_block(pre,'AI Showroom','ai-showroom.html','<img src="../assets/img/showroom/didi.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','happy-talks.html'),'w').write(case)
 
@@ -437,7 +437,7 @@ case2=head('No Vendas Humo · Rodrigo López','Case study: an AI-powered key vis
 
     </div>
   </div>
-'''+next_block(pre,'ArboTerra es…','arboterra.html','<img src="../assets/img/arboterra/kv-aventura.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'Conexiones Mágicas','conexiones-magicas.html','<img src="../assets/img/coca/s7-final.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','no-vendas-humo.html'),'w').write(case2)
 
@@ -569,7 +569,7 @@ case3=head('ArboTerra es… · Rodrigo López','Case study: an open-ended campai
       </section>
     </div>
   </div>
-'''+next_block(pre,'Conexiones Mágicas','conexiones-magicas.html','<img src="../assets/img/coca/s7-final.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'No Vendas Humo','no-vendas-humo.html','<img src="../assets/img/ai/pmi-humo-final.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','arboterra.html'),'w').write(case3)
 # ================= CASE: CONEXIONES MÁGICAS (short AI case) =================
@@ -653,7 +653,7 @@ case4=head('Conexiones Mágicas · Rodrigo López','Case study: an AI-assisted k
 
     </div>
   </div>
-'''+next_block(pre,'CampoBet','campobet.html','<img src="../assets/img/campobet/cover.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','conexiones-magicas.html'),'w').write(case4)
 
@@ -901,7 +901,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       </section>
     </div>
   </div>
-'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+next_block(pre,'ArboTerra es…','arboterra.html','<img src="../assets/img/arboterra/kv-aventura.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 case5=case5.replace('</head>','<link rel="preload" as="image" href="../assets/img/campobet/mosaic-d.jpg" media="(min-width:641px)"><link rel="preload" as="image" href="../assets/img/campobet/mosaic-m.jpg" media="(max-width:640px)">\n</head>',1)
 open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
@@ -1135,7 +1135,7 @@ lab=head('AI Lab · Rodrigo López','Three timed AI exercises from recruitment b
   </section>
   <div class="wrap">
 {labs}  </div>
-'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+next_block(pre,'CampoBet','campobet.html','<img src="../assets/img/campobet/cover.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','ai-lab.html'),'w').write(lab)
 
