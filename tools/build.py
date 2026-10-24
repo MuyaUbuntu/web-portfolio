@@ -157,7 +157,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
 {card(5,"proyectos/campobet.html","CampoBet","CampoBet","160 pieces a month on average, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
-{card(6,"proyectos/ai-showroom.html","Showroom · 11 brands","AI Showroom","13 AI key visuals for culture programs at PMI, Mars, DiDi, Sephora and more.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
+{card(6,"proyectos/ai-showroom.html","Showroom · 10 brands","AI Showroom","11 AI key visuals for culture programs, shown from reference to final.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
 {card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three briefs against the clock: from 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
       <div class="ix" aria-label="Project index">
@@ -167,7 +167,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
           <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
           <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
           <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/cover.jpg"><span class="ix-n">05</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
-          <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">AI Showroom</span><span class="ix-cl">11 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">AI Showroom</span><span class="ix-cl">10 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
           <a class="ix-row" href="proyectos/ai-lab.html" data-go data-zoom data-cursor="Open" data-img="assets/img/lab/nissan.jpg"><span class="ix-n">07</span><span class="ix-name">AI Lab</span><span class="ix-cl">Recruitment exercises</span><span class="ix-tg">AI process</span><span class="ix-yr">—</span></a>
       </div>
     </div>
@@ -911,85 +911,158 @@ open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
 
 # ================= SHOWROOM: AI KEY VISUALS =================
 pre='../'
-def sri(n,alt='',lazy=True,cls=''):
-    w,h=_PI.open(os.path.join(R,'assets','img','showroom',n+'.jpg')).size
+def spi(n,alt='',cls=''):
+    p=os.path.join(R,'assets','img','showroom','p',n+'.jpg')
+    w,h=_PI.open(p).size
     c=f' class="{cls}"' if cls else ''
-    return f'<img{c} src="{pre}assets/img/showroom/{n}.jpg" width="{w}" height="{h}" alt="{alt}"{" loading=\"lazy\"" if lazy else ""} decoding="async" draggable="false">'
-SR=[
- dict(k='copilot',big=True,client='Philip Morris International',title='Find your Copilot',fact='1,070 employees',
-      line='Key visuals for an AI-adoption program that took the whole company through three stages: Starters, Ambassadors and Experts.',
-      tools=['Firefly','Midjourney','Photoshop'],ref='copilot-ref',refcap='Painted reference that replaced the robot arm',gal=['copilot-2','copilot-3','copilot-4','copilot-5']),
- dict(k='mars',big=True,client='Mars Wrigley',title='Snackable · Together Festival',fact='700+ associates',
-      line='Identity and key visuals for “Day Zero”, the celebration of an integration, plus the events that followed it.',
-      tools=['Firefly','Photoshop'],ref='mars-ref',refcap='Hand-made reference for the composition',gal=['mars-2','mars-3','mars-4','mars-5']),
- dict(k='didi',big=True,client='DiDi Food',title='Fuerza DiDi',fact='Annual concept',
-      line='The annual internal concept for business developers: one gesture, adapted for each team.',
-      tools=['Firefly','Photoshop'],ref='didi-ref',refcap='Flat reference that fixed the pose',gal=['didi-2','didi-3','didi-4']),
- dict(k='megagas',big=True,client='Megagas · Shell retail partner',title='Amo aquí',fact='Service culture',
-      line='A service-culture campaign for the service stations and the launch of a corporate university. The fuel hose becomes a heart.',
-      tools=['Firefly','Photoshop'],ref='megagas-ref',refcap='Sketch of the idea',gal=['megagas-2','megagas-3']),
- dict(k='sephora',client='Sephora',title='Sephora Day',fact='180+ collaborators',
-      line='An event to unite offices, stores and interns under one idea: the same magic no matter where you shop.',
-      tools=['Midjourney','Photoshop'],gal=['sephora-2']),
- dict(k='coppel',client='Coppel',title='Match Perfecto',fact='Company-wide',
-      line='A campaign to relaunch the competency model and reach every level of the company, operations included.',
-      tools=['Firefly','Midjourney','Photoshop'],gal=['coppel-2','coppel-3','coppel-4']),
- dict(k='ultra',client='Ultrajewels',title='Desata tu brillo',fact='Leadership program',
-      line='Key visual for a leadership and communication program built around the brand’s cultural DNA.',
-      tools=['Midjourney','Photoshop'],ref='ultra-ref',refcap='First prompt, before refining it'),
- dict(k='cine1',client='Cinépolis',title='Partners in Life',fact='Culture program',
-      line='A single visual identity for the Cinépolis Experience culture program, to replace scattered posts.',
-      tools=['Firefly','Midjourney','Photoshop'],ref='cine1-ref',refcap='Reference for the C',gal=['cine1-2','cine1-3','cine1-4']),
- dict(k='cine2',client='Cinépolis',title='Employer branding',fact='Three proposals',
-      line='Three routes for an employer-branding program to win back trust inside and outside the company.',
-      tools=['Midjourney','Photoshop'],gal=['cine2-2','cine2-3']),
- dict(k='arcelor',client='ArcelorMittal México',title='Eslabones de vida',fact='Safety & EVP',
-      line='Employer brand and safety culture for a steel plant: every link of the chain matters.',
-      tools=['Firefly','Photoshop'],ref='arcelor-ref',refcap='Reference for the chain',gal=['arcelor-2']),
- dict(k='astro',client='HD* Human Design Doing',title='Astronauts',fact='Series for LinkedIn',
-      line='A series built to test how far AI can keep one look across many images for professional channels.',
-      tools=['Stable Diffusion'],gal=['astro-2','astro-3','astro-4','astro-5','astro-6']),
+    return f'<img{c} src="{pre}assets/img/showroom/p/{n}.jpg" width="{w}" height="{h}" alt="{alt}" loading="lazy" decoding="async" draggable="false">'
+def st(kind,label,imgs,cap='',w=1,cols=None,alts=None):
+    # kind: ref | ai | hand | final | app
+    n=len(imgs);cols=cols or min(n,3)
+    ims=''.join(x if x.startswith('<') else spi(x,(alts or {}).get(x,label)) for x in imgs)
+    return dict(kind=kind,w=w,html=f'''<span class="sp-lab"><i class="sp-k k-{kind}">{dict(ref="Reference",ai="AI",hand="Hand finish",final="Final",app="Applications")[kind]}</i>{label}</span>
+      <div class="sp-ims c{cols}">{ims}</div>{f'<p class="sp-cap">{cap}</p>' if cap else ''}''')
+def cmp(a,b,la,lb,ratio='16/9',idn=''):
+    return f'''<div class="compare sp-cmp" style="aspect-ratio:{ratio}" data-cursor="Drag">
+      <div class="before">{spi(a,la)}</div><div class="after" style="position:absolute;inset:0">{spi(b,lb)}</div>
+      <span class="l a tag k">{la}</span><span class="l b tag b">{lb}</span><span class="handle" aria-hidden="true"></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Compare {la.lower()} and {lb.lower()}"{f' id="{idn}"' if idn else ''}></div>'''
+def track(stages):
+    cols=' '.join(f'minmax(0,{s["w"]}fr)' for s in stages)
+    lis=''.join(f'<li class="sp-st k-{s["kind"]}"><span class="sp-no mono">{i+1:02d}</span>{s["html"]}</li>' for i,s in enumerate(stages))
+    return f'<ol class="sp-track" style="--cols:{cols}" data-lenis-prevent-touch>{lis}</ol>'
+def matrix(heads,rows,tpl):
+    h=''.join(f'<span class="sp-lab"><i class="sp-k k-{k}">{dict(ref="Reference",ai="AI",final="Final",hand="Hand finish")[k]}</i>{t}</span>' for k,t in heads)
+    r=''.join(f'<div class="sp-row"><span class="sp-rl mono">{lab}</span>'+''.join(f'<figure>{spi(x,lab)}</figure>' for x in ims)+'</div>' for lab,ims in rows)
+    return f'<div class="sp-mx" style="--mx:{tpl}"><div class="sp-row sp-mh"><span></span>{h}</div>{r}</div>'
+
+ULTRA_P1='A woman in profile with her head tilted up, reaching out to touch the light beam that is being projected from above on a dark background, with rainbow colors. Photograph in the style of Tim Walker. --ar 16:9'
+ultra_prompt=f'''<div class="sp-prompts">
+  <div class="sp-pr"><span class="mono">2:21 pm · First prompt</span><p>{ULTRA_P1}</p></div>
+  <div class="sp-pr on"><span class="mono">2:34 pm · Refined prompt</span><p><mark>[image reference]</mark> {ULTRA_P1.replace(' --ar 16:9','')} <mark>--stylize 800 --v 6.1</mark> --ar 16:9</p></div>
+  <p class="sp-cap">What changed: an image reference went in and stylization went up to 800. 13 minutes between the two prompts.</p></div>'''
+
+ASTRO=[f'astro-a{n:02d}' for n in range(18)]
+astro_dial=f'''<div class="sp-dial" data-imgs='{json.dumps([pre+"assets/img/showroom/p/"+a+".jpg" for a in ASTRO])}'>
+  <div class="sp-dial-big">{spi(ASTRO[0],"Astronaut portrait, style 1")}<span class="mono sp-dial-n">Style 01 / 18</span></div>
+  <div class="sp-dial-ui"><span class="mono">Same prompt · same noise seed · only the style changes</span>
+    <input type="range" min="0" max="17" value="0" step="1" aria-label="Change style">
+    <div class="sp-dial-th">{"".join(f'<button type="button" data-i="{i}"{" class=on" if i==0 else ""} aria-label="Style {i+1}">{spi(a,"")}</button>' for i,a in enumerate(ASTRO))}</div></div></div>'''
+
+SP=[
+ dict(k='copilot',client='Philip Morris International',title='Find your Copilot',fact='1,070 employees',tools=['Firefly','Midjourney','Photoshop'],
+  brief='People resisted using AI at work. The program took the whole company, 1,070 employees, through three stages: Starters, Experts and Ambassadors.',
+  idea='Partners, not replacements: a human fist meets a fist made of light.',
+  body=lambda: track([
+   st('ai','First result',['copilot-first'],'Firefly’s first take used a robot arm.',1,alts={'copilot-first':'First AI result with a robot arm'}),
+   st('ref','Painted reference',['copilot-ref'],'A flat shape painted in Photoshop to replace the arm.',1),
+   st('ai','Firefly iterations',['copilot-it1','copilot-it2','copilot-ai'],'Rounds of variations from the new reference.',1.2,cols=1),
+   st('final','Key visual',['copilot-final'],'Type and layout finished by hand.',2),
+  ])+track([
+   st('app','One look, three stages',['copilot-st1','copilot-st2','copilot-st3'],'Starters, Experts and Ambassadors, generated in Midjourney to match the key visual.',3),
+   st('ai','The prompts',['copilot-mj1','copilot-mj2','copilot-mj3'],'',1.3,cols=1),
+  ])),
+ dict(k='mars',client='Mars Wrigley',title='Snackable · Together Festival',fact='700+ associates',tools=['Firefly','Photoshop'],
+  brief='A 12-month integration in Mexico needed local events and communication, starting with “Day Zero”, the official celebration for more than 700 associates.',
+  idea='Snackable: hands coming in from every side to share the brands.',
+  body=lambda: track([
+   st('ref','Visual reference',['mars-ref'],'The composition to match.',1),
+   st('ref','Painted masks',['mars-m1','mars-m2'],'Flat shapes to place each hand and product.',1.2,cols=1),
+   st('ai','Firefly iterations',['mars-it1','mars-it2'],'',1.3,cols=1),
+   st('final','Key visual',['mars-final'],'',2),
+  ])+f'''<div class="sp-apps"><span class="sp-lab"><i class="sp-k k-app">Applications</i>Same method for the event pieces · drag to compare</span>
+    <div class="sp-apps-g">{cmp("mars-a1r","mars-a1","Sketch","AI render","2/3")}{cmp("mars-a2r","mars-a2","Sketch","AI render","2/3")}<figure>{spi("mars-a3","Applied piece with the logo")}</figure></div></div>'''),
+ dict(k='didi',client='DiDi Food',title='Fuerza DiDi',fact='Annual concept',tools=['Firefly','Photoshop'],
+  brief='DiDi Food wanted one annual concept to connect its business developers in every region with the company’s mission.',
+  idea='One raised hand, holding what each team works with.',
+  body=lambda: matrix([('ref','Painted reference'),('ai','Firefly result'),('final','Final')],
+    [('Fuerza DiDi',['didi-r1','didi-f1','didi-k1']),('Delivery',['didi-r2','didi-f2','didi-k2']),('Sales',['didi-r3','didi-f3','didi-k3'])],'minmax(0,1fr) minmax(0,1fr) minmax(0,1.78fr)')),
+ dict(k='megagas',client='Megagas · Shell retail partner',title='Amo aquí',fact='Service culture',tools=['Firefly','Photoshop'],
+  brief='The service stations needed a stronger service culture and the launch of a corporate university, for teams with high turnover.',
+  idea='Amo aquí (“I love it here”): the fuel hose bends into a heart.',
+  body=lambda: track([
+   st('ref','Sketches',['megagas-r1','megagas-r2','megagas-r3'],'The hose, the drop and the heart, drawn flat first.',1,cols=1),
+   st('ai','Firefly results',['megagas-f1','megagas-f2','megagas-f3','megagas-f4','megagas-f5'],'',1.4,cols=2),
+   st('final','Finals',['megagas-k1','megagas-k2'],'',2,cols=1),
+  ])),
+ dict(k='sephora',client='Sephora',title='Sephora Day',fact='180+ collaborators',tools=['Midjourney','Photoshop'],
+  brief='With new regional leadership, Sephora Day brought offices, stores and interns together around one idea: the same magic, wherever you shop.',
+  idea='Festival makeup, up close: the glitter is the shared magic.',
+  body=lambda: track([
+   st('ai','Midjourney',['sephora-mj1','sephora-mj2'],'Two prompts, two faces.',1,cols=1),
+   st('final','Finals',['sephora-k1','sephora-k2'],'Type, layout and color finished in Photoshop.',2.6,cols=2),
+  ])),
+ dict(k='coppel',client='Coppel',title='Match Perfecto',fact='Company-wide',tools=['Firefly','Midjourney','Photoshop'],
+  brief='Coppel needed every level of the company, operations included, to adopt its new culture and competency model.',
+  idea='Match Perfecto: the competencies as a perfect match, told with hearts, hands and a plug.',
+  body=lambda: track([
+   st('ai','Style references',['coppel-mj1','coppel-mj2'],'The 3D style, explored in Midjourney.',1,cols=1),
+   dict(kind='ref',w=2,html='<span class="sp-lab"><i class="sp-k k-ref">Reference</i>Vector → Firefly · drag to compare</span><div class="sp-ims c1">'+cmp('coppel-v1','coppel-a1','Vector','Firefly')+cmp('coppel-v2','coppel-a2','Vector','Firefly')+cmp('coppel-v3','coppel-a3','Vector','Firefly')+'</div>'),
+   st('final','Key visual and pieces',['coppel-k1','coppel-k2','coppel-k3','coppel-k4','coppel-k5'],'',2,cols=2),
+  ])),
+ dict(k='ultra',client='Ultrajewels',title='Desata tu brillo',fact='Leadership program',tools=['Midjourney','Photoshop'],
+  brief='Ultrajewels wanted inspiring leadership aligned with its cultural DNA: a playbook and workshops for its directors.',
+  idea='Desata tu brillo (“Unleash your shine”): light breaking into color on a face.',
+  body=lambda: track([
+   st('ai','First prompt',['ultra-p1'],'',1),
+   st('ai','Refined prompt',['ultra-p2'],'',1),
+   st('final','Key visual',['ultra-final'],'',2),
+  ])+ultra_prompt),
+ dict(k='cine1',client='Cinépolis',title='Partners in Life',fact='Culture program',tools=['Firefly','Midjourney','Photoshop'],
+  brief='The Cinépolis Experience culture program was a scatter of posts with no shared look. It needed one identity and a brand book.',
+  idea='Partners in Life: we all had partners who got us where we are.',
+  body=lambda: track([
+   st('ref','Reference',['cine1-ref'],'The C, flat.',1),
+   st('ai','Firefly',['cine1-f1'],'',1),
+   st('hand','Photoshop edit',['cine1-ps'],'Cleaned and relit by hand.',1),
+   st('ai','Midjourney characters',['cine1-mj1','cine1-mj2','cine1-mj3','cine1-mj4','cine1-mj5'],'Each partner pair, built prompt by prompt.',1.6,cols=2),
+  ])+track([st('final','Finals',['cine1-k1','cine1-k2','cine1-k3'],'',1,cols=3)])),
+ dict(k='cine2',client='Cinépolis',title='Employer branding',fact='Three proposals',tools=['Midjourney','Photoshop'],
+  brief='Cinépolis wanted to win back the trust of employees and outside talent, with one big idea and a playbook for every message.',
+  idea='Three routes, all starring the real crew: the people behind the screen.',
+  body=lambda: matrix([('ai','Midjourney prompt'),('final','Proposal')],
+    [('Route 01',['cine2-p1','cine2-k1']),('Route 02',['cine2-p2','cine2-k2']),('Route 03',['cine2-p3','cine2-k3'])],'minmax(0,1fr) minmax(0,1.6fr)')),
+ dict(k='arcelor',client='ArcelorMittal México',title='Eslabones de vida',fact='Safety & EVP',tools=['Firefly','Photoshop'],
+  brief='A steel plant needed a stronger employer brand and a real safety culture.',
+  idea='Eslabones de vida (“Links of life”): every link in the chain matters.',
+  body=lambda: track([
+   dict(kind='ref',w=1.6,html='<span class="sp-lab"><i class="sp-k k-ref">Reference</i>Sketch → Firefly · drag to compare</span><div class="sp-ims c1">'+cmp('arcelor-ref','arcelor-ai','Sketch','Firefly')+'</div>'),
+   st('final','Key visual',['arcelor-final'],'',1.6),
+  ])),
+ dict(k='astro',client='HD* Human Design Doing',title='Astronauts',fact='Series for LinkedIn',tools=['Stable Diffusion'],
+  brief='A self-initiated test: can AI keep one look across a whole series for professional channels?',
+  idea='Lock the prompt and the noise seed in ComfyUI, then change only the style.',
+  body=lambda: astro_dial+track([st('ai','ComfyUI workflow',['astro-wf1','astro-wf2','astro-wf3'],'The full graph, the locked prompt and noise number, and the style node.',1,cols=3)])),
 ]
 TOOLS=['Firefly','Midjourney','Stable Diffusion']
-def sr_tile(i,d):
-    t=' '.join(x.lower().replace(' ','-') for x in d['tools'])
-    ref=f'<span class="shw-ref">{sri(d["ref"],"")}<em class="mono">Started as</em></span>' if d.get('ref') else ''
-    return f'''<button type="button" class="shw-t{" big" if d.get("big") else ""}" data-i="{i}" data-t="{t}" aria-label="{d["client"]}: {d["title"]}">
-  <span class="shw-im">{sri(d["k"],d["title"]+" key visual",lazy=i>3)}{ref}</span>
-  <span class="shw-cap"><span class="mono">{d["client"]}</span><b>{d["title"]}</b><small>{d["fact"]}</small></span>
-</button>'''
-tiles=''.join(sr_tile(i,d) for i,d in enumerate(SR))
-tiles+=f'''<a class="shw-t shw-case" href="no-vendas-humo.html" data-go><span class="shw-im"><img src="{pre}assets/img/ai/pmi-humo-final.jpg" alt="No Vendas Humo key visual" loading="lazy" draggable="false"></span><span class="shw-cap"><span class="mono">Philip Morris International</span><b>No Vendas Humo</b><small>Full case →</small></span></a>
-<a class="shw-t shw-case" href="conexiones-magicas.html" data-go><span class="shw-im"><img src="{pre}assets/img/coca/s7-final.jpg" alt="Conexiones Mágicas key visual" loading="lazy" draggable="false"></span><span class="shw-cap"><span class="mono">Coca-Cola México</span><b>Conexiones Mágicas</b><small>Full case →</small></span></a>'''
-sr_data=json.dumps([dict(client=d['client'],title=d['title'],fact=d['fact'],line=d['line'],tools=d['tools'],img=f'{pre}assets/img/showroom/{d["k"]}.jpg',
-   ref=(f'{pre}assets/img/showroom/{d["ref"]}.jpg' if d.get('ref') else ''),refcap=d.get('refcap',''),gal=[f'{pre}assets/img/showroom/{g}.jpg' for g in d.get('gal',[])]) for d in SR]).replace("'","&#39;")
-chips='<button type="button" class="on" data-f="all">All <i>13</i></button>'+''.join(f'<button type="button" data-f="{t.lower().replace(" ","-")}">{t} <i>{sum(1 for d in SR if t in d["tools"])}</i></button>' for t in TOOLS)
-showroom=head('AI Showroom · Rodrigo López','A showroom of AI-assisted key visuals for internal campaigns at Philip Morris, Mars Wrigley, DiDi Food, Sephora, Coppel, Cinépolis, ArcelorMittal and more.',pre)+nav(pre,False)+f'''<main class="srp">
+def tkey(d): return ' '.join(x.lower().replace(' ','-') for x in d['tools'])
+def sp_art(i,d):
+    return f'''<article class="sp" id="sp-{d["k"]}" data-t="{tkey(d)}">
+    <header class="sp-h"><span class="sp-n">{i+1:02d}</span><div class="sp-tt"><span class="mono">{d["client"]}</span><h2>{d["title"]}</h2></div>
+      <dl class="sp-f"><div><dt class="mono">Scale</dt><dd>{d["fact"]}</dd></div><div><dt class="mono">Tools</dt><dd>{", ".join(d["tools"])}</dd></div></dl></header>
+    <div class="sp-bi"><p><b class="mono">Brief</b>{d["brief"]}</p><p><b class="mono">Idea</b>{d["idea"]}</p></div>
+    {d["body"]()}
+  </article>'''
+arts=''.join(sp_art(i,d) for i,d in enumerate(SP))
+idx=''.join(f'<a href="#sp-{d["k"]}" data-t="{tkey(d)}"><img src="{pre}assets/img/showroom/{d["k"]}.jpg" alt="" loading="lazy" draggable="false"><span class="mono">{i+1:02d}</span><b>{d["title"]}</b><small>{d["client"]}</small></a>' for i,d in enumerate(SP))
+chips=f'<button type="button" class="on" data-f="all">All <i>{len(SP)}</i></button>'+''.join(f'<button type="button" data-f="{t.lower().replace(" ","-")}">{t} <i>{sum(1 for d in SP if t in d["tools"])}</i></button>' for t in TOOLS)
+legend=''.join(f'<span><i class="sp-k k-{k}">{l}</i></span>' for k,l in [('ref','Reference'),('ai','AI'),('hand','Hand finish'),('final','Final')])
+showroom=head('AI Showroom · Rodrigo López','Eleven AI-assisted key visuals for culture and training programs at Philip Morris, Mars Wrigley, DiDi Food, Sephora, Coppel, Cinépolis, ArcelorMittal and more, shown from reference to final.',pre)+nav(pre,False)+f'''<main class="srp">
   <section class="wrap c-hero">
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">Showroom</span><span class="ai">AI process</span></div>
       <h1 class="c-title" aria-label="AI Showroom"><span aria-hidden="true">{word("AI")} {word("Showroom","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">Key visuals for culture, training and change programs inside large companies. Most started as a painted reference or a sketch; AI did the rendering and the finish was done by hand. Hover a piece to see where it started, and open it for the context.</p>
-      <dl class="facts"><div><dt class="mono">Pieces</dt><dd>13 campaigns, 11 brands</dd></div><div><dt class="mono">Role</dt><dd>Visual concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Tools</dt><dd>Firefly, Midjourney, Stable Diffusion, Photoshop</dd></div></dl>
+      <p class="c-lead">Key visuals for culture, training and change programs inside large companies. Each one reads left to right: what I started with, what the AI gave back, what I fixed by hand and what shipped.</p>
+      <dl class="facts"><div><dt class="mono">Pieces</dt><dd>11 campaigns, 10 brands</dd></div><div><dt class="mono">Role</dt><dd>Visual concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Tools</dt><dd>Firefly, Midjourney, Stable Diffusion, Photoshop</dd></div></dl>
     </div></div>
   </section>
-  <section class="wrap shw">
-    <div class="shw-bar"><div class="shw-chips" role="group" aria-label="Filter by tool">{chips}</div><span class="mono shw-hint">Hover to see the reference · click to open</span></div>
-    <div class="shw-grid" data-sr='{sr_data}'>{tiles}</div>
+  <section class="wrap sp-top">
+    <div class="shw-bar"><div class="shw-chips" role="group" aria-label="Filter by tool">{chips}</div><div class="sp-leg mono">{legend}</div></div>
+    <nav class="sp-idx" aria-label="Projects">{idx}</nav>
   </section>
-  <div class="shw-panel" hidden role="dialog" aria-modal="true" aria-label="Project details">
-    <div class="shw-sheet">
-      <button type="button" class="shw-x" aria-label="Close">×</button>
-      <div class="shw-main"><img alt=""></div>
-      <div class="shw-info"><span class="mono shw-cl"></span><h2></h2><p class="shw-line"></p>
-        <dl class="facts"><div><dt class="mono">Scale</dt><dd class="shw-fact"></dd></div><div><dt class="mono">Tools</dt><dd class="shw-tools"></dd></div></dl>
-        <div class="shw-gal"></div>
-        <div class="shw-nav"><button type="button" class="shw-p" aria-label="Previous project"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="mono shw-n"></span><button type="button" class="shw-nx" aria-label="Next project"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
-      </div>
-    </div>
-  </div>
+  <section class="wrap sp-list">{arts}</section>
 '''+next_block(pre,'AI Lab','ai-lab.html','<img src="../assets/img/lab/heineken.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','ai-showroom.html'),'w').write(showroom)
