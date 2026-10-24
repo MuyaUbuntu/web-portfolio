@@ -706,12 +706,6 @@ slot_faces=''.join(f'<span class="sf" style="--f:{i}"><i style="background-image
 SW3=[(11.1,19.6),(35.8,20.4),(61.3,20.7)]
 slot_reels=''.join(f'<div class="sx-win" style="left:{l}%;width:{w}%"><div class="cyl">{slot_faces}</div></div>' for l,w in SW3)
 slot_thumbs=''.join(f'<button type="button" class="sx-t{" on" if i==0 else ""}" data-i="{i}" aria-label="{n}"><img src="{pre}assets/img/campobet/logo-{i+1}.webp" alt="" draggable="false"></button>' for i,n in enumerate(LG))
-SB1=['A man runs through a park, with a lake behind him.','Front shot: something catches his attention.','He sees a man trying to catch a fish (Big Bass slot).','The fisherman waves at him.','The runner looks bewildered.','Distracted, he bumps into the back of a tall, muscular man.','He falls back and looks up.','It’s Zeus (Gates of Olympus): “Sorry, I gotta run.”','A lightning bolt strikes and Zeus disappears.','He gets up and hears a loud noise.','A buffalo charges at him (Buffalo Blitz).','Rear shot: he runs, looking back.','A sharp turn up the steps of a kiosk.','The camera whips to a live dealer in the kiosk.','He shows his phone; everyone sits around him.','A lightning bolt strikes behind them.','Zeus joins the scene.']
-SB2=['Top view of a stadium. “Welcome to CampoBet.”','Zoom transition.','A fan celebrates in the stands. “The sports passion…”','A 360° orbit with heavy motion blur.','Mid-spin, the scene becomes a casino.','She celebrates and looks at her phone.','Over-the-shoulder orbit to her screen.','A super zoom into the phone.','The brand ambassador smiles at his phone.','Final key visual with the welcome offer.']
-def sb_row(k,caps,title):
-    fr=''.join(f'<figure class="sb-f">{cbi(f"sb{k}-{i+1:02d}.jpg",c)}<figcaption><b>{i+1:02d}</b> {c}</figcaption></figure>' for i,c in enumerate(caps))
-    return f'<div class="sb-row{" rev" if k==2 else ""}"><div class="sb-lbl"><span class="mono">Storyboard 0{k}</span><b>{title}</b></div><div class="sb-view"><div class="sb-track">{fr}</div></div><div class="sb-ctl"><input type="range" class="sb-r" min="0" max="1000" value="0" aria-label="Scrub through {title}"><span class="sb-n mono">01 / {len(caps):02d}</span></div></div>'
-sbrows=sb_row(1,SB1,'The chase')+sb_row(2,SB2,'Brand awareness')
 outs=''.join(f'<figure class="shot out">{cbi(f"out-{i+1}.jpg","Slot visual master made with the pipeline")}</figure>' for i in range(8))
 # automation: anatomy (real layer stack), reflow (real coordinates), swimlanes (+ synced mini animation)
 LAY=[('Background','full image, 2k',0,0,1080,1920,'bg'),('Mask group','depth layer under the copy',0,1000,1080,920,'mask'),('glow_line','light ribbon',482,-53,762,1015,'glow'),('Subject','duplicate for my cutout',160,330,760,800,'subj'),('Slot logo','official file, never redrawn',270,985,540,202,'slot'),('Logo shadow','tinted from the image',234,129,613,166,'shadow'),('Logo','brand component',314,161,451,95,'logo'),('Copy','copy component',88,1239,905,190,'copy'),('Disclaimer','auto-fit, min 14 px',62,1484,955,80,'disc')]
@@ -751,7 +745,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       </div><div class="c-r">
       <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>+150 pieces a month, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog, motion</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>+150 pieces a month, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
     <div class="c-cover h184" aria-label="More than 150 pieces designed every month, with a few highlights">
       <div class="h-grid" aria-hidden="true">{h184}</div>
@@ -762,7 +756,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
 
   <div class="wrap chapters">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#rebrand">The look</a></li><li><a href="#social">Social</a></li><li><a href="#worldcup">World Cup</a></li><li><a href="#channels">Channels</a></li><li><a href="#kit">Brand kit</a></li><li><a href="#motion">Motion</a></li><li><a href="#automation">Automation</a></li></ol>
+      <ol><li><a href="#rebrand">The look</a></li><li><a href="#social">Social</a></li><li><a href="#worldcup">World Cup</a></li><li><a href="#channels">Channels</a></li><li><a href="#kit">Brand kit</a></li><li><a href="#automation">Automation</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
     <div>
@@ -842,13 +836,6 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
             <p class="sx-name mono">{LG[0]}</p>
           </div>
         </div>
-      </section>
-
-      <section class="chap" id="motion">
-        <span class="mono">06 · Motion</span>
-        <h2><span class="lm"><span>When the brand</span></span><span class="lm"><span>moves</span></span></h2>
-        <p class="lead">Storyboards for two videos: a slots chase through a park and a brand awareness spot. Both roll on their own; drag the slider under each one to jump ahead, and click a frame to see it bigger.</p>
-        <div class="sbs">{sbrows}</div>
       </section>
 
       <section class="part" id="automation">
