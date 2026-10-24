@@ -148,7 +148,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
   <section class="stage" id="work">
     <div class="sec wrap">
       <div class="sec-h">
-        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">08</i></span></span></h2>
+        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">07</i></span></span></h2>
         <div><p>Campaigns and digital work for global brands. On AI projects, hover to see the sketch they started from.</p></div>
       </div>
       <div class="grid">
@@ -157,9 +157,8 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
 {card(5,"proyectos/campobet.html","CampoBet","CampoBet","+150 pieces a month, a rebrand and three AI pipelines I designed.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
-{card(6,"","DiDi Food","Fuerza DiDi","Annual internal concept for business developers.",["Campaign","Firefly"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True,True)}
-{card(7,"","Megagas","Amo Aquí","Service culture campaign for a Shell retail partner.",["Campaign","Firefly"],ai("megagas-final","A fuel hose shaped like a heart",pre),"megagas-ref",True,True)}
-{card(8,"","Mars Wrigley","Snackable","Integration festival for 700+ associates.",["Event","Firefly"],ai("mars-final","Hands holding snacks under a blue sky",pre),"mars-ref",True,True)}
+{card(6,"proyectos/ai-showroom.html","Showroom · 11 brands","AI Showroom","13 AI key visuals for culture programs at PMI, Mars, DiDi, Sephora and more.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
+{card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three briefs against the clock: from 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
       <div class="ix" aria-label="Project index">
         <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
@@ -168,9 +167,8 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
           <a class="ix-row" href="proyectos/arboterra.html" data-go data-zoom data-cursor="Open" data-img="assets/img/arboterra/kv-aventura.jpg"><span class="ix-n">03</span><span class="ix-name">ArboTerra es…</span><span class="ix-cl">ArboTerra</span><span class="ix-tg">Campaign · 3D</span><span class="ix-yr">2023</span></a>
           <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
           <a class="ix-row" href="proyectos/campobet.html" data-go data-zoom data-cursor="Open" data-img="assets/img/campobet/cover.jpg"><span class="ix-n">05</span><span class="ix-name">CampoBet</span><span class="ix-cl">CampoBet</span><span class="ix-tg">Brand · AI system</span><span class="ix-yr">—</span></a>
-          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">Fuerza DiDi</span><span class="ix-cl">DiDi Food</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
-          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/megagas-final.jpg"><span class="ix-n">07</span><span class="ix-name">Amo Aquí</span><span class="ix-cl">Megagas</span><span class="ix-tg">Campaign · AI</span><span class="ix-yr">Soon</span></div>
-          <div class="ix-row soon" data-cursor="Coming soon" data-img="assets/img/ai/mars-final.jpg"><span class="ix-n">08</span><span class="ix-name">Snackable</span><span class="ix-cl">Mars Wrigley</span><span class="ix-tg">Event · AI</span><span class="ix-yr">Soon</span></div>
+          <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">AI Showroom</span><span class="ix-cl">11 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/ai-lab.html" data-go data-zoom data-cursor="Open" data-img="assets/img/lab/nissan.jpg"><span class="ix-n">07</span><span class="ix-name">AI Lab</span><span class="ix-cl">Recruitment exercises</span><span class="ix-tg">AI process</span><span class="ix-yr">—</span></a>
       </div>
     </div>
     <div class="lamp" aria-label="Lights off: move the cursor to discover final artworks">
@@ -912,6 +910,165 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
 case5=case5.replace('</head>','<link rel="preload" as="image" href="../assets/img/campobet/mosaic-d.jpg" media="(min-width:641px)"><link rel="preload" as="image" href="../assets/img/campobet/mosaic-m.jpg" media="(max-width:640px)">\n</head>',1)
 open(os.path.join(R,'proyectos','campobet.html'),'w').write(case5)
 
+
+
+# ================= SHOWROOM: AI KEY VISUALS =================
+pre='../'
+def sri(n,alt='',lazy=True,cls=''):
+    w,h=_PI.open(os.path.join(R,'assets','img','showroom',n+'.jpg')).size
+    c=f' class="{cls}"' if cls else ''
+    return f'<img{c} src="{pre}assets/img/showroom/{n}.jpg" width="{w}" height="{h}" alt="{alt}"{" loading=\"lazy\"" if lazy else ""} decoding="async" draggable="false">'
+SR=[
+ dict(k='copilot',big=True,client='Philip Morris International',title='Find your Copilot',fact='1,070 employees',
+      line='Key visuals for an AI-adoption program that took the whole company through three stages: Starters, Ambassadors and Experts.',
+      tools=['Firefly','Midjourney','Photoshop'],ref='copilot-ref',refcap='Painted reference that replaced the robot arm',gal=['copilot-2','copilot-3','copilot-4','copilot-5']),
+ dict(k='mars',big=True,client='Mars Wrigley',title='Snackable · Together Festival',fact='700+ associates',
+      line='Identity and key visuals for “Day Zero”, the celebration of an integration, plus the events that followed it.',
+      tools=['Firefly','Photoshop'],ref='mars-ref',refcap='Hand-made reference for the composition',gal=['mars-2','mars-3','mars-4','mars-5']),
+ dict(k='didi',big=True,client='DiDi Food',title='Fuerza DiDi',fact='Annual concept',
+      line='The annual internal concept for business developers: one gesture, adapted for each team.',
+      tools=['Firefly','Photoshop'],ref='didi-ref',refcap='Flat reference that fixed the pose',gal=['didi-2','didi-3','didi-4']),
+ dict(k='megagas',big=True,client='Megagas · Shell retail partner',title='Amo aquí',fact='Service culture',
+      line='A service-culture campaign for the service stations and the launch of a corporate university. The fuel hose becomes a heart.',
+      tools=['Firefly','Photoshop'],ref='megagas-ref',refcap='Sketch of the idea',gal=['megagas-2','megagas-3']),
+ dict(k='sephora',client='Sephora',title='Sephora Day',fact='180+ collaborators',
+      line='An event to unite offices, stores and interns under one idea: the same magic no matter where you shop.',
+      tools=['Midjourney','Photoshop'],gal=['sephora-2']),
+ dict(k='coppel',client='Coppel',title='Match Perfecto',fact='Company-wide',
+      line='A campaign to relaunch the competency model and reach every level of the company, operations included.',
+      tools=['Firefly','Midjourney','Photoshop'],gal=['coppel-2','coppel-3','coppel-4']),
+ dict(k='ultra',client='Ultrajewels',title='Desata tu brillo',fact='Leadership program',
+      line='Key visual for a leadership and communication program built around the brand’s cultural DNA.',
+      tools=['Midjourney','Photoshop'],ref='ultra-ref',refcap='First prompt, before refining it'),
+ dict(k='cine1',client='Cinépolis',title='Partners in Life',fact='Culture program',
+      line='A single visual identity for the Cinépolis Experience culture program, to replace scattered posts.',
+      tools=['Firefly','Midjourney','Photoshop'],ref='cine1-ref',refcap='Reference for the C',gal=['cine1-2','cine1-3','cine1-4']),
+ dict(k='cine2',client='Cinépolis',title='Employer branding',fact='Three proposals',
+      line='Three routes for an employer-branding program to win back trust inside and outside the company.',
+      tools=['Midjourney','Photoshop'],gal=['cine2-2','cine2-3']),
+ dict(k='arcelor',client='ArcelorMittal México',title='Eslabones de vida',fact='Safety & EVP',
+      line='Employer brand and safety culture for a steel plant: every link of the chain matters.',
+      tools=['Firefly','Photoshop'],ref='arcelor-ref',refcap='Reference for the chain',gal=['arcelor-2']),
+ dict(k='astro',client='HD* Human Design Doing',title='Astronauts',fact='Series for LinkedIn',
+      line='A series built to test how far AI can keep one look across many images for professional channels.',
+      tools=['Stable Diffusion'],gal=['astro-2','astro-3','astro-4','astro-5','astro-6']),
+]
+TOOLS=['Firefly','Midjourney','Stable Diffusion']
+def sr_tile(i,d):
+    t=' '.join(x.lower().replace(' ','-') for x in d['tools'])
+    ref=f'<span class="shw-ref">{sri(d["ref"],"")}<em class="mono">Started as</em></span>' if d.get('ref') else ''
+    return f'''<button type="button" class="shw-t{" big" if d.get("big") else ""}" data-i="{i}" data-t="{t}" aria-label="{d["client"]}: {d["title"]}">
+  <span class="shw-im">{sri(d["k"],d["title"]+" key visual",lazy=i>3)}{ref}</span>
+  <span class="shw-cap"><span class="mono">{d["client"]}</span><b>{d["title"]}</b><small>{d["fact"]}</small></span>
+</button>'''
+tiles=''.join(sr_tile(i,d) for i,d in enumerate(SR))
+tiles+=f'''<a class="shw-t shw-case" href="no-vendas-humo.html" data-go><span class="shw-im"><img src="{pre}assets/img/ai/pmi-humo-final.jpg" alt="No Vendas Humo key visual" loading="lazy" draggable="false"></span><span class="shw-cap"><span class="mono">Philip Morris International</span><b>No Vendas Humo</b><small>Full case →</small></span></a>
+<a class="shw-t shw-case" href="conexiones-magicas.html" data-go><span class="shw-im"><img src="{pre}assets/img/coca/s7-final.jpg" alt="Conexiones Mágicas key visual" loading="lazy" draggable="false"></span><span class="shw-cap"><span class="mono">Coca-Cola México</span><b>Conexiones Mágicas</b><small>Full case →</small></span></a>'''
+sr_data=json.dumps([dict(client=d['client'],title=d['title'],fact=d['fact'],line=d['line'],tools=d['tools'],img=f'{pre}assets/img/showroom/{d["k"]}.jpg',
+   ref=(f'{pre}assets/img/showroom/{d["ref"]}.jpg' if d.get('ref') else ''),refcap=d.get('refcap',''),gal=[f'{pre}assets/img/showroom/{g}.jpg' for g in d.get('gal',[])]) for d in SR]).replace("'","&#39;")
+chips='<button type="button" class="on" data-f="all">All <i>13</i></button>'+''.join(f'<button type="button" data-f="{t.lower().replace(" ","-")}">{t} <i>{sum(1 for d in SR if t in d["tools"])}</i></button>' for t in TOOLS)
+showroom=head('AI Showroom · Rodrigo López','A showroom of AI-assisted key visuals for internal campaigns at Philip Morris, Mars Wrigley, DiDi Food, Sephora, Coppel, Cinépolis, ArcelorMittal and more.',pre)+nav(pre,False)+f'''<main class="srp">
+  <section class="wrap c-hero">
+    <div class="c-head"><div class="c-l">
+      <a class="back" href="{pre}#work" data-go>← All work</a>
+      <div class="c-client"><span class="tag k">Showroom</span><span class="ai">AI process</span></div>
+      <h1 class="c-title" aria-label="AI Showroom"><span aria-hidden="true">{word("AI")} {word("Showroom","hlw")}</span></h1>
+      </div><div class="c-r">
+      <p class="c-lead">Key visuals for culture, training and change programs inside large companies. Most started as a painted reference or a sketch; AI did the rendering and the finish was done by hand. Hover a piece to see where it started, and open it for the context.</p>
+      <dl class="facts"><div><dt class="mono">Pieces</dt><dd>13 campaigns, 11 brands</dd></div><div><dt class="mono">Role</dt><dd>Visual concept, art direction, AI imagery</dd></div><div><dt class="mono">Agency</dt><dd>HD* Human Design Doing</dd></div><div><dt class="mono">Tools</dt><dd>Firefly, Midjourney, Stable Diffusion, Photoshop</dd></div></dl>
+    </div></div>
+  </section>
+  <section class="wrap shw">
+    <div class="shw-bar"><div class="shw-chips" role="group" aria-label="Filter by tool">{chips}</div><span class="mono shw-hint">Hover to see the reference · click to open</span></div>
+    <div class="shw-grid" data-sr='{sr_data}'>{tiles}</div>
+  </section>
+  <div class="shw-panel" hidden role="dialog" aria-modal="true" aria-label="Project details">
+    <div class="shw-sheet">
+      <button type="button" class="shw-x" aria-label="Close">×</button>
+      <div class="shw-main"><img alt=""></div>
+      <div class="shw-info"><span class="mono shw-cl"></span><h2></h2><p class="shw-line"></p>
+        <dl class="facts"><div><dt class="mono">Scale</dt><dd class="shw-fact"></dd></div><div><dt class="mono">Tools</dt><dd class="shw-tools"></dd></div></dl>
+        <div class="shw-gal"></div>
+        <div class="shw-nav"><button type="button" class="shw-p" aria-label="Previous project"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="mono shw-n"></span><button type="button" class="shw-nx" aria-label="Next project"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+'''+next_block(pre,'AI Lab','ai-lab.html','<img src="../assets/img/lab/heineken.jpg" alt="" draggable="false">')+'''</main>
+'''+scripts(pre)
+open(os.path.join(R,'proyectos','ai-showroom.html'),'w').write(showroom)
+
+# ================= AI LAB: TIMED EXERCISES =================
+def lbi(n,alt='',lazy=True):
+    w,h=_PI.open(os.path.join(R,'assets','img','lab',n+'.jpg')).size
+    return f'<img src="{pre}assets/img/lab/{n}.jpg" width="{w}" height="{h}" alt="{alt}"{" loading=\"lazy\"" if lazy else ""} decoding="async" draggable="false">'
+LAB=[
+ dict(k='heineken',brand='Heineken',fmt='Poster',total=42,stages=[('Reference research',10,'ref'),('Midjourney',22,'mj'),('Photoshop',5,'ps'),('Mockup',5,'mk')],
+   tools='Midjourney, Photoshop',steps=[
+   ('heineken-1','An exploratory prompt to see what the model gives back, then small refinements from each result.'),
+   ('heineken-2','Adding an omni reference of the real bottle kept the product accurate and cut post-production.'),
+   ('heineken-3','Tuning the prompt toward a beach look and away from a night-time feel.'),
+   ('heineken-4','Final adjustments to stylize and omni weight to land the exact image.'),
+   ('heineken-raw','Generative Fill to extend the image, then the label and neck fixed by hand to match the real bottle.')],
+   prompt='Amazing bottom view photo of a green Heineken bottle of beer on the beach sand. In the background a beach and very blue sky with some clouds. Depth field. Green caustics [Advertising style] --ar 9:16 --oref [bottle reference] --ow 50 --stylize 120 --v 7.0',
+   notes=[('--oref','The real bottle as an omni reference.'),('--ow 50','Omni weight, to control the bottle’s position.'),('--stylize 120','Started at 1000; too much detail, so it came down.')]),
+ dict(k='nissan',brand='Nissan',fmt='Web banner',total=67,stages=[('Reference research',10,'ref'),('Stable Diffusion',28,'sd'),('Midjourney',16,'mj'),('Photoshop',8,'ps'),('Mockup',5,'mk')],
+   tools='Stable Diffusion, Midjourney, Photoshop',steps=[
+   ('nissan-1','A Stable Diffusion setup from an earlier project places the real car in a new scene and relights it automatically (IC-Light nodes).'),
+   ('nissan-2','A second workflow upscales the image and recovers detail.'),
+   ('nissan-3','In Midjourney’s editor, the weak background was removed and a new one generated around the car.'),
+   ('nissan-raw','Minor retouching in Photoshop finished the image before the layout.')],
+   prompt='Product parked, behind an incredible night city landscape. The floor is wet. The night is very cinematic. — negative: bad quality, low quality, person, people, human',
+   notes=[('IC-Light','Relights the product to match the new background.'),('SD 1.5','Older model, less precise, but right for this job.'),('Midjourney','Prompt auto-generated from the image, then used to rebuild the scene.')]),
+ dict(k='rimmel',brand='Rimmel London',fmt='Digital content',total=75,stages=[('Reference research',10,'ref'),('Midjourney',10,'mj'),('Firefly',5,'ff'),('Photoshop',45,'ps'),('Mockup',5,'mk')],
+   tools='Midjourney, Firefly, Photoshop',steps=[
+   ('rimmel-1','Midjourney first, to set a style reference for the background and the smears.'),
+   ('rimmel-2','A photo of a real Rimmel lipstick set the composition, so Firefly would place the products right.'),
+   ('rimmel-3','With style and composition fixed, Firefly needed only a short prompt and gave clean results fast.'),
+   ('rimmel-raw','Most of the time went into Photoshop: the generic lipsticks were replaced with the real Rimmel product.')],
+   prompt='A close-up photograph of the top view of three different lipsticks, one in pink and red shades, another with a dark purple color, lying on their sides and scattered around with smears of lipstick color. The background is a plain gray. Soft lighting creates gentle shadows to highlight details like sheen or shine.',
+   notes=[('Style ref','Midjourney image for look and texture.'),('Composition ref','Real product photo for placement.'),('45 min','Hand retouching to put the real product in.')]),
+]
+def mmss(m): return f'{m//60} h {m%60:02d} min' if m>=60 else f'{m} min'
+def lab_block(i,d):
+    bar=''.join(f'<i class="lb-s {c}" style="--w:{m/d["total"]*100:.2f}%" title="{n}: {m} min"><span>{n}<b>{m} min</b></span></i>' for n,m,c in d['stages'])
+    steps=''.join(f'<figure class="lb-st">{lbi(im,txt)}<figcaption><b>{j+1:02d}</b> {txt}</figcaption></figure>' for j,(im,txt) in enumerate(d['steps']))
+    notes=''.join(f'<li><code>{a}</code><span>{b}</span></li>' for a,b in d['notes'])
+    return f'''      <section class="lab" id="{d["k"]}">
+        <div class="lab-h"><span class="mono">0{i+1} · {d["brand"]} · {d["fmt"]}</span><span class="lab-tag mono">Recruitment exercise · not commissioned by the brand</span></div>
+        <div class="lab-top">
+          <figure class="lab-final">{lbi(d["k"],d["brand"]+" final piece",lazy=i>0)}</figure>
+          <div class="lab-side">
+            <h2>{d["brand"]}<small>{d["fmt"]}</small></h2>
+            <div class="lab-clock" data-total="{d["total"]}"><span class="mono">Brief to final</span><b class="lab-t">0:00</b><small>{mmss(d["total"])} in total</small></div>
+            <div class="lab-bar" data-total="{d["total"]}">{bar}</div>
+            <p class="mono lab-tools">{d["tools"]}</p>
+            <div class="prompt" aria-label="Prompt"><div class="bar"><i></i><i></i><i></i><span>Prompt used</span></div><div class="typed">{d["prompt"]}</div></div>
+            <ul class="lab-notes">{notes}</ul>
+          </div>
+        </div>
+        <div class="drag lab-steps"><div class="drag-track" tabindex="0" aria-label="{d["brand"]} process steps" data-cursor="Drag">{steps}<figure class="lb-st">{lbi(d["k"]+"-ref","References")}<figcaption><b>Ref</b> References gathered before starting.</figcaption></figure></div>
+          <div class="drag-ui"><div class="bar"><i></i></div><div class="ar"><button type="button" data-prev aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" data-next aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+        </div>
+      </section>
+'''
+labs=''.join(lab_block(i,d) for i,d in enumerate(LAB))
+lab=head('AI Lab · Rodrigo López','Three timed AI exercises from recruitment briefs: a Heineken poster in 42 minutes, a Nissan web banner in 1 h 07 and Rimmel digital content in 1 h 15, with the prompts and tools used.',pre)+nav(pre,False)+f'''<main class="labp">
+  <section class="wrap c-hero">
+    <div class="c-head"><div class="c-l">
+      <a class="back" href="{pre}#work" data-go>← All work</a>
+      <div class="c-client"><span class="tag k">AI Lab</span><span class="ai">AI process</span></div>
+      <h1 class="c-title" aria-label="AI Lab"><span aria-hidden="true">{word("AI")} {word("Lab","hlw")}</span></h1>
+      </div><div class="c-r">
+      <p class="c-lead">Three briefs from recruitment processes, each solved against the clock. They are not work for these brands; they show how I combine Midjourney, Stable Diffusion, Firefly and Photoshop, and how long each step takes.</p>
+      <dl class="facts"><div><dt class="mono">Briefs</dt><dd>Poster, web banner, digital content</dd></div><div><dt class="mono">Fastest</dt><dd>42 min, brief to final</dd></div><div><dt class="mono">Type</dt><dd>Recruitment exercises</dd></div></dl>
+    </div></div>
+    <div class="lab-race" aria-label="Time per exercise">{''.join(f'<a href="#{d["k"]}" class="lr"><span class="mono">{d["brand"]}</span><i style="--w:{d["total"]/75*100:.1f}%"></i><b>{mmss(d["total"])}</b></a>' for d in LAB)}</div>
+  </section>
+  <div class="wrap">
+{labs}  </div>
+'''+next_block(pre,'Happy Talks','happy-talks.html',htimg(1,pre))+'''</main>
+'''+scripts(pre)
+open(os.path.join(R,'proyectos','ai-lab.html'),'w').write(lab)
 
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
 import json as _j
