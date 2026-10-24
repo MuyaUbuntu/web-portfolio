@@ -156,7 +156,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(2,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for a smoke-free sales culture program.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(3,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","Campaign concept approved at first pitch, still in use 3 years later.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","An AI key visual in six layers, with the magic made by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
-{card(5,"proyectos/campobet.html","CampoBet","CampoBet","+150 pieces a month, a rebrand and three AI pipelines I designed.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(5,"proyectos/campobet.html","CampoBet","CampoBet","160 pieces a month on average, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(6,"proyectos/ai-showroom.html","Showroom · 11 brands","AI Showroom","13 AI key visuals for culture programs at PMI, Mars, DiDi, Sephora and more.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
 {card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three briefs against the clock: from 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
@@ -200,7 +200,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
         <li data-n="04" style="--c:var(--mint)"><button type="button"><span class="i">04</span><h3>3D &amp; motion</h3><span class="pl" aria-hidden="true">+</span></button>
           <div class="body"><div><div class="inner"><p>3D models, renders and 2D animation that give campaigns depth and movement.</p><div class="tags"><span class="tag">Blender</span><span class="tag">Cinema 4D</span><span class="tag">Octane</span><span class="tag">After Effects</span></div></div></div></div></li>
         <li data-n="05" style="--c:var(--tomato)"><button type="button"><span class="i">05</span><h3>Team &amp; brand management</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Leading a design team for international iGaming brands in Mexico and Canada, aligned with Marketing, CRM, ASO and Performance to improve conversion and retention.</p><div class="tags"><span class="tag">Team lead</span><span class="tag">CRM</span><span class="tag">ASO</span><span class="tag">Performance</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>Leading design for an online betting brand, aligned with Marketing, CRM, ASO and Performance to improve conversion and retention.</p><div class="tags"><span class="tag">Team lead</span><span class="tag">CRM</span><span class="tag">ASO</span><span class="tag">Performance</span></div></div></div></div></li>
       </ul>
     </div>
   </section>
@@ -210,13 +210,10 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
       <h2>Ten years turning <em>creative ideas</em> into results.</h2>
       <div class="nums">
         <div><span class="odo" data-v="10+"></span><small>years designing, since 2016</small></div>
-        <div><span class="odo" data-v="13"></span><small>AI-powered campaigns for global brands</small></div>
-        <div><span class="odo" data-v="1,070"></span><small>employees reached by one AI-adoption program</small></div>
-        <div><span class="odo" data-v="700+"></span><small>people at the Mars integration “Day Zero”</small></div>
       </div>
     </div>
     <ul class="xp" aria-label="Experience">
-      <li><span class="yr"><b>2025 – Now</b></span><h3>Design Team Lead<small>Brainrocket</small></h3><p>Leading the design team for international iGaming brands in Mexico and Canada.</p></li>
+      <li><span class="yr"><b>2025 – Now</b></span><h3>Design Team Lead<small>iGaming</small></h3><p>Design for an online betting brand: social, paid, CRM, ASO and AI production pipelines.</p></li>
       <li><span class="yr"><b>2023 – 2025</b></span><h3>Senior Designer<small>HD* Human Design Doing</small></h3><p>Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more.</p></li>
       <li><span class="yr"><b>2020 – 2023</b></span><h3>Senior Designer<small>Happy Studio</small></h3><p>Concepts, 3D models and 2D animation for brand campaigns.</p></li>
       <li><span class="yr"><b>2018 – 2020</b></span><h3>Jr. Art Director<small>Volátil Agencia Creativa</small></h3><p>Creative concepts and art direction in a fast-paced agency.</p></li>
@@ -685,7 +682,7 @@ def col(k):
 cols=''.join(col(k) for k in range(4))
 CARS=[('Weekly fixtures',6),('Big leagues',5),('Match of the day',6)]
 cars=''.join(f'<figure class="car" data-n="{n}"><div class="car-v"><div class="car-t" data-lenis-prevent>'+''.join(cbi(f'car{c+1}-{i+1}.jpg',f'{t}, slide {i+1}',lazy=False) for i in range(n))+f'</div><button type="button" class="car-p" aria-label="Previous slide">‹</button><button type="button" class="car-n" aria-label="Next slide">›</button></div><div class="car-dots">'+''.join(f'<button type="button" aria-label="Slide {i+1}"></button>' for i in range(n))+f'</div><figcaption class="mono">{t} · {n} slides</figcaption></figure>' for c,(t,n) in enumerate(CARS))
-wc=''.join(f'<button type="button" class="pl" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="pl-n">{i+1}</span></button>' for i in range(11))
+wc=''.join(f'<button type="button" class="wcp" style="--i:{i}" aria-label="World Cup piece {i+1}">{cbi(f"wc-{i+1:02d}.jpg","World Cup piece",lazy=False)}<span class="wcp-n">{i+1}</span></button>' for i in range(11))
 wcb=''.join(f'<figure>{cbi(f"wcb-{i+1}.webp","Megashoot promo block")}</figure>' for i in range(3))
 keys=''.join(f'<figure class="key">{cbi(f"key-{i+1}.jpg","Key art reused across several pieces")}</figure>' for i in [2,4,3,0,5,1])
 CRMH=[503,503,479,500,503,498]
@@ -743,11 +740,11 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       </div><div class="c-r">
       <p class="c-lead">An online betting brand that needs content every single day: slots, sports, seasons and offers on every channel. I designed its organic and paid pieces, proposed the rebrand that gave its content a look of its own, and built the AI pipelines that now produce slot and CRM pieces in days.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand &amp; production design, AI systems</dd></div><div><dt class="mono">Output</dt><dd>+150 pieces a month, all designed by me</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>The brand’s only designer: brand, production, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~160 pieces a month on average</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
-    <div class="c-cover h184" aria-label="More than 150 pieces designed every month, with a few highlights">
+    <div class="c-cover h184" aria-label="About 160 pieces designed every month, with a few highlights">
       <div class="h-grid" aria-hidden="true">{h184}</div>
-      <div class="h-count"><b class="h-n" data-n="150">+150</b><span>pieces designed<br>per month</span></div>
+      <div class="h-count"><b class="h-n" data-n="160">160</b><span>pieces designed<br>per month, on average</span></div>
       <div class="h-feat">{hfeat}</div>
     </div>
   </section>
@@ -798,7 +795,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         </div>
         <div class="subhd"><span class="mono">03.2</span><h3>Promo blocks</h3><p>The Megashoot game, announced in email and in the app. Click to see them full size.</p></div>
         <div class="wcb">{wcb}</div>
-        <div class="subhd"><span class="mono">03.3</span><h3>Images that kept coming back</h3><p>Some key art worked so well that it was adapted again and again across social, paid, app store and CRM. Click one to see it whole.</p></div>
+        <div class="subhd"><span class="mono">03.3</span><h3>Images that kept coming back</h3><p>Key art made mostly with AI and finished in Photoshop. It worked so well that it was adapted again and again across social, paid, app store and CRM. Click one to see it whole.</p></div>
         <div class="keys">{keys}</div>
       </section>
 
@@ -806,12 +803,12 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">04 · Channels</span>
         <h2><span class="lm"><span>The same brand,</span></span><span class="lm"><span>beyond social</span></span></h2>
         <p class="lead">Email, the blog and the app stores each have their own format and their own rules. The look had to hold in all of them.</p>
-        <div class="subhd" id="crm"><span class="mono">04.1</span><h3>CRM email</h3><p>Each banner is built in layers: photo, light ribbon, the cut-out subject, a shade, copy and frame, logo and button. Hover or tap one to pull the layers apart, or show only the photos.</p></div>
+        <div class="subhd" id="crm"><span class="mono">04.1</span><h3>CRM email</h3><p>Each banner is built in layers: photo, light ribbon, the cut-out subject, a shade, copy and frame, logo and button. Some photos came from the CRM pipeline; others were existing images adapted. Hover or tap one to pull the layers apart, or show only the photos.</p></div>
         <div class="crm-ui"><button type="button" class="crm-all" aria-pressed="false">Show only the photos</button></div>
         <div class="crm-grid">{crm}</div>
         <div class="subhd" id="blog"><span class="mono">04.2</span><h3>Blog</h3><p>Headers for guides, previews and promos. Drag, swipe or use the arrows.</p></div>
         <div class="cf" tabindex="0" aria-label="Blog headers">{cf}<div class="cf-ui"><button type="button" class="cf-p" aria-label="Previous"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="cf-n mono">01 / 08</span><button type="button" class="cf-nx" aria-label="Next"><svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
-        <div class="subhd" id="aso"><span class="mono">04.3</span><h3>App store</h3><p>Two sets of store screenshots. The phone stays put and the set slides through it, the way a player swipes in the store. Use the slider to move it yourself.</p></div>
+        <div class="subhd" id="aso"><span class="mono">04.3</span><h3>App store</h3><p>Two sets of store screenshots, both winners of A/B tests run at different times. The phone stays put and the set slides through it, the way a player swipes in the store. Use the slider to move it yourself.</p></div>
         <div class="aso-ui cbp-tabs" role="tablist" aria-label="Screenshot sets"><button role="tab" aria-selected="true" data-set="a">Casino</button><button role="tab" aria-selected="false" data-set="b">Welcome offer</button></div>
         <div class="as">
           <div class="as-track" data-set="a">{aso_a}</div><div class="as-track" data-set="b" hidden>{aso_b}</div>
@@ -872,7 +869,7 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <section class="chap" id="pipelines">
         <span class="mono">Automation · 03 · Pipelines</span>
         <h2><span class="lm"><span>Who does</span></span><span class="lm"><span>what</span></span></h2>
-        <p class="lead">The three pipelines run as Claude skills, with Higgsfield for images and Figma for layout. Follow a piece through the lanes; the screen on the side shows what happens at each step.</p>
+        <p class="lead">I designed the three pipelines and built them together with Claude, as skills that drive Higgsfield for images and Figma for layout. They run every time a related ticket comes in. Follow a piece through the lanes; the screen on the side shows what happens at each step.</p>
         <div class="swim" data-sw='{sw_json}'>
           <div class="sw-top"><div class="cbp-tabs" role="tablist" aria-label="Pipelines"><button role="tab" aria-selected="true" data-p="vm">Slot visual master</button><button role="tab" aria-selected="false" data-p="res">Resizes</button><button role="tab" aria-selected="false" data-p="crm">CRM banners</button></div><button type="button" class="sw-play">Play ►</button></div>
           <div class="sw-body">
@@ -898,9 +895,9 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
         <span class="mono">Automation · 05 · Impact</span>
         <h2><span class="lm"><span>From making pieces</span></span><span class="lm"><span>to directing them</span></span></h2>
         <div class="cb-nums">
-          <div><b>+150</b><p>pieces a month designed by hand before the pipelines, with 184 in the busiest one. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the content boards</small></div>
-          <div><b class="pending">[N]</b><p>slot banners delivered in 2–3 days with the pipeline.</p><small class="mono">Pending · number to confirm</small></div>
-          <div><b>2</b><p>moments where I step in per master: choosing the scene and approving the image.</p><small class="mono">From the pipeline design</small></div>
+          <div><b>160</b><p>pieces a month on average, designed by hand before the pipelines, with 184 in the busiest month. Copy came from the content manager; every design was mine.</p><small class="mono">Counted from the content boards</small></div>
+          <div><b>50</b><p>slot pieces delivered in one day of work with the pipeline, across all formats.</p><small class="mono">Total working time, my own count</small></div>
+          <div><b>82%</b><p>of customers contacted for a first-deposit follow-up said they found CampoBet through social media. Instagram followers and interaction grew after the rebrand.</p><small class="mono">From the follow-up calls</small></div>
         </div>
       </section>
     </div>
@@ -1076,9 +1073,8 @@ PERSON={"@type":"Person","name":"Rodrigo López","jobTitle":"Design Team Lead ·
  "description":"Designer and art director from Mexico with 10+ years of experience (since 2016). Brand design, art direction, AI-assisted key visuals, internal campaigns, UX/UI and 3D for global brands. Looking for Brand Designer or Brand Manager roles; open to remote work.",
  "email":"mailto:"+EMAIL,"address":{"@type":"PostalAddress","addressCountry":"MX"},
  "sameAs":[LI,IG],
- "worksFor":{"@type":"Organization","name":"Brainrocket"},
  "knowsAbout":["Brand design","Brand management","Art direction","Key visuals","AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)","Internal communications and endomarketing","UX/UI and landing pages","3D (Blender, Cinema 4D)","Design team leadership"]}
-EXPERIENCE=[("2025–present","Design Team Lead","Brainrocket","Leads the design team for international iGaming brands in Mexico and Canada, working with Marketing, CRM, ASO and Performance."),
+EXPERIENCE=[("2025–present","Design Team Lead","iGaming","Design for an online betting brand: social, paid, CRM, ASO and AI production pipelines."),
  ("2023–2025","Senior Designer","HD* Human Design Doing","Endomarketing and culture campaigns for Philip Morris, Coca-Cola, Nestlé and more."),
  ("2020–2023","Senior Designer","Happy Studio","Concepts, 3D models and 2D animation for brand campaigns."),
  ("2018–2020","Jr. Art Director","Volátil Agencia Creativa","Creative concepts and art direction."),
@@ -1087,7 +1083,7 @@ WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for 
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a sales-culture program: hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
  ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Campaign concept, four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
  ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Real bottle-cap photo rebuilt by hand in 12 layers.","proyectos/conexiones-magicas.html"),
- ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (more than 150 pieces a month, 184 in the busiest; copy by the content manager), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
+ ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 160 pieces a month on average, 184 in the busiest; copy by the content manager; 50 slot pieces in one working day with the pipeline; 82% of customers contacted for first-deposit follow-up said they found the brand on social media), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
       {"@type":"ItemList","name":"Selected work","itemListElement":[{"@type":"ListItem","position":i+1,"item":{"@type":"CreativeWork","name":n,"description":ds,"url":u,"creator":{"@id":"#rodrigo"},"sourceOrganization":c,**({"dateCreated":y} if y else {})}} for i,(n,c,y,ds,u) in enumerate(WORKS)]},
@@ -1095,8 +1091,7 @@ def ld_home():
     return '<script type="application/ld+json">'+_j.dumps(d,ensure_ascii=False)+'</script>\n<link rel="alternate" type="text/markdown" href="llms.txt" title="Plain-text summary">\n'
 def ld_case(i):
     n,c,y,ds,u=WORKS[i]
-    cr=dict(PERSON); 
-    if n=="CampoBet": cr.pop("worksFor",None)
+    cr=dict(PERSON)
     d={"@context":"https://schema.org","@type":"CreativeWork","name":n,"description":ds,"sourceOrganization":c,**({"dateCreated":y} if y else {}),"creator":cr}
     return '<script type="application/ld+json">'+_j.dumps(d,ensure_ascii=False)+'</script>\n<link rel="alternate" type="text/markdown" href="../llms.txt" title="Plain-text summary">\n'
 def inject(path,tag):

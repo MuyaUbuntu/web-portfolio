@@ -193,7 +193,7 @@
     var cols=Array.from(txt).map(function(ch){var c=document.createElement('span');c.className='col';c.setAttribute('aria-hidden','true');
       if(/\d/.test(ch)){for(var n=0;n<=9;n++){var s=document.createElement('span');s.textContent=n;c.appendChild(s)}c.dataset.d=ch}else{var s2=document.createElement('span');s2.textContent=ch;c.appendChild(s2)}
       el.appendChild(c);return c});
-    return {el:el,roll:function(instant){cols.forEach(function(c,i){if(c.dataset.d==null)return;if(instant)c.style.transition='none';else c.style.transitionDelay=(i*.08)+'s';c.style.transform='translateY(-'+(c.dataset.d*1.15)+'em)'})}};
+    return {el:el,roll:function(instant){cols.forEach(function(c,i){if(c.dataset.d==null)return;if(instant)c.style.transition='none';else c.style.transitionDelay=(i*.08)+'s';c.style.marginTop='-'+(c.dataset.d*1.15)+'em'})}};
   });
   if(reduce||!('IntersectionObserver' in window))odos.forEach(function(o){o.roll(true)});
   else{var oio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){odos.forEach(function(o){if(o.el===en.target)o.roll(false)});oio.unobserve(en.target)}})},{threshold:.6});
@@ -539,7 +539,7 @@
     if(reduce){cells.forEach(function(c){c.classList.add('on')});hh.classList.add('in')}
     else{hn.textContent='0';var t0=null;
       (function f(n){if(!t0)t0=n;var k=Math.min(1,(n-t0)/550),e=1-Math.pow(1-k,2),m=Math.round(N*e);
-        hn.textContent='+'+Math.round(NN*e);
+        hn.textContent=Math.round(NN*e);
         if(k<1)requestAnimationFrame(f);else hh.classList.add('in')})(performance.now())}
   }
 
@@ -621,7 +621,7 @@
   /* ---------- World Cup: pieces in formation ---------- */
   var wcs=$('.wc');
   if(wcs){
-    var pls=$$('.pl',wcs),pitch=$('.pitch',wcs),focus=$('.wc-focus',wcs),big=$('.wc-big',wcs),F={
+    var pls=$$('.wcp',wcs),pitch=$('.pitch',wcs),focus=$('.wc-focus',wcs),big=$('.wc-big',wcs),F={
       '433':[[6,50],[24,14],[22,38],[22,62],[24,86],[46,24],[44,50],[46,76],[72,18],[76,50],[72,82]],
       '442':[[6,50],[24,14],[22,38],[22,62],[24,86],[50,12],[47,38],[47,62],[50,88],[76,36],[76,64]],
       '352':[[6,50],[22,26],[20,50],[22,74],[46,8],[44,30],[42,50],[44,70],[46,92],[76,36],[76,64]]},cf='433';

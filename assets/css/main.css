@@ -216,7 +216,7 @@ p{margin:0}
 @media(min-width:860px){.nums{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .nums > div{border-top:1px solid rgba(255,255,255,.25);padding-top:1rem;min-width:0}
 .odo{display:flex;font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:1.15;height:1.15em;overflow:hidden;font-variant-numeric:tabular-nums}
-.odo .col{display:flex;flex-direction:column;transition:transform 1.8s var(--out)}
+.odo .col{display:flex;flex-direction:column;align-self:flex-start;transition:margin-top 1.8s var(--out)}
 .odo .col span{display:block;height:1.15em;line-height:1.15}
 .nums small{display:block;margin-top:.6rem;color:rgba(255,255,255,.72);font-size:.9rem}
 
@@ -944,12 +944,12 @@ body *:not(.keep-case){text-transform:none!important}
 .pitch{position:relative;aspect-ratio:16/10;border-radius:var(--r);background:repeating-linear-gradient(90deg,#14924F 0 10%,#118446 10% 20%);overflow:hidden}
 @media(max-width:640px){.pitch{aspect-ratio:3/4.4;background:repeating-linear-gradient(180deg,#14924F 0 10%,#118446 10% 20%)}.pitch-l{transform:rotate(90deg) scale(1.5);transform-origin:50% 50%}}
 .pitch-l{position:absolute;inset:3%;width:94%;height:94%;fill:none;stroke:rgba(255,255,255,.55);stroke-width:.5;vector-effect:non-scaling-stroke}
-.pl{position:absolute;width:clamp(60px,9.5%,130px);translate:-50% -50%;border:0;padding:0;background:none;cursor:pointer;transition:left .9s var(--bounce),top .9s var(--bounce),scale .3s var(--bounce);transition-delay:calc(var(--i) * 30ms)}
-@media(max-width:640px){.pl{width:16%}}
-.pl .phb{width:100%;border-radius:6px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5)}
-.pl .phb span{font-size:.5rem}
-.pl:hover{scale:1.25;z-index:3}
-.pl-n{position:absolute;left:50%;bottom:-.7rem;translate:-50% 0;width:1.4rem;height:1.4rem;border-radius:50%;background:#fff;color:var(--ink);font-size:.66rem;font-weight:800;display:grid;place-items:center}
+.wcp{position:absolute;width:clamp(60px,9.5%,130px);translate:-50% -50%;border:0;padding:0;background:none;cursor:pointer;transition:left .9s var(--bounce),top .9s var(--bounce),scale .3s var(--bounce);transition-delay:calc(var(--i) * 30ms)}
+@media(max-width:640px){.wcp{width:16%}}
+.wcp .phb{width:100%;border-radius:6px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5)}
+.wcp .phb span{font-size:.5rem}
+.wcp:hover{scale:1.25;z-index:3}
+.wcp-n{position:absolute;left:50%;bottom:-.7rem;translate:-50% 0;width:1.4rem;height:1.4rem;border-radius:50%;background:#fff;color:var(--ink);font-size:.66rem;font-weight:800;display:grid;place-items:center}
 .wc-focus{position:absolute;inset:3.4rem 0 0;z-index:5;display:grid;place-items:center;background:rgba(10,42,29,.85);border-radius:var(--r);backdrop-filter:blur(4px)}
 .wc-focus[hidden]{display:none}
 .wc-big{height:86%;max-width:90%}
@@ -1146,7 +1146,7 @@ body *:not(.keep-case){text-transform:none!important}
 .car-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .3s,width .3s}
 .car-dots i.on{background:#0E9F5E;width:16px;border-radius:9px}
 .car figcaption{font-size:.72rem;color:var(--ink-2);text-align:center}
-.pl img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:6px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5);display:block}
+.wcp img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:6px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5);display:block}
 .wc-big img{height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:8px}
 .keys{display:flex;justify-content:center;margin-top:1.2rem;padding:10px 0 20px}
 .key{margin:0 -2%;width:18.5%;flex:none;transition:transform .5s var(--bounce),z-index 0s;position:relative}
@@ -1195,7 +1195,7 @@ body *:not(.keep-case){text-transform:none!important}
 .out{flex:none;margin:0;width:clamp(180px,20vw,260px);scroll-snap-align:start}
 .out img{width:100%;height:auto;border-radius:10px;display:block}
 @media(max-width:640px){.keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0}.keys .key{width:auto;min-width:0;margin:0;transform:none}.keys .key img{border-width:3px}.hf:nth-child(n+4){display:none}.h-feat{height:36%}}
-.pl img,.key img,.fm-t img{height:auto}
+.wcp img,.key img,.fm-t img{height:auto}
 
 /* ---- CampoBet · round 3 ---- */
 /* lenticular controls */
@@ -1519,3 +1519,4 @@ body *:not(.keep-case){text-transform:none!important}
 .lb-st figcaption{font-size:.85rem;color:#3b3b38}
 .lb-st figcaption b{color:var(--tomato);margin-right:.3rem}
 .shw-t[hidden]{display:none}
+@media(min-width:900px){.numbers{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:end;gap:2rem}.numbers .nums{grid-template-columns:minmax(0,1fr)!important;border:0;margin:0;padding:0}.numbers .nums > div{justify-self:end;text-align:right;border:0}.numbers .odo{justify-content:flex-end}}
