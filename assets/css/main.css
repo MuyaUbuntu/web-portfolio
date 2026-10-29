@@ -2037,3 +2037,4 @@ body *:not(.keep-case){text-transform:none!important}
 .asm-note.on{opacity:1;translate:0 0}
 
 @media(max-width:700px){.pp-lean{top:-.4rem;right:0;width:62px;rotate:10deg}.cc-lean{top:-.4rem;right:0;width:58px}.pp-title{padding-right:0}.w-open{padding-top:.4rem}}
+.t-fg svg{height:1.05rem;width:auto;display:block}
