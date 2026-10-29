@@ -66,79 +66,120 @@ def build(R, pre, head, nav, scripts, word, next_block):
     akeys=','.join((k or '') for t,d,k in steps)
     parts='<ul class="asm-parts" aria-label="Parts"><li><b>1×</b>figure</li><li><b>1×</b>button</li><li><b>6×</b>spheres</li><li><b>1×</b>type lockup</li></ul>'
 
-    # ---------- the three challenges, solved by playing ----------
-    challenges=[('01','tri-01','Break the prejudice that play isn’t serious work.','Proof comes first: the client logos sit right under “Play like a pro”, and the trainer’s credentials get a block of their own.'),
-                ('02','tri-02','Make a hands-on workshop understood on one page.','The method becomes four cards, start playing, observe, extract insights, decide, followed by a video and the same call to action.'),
-                ('03','tri-03','Speak PLAYMOBIL pro’s visual language.','Plain white figures modeled in Blender, outlined PRO PLAY type and a rounded 3D button that looks like a toy.')]
-    targets=''.join(f'<button type="button" class="tg" data-i="{i}" aria-label="Reveal challenge {n}">{hd(img,"")}<span>{n}</span></button>' for i,(n,img,q,a) in enumerate(challenges))
-    cards=''.join(f'<article class="tg-card" data-i="{i}"><span class="mono">Challenge {n}</span><h3>{q}</h3><div class="tg-ans"><p>{a}</p></div><p class="tg-lock mono">Drop a figure on {n} to unlock</p></article>' for i,(n,img,q,a) in enumerate(challenges))
-    toys=''.join(f'<span class="toy" style="--w:{w}">{hd(n,"",lazy=False)}</span>' for n,w in [('fig-wave-b',.07),('fig-armsup',.068),('fig-tophat',.09),('fig-wizard',.058),('fig-mic',.072),('sphere-o1',.04),('sphere-o2',.032),('sphere-o1',.036),('briefcase',.06)])
+    # ---------- shared drawing helpers ----------
+    def wave(cls,d):
+        return f'<svg class="wave {cls}" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path d="{d}" fill="currentColor"/></svg>'
+    W_UP='M0,92 C180,40 360,20 560,58 C760,96 920,130 1120,96 C1260,72 1360,40 1440,52 L1440,140 L0,140 Z'
+    W_DN='M0,0 L1440,0 L1440,60 C1300,110 1120,124 920,92 C720,60 560,18 360,40 C200,58 90,96 0,84 Z'
+    def fl(name,x,y,w,d,cls='',delay=0):
+        return f'<span class="fl {cls}" style="--x:{x}%;--y:{y}%;--w:{w};--dl:{delay}s" data-d="{d}" aria-hidden="true">{hd(name,"")}</span>'
+    def scribble(cls,paths):
+        ps=''.join(f'<path d="{p}" pathLength="1"/>' for p in paths)
+        return f'<svg class="scrib {cls}" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">{ps}</svg>'
 
-    # ---------- the pink lab ----------
-    lab=[('pk-flask','A lab, not an office','Glassware for a team in lab coats: culture treated as an experiment you can run.',(66,46,17)),
-         ('pk-cross','Pink as the base','Pink runs the whole page, not just the accents, so a 28-year-old firm reads young.',(10,14,11)),
-         ('pk-spring','Gestural type','Brush lettering for “Impulsa” and “Contáctanos”: the hand shows and the corporate tone breaks.',(82,16,14)),
-         ('pk-cone','A form that asks for dreams','The last field asks “What’s your dream?”. A lead form that starts a conversation.',(26,52,15)),
-         ('pk-sphere','28 years, told as a tale','Inflated 3D numbers and a pun: “our story lasts 28 years, the rest is just tales”.',(46,10,10)),
-         ('pk-tube-a','Consultants as a cast','Color-blocked portraits and a marquee of HDO°, like a show’s lineup.',(8,70,10))]
-    deco=[('pk-dot',(38,74,4)),('pk-tube-b',(90,72,7))]
-    labs=''.join(f'<button type="button" class="lab-o" style="--x:{x}%;--y:{y}%;--w:{w};--d:{i*.7}s" data-i="{i}" aria-label="{t}">{hd(n,"")}</button>' for i,(n,t,d,(x,y,w)) in enumerate(lab))
-    labs+=''.join(f'<span class="lab-o deco" style="--x:{x}%;--y:{y}%;--w:{w};--d:{i*.9+.3}s" aria-hidden="true">{hd(n,"")}</span>' for i,(n,(x,y,w)) in enumerate(deco))
-    labn=''.join(f'<div class="lab-n{" on" if i==0 else ""}" data-i="{i}"><span class="mono">{i+1:02d} / {len(lab):02d}</span><h3>{t}</h3><p>{d}</p></div>' for i,(n,t,d,p) in enumerate(lab))
+    # ---------- Pro Play: the three challenges ----------
+    challenges=[('01','tri-01','fig-wave-a','Break the prejudice that play isn’t serious work.','Proof comes first: the client logos sit right under “Play like a pro”, and the trainer’s credentials get a block of their own.'),
+                ('02','tri-02','fig-armsup','Make a hands-on workshop understood on one page.','The method becomes four cards (start playing, observe, extract insights, decide), then a video and the same call to action.'),
+                ('03','tri-03','fig-tophat','Speak PLAYMOBIL pro’s visual language.','Plain white figures modeled in Blender, outlined PRO PLAY type and a rounded 3D button that looks like a toy.')]
+    ch_cards=''.join(f'''<article class="pp-card" tabindex="0">
+            <span class="pp-peek" aria-hidden="true">{hd(fig,"")}</span>
+            <div class="pp-card-in">
+              <div class="pp-tri">{hd(tri,"")}<b>{n}</b></div>
+              <h3>{q}</h3>
+              <span class="pp-rule" aria-hidden="true"></span>
+              <p><strong>How the design answered</strong>{a}</p>
+            </div>
+          </article>''' for n,tri,fig,q,a in challenges)
+
+    # ---------- Cultura: where each decision lives ----------
+    dec=[('pk-flask','Brush lettering over pink','The hero shouts: “Impulsa una cultura colectiva” in hand lettering, with the founder mid-gesture. Culture as energy, not a slide.','cc-s-hero'),
+         ('pk-cross','Four reasons to write','Leads start at the top, not at the bottom: four cards name the reasons to get in touch, each with its own 3D icon.','cc-s-cards'),
+         ('pk-cone','A form that asks for dreams','The last field reads “What’s your dream?” instead of “Message”. The form opens a conversation.','cc-s-form'),
+         ('pk-sphere','28 years, told as a tale','Inflated 3D numbers and a pun: “our story lasts 28 years, the rest is just tales”.','cc-s-28'),
+         ('pk-spring','Proof in a bento grid','The Cinépolis employer-branding case as a grid of real pieces: logo, posters and photos.','cc-s-case'),
+         ('pk-tube-a','Consultants as a cast','The founder in his bowler hat, a CONSULTORES HDO° marquee and color-blocked portraits, like a show’s lineup.','cc-s-team')]
+    dec_list=''.join(f'<li><button type="button" data-i="{i}" aria-pressed="{"true" if i==0 else "false"}"><span class="cd-ic">{hd(o,"")}</span><span class="cd-t"><b>{i+1:02d}</b>{t}</span></button></li>' for i,(o,t,d,im) in enumerate(dec))
+    dec_imgs=''.join(f'<figure class="cd-img{" on" if i==0 else ""}" data-i="{i}">{hd(im,"Cultura Colectiva landing: "+t,lazy=i>0)}</figure>' for i,(o,t,d,im) in enumerate(dec))
+    dec_notes=''.join(f'<p class="cd-note{" on" if i==0 else ""}" data-i="{i}">{d}</p>' for i,(o,t,d,im) in enumerate(dec))
 
     marq=''.join('<span>CONSULTORES HDO°</span><span class="o">CONSULTORES HDO°</span>' for _ in range(6))
-    cast=''.join(f'<figure class="cast-f">{hd(n,a)}<figcaption class="mono">{c}</figcaption></figure>' for n,a,c in [
-        ('fig-wave-a','White figure waving, Pro Play hero','Hero'),('fig-armsup','White figure with arms up','Facilitator'),('fig-wizard','Figure with a wizard hat and wand','Footer'),
-        ('fig-tophat','Figure with a top hat and briefcase','Presentation'),('fig-bowler','Figure with a bowler hat, waving','Bowler'),('fig-mic','Figure with a bowler hat and a red microphone','Bowler & mic')])
+    cast=''.join(f'<figure class="cast-f" style="--c:{c}">{hd(n,a)}<figcaption>{cap}</figcaption></figure>' for n,a,cap,c in [
+        ('fig-wave-a','White figure waving, Pro Play hero','Hero','var(--po)'),('fig-armsup','White figure with arms up','Facilitator','var(--pc)'),
+        ('fig-wizard','Figure with a wizard hat and wand','Footer','var(--pp)'),('fig-tophat','Figure with a top hat and briefcase','Presentation','#F2A01E'),
+        ('fig-bowler','Figure with a bowler hat, waving','Bowler','var(--cp)'),('fig-mic','Figure with a bowler hat and a red microphone','Bowler &amp; mic','var(--cv)')])
 
-    page=head('One House, Two Moods · HDO landings · Rodrigo López','Case study: two landing pages for HDO Culture & Change, Pro Play (2024) and Cultura Colectiva (2023). UX/UI, branding, art direction and 3D in Blender.',pre)+nav(pre,False)+f'''<main class="hdo">
+    S1=['M-20,120 C180,40 380,220 560,120 C720,30 860,160 1020,80','M-20,520 C160,430 300,600 470,500 C640,400 760,560 1020,470']
+    S2=['M-20,300 C120,180 260,420 420,300 C560,190 700,360 860,250 C930,200 980,230 1020,210','M60,560 C220,470 360,590 520,520 C700,440 860,560 1020,500']
+
+    fonts='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&family=Permanent+Marker&display=swap">\n'
+    page=head('One House, Two Moods · HDO landings · Rodrigo López','Case study: two landing pages for HDO Culture & Change, Pro Play (2024) and Cultura Colectiva (2023). UX/UI, branding, art direction and 3D in Blender.',pre).replace('</head>',fonts+'</head>',1)+nav(pre,False)+f'''<main class="hdo">
   <section class="wrap c-hero">
     <div class="c-head"><div class="c-l">
       <a class="back" href="{pre}#work" data-go>← All work</a>
       <div class="c-client"><span class="tag k">HDO Culture &amp; Change · HD*</span><span class="tag">Web · 2023–2024</span></div>
       <h1 class="c-title" aria-label="One house, two moods"><span aria-hidden="true">{word("One")} {word("house,")} {word("two","hlw")} {word("moods","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">Two landing pages for HDO, a culture and change consultancy, one year apart. Same logo, nav and footer; opposite moods. Pro Play had to make a toy look like a serious business tool. Cultura Colectiva had to make 28 years of consulting feel young.</p>
+      <p class="c-lead">Two landing pages for HDO, a culture and change consultancy, one year apart. They share a logo, a nav and a footer, and almost nothing else. Pro Play had to make a toy look like a serious business tool. Cultura Colectiva had to make 28 years of consulting feel young.</p>
       <div class="tags c-tags"><span class="tag t">UX/UI</span><span class="tag p">Branding</span><span class="tag b">3D</span><span class="tool t-bl" title="Blender">Bl</span></div>
       <dl class="facts"><div><dt class="mono">Role</dt><dd>UX/UI, branding, art direction, 3D</dd></div><div><dt class="mono">Scope</dt><dd>Design only · built by HDO</dd></div><div><dt class="mono">Years</dt><dd>2023 · 2024</dd></div><div class="win"><dt class="mono">Result</dt><dd>Both still live, with later changes</dd></div></dl>
     </div></div>
     <div class="c-cover hdo-split">
       <a class="hs pp" href="#pro-play" aria-label="Go to Pro Play">{hd("pp-hero","Pro Play landing hero: a white figure leaning on the title and an orange Regístrate button",lazy=False)}<span class="hs-l"><b>Pro Play</b><small>Bogotá · 2024</small></span></a>
       <a class="hs cc" href="#cultura" aria-label="Go to Cultura Colectiva">{hd("cc-hero","Cultura Colectiva landing hero: brush lettering over pink and the founder in a lab coat",lazy=False)}<span class="hs-l"><b>Cultura Colectiva</b><small>Mexico · 2023</small></span></a>
-      {hd("fig-wave-b","","hs-fig",lazy=False)}{hd("pk-sphere","","hs-sph",lazy=False)}
     </div>
   </section>
 
   <div class="hdo-ch">
     <aside class="toc" aria-label="Chapters">
-      <ol><li><a href="#house">The house</a></li><li><a href="#pro-play">Pro Play</a></li><li><a href="#cultura">Cultura</a></li><li><a href="#cast">The cast</a></li><li><a href="#result">Result</a></li></ol>
+      <ol><li><a href="#house">Two projects</a></li><li><a href="#pro-play">Pro Play</a></li><li><a href="#cultura">Cultura</a></li><li><a href="#cast">The cast</a></li><li><a href="#result">Result</a></li></ol>
       <div class="bar"><i></i></div>
     </aside>
 
     <div class="wrap">
       <section class="chap" id="house">
-        <span class="mono">01 · The house</span>
-        <h2><span class="lm"><span>One house,</span></span><span class="lm"><span>two personalities</span></span></h2>
-        <p class="lead">HDO helps companies build more human cultures, with workshops, diagnostics and consulting. Each landing sells one thing to a different crowd, so each gets its own mood inside the same frame.</p>
-        <div class="house">
-          <figure class="house-f">{hd("pp-foot","Pro Play footer: HDO logo and contact details in orange")}<figcaption><span class="tag k">Pro Play</span><span>Orange</span></figcaption></figure>
-          <figure class="house-f">{hd("cc-foot","Cultura Colectiva footer: the same HDO logo and contact details in pink")}<figcaption><span class="tag k">Cultura</span><span>Pink</span></figcaption></figure>
+        <span class="mono">00 · Two projects</span>
+        <h2><span class="lm"><span>Same house,</span></span><span class="lm"><span>opposite moods</span></span></h2>
+        <p class="lead">HDO helps companies build more human cultures, with workshops, diagnostics and consulting. These two pages sell different things to different crowds, so each one got its own world.</p>
+        <div class="duo">
+          <a class="duo-f pp" href="#pro-play">
+            <span class="duo-n">Project 01</span>
+            <div class="duo-img">{hd("pp-hero","Pro Play landing hero")}</div>
+            <div class="duo-t"><b>Pro Play</b><span>A free PLAYMOBIL pro workshop in Bogotá · 2024</span><span class="duo-mood">Blue, orange and toys <i>→</i></span></div>
+          </a>
+          <a class="duo-f cc" href="#cultura">
+            <span class="duo-n">Project 02</span>
+            <div class="duo-img">{hd("cc-hero","Cultura Colectiva landing hero")}</div>
+            <div class="duo-t"><b>Cultura Colectiva</b><span>HDO’s own consultancy page · 2023</span><span class="duo-mood">Pink, brush and lab glass <i>→</i></span></div>
+          </a>
         </div>
-        <p class="muted mono" style="margin-top:.9rem">Same footer, same nav, same logo. Only the accent changes.</p>
       </section>
     </div>
 
-    <section class="band pp" id="pro-play">
+    <!-- =================== PROJECT 01 · PRO PLAY =================== -->
+    <section class="world pp" id="pro-play">
+      {wave("top",W_UP)}
+      <div class="fls" aria-hidden="true">
+        {fl("sphere-o1",6,6,4.4,-.25)}{fl("sphere-o2",88,3,2.6,-.5,"",.8)}{fl("sphere-o1",94,31,5.6,-.15,"",.4)}{fl("sphere-o2",3,43,2.2,-.6,"",1.2)}{fl("sphere-o1",91,62,3,-.35,"",.2)}{fl("sphere-o2",8,78,3.4,-.2,"",.6)}{fl("sphere-o1",52,92,2.4,-.45,"",1)}
+      </div>
       <div class="wrap">
-        <div class="band-h">
-          <div><span class="mono">02 · Pro Play · Bogotá, 2024</span>
-          <h2><span class="lm"><span>Make play look</span></span><span class="lm"><span class="hl">like serious work</span></span></h2></div>
-          <p class="lead">Pro.Play is a method created by Juan Prego and endorsed by PLAYMOBIL pro: teams model real problems with figures to find new answers. HD* brought a free, in-person workshop to Bogotá, led by Jaime Lastra, one of the few certified trainers in Latin America. The challenge: sell the professional value behind a toy.</p>
-        </div>
+        <header class="w-open">
+          <span class="w-tag">Project 01 · Bogotá, 2024</span>
+          <h2 class="pp-title" aria-label="Pro Play"><span class="o1">PRO</span> <span class="o2">PLAY</span></h2>
+          {hd("fig-wave-a","","pp-lean")}
+          <p class="w-kick">Make play look like serious work.</p>
+          <div class="w-intro">
+            <p>Pro.Play is a method created by Juan Prego and endorsed by PLAYMOBIL pro: teams model real problems with figures to find new answers. HD* brought a free, in-person workshop to Bogotá, led by Jaime Lastra, one of the few certified trainers in Latin America.</p>
+            <p>The challenge: sell the professional value behind a toy, on a single page.</p>
+          </div>
+          <ul class="w-facts"><li><b>21 May</b>Workshop date</li><li><b>Free</b>In-person workshop</li><li><b>1 page</b>From hook to sign-up</li></ul>
+        </header>
+
         {browser("pp","HDO · Pro Play landing","pp-full","The full Pro Play landing page, top to bottom",pp_notes,1400,5895)}
 
-        <h3 class="sub band-sub">Assembly instructions</h3>
-        <p class="muted band-p">Like the booklet in a Playmobil box: the hero, rebuilt piece by piece from the real renders.</p>
+        <div class="w-sec">
+          <h3 class="w-h"><span>Assembly</span> instructions</h3>
+          <p class="w-p">Like the booklet in a Playmobil box: the hero, rebuilt piece by piece from the real renders.</p>
+        </div>
         <div class="asm" data-keys="{akeys}">
           <div class="asm-stage" aria-label="The Pro Play hero, assembled step by step">
             {hd("pp-hero-line","Line drawing of the Pro Play hero, like an instruction sheet","asm-line")}
@@ -153,71 +194,87 @@ def build(R, pre, head, nav, scripts, word, next_block):
           </div>
         </div>
 
-        <h3 class="sub band-sub">Solve it by playing</h3>
-        <p class="muted band-p">The landing’s line was “when you have a problem, solve it by playing”. So here are its three challenges: drop a figure on each number to see how the design answered it.</p>
-        <div class="toss" data-cursor="Grab one">
-          <div class="toss-stage" aria-hidden="true">{toys}</div>
-          <div class="toss-floor">{targets}</div>
-          <button type="button" class="toss-reset">Drop them again</button>
+        <div class="w-sec">
+          <h3 class="w-h"><span>Three</span> challenges</h3>
+          <p class="w-p">Built like the landing’s own “¿Cómo funciona?” cards. Hover one and its figure pops up.</p>
         </div>
-        <div class="tg-cards">{cards}</div>
+        <div class="pp-cards">{ch_cards}</div>
 
-        <div class="kv-grid band-kv">
-          <figure>{hd("pp-phone","Pro Play landing on a phone: the four steps of the method")}<figcaption class="tag">How it works</figcaption></figure>
-          <figure>{hd("pp-phone-2","Pro Play landing on a phone: the orange band and the sign-up")}<figcaption class="tag">Solve it by playing</figcaption></figure>
+        <div class="kv-grid w-kv">
+          <figure>{hd("pp-phone","Pro Play on a phone: Play like a pro, client logos and the four steps")}<figcaption class="tag">Play like a pro</figcaption></figure>
+          <figure>{hd("pp-phone-2","Pro Play on a phone: the trainer, the orange band and the sign-up")}<figcaption class="tag">Trainer &amp; sign-up</figcaption></figure>
         </div>
+      </div>
+      <div class="pp-band">
+        {wave("top",W_UP)}
+        {hd("fig-armsup","","pp-band-fig")}
+        <p><span>Cuando tengas un problema,</span><b>resuélvelo jugando</b><em>“When you have a problem, solve it by playing.” The landing’s line, and its whole argument.</em></p>
       </div>
     </section>
 
-    <div class="marq" aria-hidden="true"><div class="mq-r">{marq}</div><div class="mq-r rev">{marq}</div></div>
-
-    <section class="band cc" id="cultura">
+    <!-- =================== PROJECT 02 · CULTURA COLECTIVA =================== -->
+    <section class="world cc" id="cultura">
+      <div class="marq" aria-hidden="true"><div class="mq-r">{marq}</div><div class="mq-r rev">{marq}</div></div>
+      {scribble("s1",S1)}
+      <div class="fls" aria-hidden="true">
+        {fl("pk-cross",4,9,7,-.3)}{fl("pk-sphere",86,7,6,-.5,"",.6)}{fl("pk-spring",90,36,8,-.2,"",.3)}{fl("pk-tube-a",2,40,5,-.45,"",1.1)}{fl("pk-dot",80,55,2.6,-.6,"",.9)}{fl("pk-tube-b",95,74,4,-.3,"",.5)}{fl("pk-cone",3,72,7,-.25,"",.2)}
+      </div>
       <div class="wrap">
-        <div class="band-h">
-          <div><span class="mono">03 · Cultura Colectiva · 2023</span>
-          <h2><span class="lm"><span>Make 28 years</span></span><span class="lm"><span class="hl">feel young</span></span></h2></div>
-          <p class="lead">HDO works with brands that want more human, authentic workplaces. This page had to carry that energy, its values and 28 years of experience, without sounding like a consultancy brochure.</p>
-        </div>
-        <div class="needs">
-          <div><b>Leads</b><p>Attract leads with a page of high visual impact.</p></div>
-          <div><b>Culture</b><p>Communicate a positive culture in an unconventional way.</p></div>
-          <div><b>Expertise</b><p>Show experience without looking institutional or boring.</p></div>
-        </div>
+        <header class="w-open">
+          <span class="w-tag">Project 02 · Mexico, 2023</span>
+          <h2 class="cc-title" aria-label="Cultura Colectiva"><span class="m1">Cultura</span><span class="m2">Colectiva</span></h2>
+          {hd("pk-flask","","cc-lean")}
+          <p class="w-kick">Make 28 years feel young.</p>
+          <div class="w-intro">
+            <p>HDO works with brands that want more human, authentic workplaces. This was its own page: it had to carry that energy, its values and 28 years of experience without sounding like a consultancy brochure.</p>
+          </div>
+          <ul class="w-facts"><li><b>Leads</b>Attract them with high visual impact</li><li><b>Culture</b>Show it in an unconventional way</li><li><b>Expertise</b>Without looking institutional</li></ul>
+        </header>
+
         {browser("cc","HDO · Cultura Colectiva landing","cc-full","The full Cultura Colectiva landing page, top to bottom",cc_notes,1400,7971)}
 
-        <h3 class="sub band-sub">The pink lab</h3>
-        <p class="muted band-p">Every object floating in the landing is a 3D piece. Here, each one holds a design decision: touch them.</p>
-        <div class="lab-wrap">
-          <div class="lab-stage" data-cursor="Touch one">{labs}</div>
-          <div class="lab-notes" aria-live="polite">{labn}</div>
+        <div class="w-sec">
+          <h3 class="w-h"><span>Six</span> decisions</h3>
+          <p class="w-p">Every 3D object in the landing marks one choice. Pick one to see where it lives on the page.</p>
+        </div>
+        <div class="cd" data-cursor="Pick one">
+          <ol class="cd-list" aria-label="Design decisions">{dec_list}</ol>
+          <div class="cd-view">
+            <div class="cd-frame">{dec_imgs}</div>
+            <div class="cd-notes" aria-live="polite">{dec_notes}</div>
+          </div>
         </div>
 
-        <div class="kv-grid band-kv">
+        <div class="kv-grid w-kv">
           <figure>{hd("cc-phone","Cultura Colectiva on a phone: 28 years and the Cinépolis case")}<figcaption class="tag">28 years</figcaption></figure>
           <figure>{hd("cc-team","Cultura Colectiva desktop: the founder, the HDO marquee and the team")}<figcaption class="tag">The cast</figcaption></figure>
         </div>
       </div>
+      {scribble("s2",S2)}
+      {wave("bot",W_UP)}
     </section>
 
     <div class="wrap">
       <section class="chap" id="cast">
-        <span class="mono">04 · The cast</span>
+        <span class="mono">03 · The cast</span>
         <h2><span class="lm"><span>Modeled in</span></span><span class="lm"><span>Blender, no AI</span></span></h2>
-        <p class="lead">The figures, spheres, button, trophy and lab glassware were modeled and rendered in Blender. Plain white figures keep the toy reference without copying a product, and the hats give each one a role.</p>
-        <div class="cast" data-cursor="Drag">{cast}</div>
-      </section>
-
-      <section class="chap" id="result">
-        <span class="mono">05 · Result</span>
-        <h2><span class="lm"><span>Two moods,</span></span><span class="lm"><span>still on air</span></span></h2>
-        <div class="quotes three">
-          <div class="quote c"><b>2 landings</b><p>Cultura Colectiva in 2023 and Pro Play in 2024, inside the same HDO frame.</p></div>
-          <div class="quote b"><b>Blender</b><p>Every 3D piece modeled and rendered by hand. No AI.</p></div>
-          <div class="quote a"><b>Live</b><p>Both pages are still online, with changes made after launch.</p></div>
-        </div>
-        <figure class="hdo-end">{hd("fig-g1","")}{hd("fig-g2","White figure with arms up")}{hd("fig-g3","")}</figure>
+        <p class="lead">The figures, spheres, button and lab glassware were modeled and rendered in Blender. Plain white figures keep the toy reference without copying a product, and the hats give each one a role.</p>
+        <div class="cast">{cast}</div>
       </section>
     </div>
+
+    <section class="finale" id="result">
+      {wave("top",W_UP)}
+      <div class="fls" aria-hidden="true">
+        {fl("sphere-o1",8,16,4,-.3)}{fl("sphere-o2",22,62,2.4,-.5,"",.7)}{fl("pk-sphere",86,14,5,-.35,"",.3)}{fl("pk-cross",78,64,6,-.25,"",.9)}{fl("pk-dot",64,8,2.4,-.6,"",.5)}{fl("sphere-o1",36,6,2.6,-.4,"",1.1)}
+      </div>
+      <div class="wrap fin-in">
+        <span class="w-tag">Result</span>
+        <h2 class="fin-t"><span>Two moods.</span><span>One house.</span></h2>
+        <ul class="fin-stats"><li><b>2</b>landings, one year apart</li><li><b>0</b>AI images: every 3D piece made in Blender</li><li><b>Live</b>both still online, with changes made after launch</li></ul>
+        <div class="fin-figs">{hd("fig-g1","")}{hd("fig-g2","Three white figures celebrating")}{hd("fig-g3","")}</div>
+      </div>
+    </section>
   </div>
 '''+next_block(pre,'AI Showroom','ai-showroom.html','<img src="../assets/img/showroom/didi.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)

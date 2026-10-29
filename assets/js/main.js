@@ -848,6 +848,7 @@
   var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function inView(el,fn,th){if(!('IntersectionObserver' in window))return fn(true);new IntersectionObserver(function(es){fn(es[0].isIntersecting)},{threshold:th||.35}).observe(el)}
+  if(!reduce)document.documentElement.classList.add('js-anim');
 
   /* ---------- Assembly instructions: the Pro Play hero, piece by piece ---------- */
   $$('.asm').forEach(function(a){
@@ -865,50 +866,28 @@
     if(!reduce){var started=false;inView(a,function(v){if(v&&!started&&!user){started=true;a.classList.add('auto');tick()}},.45)}
   });
 
-  /* ---------- Solve it by playing: drop a figure on a challenge ---------- */
-  $$('.toss').forEach(function(box){
-    var els=$$('.toy',box),tgs=$$('.tg',box),cards=$$('.tg-card'),W=0,H=0,FL=0,bodies=[],running=false,vis=false;
-    function size(){W=box.clientWidth;H=box.clientHeight;FL=H*.97;els.forEach(function(el){var w=+getComputedStyle(el).getPropertyValue('--w')||.1;el.style.width=Math.max(30,W<600?W*w*1.9:W*w)+'px'})}
-    function solve(i){var t=tgs[i],c=cards[i];if(!t||t.classList.contains('ok'))return;t.classList.add('ok');if(c)c.classList.add('ok')}
-    tgs.forEach(function(t,i){t.addEventListener('click',function(){solve(i)})});
-    function figure(b){return /fig-/.test(b.el.querySelector('img').src)}
-    function drop(){size();var pad=W*.06;bodies=els.map(function(el,i){var w=el.offsetWidth,h=el.offsetHeight||w*2;return {el:el,w:w,h:h,x:pad+Math.random()*(W-w-pad*2),y:-h-i*60-Math.random()*80,vx:(Math.random()-.5)*3,vy:0,r:(Math.random()-.5)*20,vr:(Math.random()-.5)*2,drag:false,touched:false,fig:/fig-/.test($('img',el).getAttribute('src'))}});start()}
-    function start(){if(!running){running=true;requestAnimationFrame(step)}}
-    function hot(b){var cx=b.x+b.w/2,br=box.getBoundingClientRect(),hit=-1;tgs.forEach(function(t,i){var r=t.getBoundingClientRect(),l=r.left-br.left,rr=r.right-br.left;if(cx>l-8&&cx<rr+8)hit=i});return hit}
-    function step(){var moving=false;
-      bodies.forEach(function(b){if(b.el.offsetHeight)b.h=b.el.offsetHeight;if(b.drag){moving=true;return}
-        b.vy+=.6;b.x+=b.vx;b.y+=b.vy;b.r+=b.vr;
-        if(b.y+b.h>FL){b.y=FL-b.h;b.vy*=-.32;b.vx*=.84;b.vr*=.5;if(Math.abs(b.vy)<1)b.vy=0}
-        var onF=b.y+b.h>=FL-1;b.r=((b.r+180)%360+360)%360-180;if(onF){b.r+=(0-b.r)*.2;b.vr*=.5}else b.vr*=.985;
-        if(b.x<0){b.x=0;b.vx*=-.6}if(b.x+b.w>W){b.x=W-b.w;b.vx*=-.6}
-        if(Math.abs(b.vx)>.05||Math.abs(b.vy)>.05||!onF||Math.abs(b.r)>.4)moving=true;else{b.vx=0;b.vr=0;
-          if(b.fig&&b.touched&&!b.done){var h=hot(b);if(h>-1){b.done=true;solve(h)}}}});
-      for(var it=0;it<3;it++)bodies.forEach(function(b){if(b.drag)return;bodies.forEach(function(o){if(o===b)return;var ox=Math.min(b.x+b.w,o.x+o.w)-Math.max(b.x,o.x),oy=Math.min(b.y+b.h,o.y+o.h)-Math.max(b.y,o.y);if(ox<=0||oy<=0)return;
-        if(oy<ox*.6){if(b.y<o.y){b.y-=oy;if(b.vy>0)b.vy*=-.12}}else{var d=(b.x+b.w/2<o.x+o.w/2)?-ox:ox;b.x+=d*.5;b.vx*=.5;if(b.x<0)b.x=0;if(b.x+b.w>W)b.x=W-b.w}})});
-      bodies.forEach(function(b){b.el.style.transform='translate('+b.x.toFixed(1)+'px,'+b.y.toFixed(1)+'px) rotate('+b.r.toFixed(1)+'deg)'});
-      if(moving&&vis)requestAnimationFrame(step);else running=false}
-    els.forEach(function(el,i){el.addEventListener('pointerdown',function(e){var b=bodies[i];if(!b)return;e.preventDefault();b.drag=true;b.touched=true;b.done=false;el.classList.add('drag');el.setPointerCapture(e.pointerId);
-      var r=box.getBoundingClientRect(),ox=e.clientX-r.left-b.x,oy=e.clientY-r.top-b.y,lx=e.clientX,ly=e.clientY;
-      function mv(ev){b.vx=ev.clientX-lx;b.vy=ev.clientY-ly;lx=ev.clientX;ly=ev.clientY;b.x=ev.clientX-r.left-ox;b.y=Math.min(FL-b.h,ev.clientY-r.top-oy);b.vr=Math.max(-6,Math.min(6,b.vx*.25));
-        var h=b.fig?hot(b):-1;tgs.forEach(function(t,j){t.classList.toggle('hot',j===h)});start()}
-      function up(){b.drag=false;el.classList.remove('drag');var hh=b.fig?hot(b):-1;if(hh>-1&&b.y+b.h>FL*.35){b.done=true;b.vx*=.2;solve(hh)}tgs.forEach(function(t){t.classList.remove('hot')});el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);
-        b.vx=Math.max(-36,Math.min(36,b.vx));b.vy=Math.max(-36,Math.min(36,b.vy));start()}
-      el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})});
-    $('.toss-reset',box).addEventListener('click',drop);
-    addEventListener('resize',function(){var ow=W;size();if(Math.abs(ow-W)>40)drop()});
-    var first=true;inView(box,function(v){vis=v;if(v){if(first){first=false;drop()}else start()}},.3)});
+  /* ---------- Floating objects: parallax on scroll ---------- */
+  var fls=$$('.fl');
+  if(fls.length&&!reduce){var tk=false;
+    function par(){tk=false;var vh=innerHeight;fls.forEach(function(f){var r=f.parentElement.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)return;var c=(r.top+r.height/2)-vh/2;f.style.setProperty('--py',(c*(+f.dataset.d||0)).toFixed(1)+'px')})}
+    addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(par)}},{passive:true});par()}
 
-  /* ---------- The pink lab: every object holds a decision ---------- */
-  $$('.lab-wrap').forEach(function(w){var st=$('.lab-stage',w),os=$$('button.lab-o',w),ns=$$('.lab-n',w);
-    function show(i){os.forEach(function(o,j){o.classList.toggle('on',j===i);if(j===i)o.classList.add('seen')});ns.forEach(function(n,j){n.classList.toggle('on',j===i)})}
-    os.forEach(function(o,i){o.addEventListener('click',function(){show(i)});o.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')show(i)});o.addEventListener('focus',function(){show(i)})});
-    show(0);os[0].classList.remove('seen');
-    if(!reduce&&matchMedia('(pointer:fine)').matches)st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();st.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(3));st.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(3))})});
+  /* ---------- Brush scribbles draw in ---------- */
+  $$('.scrib').forEach(function(s){inView(s,function(v){if(v)s.classList.add('in')},.2)});
+
+  /* ---------- Six decisions: each object points to its section ---------- */
+  $$('.cd').forEach(function(c){var bs=$$('.cd-list button',c),im=$$('.cd-img',c),nt=$$('.cd-note',c),cur=0,t=null,user=false,D=4200,t0=0,raf=0;
+    function set(i){cur=i;bs.forEach(function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')});im.forEach(function(m,j){m.classList.toggle('on',j===i);if(j===i){m.scrollTop=0;var g=m.querySelector('img');if(g)g.loading='eager'}});nt.forEach(function(n,j){n.classList.toggle('on',j===i)})}
+    function stop(){user=true;c.classList.remove('auto');clearTimeout(t);cancelAnimationFrame(raf)}
+    function prog(n){if(user)return;var p=Math.min(100,(n-t0)/D*100);var b=bs[cur];if(b)b.style.setProperty('--p',p+'%');raf=requestAnimationFrame(prog)}
+    function tick(){if(user)return;t0=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(prog);t=setTimeout(function(){bs[cur].style.removeProperty('--p');set((cur+1)%bs.length);tick()},D)}
+    bs.forEach(function(b,j){b.addEventListener('click',function(){stop();bs.forEach(function(x){x.style.removeProperty('--p')});set(j)})});
+    set(0);if(!reduce){var on=false;inView(c,function(v){if(v&&!on&&!user){on=true;c.classList.add('auto');tick()}},.4)}});
 
   /* ---------- Marquee: CONSULTORES HDO° moves with the scroll ---------- */
   var mq=$('.marq');
-  if(mq&&!reduce){var rows=$$('.mq-r',mq),tk=false;
-    function upd(){tk=false;var r=mq.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);p=Math.max(0,Math.min(1,p));
+  if(mq&&!reduce){var rows=$$('.mq-r',mq),tq=false;
+    function upd(){tq=false;var r=mq.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);p=Math.max(0,Math.min(1,p));
       rows.forEach(function(row,i){var d=row.scrollWidth-mq.clientWidth;row.style.transform='translateX('+(-(i?1-p:p)*d*.5-d*.1).toFixed(1)+'px)'})}
-    addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});upd()}
+    addEventListener('scroll',function(){if(!tq){tq=true;requestAnimationFrame(upd)}},{passive:true});upd()}
 })();
