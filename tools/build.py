@@ -222,7 +222,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
       </div>
     </div>
     <ul class="xp" aria-label="Experience">
-      <li><span class="yr"><b>2025 – Now</b></span><h3>Design Team Lead<small>iGaming</small></h3><p>Sole designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines.</p></li>
+      <li><span class="yr"><b>2025 – Now</b></span><h3>Design MX Lead<small>iGaming</small></h3><p>Designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines.</p></li>
       <li><span class="yr"><b>2023 – 2025</b></span><h3>Senior Designer<small>HD* Human Design Doing</small></h3><p>Concepts and AI key visuals for culture and training programs at Philip Morris, Coca-Cola, Mars, Sephora, Cinépolis and more, plus the Happy Talks landing.</p></li>
       <li><span class="yr"><b>2020 – 2023</b></span><h3>Senior Designer<small>Happy Studio</small></h3><p>Campaign concepts, 3D and 2D animation, including the ArboTerra concept and AdBook.</p></li>
       <li><span class="yr"><b>2018 – 2020</b></span><h3>Jr. Art Director<small>Volátil Agencia Creativa</small></h3><p>Creative concepts and art direction in a fast-paced agency.</p></li>
@@ -1155,12 +1155,12 @@ import sys as _s; _s.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import case_hdo; case_hdo.build(R,'../',head,nav,scripts,word,next_block)
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
 import json as _j
-PERSON={"@type":"Person","name":"Rodrigo López","jobTitle":"Design Team Lead · Designer & Art Director",
+PERSON={"@type":"Person","name":"Rodrigo López","jobTitle":"Design MX Lead · Designer & Art Director",
  "description":"Designer and art director from Mexico with 10+ years of experience (since 2016). Brand design, art direction, AI-assisted key visuals, internal campaigns, UX/UI and 3D for global brands. Looking for Brand Designer or Brand Manager roles; open to remote work.",
  "email":"mailto:"+EMAIL,"address":{"@type":"PostalAddress","addressCountry":"MX"},
  "sameAs":[LI,IG],
  "knowsAbout":["Brand design","Art direction","Key visuals","AI image generation (Adobe Firefly, Midjourney, Stable Diffusion)","Internal communications and endomarketing","UX/UI and landing pages","3D (Blender, Cinema 4D)","Design team leadership"]}
-EXPERIENCE=[("2025–present","Design Team Lead","iGaming","Sole designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines."),
+EXPERIENCE=[("2025–present","Design MX Lead","iGaming","Designer for an online betting brand: social, paid, CRM, ASO and a rebrand of its organic content. Designed three AI production pipelines."),
  ("2023–2025","Senior Designer","HD* Human Design Doing","Concepts and AI key visuals for culture and training programs at Philip Morris, Coca-Cola, Mars, Sephora, Cinépolis and more, plus the Happy Talks landing."),
  ("2020–2023","Senior Designer","Happy Studio","Campaign concepts, 3D and 2D animation, including the ArboTerra concept and AdBook."),
  ("2018–2020","Jr. Art Director","Volátil Agencia Creativa","Creative concepts and art direction."),
