@@ -4,3 +4,4 @@ Thumbs.db
 *.ai
 *.mov
 node_modules/
+__pycache__/
