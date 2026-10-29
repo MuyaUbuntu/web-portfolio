@@ -604,11 +604,11 @@
   if(sx){
     var wins=$$('.sx-win',sx),cyls=$$('.cyl',sx),ths=$$('.sx-t',sx),nmx=$('.sx-name',sx),lev=$('.sx-lever',sx),simg=$('.sx-lev',sx),angs=[0,0,0],curL=0,busy2=false,N8=8,NF=61,frames=[],loaded=false;
     var sbase=simg.getAttribute('src').replace(/l00\.webp.*$/,'');
-    function preload(){if(loaded)return;loaded=true;for(var i=0;i<NF;i++){var im=new Image();im.src=sbase+'l'+(i<10?'0':'')+i+'.webp';frames.push(im)}}
+    var spr=null,lcv=null,lcx=null;function preload(){if(loaded)return;loaded=true;spr=new Image();spr.onload=function(){frames=[spr]};spr.src=sbase+'sprite.webp';lcv=document.createElement('canvas');lcv.width=172;lcv.height=557;lcv.className='sx-lev';lcv.setAttribute('aria-hidden','true');lcv.style.visibility='hidden';simg.parentNode.insertBefore(lcv,simg.nextSibling);lcx=lcv.getContext('2d')}
     inView(sx,preload,.05);
     function rsz(){wins.forEach(function(w){w.style.setProperty('--r',(w.clientHeight/2)+'px')})}
     addEventListener('resize',rsz);addEventListener('load',rsz);rsz();
-    function play(){if(reduce||!frames.length)return;var t0=performance.now();(function f(n){var k=Math.min(NF-1,Math.floor((n-t0)/33));var fr=frames[k];if(fr&&fr.complete&&fr.naturalWidth)simg.src=fr.src;if(k<NF-1)requestAnimationFrame(f);else simg.src=frames[0].src})(t0)}
+    function play(){if(reduce||!frames.length||!lcx)return;var t0=performance.now();lcv.style.visibility='visible';simg.style.visibility='hidden';(function f(n){var k=Math.min(NF-1,Math.floor((n-t0)/33));lcx.clearRect(0,0,172,557);lcx.drawImage(spr,k*172,0,172,557,0,0,172,557);if(k<NF-1)requestAnimationFrame(f);else{simg.style.visibility='';lcv.style.visibility='hidden'}})(t0)}
     function spin(k){if(busy2)return;busy2=true;curL=k;ths.forEach(function(x,i){x.classList.toggle('on',i===k)});nmx.textContent=ths[k].getAttribute('aria-label');
       preload();play();
       setTimeout(function(){cyls.forEach(function(c,j){var b=Math.ceil(angs[j]/360)*360+360*(2+j),a=b+k*45;angs[j]=a;
