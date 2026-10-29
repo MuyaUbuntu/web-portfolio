@@ -161,7 +161,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
         <div><p>Campaigns, brand systems and digital work for Philip Morris, Coca-Cola, Mars and more. On AI projects, hover to see the sketch each one started from.</p></div>
       </div>
       <div class="grid">
-{card(1,"proyectos/campobet.html","CampoBet","CampoBet","Sole designer of a betting brand: ~160 pieces a month, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(1,"proyectos/campobet.html","CampoBet","CampoBet","Designer of a betting brand: ~160 pieces a month, a rebrand and three AI pipelines.",["Brand","Social","AI system"],'<div class="ph"><img src="assets/img/campobet/cover.jpg" alt="CampoBet trophy key visual" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(2,"proyectos/arboterra.html","ArboTerra · Puebla, Mexico","ArboTerra es…","A concept that refuses to define the park. Approved at first pitch, still in use three years on.",["Campaign","3D","Blender"],'<div class="ph"><img src="assets/img/arboterra/kv-aventura.jpg" alt="The Árbol Arcano floating over teal clouds" loading="lazy" decoding="async" draggable="false"></div>')}
 {card(3,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for PMI’s sales-force program, built on a Spanish double meaning.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","Key visual for a 75-person team experience: AI for the light, the details by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
@@ -748,9 +748,9 @@ case5=head('CampoBet · Rodrigo López','Case study: brand and production design
       <div class="c-client"><span class="tag k">CampoBet</span><span class="ai">AI system</span></div>
       <h1 class="c-title" aria-label="CampoBet"><span aria-hidden="true">{word("Campo")}{word("Bet","hlw")}</span></h1>
       </div><div class="c-r">
-      <p class="c-lead">An online betting brand that publishes every day. As its only designer, I produce ~160 pieces a month across social, paid, CRM, the blog and the app stores. I proposed the rebrand that gave the organic content its own look, and designed three AI pipelines that put the brand rules into production.</p>
+      <p class="c-lead">An online betting brand that publishes every day. As its designer, I produce ~160 pieces a month across social, paid, CRM, the blog and the app stores. I proposed the rebrand that gave the organic content its own look, and designed three AI pipelines that put the brand rules into production.</p>
       <div class="tags c-tags"><span class="tag t">Brand design</span><span class="tag p">Social &amp; paid</span><span class="tag b">AI pipelines</span><span class="tool t-ps" title="Photoshop">Ps</span><span class="tool t-fg" title="Figma">Fg</span></div>
-      <dl class="facts"><div><dt class="mono">Role</dt><dd>The brand’s only designer: brand, production, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~160 pieces a month on average</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
+      <dl class="facts"><div><dt class="mono">Role</dt><dd>Brand, production, AI systems</dd></div><div><dt class="mono">Output</dt><dd>~160 pieces a month on average</dd></div><div><dt class="mono">Scope</dt><dd>Social, paid, CRM, ASO, blog</dd></div><div><dt class="mono">Systems</dt><dd>3 AI pipelines I designed</dd></div></dl>
     </div></div>
     <div class="c-cover h184" aria-label="About 160 pieces designed every month, with a few highlights">
       <div class="h-grid" aria-hidden="true">{h184}</div>
