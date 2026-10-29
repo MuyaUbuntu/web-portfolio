@@ -39,32 +39,35 @@ def build(R, pre, head, nav, scripts, word, next_block):
           </div>
         </div>'''
 
-    # ---------- assembly instructions (Pro Play hero, piece by piece) ----------
-    # regions in % of the hero: left, top, right, bottom (inset values)
-    steps=[('Parts','Everything in the box: one figure, six spheres, one button and the type. All 3D pieces modeled in Blender.',None),
-           ('Type','The lockup goes first: “Juega y conoce”, the outlined PRO PLAY and the Playmobil pro logo.','type'),
-           ('Figure','A plain white figure leans on the title, so the toy is part of the headline.','fig'),
+    # ---------- assembly instructions: the real PSD layers, piece by piece ----------
+    # bbox in the 1920x1080 PSD -> % of the stage. ex = exploded pose (dx,dy in % of stage, rot, scale)
+    def pc(x0,y0,x1,y1): return (x0/19.2,y0/10.8,(x1-x0)/19.2,(y1-y0)/10.8)
+    # loose-part spots on the table at step 00: centre (cx,cy in % of stage), rotation, scale
+    L=[('type','asm-type',pc(143,228,1396,828),(31,34,-6,.5)),
+       ('fig','asm-toy',pc(51,466,295,903),(13,70,18,.75)),
+       ('btn','asm-btn',pc(1106,534,1905,787),(73,30,7,.42)),
+       ('btn','asm-conoce',pc(1397,422,1658,505),(74,64,-5,.8)),
+       ('sph','asm-ball',pc(119,270,201,350),(52,84,0,1)),('sph','asm-ball',pc(1126,270,1149,293),(59,86,0,1)),
+       ('sph','asm-ball',pc(1754,264,1792,300),(64,85,0,1)),('sph','asm-ball',pc(1179,825,1228,873),(70,85,0,1)),
+       ('sph','asm-ball',pc(1858,837,1950,926),(78,84,0,1)),('sph','asm-ball',pc(191,1029,270,1106),(87,84,0,1))]
+    steps=[('Parts','Everything in the box, straight from the PSD: a background, the type lockup, one figure, one button and six spheres.',None),
+           ('Background','A blue field with soft blobs and HDO’s nav, the frame both landings share.','bg'),
+           ('Type','“Juega y conoce”, the outlined PRO PLAY and the PLAYMOBIL pro logo go in as one lockup.','type'),
+           ('Figure','A plain white figure, modeled in Blender, leans on the title so the toy is part of the headline.','fig'),
            ('Button','One orange, toy-like button. Nothing else on screen looks pressable.','btn'),
            ('Spheres','Six orange spheres repeat the button color across the page.','sph'),
-           ('Done','Color, light and HDO’s nav. The hero, as it went live.','all')]
-    REG={'type':(11,34,38,19),'fig':(2.5,42,83.5,15),'btn':(67,37,8,35),'all':(0,0,0,0)}
-    SPH=[(8.3,28.8,2.1),(59.2,26,.7),(92.3,26.1,1.1),(62.6,78.5,1.45),(98.6,81.8,2.1),(12.1,98.2,2.05)]  # cx, cy (%), r (% of width)
-    def clip(k):
-        l,t,r,b=REG[k];return f'clip-path:inset({t}% {r}% {b}% {l}% round 1.2vw)'
-    layers=''.join(f'<div class="asm-c" data-s="{k}" style="{clip(k)}">{hd("pp-hero","",lazy=True)}</div>' for k in ['type','fig','btn','all'])
-    # spheres revealed one by one with circular masks sized relative to the stage
-    sph_masks=''.join(f'<div class="asm-c sph" data-s="sph" style="--cx:{cx}%;--cy:{cy}%;--r:{r}">{hd("pp-hero","",lazy=True)}</div>' for cx,cy,r in SPH)
-    # loose pieces: tray position (x,y,w in % of stage) -> target position
-    pieces=[('fig-wave-a','fig',(70.5,70.5,3.6),(5,43.5,8.3)),
-            ('btn','btn',(76.5,78,12),(67.6,47,23.6)),
-            ]+[('sphere-o1','sph',(90+(i%3)*2.6,72+(i//3)*7,2.1),(cx-r*1.1,cy-r*1.1*1.778,r*2.2)) for i,(cx,cy,r) in enumerate(SPH)]
-    def piece(n,s,t,g,i):
-        return f'<span class="asm-p" data-s="{s}" style="--tx:{t[0]}%;--ty:{t[1]}%;--tw:{t[2]}%;--gx:{g[0]}%;--gy:{g[1]}%;--gw:{g[2]}%;--d:{i*70}ms">{hd(n,"")}</span>'
-    ptray=''.join(piece(n,s,t,g,i) for i,(n,s,t,g) in enumerate(pieces))
+           ('Done','The hero, as it went live.','done')]
+    akeys=','.join((k or '') for t,d,k in steps)
+    def lay(i,k,n,g,e):
+        x,y,w,h=g;cx,cy,r,sc=e
+        dx=cx-(x+w/2);dy=(cy-(y+h/2))*0.5625
+        return f'<span class="asm-l{" btn-main" if n=="asm-btn" else ""}" data-s="{k}" style="--x:{x:.2f}%;--y:{y:.2f}%;--w:{w:.2f}%;--dx:{dx:.2f}cqw;--dy:{dy:.2f}cqw;--r:{r}deg;--s:{sc};--d:{(i%6)*80}ms">{hd(n,"")}</span>'
+    layers=f'<div class="asm-l asm-bgl" data-s="bg">{hd("asm-bg","")}</div>'+''.join(lay(i,k,n,g,e) for i,(k,n,g,e) in enumerate(L))
+    sph_masks=''
+    ptray=''
     asteps=''.join(f'<button type="button" data-i="{i}" aria-pressed="{"true" if i==0 else "false"}"><b>{i:02d}</b>{t}</button>' for i,(t,d,k) in enumerate(steps))
     anotes=''.join(f'<p class="asm-note{" on" if i==0 else ""}">{d}</p>' for i,(t,d,k) in enumerate(steps))
-    akeys=','.join((k or '') for t,d,k in steps)
-    parts='<ul class="asm-parts" aria-label="Parts"><li><b>1×</b>figure</li><li><b>1×</b>button</li><li><b>6×</b>spheres</li><li><b>1×</b>type lockup</li></ul>'
+    parts='<ul class="asm-parts" aria-label="Parts"><li><b>1×</b>background</li><li><b>1×</b>type lockup</li><li><b>1×</b>figure</li><li><b>1×</b>button</li><li><b>6×</b>spheres</li></ul>'
 
     # ---------- shared drawing helpers ----------
     def wave(cls,d):
@@ -84,7 +87,7 @@ def build(R, pre, head, nav, scripts, word, next_block):
     ch_cards=''.join(f'''<article class="pp-card" tabindex="0">
             <span class="pp-peek" aria-hidden="true">{hd(fig,"")}</span>
             <div class="pp-card-in">
-              <div class="pp-tri">{hd(tri,"")}<b>{n}</b></div>
+              <div class="pp-tri">{hd(tri,"Challenge "+n)}</div>
               <h3>{q}</h3>
               <span class="pp-rule" aria-hidden="true"></span>
               <p><strong>How the design answered</strong>{a}</p>
@@ -104,9 +107,9 @@ def build(R, pre, head, nav, scripts, word, next_block):
 
     marq=''.join('<span>CONSULTORES HDO°</span><span class="o">CONSULTORES HDO°</span>' for _ in range(6))
     cast=''.join(f'<figure class="cast-f" style="--c:{c}">{hd(n,a)}<figcaption>{cap}</figcaption></figure>' for n,a,cap,c in [
-        ('fig-wave-a','White figure waving, Pro Play hero','Hero','var(--po)'),('fig-armsup','White figure with arms up','Facilitator','var(--pc)'),
+        ('fig-wave-a','White figure waving, Pro Play hero','Hero','var(--po)'),('fig-bowler','Figure with a bowler hat, waving','Bowler','var(--pc)'),
         ('fig-wizard','Figure with a wizard hat and wand','Footer','var(--pp)'),('fig-tophat','Figure with a top hat and briefcase','Presentation','#F2A01E'),
-        ('fig-bowler','Figure with a bowler hat, waving','Bowler','var(--cp)'),('fig-mic','Figure with a bowler hat and a red microphone','Bowler &amp; mic','var(--cv)')])
+        ('fig-armsup','White figure with arms up','Facilitator','var(--cp)'),('fig-mic','Figure with a bowler hat and a red microphone','Bowler &amp; mic','var(--cv)')])
 
     S1=['M-20,120 C180,40 380,220 560,120 C720,30 860,160 1020,80','M-20,520 C160,430 300,600 470,500 C640,400 760,560 1020,470']
     S2=['M-20,300 C120,180 260,420 420,300 C560,190 700,360 860,250 C930,200 980,230 1020,210','M60,560 C220,470 360,590 520,520 C700,440 860,560 1020,500']
@@ -178,13 +181,12 @@ def build(R, pre, head, nav, scripts, word, next_block):
 
         <div class="w-sec">
           <h3 class="w-h"><span>Assembly</span> instructions</h3>
-          <p class="w-p">Like the booklet in a Playmobil box: the hero, rebuilt piece by piece from the real renders.</p>
+          <p class="w-p">Like the booklet in a Playmobil box: the hero, rebuilt from the real layers of the PSD.</p>
         </div>
         <div class="asm" data-keys="{akeys}">
           <div class="asm-stage" aria-label="The Pro Play hero, assembled step by step">
             {hd("pp-hero-line","Line drawing of the Pro Play hero, like an instruction sheet","asm-line")}
-            {layers}{sph_masks}
-            <div class="asm-box" aria-hidden="true"><span>Parts box</span></div><div class="asm-tray" aria-hidden="true">{ptray}</div>
+            {layers}
             <span class="asm-num" aria-hidden="true">00</span>
           </div>
           <div class="asm-side">
@@ -257,7 +259,7 @@ def build(R, pre, head, nav, scripts, word, next_block):
     <div class="wrap">
       <section class="chap" id="cast">
         <span class="mono">03 · The cast</span>
-        <h2><span class="lm"><span>Modeled in</span></span><span class="lm"><span>Blender, no AI</span></span></h2>
+        <h2><span class="lm"><span>Modeled in</span></span><span class="lm"><span>Blender</span></span></h2>
         <p class="lead">The figures, spheres, button and lab glassware were modeled and rendered in Blender. Plain white figures keep the toy reference without copying a product, and the hats give each one a role.</p>
         <div class="cast">{cast}</div>
       </section>
@@ -276,6 +278,6 @@ def build(R, pre, head, nav, scripts, word, next_block):
       </div>
     </section>
   </div>
-'''+next_block(pre,'AI Showroom','ai-showroom.html','<img src="../assets/img/showroom/didi.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'Piensa en Jumbo','piensa-en-jumbo.html','<img src="../assets/img/jumbo/thumb.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
     open(os.path.join(R,'proyectos','hdo-landings.html'),'w').write(page)

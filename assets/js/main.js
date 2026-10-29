@@ -850,17 +850,17 @@
   function inView(el,fn,th){if(!('IntersectionObserver' in window))return fn(true);new IntersectionObserver(function(es){fn(es[0].isIntersecting)},{threshold:th||.35}).observe(el)}
   if(!reduce)document.documentElement.classList.add('js-anim');
 
-  /* ---------- Assembly instructions: the Pro Play hero, piece by piece ---------- */
+  /* ---------- Assembly instructions: real PSD layers snap into place ---------- */
   $$('.asm').forEach(function(a){
     var keys=a.dataset.keys.split(','),btn=$$('.asm-steps button',a),nt=$$('.asm-note',a),num=$('.asm-num',a),cur=0,timer=null,user=false,last=keys.length-1;
     function idx(k){return keys.indexOf(k)}
     function set(i){cur=i;a.dataset.i=i;a.classList.toggle('done',i===last);
       btn.forEach(function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')});nt.forEach(function(n,j){n.classList.toggle('on',j===i)});
       num.textContent=(i<10?'0':'')+i;
-      $$('.asm-c',a).forEach(function(c){c.classList.toggle('on',idx(c.dataset.s)<=i)});
-      $$('.asm-p',a).forEach(function(p){p.classList.toggle('placed',idx(p.dataset.s)<=i)})}
+      $$('.asm-l',a).forEach(function(c){c.classList.toggle('on',idx(c.dataset.s)<=i)});
+      if(i===last&&!reduce){a.classList.remove('press');void a.offsetWidth;a.classList.add('press')}}
     function stop(){user=true;a.classList.remove('auto');clearTimeout(timer)}
-    function tick(){if(user)return;if(cur>=last){a.classList.remove('auto');return}timer=setTimeout(function(){if(user)return;set(cur+1);tick()},2800)}
+    function tick(){if(user)return;if(cur>=last){a.classList.remove('auto');return}timer=setTimeout(function(){if(user)return;set(cur+1);tick()},2600)}
     btn.forEach(function(b,j){b.addEventListener('click',function(){stop();set(j)})});
     set(0);
     if(!reduce){var started=false;inView(a,function(v){if(v&&!started&&!user){started=true;a.classList.add('auto');tick()}},.45)}
