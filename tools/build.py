@@ -1,5 +1,11 @@
 """Builds index.html and the case pages (v3.1).
-Usage: python3 tools/build.py"""
+Usage: python3 tools/build.py
+
+WARNING (2026-10-28): the live site also has Piensa en Jumbo and Believe in our Behaviors,
+which were built in another session and are NOT in this script. index.html, llms.txt and the
+case pages in this branch were synced from the live site by hand. Running this script will
+overwrite them and drop those two cases until their builders are added here.
+tools/case_hdo.py builds proyectos/hdo-landings.html on its own."""
 import os, json
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import hashlib as _h
@@ -151,7 +157,7 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
   <section class="stage" id="work">
     <div class="sec wrap">
       <div class="sec-h">
-        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">07</i></span></span></h2>
+        <h2><span class="lm"><span>Selected</span></span><span class="lm"><span>work<i class="n">08</i></span></span></h2>
         <div><p>Campaigns, brand systems and digital work for Philip Morris, Coca-Cola, Mars and more. On AI projects, hover to see the sketch each one started from.</p></div>
       </div>
       <div class="grid">
@@ -160,8 +166,9 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
 {card(3,"proyectos/no-vendas-humo.html","Philip Morris International","No Vendas Humo","Key visual for PMI’s sales-force program, built on a Spanish double meaning.",["Key visual","Firefly","Photoshop"],ai("pmi-humo-final","Smoke letters reading No Vendas Humo",pre),"pmi-humo-ref",True)}
 {card(4,"proyectos/conexiones-magicas.html","Coca-Cola México · HD*","Conexiones Mágicas","Key visual for a 75-person team experience: AI for the light, the details by hand.",["Key visual","Firefly","Photoshop"],'<div class="ph"><img src="assets/img/coca/s7-final.jpg" alt="A hand catching a Coca-Cola bottle cap in red light" loading="lazy" decoding="async" draggable="false"></div>',"coca-ref",True)}
 {card(5,"proyectos/happy-talks.html","HD* · 2024","Happy Talks","Landing UI for a conference brand: two weeks, approved in the first round, still live.",["Web","UI","Illustrator"],ht(1,"Happy Talks landing page on a laptop",pre))}
-{card(6,"proyectos/ai-showroom.html","Showroom · 10 brands","AI Showroom","11 AI key visuals for culture programs, shown from reference to final.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
-{card(7,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three recruitment briefs against the clock. The fastest: 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
+{card(6,"proyectos/hdo-landings.html","HDO · HD* · 2023–2024","One House, Two Moods","Two landings for one brand: blue to play, pink to provoke. Both still live.",["Web","UI","3D"],'<div class="ph"><img src="assets/img/hdo/cover.jpg" alt="Two HDO landing heroes split diagonally: blue Pro Play and pink Cultura Colectiva" loading="lazy" decoding="async" draggable="false"></div>')}
+{card(7,"proyectos/ai-showroom.html","Showroom · 10 brands","AI Showroom","11 AI key visuals for culture programs, shown from reference to final.",["Key visuals","Firefly","Midjourney"],ai("didi-final","A hand holding a light saber handle",pre),"didi-ref",True)}
+{card(8,"proyectos/ai-lab.html","Recruitment exercises","AI Lab","Three recruitment briefs against the clock. The fastest: 42 minutes, brief to final.",["Midjourney","Stable Diffusion","Firefly"],'<div class="ph"><img src="assets/img/lab/nissan.jpg" alt="Nissan SUV in a night city, AI exercise" loading="lazy" decoding="async" draggable="false"></div>',None,True)}
       </div>
       <div class="ix" aria-label="Project index">
         <div class="ix-h"><span>Index</span><span>Client</span><span>Discipline</span><span>Year</span></div>
@@ -170,8 +177,9 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
           <a class="ix-row" href="proyectos/no-vendas-humo.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/pmi-humo-final.jpg"><span class="ix-n">03</span><span class="ix-name">No Vendas Humo</span><span class="ix-cl">Philip Morris International</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">2024</span></a>
           <a class="ix-row" href="proyectos/conexiones-magicas.html" data-go data-zoom data-cursor="Open" data-img="assets/img/coca/s7-final.jpg"><span class="ix-n">04</span><span class="ix-name">Conexiones Mágicas</span><span class="ix-cl">Coca-Cola México</span><span class="ix-tg">Key visual · AI</span><span class="ix-yr">—</span></a>
           <a class="ix-row" href="proyectos/happy-talks.html" data-go data-zoom data-cursor="Open" data-img="assets/img/happy-talks/01.jpg"><span class="ix-n">05</span><span class="ix-name">Happy Talks</span><span class="ix-cl">HD*</span><span class="ix-tg">Web · UI</span><span class="ix-yr">2024</span></a>
-          <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">06</span><span class="ix-name">AI Showroom</span><span class="ix-cl">10 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
-          <a class="ix-row" href="proyectos/ai-lab.html" data-go data-zoom data-cursor="Open" data-img="assets/img/lab/nissan.jpg"><span class="ix-n">07</span><span class="ix-name">AI Lab</span><span class="ix-cl">Recruitment exercises</span><span class="ix-tg">AI process</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/hdo-landings.html" data-go data-zoom data-cursor="Open" data-img="assets/img/hdo/cover.jpg"><span class="ix-n">06</span><span class="ix-name">One House, Two Moods</span><span class="ix-cl">HDO</span><span class="ix-tg">Web · 3D</span><span class="ix-yr">2023–24</span></a>
+          <a class="ix-row" href="proyectos/ai-showroom.html" data-go data-zoom data-cursor="Open" data-img="assets/img/ai/didi-final.jpg"><span class="ix-n">07</span><span class="ix-name">AI Showroom</span><span class="ix-cl">10 brands</span><span class="ix-tg">Key visuals · AI</span><span class="ix-yr">—</span></a>
+          <a class="ix-row" href="proyectos/ai-lab.html" data-go data-zoom data-cursor="Open" data-img="assets/img/lab/nissan.jpg"><span class="ix-n">08</span><span class="ix-name">AI Lab</span><span class="ix-cl">Recruitment exercises</span><span class="ix-tg">AI process</span><span class="ix-yr">—</span></a>
       </div>
     </div>
     <div class="lamp" aria-label="Lights off: move the cursor to discover final artworks">
@@ -199,9 +207,9 @@ home=head('Rodrigo López · Designer & Art Director','Portfolio of Rodrigo Lóp
         <li data-n="02" style="--c:var(--pink)"><button type="button"><span class="i">02</span><h3>Internal campaigns</h3><span class="pl" aria-hidden="true">+</span></button>
           <div class="body"><div><div class="inner"><p>Concepts and key visuals for culture, training and change programs, from a 75-person plant team to a 1,070-employee rollout. Philip Morris, Coca-Cola, Mars, Sephora and more.</p><div class="tags"><span class="tag">Endomarketing</span><span class="tag">Concepts</span><span class="tag">Events</span><span class="tag">Large-format</span></div></div></div></div></li>
         <li data-n="03" style="--c:var(--sky)"><button type="button"><span class="i">03</span><h3>UX/UI &amp; web</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>Landing pages built around one action, like <a href="proyectos/happy-talks.html" data-go>Happy Talks</a>: nine sections that lead to a single request.</p><div class="tags"><span class="tag">Figma</span><span class="tag">Landing pages</span><span class="tag">HTML &amp; CSS</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>Landing pages built around one action, like <a href="proyectos/happy-talks.html" data-go>Happy Talks</a>: nine sections that lead to a single request. Or one brand in two moods, like the <a href="proyectos/hdo-landings.html" data-go>HDO landings</a>.</p><div class="tags"><span class="tag">Figma</span><span class="tag">Landing pages</span><span class="tag">HTML &amp; CSS</span></div></div></div></div></li>
         <li data-n="04" style="--c:var(--mint)"><button type="button"><span class="i">04</span><h3>3D &amp; motion</h3><span class="pl" aria-hidden="true">+</span></button>
-          <div class="body"><div><div class="inner"><p>3D models and scenes for campaigns, like ArboTerra’s floating tree, plus 2D animation.</p><div class="tags"><span class="tag">Blender</span><span class="tag">Cinema 4D</span><span class="tag">Octane</span><span class="tag">After Effects</span></div></div></div></div></li>
+          <div class="body"><div><div class="inner"><p>3D models and scenes for campaigns, like ArboTerra’s floating tree or the toy figures of the HDO landings, plus 2D animation.</p><div class="tags"><span class="tag">Blender</span><span class="tag">Cinema 4D</span><span class="tag">Octane</span><span class="tag">After Effects</span></div></div></div></div></li>
       </ul>
     </div>
   </section>
@@ -363,7 +371,7 @@ case=head('Happy Talks · Rodrigo López','Case study: UI design for Happy Talks
       </section>
     </div>
   </div>
-'''+next_block(pre,'AI Showroom','ai-showroom.html','<img src="../assets/img/showroom/didi.jpg" alt="" draggable="false">')+'''</main>
+'''+next_block(pre,'One House, Two Moods','hdo-landings.html','<img src="../assets/img/hdo/cover.jpg" alt="" draggable="false">')+'''</main>
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','happy-talks.html'),'w').write(case)
 
@@ -1142,6 +1150,9 @@ lab=head('AI Lab · Rodrigo López','Three timed AI exercises from recruitment b
 '''+scripts(pre)
 open(os.path.join(R,'proyectos','ai-lab.html'),'w').write(lab)
 
+# ================= CASE: HDO LANDINGS =================
+import sys as _s; _s.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import case_hdo; case_hdo.build(R,'../',head,nav,scripts,word,next_block)
 # ================= MACHINE-READABLE SUMMARY (JSON-LD) =================
 import json as _j
 PERSON={"@type":"Person","name":"Rodrigo López","jobTitle":"Design Team Lead · Designer & Art Director",
@@ -1158,6 +1169,7 @@ WORKS=[("Happy Talks","HD* Human Design Doing (in-house)","2024","UI design for 
  ("No Vendas Humo","Philip Morris International","","AI-assisted key visual for a 2.5-day training that refocused the sales force on point-of-sale execution. Title plays on the Spanish idiom for empty promises; hand-painted reference finished with Adobe Firefly and Photoshop.","proyectos/no-vendas-humo.html"),
  ("ArboTerra es…","ArboTerra (via Happy Studio)","2023","Open-ended campaign concept (the park means something different to each visitor, so the line stays open), four 3D key visuals (Blender + Photoshop) and a 35-page AdBook. Approved at first presentation; the client's in-house team still uses the system three years later. Execution after the concept was done by the client.","proyectos/arboterra.html"),
  ("Conexiones Mágicas","Coca-Cola México (via HD* Human Design Doing)","","Visual concept and AI-assisted key visual (Adobe Firefly + Photoshop) for a team-building proposal for a 75-person warehouse team. Bottle cap built by hand in about 12 layers.","proyectos/conexiones-magicas.html"),
+ ("One House, Two Moods","HDO Culture & Change (HD* Human Design Doing)","2023–2024","Two landing pages for HDO: Cultura Colectiva (2023), the consultancy's own page, and Pro Play (2024), a free in-person PLAYMOBIL pro workshop in Bogotá, Colombia. UX/UI, branding, art direction and 3D figures modeled in Blender; no AI. Design only, built by HDO; both still online, with changes made after launch.","proyectos/hdo-landings.html"),
  ("CampoBet","CampoBet","","Brand and production design for an online betting brand: a rebrand of the organic content (approved), an icon system, seasonal promo logos, a World Cup set, social, paid, CRM, ASO and blog pieces (about 160 pieces a month on average, 184 in the busiest; copy by the content manager; 50 slot pieces in one working day with the pipeline; 82% of customers contacted for first-deposit follow-up said they found the brand on social media), and three AI production pipelines (slot visual masters, resizes, CRM banners) designed by Rodrigo as Claude skills driving Higgsfield and Figma.","proyectos/campobet.html")]
 def ld_home():
     d={"@context":"https://schema.org","@graph":[dict(PERSON,**{"@id":"#rodrigo"}),
@@ -1174,7 +1186,7 @@ def inject(path,tag):
     if 'application/ld+json' not in t: t=t.replace('</head>',tag+'</head>',1)
     open(path,'w').write(t)
 inject(os.path.join(R,'index.html'),ld_home())
-for i,f in enumerate(['happy-talks','no-vendas-humo','arboterra','conexiones-magicas','campobet']): inject(os.path.join(R,'proyectos',f+'.html'),ld_case(i))
+for i,f in enumerate(['happy-talks','no-vendas-humo','arboterra','conexiones-magicas','hdo-landings','campobet']): inject(os.path.join(R,'proyectos',f+'.html'),ld_case(i))
 md=["# Rodrigo López — Designer & Art Director","",PERSON["description"],"",f"- Email: {EMAIL}",f"- LinkedIn: {LI}",f"- Instagram: {IG}",f"- WhatsApp: {WA}","- Location: Mexico · open to remote","","## Experience"]
 md+= [f"- {yr} · {r}, {o}. {ds}" for yr,r,o,ds in EXPERIENCE]
 md+=["","## Selected work"]+[f"- [{n}]({u}) — {c}{' · '+y if y else ''}. {ds}" for n,c,y,ds,u in WORKS]
