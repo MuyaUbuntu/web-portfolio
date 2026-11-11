@@ -55,3 +55,8 @@ h1,h2,h3{font-weight:500!important;letter-spacing:-.035em}
 .say .hw.cp.on{background:#FF4417!important}
 .say .hw.cp.on,.say .hw.cp.on *{color:#fff!important}
 .say .hw.cp.on::after{background:#fff!important}
+/* round 2 */
+.stk.s2,.stk.s3{outline:2px solid #141414;outline-offset:-2px}
+.stk.s5{outline:1.5px solid #6E6E6A;color:#3A3A37}
+.blob{background:#3A3A37;color:#FAFAF8}
+.blob:hover{background:#55554F}
