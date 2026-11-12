@@ -99,3 +99,13 @@ p{line-height:1.6}
 .blob{border-radius:50%!important}
 .rail{font-weight:400!important}
 .hero-cta a,.btn,a[class*="cta"]:not(.nav-cta){border-radius:2px!important}
+
+/* mobile: keep case headers and tags inside the viewport */
+@media (max-width:900px){
+  .c-head{grid-template-columns:minmax(0,1fr)!important}
+  .c-head>*,.c-l,.c-meta,.c-meta dd{min-width:0}
+  .c-title,.c-lead,.c-meta dd{overflow-wrap:anywhere}
+  .sts .sslot{white-space:normal;max-width:100%;height:auto}
+  .c-client{display:flex;flex-wrap:wrap;max-width:100%;row-gap:.5rem}
+  .c-client .tag{white-space:normal}
+}
