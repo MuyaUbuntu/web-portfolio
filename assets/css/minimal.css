@@ -60,3 +60,42 @@ h1,h2,h3{font-weight:500!important;letter-spacing:-.035em}
 .stk.s5{outline:1.5px solid #6E6E6A;color:#3A3A37}
 .blob{background:#3A3A37;color:#FAFAF8}
 .blob:hover{background:#55554F}
+/* round 3 · quieter, more editorial */
+:root{--f-display:"Inter Tight","Instrument Sans","Inter",system-ui,sans-serif}
+body{font-size:15px;letter-spacing:-.005em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:400!important;letter-spacing:-.045em;line-height:1.02}
+h2{font-size:clamp(2rem,4.6vw,3.9rem)}
+h3{letter-spacing:-.02em}
+p{line-height:1.6}
+.lead,.c-lead,.lede,.say p.big{font-weight:400;letter-spacing:-.02em;line-height:1.35}
+.say p.big{font-size:clamp(1.7rem,3.6vw,3rem)}
+.mono,.tag,.kick,small.mono{font-family:var(--f-mono);font-size:.68rem!important;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.stk{font-weight:400!important;letter-spacing:-.05em}
+/* menu: from floating pill to a full-width hairline bar */
+.nav{left:0;right:0;top:0;transform:none;width:auto;border-radius:0;padding:14px clamp(16px,3vw,40px);background:rgba(250,250,248,.82);border:0;border-bottom:1px solid var(--line);justify-content:space-between;backdrop-filter:blur(14px)}
+.nav-logo{width:34px;height:34px;border-radius:0;background:transparent;color:var(--ink)}
+.nav-logo:hover{transform:none;opacity:.6}
+.nav-pill{display:none}
+.nav-links{gap:clamp(.6rem,2vw,2rem);margin-left:auto}
+.nav-links a{height:auto;padding:0;background:none;color:var(--ink);font-family:var(--f-mono)!important;font-size:.7rem!important;letter-spacing:.14em!important;text-transform:uppercase;font-weight:400!important}
+.nav-links a::before{content:"[ ";opacity:0;transition:opacity .25s}
+.nav-links a::after{content:" ]";opacity:0;transition:opacity .25s}
+.nav-links a:hover::before,.nav-links a:hover::after,.nav-links a.on::before,.nav-links a.on::after{opacity:1}
+.nav-links a.on{color:var(--ink)}
+.nav-cta{height:auto;padding:.55rem .9rem;margin-left:clamp(.6rem,2vw,2rem);border-radius:0;background:var(--ink);color:var(--bg);font-family:var(--f-mono)!important;font-size:.68rem!important;letter-spacing:.14em!important;text-transform:uppercase}
+.nav-cta:hover{transform:none;opacity:.8}
+/* cards and hairlines */
+.card .info h3{font-size:1.35rem}
+.card .info p{font-size:.92rem;color:var(--night-2)}
+.tag,.ai{border-radius:0}
+.stage,.svc-card,.card .frame,.nav,.chip,.code,button{border-radius:2px!important}
+/* contact: smaller, no clipped descenders */
+.contact h2{font-size:clamp(2.6rem,8.5vw,7.5rem)!important;line-height:1.02!important;letter-spacing:-.05em!important;font-weight:400!important}
+.contact h2 .lm{padding-bottom:.08em;overflow:visible}
+.contact h2 .lm-last{padding-bottom:.12em;margin-bottom:0}
+.mail{font-weight:400;letter-spacing:-.03em}
+.contact h2 .lm-last .o{display:block}
+@media(min-width:900px){.contact h2{padding-left:clamp(1.5rem,7vw,7rem)}}
+.blob{border-radius:50%!important}
+.rail{font-weight:400!important}
+.hero-cta a,.btn,a[class*="cta"]:not(.nav-cta){border-radius:2px!important}
