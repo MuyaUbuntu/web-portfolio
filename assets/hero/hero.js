@@ -3,7 +3,7 @@
 "use strict";
 var host=document.getElementById("hx-host");if(!host||!host.attachShadow)return;
 var R=host.attachShadow({mode:"open"});
-R.innerHTML='<link rel="stylesheet" href="assets/hero/hero.css">'+"<section class=\"hero\" id=\"hero\">\n  <div class=\"meta\"><div>Rodrigo L\u00f3pez<b>Designer &amp; art director</b></div><div>Based in<b>Mexico \u00b7 Remote</b></div><div>Practice<b>10+ years, since 2016</b></div><div class=\"live\">Status<b>Open to projects &amp; roles</b></div></div>\n\n  <div class=\"stage\" id=\"stage\">\n    <div class=\"bg\"></div>\n    <span class=\"mode-tag\" id=\"tag\"></span>\n    <h1 class=\"rows\" id=\"rows\" aria-label=\"Creative ideas, big results.\">\n      <span class=\"row\"><span class=\"tx\"><span class=\"w w1\">Creative</span> <span class=\"w w2\"><em>ideas,</em></span></span></span>\n      <span class=\"row\"><span class=\"tx\"><span class=\"w w3\">big results.</span><span class=\"reg\">\u00ae</span></span></span>\n    </h1>\n    <div class=\"deco\" id=\"deco\">\n      <div class=\"bb\" id=\"bb\"></div>\n      <div class=\"ad\" id=\"ad\"></div>\n      <div class=\"ai\" id=\"ai\"><div class=\"pbox\" id=\"pbox\"><div class=\"ph empty\" id=\"ph\">Describe a style for the headline\u2026</div><div class=\"rowb\"><span class=\"chip\"><i></i>Image model \u00b7 v7</span><span class=\"chip\" id=\"ratio\">16:9</span><span class=\"gen\" id=\"gen\">Generating\u2026</span><span class=\"go\" id=\"go\"><svg viewBox=\"0 0 16 16\"><path d=\"M8 13V3M3.5 7.5 8 3l4.5 4.5\"/></svg></span></div></div></div>\n      <div class=\"stk\" id=\"stk\"></div>\n      <div class=\"fig\" id=\"fig\">\n        <span class=\"frame-l\">Hero / Desktop \u2014 1440</span>\n        <div class=\"sel\" id=\"sel\"><i></i><i></i><i></i><i></i><b id=\"selb\"></b></div>\n        <div class=\"cursor\" id=\"c1\" style=\"--c:#0d99ff\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#0d99ff\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Rodrigo</span></div>\n        <div class=\"cursor\" id=\"c2\" style=\"--c:#e9437a\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#e9437a\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Client</span></div>\n        <div class=\"cursor\" id=\"c3\" style=\"--c:#14ae5c\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#14ae5c\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Dev</span></div>\n        <div class=\"cmt\" id=\"cmt\"><span class=\"pin\">CL</span><span class=\"bub\"><b>Client</b>Love this headline \u2726</span></div>\n      </div>\n      <svg width=\"0\" height=\"0\" style=\"position:absolute\" aria-hidden=\"true\"><filter id=\"dream\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence id=\"dturb\" type=\"fractalNoise\" baseFrequency=\"0.008 0.03\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap id=\"ddisp\" in=\"SourceGraphic\" in2=\"n\" scale=\"0\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feGaussianBlur id=\"dblur\" in=\"d\" stdDeviation=\"0\"/></filter></svg><div class=\"d3\" id=\"d3\"><div class=\"rig\" id=\"rig\"></div></div><div class=\"x3\"><div class=\"rig3\" id=\"rig3\"></div></div>\n      <div class=\"vid\" id=\"vid\"></div>\n    </div>\n  </div>\n\n  <div class=\"bar\">\n    <p class=\"intro\">Campaigns and visual systems for global brands, from the first sketch to production. <b>Slide or tap a discipline</b> and the headline takes its form.</p>\n    <div class=\"sl\" id=\"sl\">\n      <div class=\"sl-hint\"><span>\u2190 Drag to switch discipline \u2192</span><span id=\"cnt\">01 / 07</span></div>\n      <div class=\"sl-track\" id=\"track\" role=\"tablist\" aria-label=\"Disciplines\"><div class=\"sl-thumb\" id=\"thumb\"><i></i></div></div>\n    </div>\n  </div>\n</section>";
+R.innerHTML='<link rel="stylesheet" href="assets/hero/hero.css">'+"<section class=\"hero\" id=\"hero\">\n  <div class=\"meta\"><div>Rodrigo L\u00f3pez<b>Designer &amp; art director</b></div><div>Based in<b>Mexico \u00b7 Remote</b></div><div>Practice<b>10+ years, since 2016</b></div><div class=\"live\">Status<b>Open to projects &amp; roles</b></div></div>\n\n  <div class=\"stage\" id=\"stage\">\n    <div class=\"bg\"></div>\n    <span class=\"mode-tag\" id=\"tag\"></span>\n    <h1 class=\"rows\" id=\"rows\" aria-label=\"Creative ideas, big results.\">\n      <span class=\"row\"><span class=\"tx\"><span class=\"w w1\">Creative</span> <span class=\"w w2\"><em>ideas,</em></span></span></span>\n      <span class=\"row\"><span class=\"tx\"><span class=\"w w3\">big results.</span><span class=\"reg\">\u00ae</span></span></span>\n    </h1>\n    <div class=\"deco\" id=\"deco\">\n      <div class=\"bb\" id=\"bb\"></div>\n      <div class=\"ad\" id=\"ad\"></div>\n      <div class=\"ai\" id=\"ai\"><div class=\"pbox\" id=\"pbox\"><div class=\"ph empty\" id=\"ph\">Describe a style for the headline\u2026</div><div class=\"rowb\"><span class=\"chip\"><i></i>Image model \u00b7 v7</span><span class=\"chip\" id=\"ratio\">16:9</span><span class=\"gen\" id=\"gen\">Generating\u2026</span><span class=\"go\" id=\"go\"><svg viewBox=\"0 0 16 16\"><path d=\"M8 13V3M3.5 7.5 8 3l4.5 4.5\"/></svg></span></div></div></div>\n      <div class=\"stk\" id=\"stk\"></div>\n      <div class=\"fig\" id=\"fig\">\n        <span class=\"frame-l\">Hero / Desktop \u2014 1440</span>\n        <div class=\"sel\" id=\"sel\"><i></i><i></i><i></i><i></i><b id=\"selb\"></b></div>\n        <div class=\"cursor\" id=\"c1\" style=\"--c:#0d99ff\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#0d99ff\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Rodrigo</span></div>\n        <div class=\"cursor\" id=\"c2\" style=\"--c:#e9437a\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#e9437a\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Client</span></div>\n        <div class=\"cursor\" id=\"c3\" style=\"--c:#14ae5c\"><svg viewBox=\"0 0 18 18\"><path d=\"M1 1l6 15 2.5-6.5L16 7z\" fill=\"#14ae5c\" stroke=\"#fff\" stroke-width=\"1.2\"/></svg><span>Dev</span></div>\n        <div class=\"cmt\" id=\"cmt\"><span class=\"pin\">CL</span><span class=\"bub\"><b>Client</b>Love this headline \u2726</span></div>\n      </div>\n      <svg width=\"0\" height=\"0\" style=\"position:absolute\" aria-hidden=\"true\"><filter id=\"dream\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence id=\"dturb\" type=\"fractalNoise\" baseFrequency=\"0.008 0.03\" numOctaves=\"1\" seed=\"3\" result=\"n\"/><feDisplacementMap id=\"ddisp\" in=\"SourceGraphic\" in2=\"n\" scale=\"0\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feGaussianBlur id=\"dblur\" in=\"d\" stdDeviation=\"0\"/></filter></svg><div class=\"d3\" id=\"d3\"><div class=\"rig\" id=\"rig\"></div></div><div class=\"x3\"><div class=\"rig3\" id=\"rig3\"></div></div>\n      <div class=\"vid\" id=\"vid\"></div>\n    </div>\n  </div>\n\n  <div class=\"bar\">\n    <p class=\"intro\">Campaigns and visual systems for global brands, from the first sketch to production. <b>Slide or tap a discipline</b> and the headline takes its form.</p>\n    <div class=\"sl\" id=\"sl\">\n      <div class=\"sl-hint\"><span>\u2190 Drag to switch discipline \u2192</span><span id=\"cnt\">01 / 07</span></div>\n      <div class=\"sl-track\" id=\"track\" role=\"tablist\" aria-label=\"Disciplines\"><div class=\"sl-thumb\" id=\"thumb\"><i></i></div></div>\n    </div>\n  </div>\n</section>";
 var css=R.querySelector("link");function boot(){
 (function(){
 "use strict";
@@ -168,19 +168,19 @@ function runAI(){
 function runInt(){
   var stk=R.getElementById("stk");
   var b1=wbox(words[0]),b2=wbox(words[1]),b3=wbox(words[2]);
-  var W=stage.clientWidth,k=W<600?.6:1,B=b3.y+b3.h,R=b3.x+b3.w;
+  var W=stage.clientWidth,k=W<600?.6:1,B=b3.y+b3.h,RX=b3.x+b3.w;
   function cx(x,w){return Math.max(0,Math.min(W-w,x))}
   var extra=[
     {t:"Hi,<br>team!",bg:"#ffe14d",c:"#141414",x:0,y:-78*k,w:70,h:70,r:"-10deg",round:"50%"},
     {t:"5/5",bg:"#7c5cff",c:"#fff",x:W*.46,y:-70*k,w:62,h:62,r:"-14deg",round:"50%"},
     {t:"Team<br>2024",bg:"#16a34a",c:"#fff",x:W-90*k,y:-86*k,w:86,h:86,r:"12deg",round:"50%"},
-    {t:"Values",bg:"#FF4417",c:"#fff",x:R+24*k,y:b3.y+b3.h*.12,w:118,h:44,r:"-8deg",round:"999px"},
+    {t:"Values",bg:"#FF4417",c:"#fff",x:RX+24*k,y:b3.y+b3.h*.12,w:118,h:44,r:"-8deg",round:"999px"},
     {t:"★ Live it",bg:"#fff",c:"#141414",x:W*.05,y:B+18*k,w:112,h:40,r:"6deg",round:"6px"}
   ];
   var stamps=[
     {t:"Kick-off<br>Q3",c:"#1d4ed8",x:W*.24,y:-84*k,s:84,r:"14deg"},
     {t:"We did<br>it!",c:"#7c3aed",x:W*.68,y:-80*k,s:78,r:"18deg"},
-    {t:"Approved<br>★ HR ★",c:"#d6261c",x:R+40*k,y:b3.y+b3.h*.55,s:92,r:"-16deg"},
+    {t:"Approved<br>★ HR ★",c:"#d6261c",x:RX+40*k,y:b3.y+b3.h*.55,s:92,r:"-16deg"},
     {t:"Best<br>place to<br>work",c:"#16a34a",x:W-100*k,y:B+6*k,s:96,r:"-8deg"},
     {t:"Townhall · Fri",c:"#d6261c",x:W*.36,y:B+30*k,rect:1,r:"-4deg"},
     {t:"Internal only",c:"#141414",x:W*.62,y:B+22*k,rect:1,r:"6deg"}
@@ -219,9 +219,9 @@ function runUI(){
 }
 
 function run3D(){
-  var rig=R.getElementById("rig3"),N=22,html="";
+  var rig=R.getElementById("rig3"),N=12,html="";
   for(var z=N;z>=0;z--){var t=z/N,c="rgb("+Math.round(200-110*t)+","+Math.round(194-108*t)+","+Math.round(184-104*t)+")";
-    html+='<div class="lyr'+(z===0?" front":"")+'" style="transform:translateZ('+(-z*1.6)+'px);--c:'+c+'">'+rowsEl.innerHTML+'</div>';}
+    html+='<div class="lyr'+(z===0?" front":"")+'" style="transform:translateZ('+(-z*2.8)+'px);--c:'+c+'">'+rowsEl.innerHTML+'</div>';}
   rig.innerHTML='<div class="shadow"></div>'+html;
   rig.querySelectorAll(".row").forEach(function(r,j){r.style.fontSize=rows[j%2].style.fontSize});
   var tx=0,ty=0,ax=0,ay=0,t0=performance.now(),raf;
@@ -293,6 +293,9 @@ track.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){hold=true;
 var rz;addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(function(){var i=cur;cur=-1;show(i,true)},150)});
 document.fonts&&document.fonts.ready.then(function(){var i=cur<0?0:cur;cur=-1;show(i,true)});
 show(0,true);
+if("IntersectionObserver" in window){var paused=false;new IntersectionObserver(function(es){var v=es[0].isIntersecting;
+  if(!v&&!paused){paused=true;clearSubs();clearTimeout(timer);thumb.classList.remove("run")}
+  else if(v&&paused){paused=false;var i=cur;cur=-1;show(i,true)}},{threshold:0}).observe(stage)}
 })();
 }
 if(css.sheet)boot();else css.addEventListener("load",boot);
