@@ -1,0 +1,101 @@
+/* Minimal skin: overrides only (colour, type, shape). Structure and behaviour untouched. */
+:root{
+  --bg:#FAFAF8; --bg-2:#F0F0ED; --ink:#141414; --ink-2:#8A8A86; --line:rgba(20,20,20,.09);
+  --night:#161616; --night-2:#8E8E8A;
+  --tomato:#141414; --on-tomato:#FAFAF8;
+  --pink:#ECECE8; --butter:#E6E6E1; --sky:#EEEEEA; --mint:#E9E9E5; --chip:transparent;
+  --f-display:"Instrument Sans","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --r:6px; --r-sm:4px;
+}
+h1,h2,h3{font-weight:500!important;letter-spacing:-.035em}
+.mono{letter-spacing:.06em}
+*{box-shadow:none!important;text-shadow:none!important}
+.tag,.ai{box-shadow:inset 0 0 0 1px var(--line)!important;background:transparent;font-weight:400}
+.tag.t,.tag.k{background:var(--ink);color:var(--bg)}
+.tag.p,.tag.b,.ai{background:transparent;color:var(--ink)}
+.ai::before{width:.4rem;height:.4rem;clip-path:circle(50%)}
+.nav{background:rgba(250,250,248,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:8px}
+.nav-logo{border-radius:6px;background:var(--ink);color:var(--bg)}
+.nav-links a,.nav-links a.on{color:var(--ink)}
+.nav-pill{border-radius:6px;background:var(--bg-2)}
+.nav-cta{border-radius:6px}
+.ctag{border-radius:4px}
+.stk{font-weight:500!important;letter-spacing:-.04em;border-radius:4px;--r:0deg!important;rotate:0deg!important}
+.stk.s1,.stk.s4{background:var(--ink);color:var(--bg)}
+.stk.s2,.stk.s3{background:transparent;color:var(--ink);outline:1px solid var(--line)}
+.stk.s5{background:transparent;color:var(--ink-2);outline:1px solid var(--line);border-radius:99px}
+.hero-bottom .scroll b{border:1px solid var(--line);animation:none}
+.ribbon{rotate:0deg!important;margin:1.5rem 0 0;background:transparent;color:var(--ink);border-block:1px solid var(--line);padding-block:.8rem}
+.ribbon.alt{rotate:0deg!important;background:transparent;color:var(--ink-2);margin-top:0;border-top:0}
+.rail{font-weight:400;font-family:var(--f-mono);font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.08em}
+.rail span::after{content:"·"}
+.say p.big{font-weight:400}
+.stage{border-radius:8px;margin-inline:0}
+.card .frame,.card:hover .frame{border-radius:4px}
+.card .num{border-radius:4px;width:2.4rem;height:2.4rem;font-weight:500;rotate:0deg!important;background:rgba(250,250,248,.9)}
+.card:hover .num{scale:1}
+.card .client{color:var(--night-2)}
+.card .go{border-radius:4px}
+.card:hover .go{background:#fff;rotate:0deg}
+.card .ref::before{background:#fff}
+.svc-card{background:var(--night);border-radius:8px}
+.svc-big{color:rgba(255,255,255,.06)}
+.svc-card .now{border-radius:4px}
+.play-sticker{rotate:0deg!important}
+.say .hw,.say .hw *{color:var(--ink)!important;text-decoration-color:var(--ink)!important;border-color:var(--ink)!important}
+.say .hw::after,.say .hw::before{background:var(--ink)!important}
+.stage{border-radius:8px!important}
+.card .info .tags .tag{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)!important}
+/* fixes */
+.contact h2 .o{color:var(--on-tomato)!important;-webkit-text-stroke:0}
+.dots{filter:grayscale(1) brightness(.45)}
+.dh-move rect{fill:var(--ink)}
+.say .hw.cp.on{background:#FF4417!important}
+.say .hw.cp.on,.say .hw.cp.on *{color:#fff!important}
+.say .hw.cp.on::after{background:#fff!important}
+/* round 2 */
+.stk.s2,.stk.s3{outline:2px solid #141414;outline-offset:-2px}
+.stk.s5{outline:1.5px solid #6E6E6A;color:#3A3A37}
+.blob{background:#3A3A37;color:#FAFAF8}
+.blob:hover{background:#55554F}
+/* round 3 · quieter, more editorial */
+:root{--f-display:"Inter Tight","Instrument Sans","Inter",system-ui,sans-serif}
+body{font-size:15px;letter-spacing:-.005em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:400!important;letter-spacing:-.045em;line-height:1.02}
+h2{font-size:clamp(2rem,4.6vw,3.9rem)}
+h3{letter-spacing:-.02em}
+p{line-height:1.6}
+.lead,.c-lead,.lede,.say p.big{font-weight:400;letter-spacing:-.02em;line-height:1.35}
+.say p.big{font-size:clamp(1.7rem,3.6vw,3rem)}
+.mono,.tag,.kick,small.mono{font-family:var(--f-mono);font-size:.68rem!important;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.stk{font-weight:400!important;letter-spacing:-.05em}
+/* menu: from floating pill to a full-width hairline bar */
+.nav{left:0;right:0;top:0;transform:none;width:auto;border-radius:0;padding:14px clamp(16px,3vw,40px);background:rgba(250,250,248,.82);border:0;border-bottom:1px solid var(--line);justify-content:space-between;backdrop-filter:blur(14px)}
+.nav-logo{width:34px;height:34px;border-radius:0;background:transparent;color:var(--ink)}
+.nav-logo:hover{transform:none;opacity:.6}
+.nav-pill{display:none}
+.nav-links{gap:clamp(.6rem,2vw,2rem);margin-left:auto}
+.nav-links a{height:auto;padding:0;background:none;color:var(--ink);font-family:var(--f-mono)!important;font-size:.7rem!important;letter-spacing:.14em!important;text-transform:uppercase;font-weight:400!important}
+.nav-links a::before{content:"[ ";opacity:0;transition:opacity .25s}
+.nav-links a::after{content:" ]";opacity:0;transition:opacity .25s}
+.nav-links a:hover::before,.nav-links a:hover::after,.nav-links a.on::before,.nav-links a.on::after{opacity:1}
+.nav-links a.on{color:var(--ink)}
+.nav-cta{height:auto;padding:.55rem .9rem;margin-left:clamp(.6rem,2vw,2rem);border-radius:0;background:var(--ink);color:var(--bg);font-family:var(--f-mono)!important;font-size:.68rem!important;letter-spacing:.14em!important;text-transform:uppercase}
+.nav-cta:hover{transform:none;opacity:.8}
+/* cards and hairlines */
+.card .info h3{font-size:1.35rem}
+.card .info p{font-size:.92rem;color:var(--night-2)}
+.tag,.ai{border-radius:0}
+.stage,.svc-card,.card .frame,.nav,.chip,.code,button{border-radius:2px!important}
+/* contact: smaller, no clipped descenders */
+.contact h2{font-size:clamp(2.6rem,8.5vw,7.5rem)!important;line-height:1.02!important;letter-spacing:-.05em!important;font-weight:400!important}
+.contact h2 .lm{padding-bottom:.08em;overflow:visible}
+.contact h2 .lm-last{padding-bottom:.12em;margin-bottom:0}
+.mail{font-weight:400;letter-spacing:-.03em}
+.contact h2 .lm-last .o{display:block}
+@media(min-width:900px){.contact h2{padding-left:clamp(1.5rem,7vw,7rem)}}
+.blob{border-radius:50%!important}
+.rail{font-weight:400!important}
+.hero-cta a,.btn,a[class*="cta"]:not(.nav-cta){border-radius:2px!important}
