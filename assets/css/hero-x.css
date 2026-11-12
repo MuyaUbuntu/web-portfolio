@@ -1,0 +1,36 @@
+/* Hero X: editorial statement + live discipline index (replaces hero and ribbons). */
+main > .hero, main > .ribbon{display:none!important}
+.hx{position:relative;min-height:100svh;padding:7rem clamp(16px,3vw,40px) 3rem;display:grid;grid-template-rows:auto 1fr;gap:clamp(2rem,5vh,4rem);max-width:1480px;margin:0 auto}
+.hx-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;border-top:1px solid var(--ink);padding-top:.9rem;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.hx-meta b{display:block;color:var(--ink);font-weight:400;margin-top:.35rem;letter-spacing:.06em;text-transform:none;font-family:var(--f-body);font-size:.92rem}
+.hx-meta .live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#16a34a;margin-right:.5em;vertical-align:middle}
+.hx-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(2rem,4vw,5rem);align-items:end}
+.hx h1{font-family:var(--f-display);font-weight:400;font-size:clamp(3.2rem,8.2vw,8.6rem);line-height:.92;letter-spacing:-.055em;margin:0 0 clamp(1.5rem,4vh,3rem)}
+.hx h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;letter-spacing:-.02em}
+.hx-intro{max-width:34ch;font-size:1.02rem;line-height:1.55;color:var(--ink-2);margin:0 0 2rem}
+.hx-intro b{color:var(--ink);font-weight:500}
+.hx-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.hx-list li{border-bottom:1px solid var(--line)}
+.hx-list a{display:grid;grid-template-columns:2.4rem minmax(0,1fr) auto;align-items:baseline;gap:.8rem;padding:.7rem 0;text-decoration:none;color:var(--ink-2);transition:color .35s,padding .45s cubic-bezier(.2,.8,.2,1)}
+.hx-list .n{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em}
+.hx-list .t{font-size:clamp(1.15rem,1.9vw,1.6rem);letter-spacing:-.03em}
+.hx-list .c{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateX(-6px);transition:opacity .35s,transform .45s}
+.hx-list li.on a{color:var(--ink);padding-left:.6rem}
+.hx-list li.on .c{opacity:1;transform:none}
+.hx-stage{position:relative}
+.hx-frame{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-2)}
+.hx-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .9s ease,transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.hx-frame img.on{opacity:1;transform:none}
+.hx-bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--bg);mix-blend-mode:difference;z-index:2}
+.hx-cap{display:flex;justify-content:space-between;gap:1rem;margin-top:.8rem;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.hx-cap b{color:var(--ink);font-weight:400}
+.hx-cta{display:inline-flex;align-items:center;gap:.8rem;margin-top:1.6rem;padding:.9rem 1.2rem;background:var(--ink);color:var(--bg);text-decoration:none;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.hx-cta:hover{opacity:.85}
+@media(max-width:900px){
+  .hx{padding-top:6rem}
+  .hx-meta{grid-template-columns:1fr 1fr;row-gap:1rem}
+  .hx-body{grid-template-columns:minmax(0,1fr)}
+  .hx-frame{aspect-ratio:4/3}
+  .hx-stage{order:2}
+}
+@media(prefers-reduced-motion:reduce){.hx-frame img{transition:opacity .2s}.hx-bar{display:none}}
