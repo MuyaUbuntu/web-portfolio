@@ -48,6 +48,10 @@
   try{arrived=sessionStorage.getItem('rl-go')==='1';sessionStorage.removeItem('rl-go')}catch(e){}
   if(arrived&&!reduce){root.classList.add('arriving');scribble();
     setTimeout(function(){root.classList.add('arrived');setTimeout(function(){root.classList.remove('arriving','arrived');scribRun=false},1600)},550)}
+  /* Back/forward cache: a page restored from history must not keep the exit transition on screen */
+  addEventListener('pageshow',function(e){if(!e.persisted)return;
+    document.querySelectorAll('.zoom-layer').forEach(function(l){l.remove()});
+    root.classList.remove('leaving','zoomed','arriving','arrived');try{sessionStorage.removeItem('rl-zoom');sessionStorage.removeItem('rl-go')}catch(err){}});
   /* ---------- Zoom transition: the image grows into the next page ---------- */
   function zoomFrom(a,e){var im=a.querySelector('.frame img,.peek img,.ph img')||null,src=a.getAttribute('data-img')||(im&&(im.currentSrc||im.src));if(!src)return false;
     var r=im&&im.getBoundingClientRect();if(!r||r.width<20||r.height<20){r={left:e.clientX-80,top:e.clientY-50,width:160,height:100}}
