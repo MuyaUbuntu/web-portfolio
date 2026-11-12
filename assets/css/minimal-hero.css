@@ -1,0 +1,16 @@
+/* Hero test: fewer objects, one accent block, serif italic contrast. Overrides only. */
+.hero .dots{display:none}
+.hero .drag-hint{display:none}
+.stickers{gap:clamp(4px,1vw,14px) clamp(10px,2vw,28px)}
+.stk{background:transparent!important;color:var(--ink)!important;outline:0!important;box-shadow:none!important;font-size:clamp(3.2rem,10.5vw,10rem)!important;line-height:.95;padding:.02em .08em!important;letter-spacing:-.055em;font-weight:400!important}
+.stk.s4{background:var(--ink)!important;color:var(--bg)!important;padding:.02em .22em .08em!important}
+.stk.s2{font-family:"Instrument Serif",Georgia,serif!important;font-style:italic;letter-spacing:-.02em;text-transform:none!important}
+.stk.s5{font-family:var(--f-mono)!important;font-size:.7rem!important;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)!important;outline:0!important;border-radius:0!important;padding:0!important;align-self:flex-start;margin-top:1.2em}
+.hero-bottom .btn.o{display:none}
+.hero-bottom .btn.t{border-radius:2px!important;background:var(--ink);color:var(--bg)}
+.hero-bottom .scroll b{border-radius:0;animation:none}
+.ribbon.alt{display:none}
+.ribbon{border-bottom:1px solid var(--line)}
+.ribbon .rail{color:var(--ink-2);font-size:.72rem!important;letter-spacing:.16em;text-transform:uppercase;animation-duration:90s!important}
+.rail span::after{content:"/"!important;margin:0 1.4em;opacity:.5}
+@media(max-width:700px){.stk.s5{order:9;width:100%;text-align:center;margin-top:.8rem;align-self:auto}}
