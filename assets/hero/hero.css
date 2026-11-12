@@ -11,8 +11,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .meta .live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.5em;vertical-align:middle}
 
 /* stage */
-.stage{position:relative;align-self:center;width:100%;transition:opacity .35s ease,filter .35s ease}
-.stage.out{opacity:0;filter:blur(8px)}
+.stage{position:relative;align-self:center;width:100%;transition:opacity .32s ease}
+.stage.out{opacity:0}
 .bg{position:absolute;inset:-1.4rem calc(-1*clamp(16px,2.4vw,36px));z-index:0;transition:background .5s}
 .rows{position:relative;z-index:2}
 .row{position:relative;display:block;white-space:nowrap;line-height:.86;font-family:var(--disp);font-weight:400;letter-spacing:-.055em}
@@ -133,7 +133,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .m-int .w:hover{transform:rotate(calc(var(--r,0deg)*-1)) scale(1.02)}
 .stk{z-index:4}
 .m-int .stk{display:block}
-.stk .stamp{position:absolute;display:grid;place-items:center;text-align:center;border-radius:50%;border:3px double var(--sc);color:var(--sc);font:800 .62rem/1.1 var(--mono);letter-spacing:.12em;text-transform:uppercase;mix-blend-mode:multiply;opacity:0;transform:rotate(var(--r))}
+.stk .stamp{position:absolute;display:grid;place-items:center;text-align:center;border-radius:50%;border:3px double var(--sc);color:var(--sc);font:800 .62rem/1.1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:0;transform:rotate(var(--r))}
 .stk .stamp.rect{border-radius:4px;padding:.35rem .6rem;white-space:nowrap}
 .stk .stamp.thud{animation:thud .45s cubic-bezier(.3,1.5,.5,1) both}
 @keyframes thud{0%{opacity:0;transform:scale(2.2) rotate(var(--r))}60%{opacity:.95}100%{opacity:.88;transform:scale(1) rotate(var(--r))}}
