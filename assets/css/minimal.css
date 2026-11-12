@@ -109,3 +109,14 @@ p{line-height:1.6}
   .c-client{display:flex;flex-wrap:wrap;max-width:100%;row-gap:.5rem}
   .c-client .tag{white-space:normal}
 }
+
+/* header: full width on every screen; Home + Work on mobile */
+.nav{max-width:none!important}
+.nav-home{display:none!important}
+@media (max-width:680px){
+  .nav{padding:12px 16px}
+  .nav-links{display:flex!important;gap:1.1rem}
+  .nav-links .nav-home{display:inline-flex!important}
+  .nav-links a[href$="#services"],.nav-links a[href$="#be-creative"]{display:none!important}
+  .nav-cta{padding:.45rem .7rem;font-size:.6rem!important;margin-left:1.1rem}
+}
