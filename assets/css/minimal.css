@@ -120,3 +120,12 @@ p{line-height:1.6}
   .nav-links a[href$="#services"],.nav-links a[href$="#be-creative"]{display:none!important}
   .nav-cta{padding:.45rem .7rem;font-size:.6rem!important;margin-left:1.1rem}
 }
+
+/* Believe: hint under the narrative text */
+.bb-hint{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:1.1rem 0 .4rem}
+.bb-hint .bb-ar{width:2rem;height:2rem;border:1px solid currentColor;background:none;color:var(--ink);cursor:pointer;font:400 .9rem/1 var(--f-mono);display:grid;place-items:center;transition:background .25s,color .25s}
+.bb-hint .bb-ar:hover{background:var(--ink);color:var(--bg)}
+.bb-dots{display:flex;gap:.45rem}
+.bb-dots button{width:8px;height:8px;border-radius:50%!important;border:0;padding:0;background:rgba(20,20,20,.18);cursor:pointer;transition:background .3s,width .3s}
+.bb-dots button.on{width:22px;border-radius:999px!important;background:#08312a}
+.bb-tip{flex-basis:100%;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2,#8a8a86)}
