@@ -105,8 +105,8 @@
       pill.style.opacity='1';pill.style.width=a.offsetWidth+'px';pill.style.transform='translateX('+a.offsetLeft+'px)';links.forEach(function(l){l.classList.toggle('on',l===a)})}
     links.forEach(function(a){a.addEventListener('pointerenter',function(){moveTo(a)})});
     wrap.addEventListener('pointerleave',function(){moveTo(current)});
-    var key=function(a){return a.getAttribute('href').replace(/^.*#/,'#')};
-    var secs=links.map(function(a){return $(key(a))}).filter(Boolean);
+    var key=function(a){var h=a.getAttribute('href')||'',i=h.indexOf('#');return i<0||i===h.length-1?null:h.slice(i)};
+    var secs=links.map(function(a){var k=key(a);return k?$(k):null}).filter(Boolean);
     if(secs.length&&'IntersectionObserver' in window){
       var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){current=links.find(function(l){return key(l)==='#'+en.target.id})||null;moveTo(current)}})},{rootMargin:'-45% 0px -50% 0px'});
       secs.forEach(function(s){io.observe(s)});
@@ -824,7 +824,14 @@
   var nar=$('.bb-nar');
   if(nar){
     var N=JSON.parse(nar.dataset.nar),nn=$$('.bb-nn',nar),ln=$$('.bb-ring line',nar),nN=$('.bb-nar-n',nar),nH=$('.bb-nar-h',nar),nD=$('.bb-nar-d',nar),ni=0,nauto=null;
-    function nset(i){ni=i;nn.forEach(function(b,j){b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i?'true':'false')});ln.forEach(function(l,j){l.classList.toggle('on',j===i)});
+    /* hint: dots + arrows under the text, so it is clear there are more layers */
+    var nT=$('.bb-nar-t',nar),hint=document.createElement('div');hint.className='bb-hint';
+    hint.innerHTML='<button type="button" class="bb-ar" aria-label="Previous layer">←</button><span class="bb-dots">'+N.map(function(_,j){return '<button type="button" aria-label="Layer '+(j+1)+'"></button>'}).join('')+'</span><button type="button" class="bb-ar" aria-label="Next layer">→</button><span class="mono bb-tip">Tap a number to explore all 6 layers</span>';
+    nD.insertAdjacentElement('afterend',hint);var dots=$$('.bb-dots button',hint),ars=$$('.bb-ar',hint);
+    dots.forEach(function(d,j){d.addEventListener('click',function(){nstop();nar._seen=1;nset(j)})});
+    ars[0].addEventListener('click',function(){nstop();nar._seen=1;nset((ni+N.length-1)%N.length)});
+    ars[1].addEventListener('click',function(){nstop();nar._seen=1;nset((ni+1)%N.length)});
+    function nset(i){ni=i;dots.forEach(function(d,j){d.classList.toggle('on',j===i)});nn.forEach(function(b,j){b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i?'true':'false')});ln.forEach(function(l,j){l.classList.toggle('on',j===i)});
       nN.textContent=('0'+(i+1)).slice(-2)+' / 0'+N.length;nH.textContent=N[i].t;nD.textContent=N[i].d}
     nset(0);
     function nstop(){if(nauto){clearInterval(nauto);nauto=null}}
